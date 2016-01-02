@@ -18,8 +18,8 @@ public class Chassis extends Subsystem
 	static CANTalon motorChassisFrontRight = new CANTalon(RobotMap.talonDevIDChassisFrontRight);
 	static CANTalon motorChassisBackRight = new CANTalon(RobotMap.talonDevIDChassisBackRight);
 	
-	static Talon motorChassisFrontLeft = new Talon(RobotMap.talonDevIDChassisFrontLeft);
-	static Talon motorChassisBackLeft = new Talon(RobotMap.talonDevIDChassisBackLeft);
+	static CANTalon motorChassisFrontLeft = new CANTalon(RobotMap.talonDevIDChassisFrontLeft);
+	static CANTalon motorChassisBackLeft = new CANTalon(RobotMap.talonDevIDChassisBackLeft);
 
 	// Creates robot drive configuration with four motors
 	static RobotDrive chassisDrive = new RobotDrive(motorChassisFrontLeft,motorChassisBackLeft,motorChassisFrontRight,motorChassisBackRight);
@@ -27,9 +27,9 @@ public class Chassis extends Subsystem
 	public Chassis() {
 		super();
 	
-		// Set a timeout for the motors (2 seconds)
+		// Set a timeout for the motors (1 seconds)
 		chassisDrive.setSafetyEnabled(true);
-		chassisDrive.setExpiration(2);
+		chassisDrive.setExpiration(1);
 	}
 	public void initDefaultCommand () {
 		setDefaultCommand(new DriveWithJoystick());
@@ -45,11 +45,10 @@ public class Chassis extends Subsystem
 		//twist = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowT", twist) : ThrottleLookup.calcJoystickCorrection("NormT", twist);
 		//yAxis = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", yAxis) : ThrottleLookup.calcJoystickCorrection("NormY", yAxis); 
 		
-		twist = -twist;
-		
 		SmartDashboard.putString("ROBOT MODE", (RobotMap.pMode) ? "Slow" : "Normal");	
 				
 		SmartDashboard.putNumber("JoystickY", yAxis);
+		SmartDashboard.putNumber("JoystickX", xAxis);
 		SmartDashboard.putNumber("JoystickTwist", twist);
 		SmartDashboard.putBoolean("Precision Mode", RobotMap.pMode);
 		
