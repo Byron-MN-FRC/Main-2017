@@ -21,25 +21,21 @@ public class Chassis extends Subsystem
 	static Talon motorChassisFrontLeft = new Talon(RobotMap.talonDevIDChassisFrontLeft);
 	static Talon motorChassisBackLeft = new Talon(RobotMap.talonDevIDChassisBackLeft);
 
-	
-	//front is top of "U" back is bottom of "U"
-	// Creates robot drive configuration with a left and right motor
+	// Creates robot drive configuration with four motors
 	static RobotDrive chassisDrive = new RobotDrive(motorChassisFrontLeft,motorChassisBackLeft,motorChassisFrontRight,motorChassisBackRight);
 	
-	public Chassis()
-	{
+	public Chassis() {
 		super();
-		
-		// Set a timeout for the motors (1 second)
+	
+		// Set a timeout for the motors (2 seconds)
 		chassisDrive.setSafetyEnabled(true);
-		chassisDrive.setExpiration(1);
+		chassisDrive.setExpiration(2);
 	}
-	public void initDefaultCommand ()
-	{
+	public void initDefaultCommand () {
 		setDefaultCommand(new DriveWithJoystick());
 	}
-	public void driveWithJoystick(Joystick joystickP0)
-	{
+	
+	public void driveWithJoystick(Joystick joystickP0) {
 		// Get raw values from joystick controller
 		double yAxis = joystickP0.getY();
 		double xAxis = joystickP0.getX();
@@ -51,7 +47,7 @@ public class Chassis extends Subsystem
 		
 		twist = -twist;
 		
-		//SmartDashboard.putString("ROBOT MODE", (RobotMap.pMode) ? "Slow" : "Normal");	
+		SmartDashboard.putString("ROBOT MODE", (RobotMap.pMode) ? "Slow" : "Normal");	
 				
 		SmartDashboard.putNumber("JoystickY", yAxis);
 		SmartDashboard.putNumber("JoystickTwist", twist);
@@ -59,36 +55,4 @@ public class Chassis extends Subsystem
 		
 		chassisDrive.mecanumDrive_Cartesian(xAxis, yAxis, twist, 0);
 	}
-	
-	
-	//What was in before the throttle tables
-/*	public void driveWithJoystick(Joystick joystickP0)
-	{
-		// Get simple values from joystick
-		double twist = joystickP0.getTwist();
-		double y = joystickP0.getY();
-		// Corrections for making driving easier
-		twist = -twist/1.25;
-		if(RobotMap.pMode == true)
-		{
-		y = ThrottleLookup.calcJoystickCorrection(1, y);
-		}
-		else
-		{
-		y = ThrottleLookup.calcJoystickCorrection(2, y);
-		}
-		if(RobotMap.pMode == true)
-		{
-		chassisDrive.arcadeDrive(y/2, twist/1.5);
-		SmartDashboard.putString("ROBOT MODE", "Slow");
-		}
-		else
-		{
-		chassisDrive.arcadeDrive(y, twist);
-		SmartDashboard.putString("ROBOT MODE", "Normal");
-		}
-		SmartDashboard.putNumber("JoystickY", y);
-		SmartDashboard.putNumber("JoystickTwist", twist);
-		SmartDashboard.putBoolean("Precision Mode", RobotMap.pMode);
-	}*/
 }

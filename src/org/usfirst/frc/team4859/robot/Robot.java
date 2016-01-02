@@ -15,7 +15,6 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 
     Command autonomousCommand;
-    SendableChooser autonomousChooser;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -38,9 +37,7 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit()
     {
-    	autonomousCommand = (Command) autonomousChooser.getSelected();
-        // schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
+    	if (autonomousCommand != null) autonomousCommand.start();
     }
 
     /**
