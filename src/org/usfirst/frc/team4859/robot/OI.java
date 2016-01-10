@@ -15,11 +15,11 @@ public class OI {
 	private final Joystick joystickP0 = new Joystick(0);
 	
 	// Create button for precision mode for joystick button 12
-	//Button precisionMode = new JoystickButton(joystickP0, 12);
+	Button precisionMode = new JoystickButton(joystickP0, 12);
 
 	public OI()
 	{
-		//precisionMode.toggleWhenPressed(new PrecisionMode());
+		precisionMode.toggleWhenPressed(new PrecisionMode());
 		
 	}
 	

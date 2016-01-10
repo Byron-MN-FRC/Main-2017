@@ -26,7 +26,8 @@ public class Chassis extends Subsystem
 	
 	public Chassis() {
 		super();
-	
+		//chassisDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
+		//chassisDrive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
 		// Set a timeout for the motors (1 seconds)
 		chassisDrive.setSafetyEnabled(true);
 		chassisDrive.setExpiration(1);
@@ -40,10 +41,12 @@ public class Chassis extends Subsystem
 		double yAxis = joystickP0.getY();
 		double xAxis = joystickP0.getX();
 		double twist = joystickP0.getTwist();
+		double fakeYAxis = -twist;
+		double fakeTwist = -yAxis;
 		
 		// Apply translations to the values from the controller
-		//twist = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowT", twist) : ThrottleLookup.calcJoystickCorrection("NormT", twist);
-		//yAxis = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", yAxis) : ThrottleLookup.calcJoystickCorrection("NormY", yAxis); 
+		fakeTwist = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("FakeSlowT", fakeTwist) : ThrottleLookup.calcJoystickCorrection("FakeNormT", fakeTwist);
+		fakeYAxis = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("FakeSlowY", fakeYAxis) : ThrottleLookup.calcJoystickCorrection("FakeNormY", fakeYAxis); 
 		
 		SmartDashboard.putString("ROBOT MODE", (RobotMap.pMode) ? "Slow" : "Normal");	
 				
@@ -51,7 +54,8 @@ public class Chassis extends Subsystem
 		SmartDashboard.putNumber("JoystickX", xAxis);
 		SmartDashboard.putNumber("JoystickTwist", twist);
 		SmartDashboard.putBoolean("Precision Mode", RobotMap.pMode);
-		
-		chassisDrive.mecanumDrive_Cartesian(xAxis, yAxis, twist, 0);
+		//left/right, forward/backward, turning, gyro (none)
+		chassisDrive.mecanumDrive_Cartesian(xAxis, fakeYAxis, fakeTwist, 0);
+		//chassisDrive.arcadeDrive(-yAxis, -twist);
 	}
 }
