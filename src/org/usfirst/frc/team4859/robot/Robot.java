@@ -1,6 +1,6 @@
 package org.usfirst.frc.team4859.robot;
 
-import org.usfirst.frc.team4859.robot.commands.Autonomous;
+import org.usfirst.frc.team4859.robot.autonomous.Autonomous;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 	//Create subsystems
@@ -15,6 +16,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 
     Command autonomousCommand;
+    SendableChooser autonomousChooser;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -25,6 +27,11 @@ public class Robot extends IterativeRobot {
     	// Initialize subsystems
     	chassis = new Chassis();
 		oi = new OI();
+		
+		// Add autonomous modes
+		autonomousChooser = new SendableChooser();
+		autonomousChooser.addDefault("Start Auto NULL", new Autonomous());
+		SmartDashboard.putData("Autonomous Mode Chooser", autonomousChooser);
 		
         // Instantiate the command used for the autonomous period
         autonomousCommand = new Autonomous();
@@ -37,6 +44,8 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit()
     {
+    	autonomousCommand = (Command) autonomousChooser.getSelected();
+    	
     	if (autonomousCommand != null) autonomousCommand.start();
     }
 
@@ -71,6 +80,7 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic()
     {
         Scheduler.getInstance().run();
+        
     }
     
     /**

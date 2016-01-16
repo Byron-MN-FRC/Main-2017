@@ -4,21 +4,21 @@ public class ThrottleLookup
 {
 	
 
-		// FakeSlowY
+		// SlowY
 		public static double[][] correctionTable1 = {
 			{.015, .25, .500, .7500, 1.00},
 			{.000, .05, .1, .2, 0.4}};
-		// FakeNormY
+		// NormY
 		public static double[][] correctionTable2 = {
 			{.015, .25, .50, .75, 1.0},
 			{.000, .15, .35, .75, 1.0}};
 
-		// FakeSlowT
+		// SlowT
 		public static double[][] correctionTable3 = {
-			{.015, .2500, .500, .75, 1.0},
-			{.000, .0375, .075, .15, 0.3}};
+			{.015, .25, .5, .75, 1.0},
+			{.000, .05, .1, .20, 0.4}};
 
-		// FakeNormT
+		// NormT
 		public static double[][] correctionTable4 = {
 			{.015, .250, .50, .75, 1.0},
 			{.000, .075, .15, .30, 0.6}};
@@ -29,13 +29,13 @@ public class ThrottleLookup
 		
 		switch (tableName)
 		{
-			case "FakeSlowY" : correctionTable = correctionTable1;
+			case "SlowY" : correctionTable = correctionTable1;
 				break;
-			case "FakeNormY" : correctionTable = correctionTable2;
+			case "NormY" : correctionTable = correctionTable2;
 				break;
-			case "FakeSlowT": correctionTable = correctionTable3;
+			case "SlowT": correctionTable = correctionTable3;
 				break;
-			case "FakeNormT": correctionTable = correctionTable4;
+			case "NormT": correctionTable = correctionTable4;
 				break;
 			default : correctionTable = correctionTable1;
 		}
