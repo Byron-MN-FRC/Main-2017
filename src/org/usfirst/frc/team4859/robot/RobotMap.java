@@ -25,6 +25,8 @@ public class RobotMap {
 	public static int talonDevIDChassisFrontLeft = 16;
 	public static int talonDevIDChassisBackLeft = 11;
 	
+	public static int solenoidDevIDSolenoid = 10;
+	
 	// Create precision mode variable and set to false by default
 	public static boolean pMode = false;
 	

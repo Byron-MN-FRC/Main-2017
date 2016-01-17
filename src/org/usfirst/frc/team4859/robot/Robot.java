@@ -2,6 +2,7 @@ package org.usfirst.frc.team4859.robot;
 
 import org.usfirst.frc.team4859.robot.autonomous.Autonomous;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
+import org.usfirst.frc.team4859.robot.subsystems.Solenoids;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -14,6 +15,7 @@ public class Robot extends IterativeRobot {
 	//Create subsystems
 	public static Chassis chassis;
 	public static OI oi;
+	public static Solenoids solenoids;
 
     Command autonomousCommand;
     SendableChooser autonomousChooser;
@@ -26,11 +28,12 @@ public class Robot extends IterativeRobot {
     {
     	// Initialize subsystems
     	chassis = new Chassis();
+    	solenoids = new Solenoids();
 		oi = new OI();
 		
 		// Add autonomous modes
 		autonomousChooser = new SendableChooser();
-		autonomousChooser.addDefault("Start Auto NULL", new Autonomous());
+		autonomousChooser.addDefault("Default", new Autonomous());
 		SmartDashboard.putData("Autonomous Mode Chooser", autonomousChooser);
 		
         // Instantiate the command used for the autonomous period
