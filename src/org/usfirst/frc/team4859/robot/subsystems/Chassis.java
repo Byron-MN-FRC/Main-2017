@@ -14,27 +14,33 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class Chassis extends Subsystem
-{
+public class Chassis extends Subsystem {
 	//Setting chassis motors to CANTalon IDs
-	static CANTalon motorChassisFrontRight = new CANTalon(RobotMap.talonDevIDChassisFrontRight);
-	static CANTalon motorChassisBackRight = new CANTalon(RobotMap.talonDevIDChassisBackRight);
+	static CANTalon motorChassisRight = new CANTalon(RobotMap.talonDevIDChassisRight);
+	static CANTalon motorChassisRightSlave = new CANTalon(RobotMap.talonDevIDChassisRightSlave);
 	
-	static CANTalon motorChassisFrontLeft = new CANTalon(RobotMap.talonDevIDChassisFrontLeft);
-	static CANTalon motorChassisBackLeft = new CANTalon(RobotMap.talonDevIDChassisBackLeft);
+	static CANTalon motorChassisLeft = new CANTalon(RobotMap.talonDevIDChassisLeft);
+	static CANTalon motorChassisLeftSlave = new CANTalon(RobotMap.talonDevIDChassisLeftSlave);
 
 	// Creates robot drive configuration with four motors
-	static RobotDrive chassisDrive = new RobotDrive(motorChassisFrontLeft,motorChassisBackLeft,motorChassisFrontRight,motorChassisBackRight);
+	static RobotDrive chassisDrive = new RobotDrive(motorChassisLeft, motorChassisRight);
 	
 	public Chassis() {
-		
 		super();
-		//chassisDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
-		//chassisDrive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
+		//chassisDrive.setInvertedMotor(RobotDrive.MotorType.kRight, true);
+		//chassisDrive.setInvertedMotor(RobotDrive.MotorType.kRight, true);
+		
+		motorChassisRightSlave.changeControlMode(ControlMode.Follower);
+		motorChassisLeftSlave.changeControlMode(ControlMode.Follower);
+		
+		motorChassisRightSlave.set(12);
+		motorChassisLeftSlave.set(16);
+		
 		// Set a timeout for the motors (1 seconds)
 		chassisDrive.setSafetyEnabled(true);
 		chassisDrive.setExpiration(1);
 	}
+	
 	public void initDefaultCommand () {
 		setDefaultCommand(new DriveWithJoystick());
 	}
@@ -44,12 +50,8 @@ public class Chassis extends Subsystem
 		double yAxis = joystickP0.getY();
 		double xAxis = joystickP0.getX();
 		double twist = joystickP0.getTwist();
-		//double fakeYAxis = -twist;
-		//double fakeTwist = -yAxis;
 		
 		// Apply translations to the values from the controller
-		//fakeTwist = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("FakeSlowT", fakeTwist) : ThrottleLookup.calcJoystickCorrection("FakeNormT", fakeTwist);
-		//fakeYAxis = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("FakeSlowY", fakeYAxis) : ThrottleLookup.calcJoystickCorrection("FakeNormY", fakeYAxis); 
 		yAxis = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", yAxis) : ThrottleLookup.calcJoystickCorrection("NormY", yAxis);
 		twist = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowT", twist) : ThrottleLookup.calcJoystickCorrection("NormT", twist);
 		
@@ -59,11 +61,8 @@ public class Chassis extends Subsystem
 		SmartDashboard.putNumber("JoystickX", xAxis);
 		SmartDashboard.putNumber("JoystickTwist", twist);
 		SmartDashboard.putBoolean("Precision Mode", RobotMap.pMode);
-		//NetworkTable.getTable("SmartDashboard").putNumber("timel", 1);
 		
-		//left/right, forward/backward, turning, gyro (none)
-		//chassisDrive.mecanumDrive_Cartesian(xAxis, fakeYAxis, fakeTwist, 0);
-		chassisDrive.arcadeDrive(-yAxis, -twist);
+		chassisDrive.arcadeDrive(yAxis, twist);
 	}
 	
 	public void DriveStraight(double inputSpeed)
