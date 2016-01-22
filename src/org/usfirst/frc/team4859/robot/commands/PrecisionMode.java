@@ -5,28 +5,23 @@ import org.usfirst.frc.team4859.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 
 
-public class PrecisionMode extends Command
-{
-	protected void initialize()
-	{
+public class PrecisionMode extends Command {
+	protected void initialize() {
 		RobotMap.pMode = true;
 	}
 	
-	protected void execute(){}
+	protected void execute(){
+	}
 	
-	protected boolean isFinished()
-	{
+	protected boolean isFinished() {
 		return false;
 	}
 	
-	protected void end()
-	{
+	protected void end() {
 		RobotMap.pMode = false;
 	}
 	
-	protected void interrupted()
-	{
+	protected void interrupted() {
 		end();
 	}
-	
 }

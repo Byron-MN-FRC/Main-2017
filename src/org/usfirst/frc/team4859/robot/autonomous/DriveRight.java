@@ -8,8 +8,7 @@ public class DriveRight extends Command {
 	private double Time;
 	private double Speed;
 	
-    public DriveRight(double inputSpeed, double inputTime)
-    {
+    public DriveRight(double inputSpeed, double inputTime) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.chassis);
         Speed = inputSpeed;
@@ -17,33 +16,28 @@ public class DriveRight extends Command {
     }
 
     // Called just before this Command runs the first time
-    protected void initialize()
-    {
+    protected void initialize() {
     	Robot.chassis.DriveRight(Speed);
     	setTimeout(Time);
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute()
-    {
+    protected void execute() {
     	Robot.chassis.DriveRight(Speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished()
-    {
+    protected boolean isFinished() {
         return isTimedOut();
     }
 
     // Called once after isFinished returns true
-    protected void end()
-    {
+    protected void end() {
     	Robot.chassis.DriveStop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
-    protected void interrupted()
-    {
+    protected void interrupted() {
     }
 }

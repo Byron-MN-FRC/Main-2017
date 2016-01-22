@@ -23,9 +23,9 @@ public class OI {
 	Button solenoidReverse = new JoystickButton(joystickP0, 3);
 	Button solenoidStop = new JoystickButton(joystickP0, 2);
 
-	public OI()
-	{
+	public OI() {
 		precisionMode.toggleWhenPressed(new PrecisionMode());
+		
 		solenoidForward.whenPressed(new SolenoidForward());
 		solenoidForward.whenReleased(new SolenoidStop());
 		solenoidReverse.whenPressed(new SolenoidReverse());
@@ -34,9 +34,7 @@ public class OI {
 		
 	}
 	
-	public Joystick getJoystick()
-	{
+	public Joystick getJoystick() {
 		return joystickP0;
 	}
 }
-
