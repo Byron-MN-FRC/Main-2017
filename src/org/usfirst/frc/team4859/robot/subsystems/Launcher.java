@@ -6,12 +6,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Launcher extends Subsystem {
 	
-	Ultrasonic DistanceSensor = new Ultrasonic(1,1);
+
 	
 	public Launcher()
 	{
 		super();
-		DistanceSensor.setAutomaticMode(true);
+		
 	}
 
     public void initDefaultCommand() {
@@ -19,9 +19,6 @@ public class Launcher extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    public void DistanceSensor()
-    {
-    	double distance = DistanceSensor.getRangeInches();
-    }
+
 }
 
