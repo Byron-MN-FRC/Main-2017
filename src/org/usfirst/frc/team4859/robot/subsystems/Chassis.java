@@ -62,7 +62,7 @@ public class Chassis extends Subsystem {
 		SmartDashboard.putNumber("JoystickTwist", twist);
 		SmartDashboard.putBoolean("Precision Mode", RobotMap.pMode);
 		
-		chassisDrive.arcadeDrive(yAxis, twist);
+		chassisDrive.arcadeDrive(-yAxis, -twist);
 	}
 	
 	public void DriveStraight(double inputSpeed)
@@ -75,22 +75,46 @@ public class Chassis extends Subsystem {
 	public void DriveBackwards(double inputSpeed){		
 		//motorChassisRight.changeControlMode(ControlMode.Speed);
 		//motorChassisLeft.changeControlMode(ControlMode.Speed);
-		chassisDrive.arcadeDrive(inputSpeed,0);
+		chassisDrive.arcadeDrive(-inputSpeed,0);
 	}
 	
 	public void DriveStop(){
 		chassisDrive.arcadeDrive(0,0);
 	}
 	
-	public void DriveLeft(double inputSpeed){
+	public void DriveLeftCenter(double inputSpeed){
 		//motorChassisRight.changeControlMode(ControlMode.Speed);
 		//motorChassisLeft.changeControlMode(ControlMode.Speed);
 		chassisDrive.arcadeDrive(0,inputSpeed);
 	}
 	
-	public void DriveRight(double inputSpeed){
+	public void DriveLeftForwards(double inputSpeed){
+		//motorChassisRight.changeControlMode(ControlMode.Speed);
+		//motorChassisLeft.changeControlMode(ControlMode.Speed);
+		chassisDrive.arcadeDrive(inputSpeed,inputSpeed);
+	}
+	
+	public void DriveLeftBackwards(double inputSpeed){
+		//motorChassisRight.changeControlMode(ControlMode.Speed);
+		//motorChassisLeft.changeControlMode(ControlMode.Speed);
+		chassisDrive.arcadeDrive(-inputSpeed,inputSpeed);
+	}
+	
+	public void DriveRightCenter(double inputSpeed){
 	//	motorChassisRight.changeControlMode(ControlMode.Speed);
 		//motorChassisLeft.changeControlMode(ControlMode.Speed);
 		chassisDrive.arcadeDrive(0,-inputSpeed);
 	}
+	
+	public void DriveRightForwards(double inputSpeed){
+		//	motorChassisRight.changeControlMode(ControlMode.Speed);
+			//motorChassisLeft.changeControlMode(ControlMode.Speed);
+			chassisDrive.arcadeDrive(inputSpeed,-inputSpeed);
+		}
+	
+	public void DriveRightBackwards(double inputSpeed){
+		//	motorChassisRight.changeControlMode(ControlMode.Speed);
+			//motorChassisLeft.changeControlMode(ControlMode.Speed);
+			chassisDrive.arcadeDrive(-inputSpeed,-inputSpeed);
+		}
 }

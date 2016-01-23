@@ -3,12 +3,12 @@ package org.usfirst.frc.team4859.robot.autonomous;
 import org.usfirst.frc.team4859.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class DriveRight extends Command {
+public class DriveRightCenter extends Command {
 
 	private double Time;
 	private double Speed;
 	
-    public DriveRight(double inputSpeed, double inputTime) {
+    public DriveRightCenter(double inputSpeed, double inputTime) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.chassis);
         Speed = inputSpeed;
@@ -17,13 +17,13 @@ public class DriveRight extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.chassis.DriveRight(Speed);
+    	Robot.chassis.DriveRightCenter(Speed);
     	setTimeout(Time);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.chassis.DriveRight(Speed);
+    	Robot.chassis.DriveRightCenter(Speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

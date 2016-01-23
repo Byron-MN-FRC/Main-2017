@@ -1,6 +1,9 @@
 package org.usfirst.frc.team4859.robot;
 
+import org.usfirst.frc.team4859.robot.autonomous.DriveStop;
 import org.usfirst.frc.team4859.robot.commands.PrecisionMode;
+import org.usfirst.frc.team4859.robot.commands.ShuffleLeft;
+import org.usfirst.frc.team4859.robot.commands.ShuffleRight;
 import org.usfirst.frc.team4859.robot.commands.SolenoidForward;
 import org.usfirst.frc.team4859.robot.commands.SolenoidReverse;
 import org.usfirst.frc.team4859.robot.commands.SolenoidStop;
@@ -19,18 +22,24 @@ public class OI {
 	
 	// Create button for precision mode for joystick button 12
 	Button precisionMode = new JoystickButton(joystickP0, 12);
-	Button solenoidForward = new JoystickButton(joystickP0, 5);
-	Button solenoidReverse = new JoystickButton(joystickP0, 3);
-	Button solenoidStop = new JoystickButton(joystickP0, 2);
+	
+	Button shuffleLeft = new JoystickButton(joystickP0, 11);
+	
+	//Button solenoidForward = new JoystickButton(joystickP0, 5);
+	//Button solenoidReverse = new JoystickButton(joystickP0, 3);
+	//Button solenoidStop = new JoystickButton(joystickP0, 2);
 
 	public OI() {
 		precisionMode.toggleWhenPressed(new PrecisionMode());
 		
-		solenoidForward.whenPressed(new SolenoidForward());
-		solenoidForward.whenReleased(new SolenoidStop());
-		solenoidReverse.whenPressed(new SolenoidReverse());
-		solenoidReverse.whenReleased(new SolenoidStop());
-		solenoidStop.whileHeld(new SolenoidStop());
+		shuffleLeft.whenPressed(new ShuffleRight());
+		shuffleLeft.whenReleased(new DriveStop(1));
+		
+		//solenoidForward.whenPressed(new SolenoidForward());
+		//solenoidForward.whenReleased(new SolenoidStop());
+		//solenoidReverse.whenPressed(new SolenoidReverse());
+		//solenoidReverse.whenReleased(new SolenoidStop());
+		//solenoidStop.whileHeld(new SolenoidStop());
 		
 	}
 	
