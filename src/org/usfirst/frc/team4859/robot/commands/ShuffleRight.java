@@ -15,16 +15,16 @@ public class ShuffleRight extends CommandGroup {
 	
     public  ShuffleRight() {
     	
-        //addSequential(new DriveRightBackwards(0.6,1));
-        //addSequential(new DriveLeftCenter(0.6,.3925));
-        //addSequential(new DriveStraight(0.6,0.515));
+        addSequential(new DriveLeftBackwards(0.7,.75));
+        addSequential(new DriveRightCenter(0.7,.3));
+        addSequential(new DriveStraight(0.7,0.386));
     	
-    	addSequential(new DriveLeftBackwards(0.5,0.1));
-    	addSequential(new DriveLeftBackwards(1,.25));
-    	addSequential(new DriveStop(.1));
-    	addSequential(new DriveRightCenter(.5, 0.22));
-        addSequential(new DriveRightCenter(1,.01));
-        addSequential(new DriveStraight(1,0.21));
+//    	addSequential(new DriveLeftBackwards(0.5,0.1));
+//    	addSequential(new DriveLeftBackwards(1,.25));
+//    	addSequential(new DriveStop(.1));
+//    	addSequential(new DriveRightCenter(.5, 0.22));
+//      addSequential(new DriveRightCenter(1,.01));
+//      addSequential(new DriveStraight(1,0.21));
     	addSequential(new DriveStop(0));
     }
 }  
