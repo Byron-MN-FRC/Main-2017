@@ -29,18 +29,18 @@ public class Chassis extends Subsystem {
 	Potentiometer potentiometer = new AnalogPotentiometer(ai, 360, 30);
 
 	// Creates robot drive configuration with four motors
-	static RobotDrive chassisDrive = new RobotDrive(motorChassisLeft, motorChassisRight);
+	static RobotDrive chassisDrive = new RobotDrive(motorChassisLeft, motorChassisLeftSlave, motorChassisRight, motorChassisRightSlave);
 	
 	public Chassis() {
 		super();
 		//chassisDrive.setInvertedMotor(RobotDrive.MotorType.kRight, true);
 		//chassisDrive.setInvertedMotor(RobotDrive.MotorType.kRight, true);
 		
-		motorChassisRightSlave.changeControlMode(ControlMode.Follower);
-		motorChassisLeftSlave.changeControlMode(ControlMode.Follower);
+		//motorChassisRightSlave.changeControlMode(ControlMode.Follower);
+		//motorChassisLeftSlave.changeControlMode(ControlMode.Follower);
 		
-		motorChassisRightSlave.set(12);
-		motorChassisLeftSlave.set(16);
+		//motorChassisRightSlave.set(RobotMap.talonDevIDChassisRight);
+		//motorChassisLeftSlave.set(RobotMap.talonDevIDChassisLeft);
 		
 		// Set a timeout for the motors (1 seconds)
 		chassisDrive.setSafetyEnabled(true);
