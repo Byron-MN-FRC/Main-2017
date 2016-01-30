@@ -69,9 +69,9 @@ public class Chassis extends Subsystem {
 		SmartDashboard.putBoolean("Precision Mode", RobotMap.pMode);
 		
 		// Sensors
-		SmartDashboard.putNumber("Range", (distanceSensor.getVoltage()*3.28084));
-		SmartDashboard.putNumber("Gyro", (gyro.getAngle()));
-		SmartDashboard.putNumber("Potentiometer", potentiometer.get());
+		SmartDashboard.putNumber("Distance (feet)", (distanceSensor.getVoltage()*3.28084));
+		SmartDashboard.putNumber("Gyro Angle", (gyro.getAngle()));
+		SmartDashboard.putNumber("Potentiometer Angle", potentiometer.get());
 		
 		
 		chassisDrive.arcadeDrive(-yAxis, -twist);
