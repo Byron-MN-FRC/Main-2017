@@ -22,7 +22,7 @@ public class ThrottleLookup
 		// NormT
 		public static double[][] correctionTable4 = {
 			{.015, .25, .500, .75, 1.0},
-			{.000, .10, .175, .40, 0.8}};
+			{.000, .10, .175, .30, 0.6}};
 	
 	public static double calcJoystickCorrection(String tableName, double x)
 	{

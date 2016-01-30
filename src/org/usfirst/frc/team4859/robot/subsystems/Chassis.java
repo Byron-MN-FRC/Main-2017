@@ -3,14 +3,17 @@ package org.usfirst.frc.team4859.robot.subsystems;
 import org.usfirst.frc.team4859.robot.RobotMap;
 import org.usfirst.frc.team4859.robot.ThrottleLookup.ThrottleLookup;
 import org.usfirst.frc.team4859.robot.commands.DriveWithJoystick;
+
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -27,20 +30,20 @@ public class Chassis extends Subsystem {
 	Gyro gyro = new Gyro(1);
 	AnalogInput ai = new AnalogInput(2);
 	Potentiometer potentiometer = new AnalogPotentiometer(ai, 360, 30);
+	
+	Accelerometer accel = new BuiltInAccelerometer(Accelerometer.Range.k4G);
 
 	// Creates robot drive configuration with four motors
-	static RobotDrive chassisDrive = new RobotDrive(motorChassisLeft, motorChassisLeftSlave, motorChassisRight, motorChassisRightSlave);
+	static RobotDrive chassisDrive = new RobotDrive(motorChassisLeft, motorChassisRight);
 	
 	public Chassis() {
 		super();
-		//chassisDrive.setInvertedMotor(RobotDrive.MotorType.kRight, true);
-		//chassisDrive.setInvertedMotor(RobotDrive.MotorType.kRight, true);
 		
-		//motorChassisRightSlave.changeControlMode(ControlMode.Follower);
-		//motorChassisLeftSlave.changeControlMode(ControlMode.Follower);
+		motorChassisRightSlave.changeControlMode(ControlMode.Follower);
+		motorChassisLeftSlave.changeControlMode(ControlMode.Follower);
 		
-		//motorChassisRightSlave.set(RobotMap.talonDevIDChassisRight);
-		//motorChassisLeftSlave.set(RobotMap.talonDevIDChassisLeft);
+		motorChassisRightSlave.set(RobotMap.talonDevIDChassisRight);
+		motorChassisLeftSlave.set(RobotMap.talonDevIDChassisLeft);
 		
 		// Set a timeout for the motors (1 seconds)
 		chassisDrive.setSafetyEnabled(true);

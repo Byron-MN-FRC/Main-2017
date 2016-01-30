@@ -7,8 +7,6 @@ import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 
 public class Launcher extends Subsystem {
 	
-	Accelerometer accel = new BuiltInAccelerometer(Accelerometer.Range.k4G);
-	
 	public Launcher()
 	{
 		super();
