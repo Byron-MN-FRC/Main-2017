@@ -1,30 +1,32 @@
 package org.usfirst.frc.team4859.robot.subsystems;
 
-import org.usfirst.frc.team4859.robot.Robot;
 import org.usfirst.frc.team4859.robot.RobotMap;
 import org.usfirst.frc.team4859.robot.ThrottleLookup.ThrottleLookup;
 import org.usfirst.frc.team4859.robot.commands.DriveWithJoystick;
-
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.Gyro;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Chassis extends Subsystem {
-	//Setting chassis motors to CANTalon IDs
+	// Creating and setting motors
 	static CANTalon motorChassisRight = new CANTalon(RobotMap.talonDevIDChassisRight);
 	static CANTalon motorChassisRightSlave = new CANTalon(RobotMap.talonDevIDChassisRightSlave);
 	
 	static CANTalon motorChassisLeft = new CANTalon(RobotMap.talonDevIDChassisLeft);
 	static CANTalon motorChassisLeftSlave = new CANTalon(RobotMap.talonDevIDChassisLeftSlave);
 	
-	AnalogInput DistanceSensor = new AnalogInput(0);
+	// Sensors
+	AnalogInput distanceSensor = new AnalogInput(0);
+	Gyro gyro = new Gyro(1);
+	AnalogInput ai = new AnalogInput(2);
+	Potentiometer potentiometer = new AnalogPotentiometer(ai, 360, 30);
 
 	// Creates robot drive configuration with four motors
 	static RobotDrive chassisDrive = new RobotDrive(motorChassisLeft, motorChassisRight);
@@ -65,7 +67,12 @@ public class Chassis extends Subsystem {
 		SmartDashboard.putNumber("JoystickX", xAxis);
 		SmartDashboard.putNumber("JoystickTwist", twist);
 		SmartDashboard.putBoolean("Precision Mode", RobotMap.pMode);
-		SmartDashboard.putNumber("Range", (DistanceSensor.getVoltage()*3.28084));
+		
+		// Sensors
+		SmartDashboard.putNumber("Range", (distanceSensor.getVoltage()*3.28084));
+		SmartDashboard.putNumber("Gyro", (gyro.getAngle()));
+		SmartDashboard.putNumber("Potentiometer", potentiometer.get());
+		
 		
 		chassisDrive.arcadeDrive(-yAxis, -twist);
 	}
