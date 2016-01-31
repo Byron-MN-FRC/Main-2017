@@ -31,7 +31,7 @@ public class Chassis extends Subsystem {
 	AnalogInput ai = new AnalogInput(2);
 	Potentiometer potentiometer = new AnalogPotentiometer(ai, 360, 30);
 	
-	Accelerometer accel = new BuiltInAccelerometer(Accelerometer.Range.k4G);
+	BuiltInAccelerometer accel = new BuiltInAccelerometer();
 
 	// Creates robot drive configuration with four motors
 	static RobotDrive chassisDrive = new RobotDrive(motorChassisLeft, motorChassisRight);
@@ -44,6 +44,8 @@ public class Chassis extends Subsystem {
 		
 		motorChassisRightSlave.set(RobotMap.talonDevIDChassisRight);
 		motorChassisLeftSlave.set(RobotMap.talonDevIDChassisLeft);
+		
+		
 		
 		// Set a timeout for the motors (1 seconds)
 		chassisDrive.setSafetyEnabled(true);
@@ -75,9 +77,12 @@ public class Chassis extends Subsystem {
 		SmartDashboard.putNumber("Distance (feet)", (distanceSensor.getVoltage()*3.28084));
 		SmartDashboard.putNumber("Gyro Angle", (gyro.getAngle()));
 		SmartDashboard.putNumber("Potentiometer Angle", potentiometer.get());
+		SmartDashboard.putNumber("Accel X", accel.getX());
+		SmartDashboard.putNumber("Accel Y", accel.getY());
+		SmartDashboard.putNumber("Accel Z", accel.getZ());
 		
 		
-		chassisDrive.arcadeDrive(-yAxis, -twist);
+		chassisDrive.arcadeDrive(yAxis, -twist);
 	}
 	
 	public void DriveStraight(double inputSpeed)

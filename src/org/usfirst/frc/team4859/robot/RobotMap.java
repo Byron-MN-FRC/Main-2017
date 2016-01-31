@@ -20,9 +20,9 @@ public class RobotMap {
     // public static int rangefinderModule = 1;
 	
 	public static int talonDevIDChassisRight = 3;
-	public static int talonDevIDChassisRightSlave = 4;
+	public static int talonDevIDChassisRightSlave = 5;
 	
-	public static int talonDevIDChassisLeft = 5;
+	public static int talonDevIDChassisLeft = 4;
 	public static int talonDevIDChassisLeftSlave = 6;
 	
 	public static int solenoidDevIDSolenoid = 2;
