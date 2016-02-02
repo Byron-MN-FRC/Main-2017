@@ -25,7 +25,12 @@ public class RobotMap {
 	public static int talonDevIDChassisLeft = 4;
 	public static int talonDevIDChassisLeftSlave = 6;
 	
-	public static int solenoidDevIDSolenoid = 2;
+	public static int talonDevIDLauncherFlywheelRight = 7;
+	public static int talonDevIDLauncherFlywheelLeft = 8;
+	
+	public static int talonDevIDLauncherFlywheelFeed = 9;
+	
+	public static int talonDevIDLauncherAngle = 10;
 	
 	// Create precision mode variable and set to false by default
 	public static boolean pMode = false;	

@@ -2,6 +2,7 @@ package org.usfirst.frc.team4859.robot;
 
 import org.usfirst.frc.team4859.robot.autonomous.Autonomous;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
+import org.usfirst.frc.team4859.robot.subsystems.Launcher;
 import org.usfirst.frc.team4859.robot.subsystems.Solenoids;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -14,8 +15,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 	//Create subsystems
 	public static Chassis chassis;
-	public static OI oi;
 	public static Solenoids solenoids;
+	public static Launcher launcher;
+	public static OI oi;
 
     Command autonomousCommand;
     SendableChooser autonomousChooser;
@@ -28,6 +30,7 @@ public class Robot extends IterativeRobot {
     	// Initialize subsystems
     	chassis = new Chassis();
     	solenoids = new Solenoids();
+    	launcher = new Launcher();
 		oi = new OI();
 		
 		// Add autonomous modes
