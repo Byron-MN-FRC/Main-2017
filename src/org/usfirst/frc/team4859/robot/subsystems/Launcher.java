@@ -18,7 +18,7 @@ public class Launcher extends Subsystem {
 	
 	public Launcher() {
 		super();
-		
+		motorLauncherAngle.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Absolute);
 	}
 
     public void initDefaultCommand() {
