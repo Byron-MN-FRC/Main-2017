@@ -1,10 +1,6 @@
 package org.usfirst.frc.team4859.robot.autonomous;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team4859.robot.RobotMap;
 
 public class Autonomous extends CommandGroup {
     

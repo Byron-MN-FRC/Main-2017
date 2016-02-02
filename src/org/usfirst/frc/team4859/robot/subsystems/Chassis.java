@@ -4,16 +4,17 @@ import org.usfirst.frc.team4859.robot.RobotMap;
 import org.usfirst.frc.team4859.robot.ThrottleLookup.ThrottleLookup;
 import org.usfirst.frc.team4859.robot.commands.DriveWithJoystick;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CANTalon.ControlMode;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -27,7 +28,7 @@ public class Chassis extends Subsystem {
 	
 	// Sensors
 	AnalogInput distanceSensor = new AnalogInput(0);
-	Gyro gyro = new Gyro(1);
+	Gyro gyro = new AnalogGyro(1);
 	AnalogInput ai = new AnalogInput(2);
 	Potentiometer potentiometer = new AnalogPotentiometer(ai, 360, 30);
 	
@@ -39,8 +40,8 @@ public class Chassis extends Subsystem {
 	public Chassis() {
 		super();
 		
-		motorChassisRightSlave.changeControlMode(ControlMode.Follower);
-		motorChassisLeftSlave.changeControlMode(ControlMode.Follower);
+		motorChassisRightSlave.changeControlMode(TalonControlMode.Follower);
+		motorChassisLeftSlave.changeControlMode(TalonControlMode.Follower);
 		
 		motorChassisRightSlave.set(RobotMap.talonDevIDChassisRight);
 		motorChassisLeftSlave.set(RobotMap.talonDevIDChassisLeft);

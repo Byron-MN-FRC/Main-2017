@@ -1,6 +1,5 @@
 package org.usfirst.frc.team4859.robot;
 
-import org.usfirst.frc.team4859.robot.autonomous.DriveStop;
 import org.usfirst.frc.team4859.robot.commands.FlywheelBackward;
 import org.usfirst.frc.team4859.robot.commands.FlywheelFeedIn;
 import org.usfirst.frc.team4859.robot.commands.FlywheelFeedOut;
@@ -9,12 +8,6 @@ import org.usfirst.frc.team4859.robot.commands.FlywheelForward;
 import org.usfirst.frc.team4859.robot.commands.FlywheelForwardSpin;
 import org.usfirst.frc.team4859.robot.commands.FlywheelStop;
 import org.usfirst.frc.team4859.robot.commands.PrecisionMode;
-import org.usfirst.frc.team4859.robot.commands.ShuffleLeft;
-import org.usfirst.frc.team4859.robot.commands.ShuffleRight;
-import org.usfirst.frc.team4859.robot.commands.SolenoidForward;
-import org.usfirst.frc.team4859.robot.commands.SolenoidReverse;
-import org.usfirst.frc.team4859.robot.commands.SolenoidStop;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;

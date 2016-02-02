@@ -4,7 +4,7 @@ package org.usfirst.frc.team4859.robot.subsystems;
 import org.usfirst.frc.team4859.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CANTalon.ControlMode;
+import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -86,4 +86,3 @@ public class Launcher extends Subsystem {
     	
     }
 }
-

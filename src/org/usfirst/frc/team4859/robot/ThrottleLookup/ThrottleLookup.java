@@ -2,7 +2,6 @@ package org.usfirst.frc.team4859.robot.ThrottleLookup;
 
 public class ThrottleLookup 
 {
-	
 
 		// SlowY
 		public static double[][] correctionTable1 = {
