@@ -4,7 +4,6 @@ import org.usfirst.frc.team4859.robot.RobotMap;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Launcher extends Subsystem {
@@ -16,7 +15,7 @@ public class Launcher extends Subsystem {
 	
 	public Launcher() {
 		super();
-		//motorLauncherAngle.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Absolute);
+		motorLauncherAngle.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Absolute);
 	}
 
     public void initDefaultCommand() {

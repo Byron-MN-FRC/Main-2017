@@ -4,7 +4,6 @@ import org.usfirst.frc.team4859.robot.autonomous.DriveLeftCenter;
 import org.usfirst.frc.team4859.robot.autonomous.DriveRightBackwards;
 import org.usfirst.frc.team4859.robot.autonomous.DriveStop;
 import org.usfirst.frc.team4859.robot.autonomous.DriveStraight;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class ShuffleLeft extends CommandGroup {
