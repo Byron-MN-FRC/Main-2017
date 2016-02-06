@@ -32,10 +32,6 @@ public class OI {
 	
 	Button flywheelFeedIn = new JoystickButton(joystickP0, 3);
 	Button flywheelFeedOut = new JoystickButton(joystickP0, 5);
-	
-	//Button solenoidForward = new JoystickButton(joystickP0, 5);
-	//Button solenoidReverse = new JoystickButton(joystickP0, 3);
-	//Button solenoidStop = new JoystickButton(joystickP0, 2);
 
 	public OI() {
 		precisionMode.toggleWhenPressed(new PrecisionMode());
@@ -56,14 +52,7 @@ public class OI {
 		flywheelFeedOut.whenReleased(new FlywheelFeedStop());
 		
 		//shuffleLeft.whenPressed(new ShuffleRight());
-		//shuffleLeft.whenReleased(new DriveStop(1));
-		
-		//solenoidForward.whenPressed(new SolenoidForward());
-		//solenoidForward.whenReleased(new SolenoidStop());
-		//solenoidReverse.whenPressed(new SolenoidReverse());
-		//solenoidReverse.whenReleased(new SolenoidStop());
-		//solenoidStop.whileHeld(new SolenoidStop());
-		
+		//shuffleLeft.whenReleased(new DriveStop(1));		
 	}
 	
 	public Joystick getJoystick() {
