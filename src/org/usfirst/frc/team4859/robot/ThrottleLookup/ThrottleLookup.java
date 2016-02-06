@@ -46,7 +46,7 @@ public class ThrottleLookup
 		int pos = 0; 
 		double returnValue;
 		
-		while ((pos < 5) && (x > correctionTable1[0][pos]))
+		while ((pos < 5) && (x > correctionTable[0][pos]))
 		{
 			pos++;
 		}
@@ -63,7 +63,7 @@ public class ThrottleLookup
 			}
 			else
 			{
-				return 0;
+				return 0.0;
 			}
 		}
 		else
