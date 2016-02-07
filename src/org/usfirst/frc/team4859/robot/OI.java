@@ -7,6 +7,9 @@ import org.usfirst.frc.team4859.robot.commands.FlywheelFeedStop;
 import org.usfirst.frc.team4859.robot.commands.FlywheelForward;
 import org.usfirst.frc.team4859.robot.commands.FlywheelForwardSpin;
 import org.usfirst.frc.team4859.robot.commands.FlywheelStop;
+import org.usfirst.frc.team4859.robot.commands.LauncherAngleDown;
+import org.usfirst.frc.team4859.robot.commands.LauncherAngleStop;
+import org.usfirst.frc.team4859.robot.commands.LauncherAngleUp;
 import org.usfirst.frc.team4859.robot.commands.PrecisionMode;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -32,6 +35,10 @@ public class OI {
 	
 	Button flywheelFeedIn = new JoystickButton(joystickP0, 3);
 	Button flywheelFeedOut = new JoystickButton(joystickP0, 5);
+	
+	Button launcherAngleUp = new JoystickButton(joystickP0, 10);
+	Button launcherAngleDown = new JoystickButton(joystickP0, 9);
+	Button launcherAngleStop = new JoystickButton(joystickP0, 7);
 
 	public OI() {
 		precisionMode.toggleWhenPressed(new PrecisionMode());
@@ -50,6 +57,10 @@ public class OI {
 		
 		flywheelFeedOut.whenPressed(new FlywheelFeedOut());
 		flywheelFeedOut.whenReleased(new FlywheelFeedStop());
+		
+		launcherAngleUp.toggleWhenPressed(new LauncherAngleUp());
+		
+		launcherAngleDown.toggleWhenPressed(new LauncherAngleDown());
 		
 		//shuffleLeft.whenPressed(new ShuffleRight());
 		//shuffleLeft.whenReleased(new DriveStop(1));		

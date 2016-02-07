@@ -39,6 +39,7 @@ public class Robot extends IterativeRobot {
     }
 	
 	public void disabledPeriodic() {
+    	launcher.LauncherAngleStop();
 		Scheduler.getInstance().run();
 	}
 

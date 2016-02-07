@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Launcher extends Subsystem {
 	
@@ -53,5 +54,18 @@ public class Launcher extends Subsystem {
     
     public void FlywheelFeedStop() {
     	motorLauncherFlywheelFeed.set(0);
+    }
+    
+    public void LauncherAngleStop() {
+    	motorLauncherAngle.set(0.0);
+    }
+    
+    public void LauncherMotorGo(double input) {
+    	if (input - motorLauncherAngle.getPosition() > 0.01) {
+    		motorLauncherAngle.set(((input - motorLauncherAngle.getPosition())*10));
+    	} else if (input - motorLauncherAngle.getPosition() < -0.01) {
+    		motorLauncherAngle.set(((input - motorLauncherAngle.getPosition())*10));
+    	} else 
+    		motorLauncherAngle.set(0.0);
     }
 }
