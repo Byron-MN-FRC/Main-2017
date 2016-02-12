@@ -24,14 +24,15 @@ public class Launcher extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    public void FlywheelForward() {
+    public void FlywheelSpinup() {
     	motorLauncherFlywheelRight.set(1);
     	motorLauncherFlywheelLeft.set(-1);
     }
     
-    public void FlywheelBackward() {
-    	motorLauncherFlywheelRight.set(-1);
-    	motorLauncherFlywheelLeft.set(1);
+    public void Intake() {
+    	motorLauncherFlywheelRight.set(-.5);
+    	motorLauncherFlywheelLeft.set(.5);
+    	motorLauncherFlywheelFeed.set(-1);
     }
     
     public void FlywheelForwardSpin() {
@@ -66,5 +67,14 @@ public class Launcher extends Subsystem {
     	if (new_multiplier > 10) new_multiplier = 10;
     	motorLauncherAngle.set(new_multiplier*diff);
     	return new_multiplier;
+    }
+    
+    public void FlywheelSpinUp(double inputSpeed){
+    	motorLauncherFlywheelRight.set(inputSpeed);
+    	motorLauncherFlywheelLeft.set(-inputSpeed);
+	}
+    
+    public void FlywheelFeedOutTime(double inputSpeed) {
+    	motorLauncherFlywheelFeed.set(-inputSpeed);
     }
 }

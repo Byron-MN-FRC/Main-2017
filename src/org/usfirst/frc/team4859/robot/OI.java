@@ -10,6 +10,7 @@ import org.usfirst.frc.team4859.robot.commands.FlywheelStop;
 import org.usfirst.frc.team4859.robot.commands.LauncherAngleDown;
 import org.usfirst.frc.team4859.robot.commands.LauncherAngleStop;
 import org.usfirst.frc.team4859.robot.commands.LauncherAngleUp;
+import org.usfirst.frc.team4859.robot.commands.Outtake;
 import org.usfirst.frc.team4859.robot.commands.PrecisionMode;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -22,7 +23,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {	
 	// Create a joystick on port 0
 	private final Joystick joystickP0 = new Joystick(0);
-	
+	private final Joystick xboxP1 = new Joystick(1);
 	// Create button for precision mode for joystick button 12
 	Button precisionMode = new JoystickButton(joystickP0, 12);
 	
@@ -30,6 +31,8 @@ public class OI {
 	
 	Button flywheelForward = new JoystickButton(joystickP0, 6);
 	Button flywheelBackward = new JoystickButton(joystickP0, 4);
+	Button ultimateShooter = new JoystickButton(xboxP1, 6);
+	
 	
 	Button flywheelForwardSpin = new JoystickButton(joystickP0, 8);
 	
@@ -57,7 +60,8 @@ public class OI {
 		
 		flywheelFeedOut.whenPressed(new FlywheelFeedOut());
 		flywheelFeedOut.whenReleased(new FlywheelFeedStop());
-		
+		ultimateShooter.whenPressed(new Outtake());
+		ultimateShooter.whenReleased(new FlywheelStop());
 		launcherAngleUp.toggleWhenPressed(new LauncherAngleUp());
 		
 		launcherAngleDown.toggleWhenPressed(new LauncherAngleDown());

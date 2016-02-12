@@ -1,5 +1,7 @@
 package org.usfirst.frc.team4859.robot.autonomous;
 
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutoNothing extends CommandGroup {
@@ -23,4 +25,4 @@ public class AutoNothing extends CommandGroup {
         // arm.
     	addSequential(new DriveStop(0));
     }
-}  
+}
