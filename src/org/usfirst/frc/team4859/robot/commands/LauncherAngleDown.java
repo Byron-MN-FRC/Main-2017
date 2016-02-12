@@ -7,20 +7,21 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class LauncherAngleDown extends Command {
-
+	private double mult;
+	
     public LauncherAngleDown() {
     	requires(Robot.launcher);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
+    	mult = 0;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	Robot.launcher.LauncherMotorGo(0.8);
+    	mult = Robot.launcher.LauncherMotorGo(0.6,mult);
     }
 
     // Make this return true when this Command no longer needs to run execute()

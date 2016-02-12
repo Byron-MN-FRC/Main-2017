@@ -60,12 +60,11 @@ public class Launcher extends Subsystem {
     	motorLauncherAngle.set(0.0);
     }
     
-    public void LauncherMotorGo(double input) {
-    	if (input - motorLauncherAngle.getPosition() > 0.01) {
-    		motorLauncherAngle.set(((input - motorLauncherAngle.getPosition())*10));
-    	} else if (input - motorLauncherAngle.getPosition() < -0.01) {
-    		motorLauncherAngle.set(((input - motorLauncherAngle.getPosition())*10));
-    	} else 
-    		motorLauncherAngle.set(0.0);
+    public double LauncherMotorGo(double input, double multiplier) {
+    	double diff = input - motorLauncherAngle.getPosition();
+    	double new_multiplier = multiplier + 0.3;
+    	if (new_multiplier > 10) new_multiplier = 10;
+    	motorLauncherAngle.set(new_multiplier*diff);
+    	return new_multiplier;
     }
 }
