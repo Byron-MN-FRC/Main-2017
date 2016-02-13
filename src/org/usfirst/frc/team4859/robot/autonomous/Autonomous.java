@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4859.robot.autonomous;
 
+import org.usfirst.frc.team4859.robot.commands.*;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class Autonomous extends CommandGroup {
@@ -26,5 +27,13 @@ public class Autonomous extends CommandGroup {
     	//addSequential(new DriveStop(2));
     	//addSequential(new DriveStraight(-.5, 1));
     	//addSequential(new DriveStop(0));
+    	addSequential(new LauncherAngleDown());
+    	addSequential(new DriveStraight(-0.5,3));
+    	addSequential(new DriveStop(0.5));
+    	addSequential(new DriveRightCenter(0.5,1));
+    	addSequential(new DriveStop(0.5));
+    	addSequential(new DriveStraight(-0.5,2));
+    	addSequential(new DriveStop(0.5));
+    	addSequential(new Outtake());
     }
 }
