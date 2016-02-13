@@ -31,7 +31,7 @@ public class Robot extends IterativeRobot {
     	launcher = new Launcher();
 		oi = new OI();
 		
-		start = launcher.motorLauncherAngle.getPosition();
+		start = launcher.motorLauncherAngle.getPosition() + 0.1;
 		// Add autonomous modes
 		autonomousChooser = new SendableChooser();
 		autonomousChooser.addDefault("Default", new Autonomous());
@@ -56,6 +56,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
+    	if (launcher.limitDown.get()) start = launcher.motorLauncherAngle.getPosition();
         Scheduler.getInstance().run();
     }
 
@@ -78,6 +79,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+    	if (launcher.limitDown.get()) start = launcher.motorLauncherAngle.getPosition();
         Scheduler.getInstance().run();
         
     }

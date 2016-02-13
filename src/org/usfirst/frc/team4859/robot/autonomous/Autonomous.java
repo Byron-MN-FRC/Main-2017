@@ -22,11 +22,9 @@ public class Autonomous extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	//double timel = NetworkTable.getTable("SmartDashboard").getNumber("timel");
-    	addSequential(new DriveStop(0));
-    	//addSequential(new DriveStraight(.5, timel));
-    	addSequential(new DriveStop(2));
-    	addSequential(new DriveStraight(-.5, 1));
-    	addSequential(new DriveStop(0));
+    	//addSequential(new DriveStop(0));
+    	//addSequential(new DriveStop(2));
+    	//addSequential(new DriveStraight(-.5, 1));
+    	//addSequential(new DriveStop(0));
     }
 }
