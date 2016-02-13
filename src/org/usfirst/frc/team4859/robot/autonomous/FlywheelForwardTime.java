@@ -3,12 +3,12 @@ package org.usfirst.frc.team4859.robot.autonomous;
 import org.usfirst.frc.team4859.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class FlywheelSpinUp extends Command {
+public class FlywheelForwardTime extends Command {
 
 	private double time;
 	private double speed;
 	
-    public FlywheelSpinUp(double inputSpeed, double inputTime) {
+    public FlywheelForwardTime(double inputSpeed, double inputTime) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.launcher);
         speed = inputSpeed;
