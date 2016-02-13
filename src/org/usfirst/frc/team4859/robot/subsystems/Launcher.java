@@ -58,10 +58,10 @@ public class Launcher extends Subsystem {
     	motorLauncherFlywheelFeed.set(0);
     }
     public void LauncherAngleDown(){
-    	motorLauncherAngle.set(-.1);
+    	motorLauncherAngle.set(.545);
     }
     public void LauncherAngleUp() {
-    	motorLauncherAngle.set(.3);
+    	motorLauncherAngle.set(.35);
     }
     public void LauncherAngleStop() {
     	motorLauncherAngle.set(0.0);
@@ -70,7 +70,7 @@ public class Launcher extends Subsystem {
     public double LauncherMotorGo(double input, double multiplier) {
     	double diff = input - motorLauncherAngle.getPosition();
     	double new_multiplier = multiplier + 0.3;
-    	if (new_multiplier > 10) new_multiplier = 10;
+    	if (new_multiplier > 100) new_multiplier = 100;
     	motorLauncherAngle.set(new_multiplier*diff);
     	return new_multiplier;
     }
