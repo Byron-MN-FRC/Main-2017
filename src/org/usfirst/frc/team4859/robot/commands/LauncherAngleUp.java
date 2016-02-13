@@ -20,7 +20,7 @@ public class LauncherAngleUp extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	mult = Robot.launcher.LauncherMotorGo(0.5,mult);
+    	mult = Robot.launcher.LauncherMotorGo(0.3,mult);
     }
 
     // Make this return true when this Command no longer needs to run execute()
