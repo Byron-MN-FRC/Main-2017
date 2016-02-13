@@ -24,15 +24,11 @@ public class OI {
 	// Create a joystick on port 0
 	private final Joystick joystickP0 = new Joystick(0);
 	private final Joystick xboxP1 = new Joystick(1);
-	// Create button for precision mode for joystick button 12
-	Button precisionMode = new JoystickButton(joystickP0, 12);
 	
-	//Button shuffleLeft = new JoystickButton(joystickP0, 11);
+	Button precisionMode = new JoystickButton(joystickP0, 12);
 	
 	Button flywheelForward = new JoystickButton(xboxP1, 7);
 	Button flywheelBackward = new JoystickButton(xboxP1, 5);
-	Button ultimateShooter = new JoystickButton(xboxP1, 6);
-	
 	
 	Button flywheelForwardSpin = new JoystickButton(joystickP0, 8);
 	
@@ -41,6 +37,8 @@ public class OI {
 	
 	Button launcherAngleUp = new JoystickButton(xboxP1, 4);
 	Button launcherAngleDown = new JoystickButton(xboxP1, 1);
+	
+	Button autoShoot = new JoystickButton(xboxP1, 6);
  
 	public OI() {
 		precisionMode.toggleWhenPressed(new PrecisionMode());
@@ -59,14 +57,12 @@ public class OI {
 		
 		flywheelFeedOut.whenPressed(new FlywheelFeedOut());
 		flywheelFeedOut.whenReleased(new FlywheelFeedStop());
-		ultimateShooter.whenPressed(new Outtake());
-		ultimateShooter.whenReleased(new FlywheelStop());
-		launcherAngleUp.toggleWhenPressed(new LauncherAngleUp());
 		
+		launcherAngleUp.toggleWhenPressed(new LauncherAngleUp());
 		launcherAngleDown.toggleWhenPressed(new LauncherAngleDown());
 		
-		//shuffleLeft.whenPressed(new ShuffleRight());
-		//shuffleLeft.whenReleased(new DriveStop(1));		
+		autoShoot.whenPressed(new Outtake());
+		autoShoot.whenReleased(new FlywheelStop());
 	}
 	
 	public Joystick getJoystick() {

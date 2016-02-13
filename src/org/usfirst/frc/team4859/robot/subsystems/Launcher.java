@@ -70,7 +70,7 @@ public class Launcher extends Subsystem {
     public double LauncherMotorGo(double input, double multiplier) {
     	double diff = input - motorLauncherAngle.getPosition();
     	double new_multiplier = multiplier + 0.3;
-    	if (new_multiplier > 100) new_multiplier = 100;
+    	if (new_multiplier > 10) new_multiplier = 10;
     	motorLauncherAngle.set(new_multiplier*diff);
     	return new_multiplier;
     }
