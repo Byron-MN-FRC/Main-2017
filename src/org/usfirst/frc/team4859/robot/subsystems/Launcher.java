@@ -43,6 +43,7 @@ public class Launcher extends Subsystem {
     public void FlywheelStop() {
     	motorLauncherFlywheelRight.set(0);
     	motorLauncherFlywheelLeft.set(0);
+    	motorLauncherFlywheelFeed.set(0);
     }
     
     public void FlywheelFeedIn() {
@@ -56,7 +57,12 @@ public class Launcher extends Subsystem {
     public void FlywheelFeedStop() {
     	motorLauncherFlywheelFeed.set(0);
     }
-    
+    public void LauncherAngleDown(){
+    	motorLauncherAngle.set(-.1);
+    }
+    public void LauncherAngleUp() {
+    	motorLauncherAngle.set(.3);
+    }
     public void LauncherAngleStop() {
     	motorLauncherAngle.set(0.0);
     }

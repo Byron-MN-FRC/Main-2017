@@ -29,20 +29,19 @@ public class OI {
 	
 	//Button shuffleLeft = new JoystickButton(joystickP0, 11);
 	
-	Button flywheelForward = new JoystickButton(joystickP0, 6);
-	Button flywheelBackward = new JoystickButton(joystickP0, 4);
+	Button flywheelForward = new JoystickButton(xboxP1, 7);
+	Button flywheelBackward = new JoystickButton(xboxP1, 5);
 	Button ultimateShooter = new JoystickButton(xboxP1, 6);
 	
 	
 	Button flywheelForwardSpin = new JoystickButton(joystickP0, 8);
 	
-	Button flywheelFeedIn = new JoystickButton(joystickP0, 3);
-	Button flywheelFeedOut = new JoystickButton(joystickP0, 5);
+	Button flywheelFeedIn = new JoystickButton(xboxP1, 3);
+	Button flywheelFeedOut = new JoystickButton(xboxP1, 2);
 	
-	Button launcherAngleUp = new JoystickButton(joystickP0, 10);
-	Button launcherAngleDown = new JoystickButton(joystickP0, 9);
-	Button launcherAngleStop = new JoystickButton(joystickP0, 7);
-
+	Button launcherAngleUp = new JoystickButton(xboxP1, 4);
+	Button launcherAngleDown = new JoystickButton(xboxP1, 1);
+ 
 	public OI() {
 		precisionMode.toggleWhenPressed(new PrecisionMode());
 		
