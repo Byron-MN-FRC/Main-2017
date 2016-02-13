@@ -30,8 +30,6 @@ public class OI {
 	Button flywheelForward = new JoystickButton(xboxP1, 7);
 	Button flywheelBackward = new JoystickButton(xboxP1, 5);
 	
-	Button flywheelForwardSpin = new JoystickButton(joystickP0, 8);
-	
 	Button flywheelFeedIn = new JoystickButton(xboxP1, 3);
 	Button flywheelFeedOut = new JoystickButton(xboxP1, 2);
 	
@@ -49,9 +47,6 @@ public class OI {
 		flywheelBackward.whenPressed(new FlywheelBackward());
 		flywheelBackward.whenReleased(new FlywheelStop());
 		
-		flywheelForwardSpin.whenPressed(new FlywheelForwardSpin());
-		flywheelForwardSpin.whenReleased(new FlywheelStop());
-		
 		flywheelFeedIn.whenPressed(new FlywheelFeedIn());
 		flywheelFeedIn.whenReleased(new FlywheelFeedStop());
 		
@@ -59,6 +54,7 @@ public class OI {
 		flywheelFeedOut.whenReleased(new FlywheelFeedStop());
 		
 		launcherAngleUp.toggleWhenPressed(new LauncherAngleUp());
+		
 		launcherAngleDown.toggleWhenPressed(new LauncherAngleDown());
 		
 		autoShoot.whenPressed(new Outtake());

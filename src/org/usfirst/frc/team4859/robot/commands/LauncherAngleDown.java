@@ -16,12 +16,12 @@ public class LauncherAngleDown extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	mult = 0;
+    	mult = Robot.launcher.LauncherMotorGo(0.61,mult);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
-    	mult = Robot.launcher.LauncherMotorGo(0.5,mult);
+    	Robot.launcher.LauncherAngleStop();
     }
 
     // Make this return true when this Command no longer needs to run execute()
