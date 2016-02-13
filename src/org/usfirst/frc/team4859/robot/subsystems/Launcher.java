@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4859.robot.subsystems;
 
+import org.usfirst.frc.team4859.robot.Robot;
 import org.usfirst.frc.team4859.robot.RobotMap;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
@@ -12,7 +13,8 @@ public class Launcher extends Subsystem {
 	static Talon motorLauncherFlywheelRight = new Talon(RobotMap.talonDevIDLauncherFlywheelRight);
 	static Talon motorLauncherFlywheelLeft = new Talon(RobotMap.talonDevIDLauncherFlywheelLeft);
 	static Talon motorLauncherFlywheelFeed = new Talon(RobotMap.talonDevIDLauncherFlywheelFeed);
-	static CANTalon motorLauncherAngle = new CANTalon(RobotMap.talonDevIDLauncherAngle);
+	public CANTalon motorLauncherAngle = new CANTalon(RobotMap.talonDevIDLauncherAngle);
+	public static double mult;
 	
 	public Launcher() {
 		super();
@@ -24,31 +26,19 @@ public class Launcher extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    public void FlywheelSpinup() {
-    	motorLauncherFlywheelRight.set(1);
-    	motorLauncherFlywheelLeft.set(-1);
-    }
-    
-    public void Intake() {
-    	motorLauncherFlywheelRight.set(-.75);
-    	motorLauncherFlywheelLeft.set(.75);
-    	motorLauncherFlywheelFeed.set(-1);
-    }
-    
     public void FlywheelForward() {
     	motorLauncherFlywheelRight.set(1);
     	motorLauncherFlywheelLeft.set(-1);
     }
     
-    public void FlywheelForwardSpin() {
-    	motorLauncherFlywheelRight.set(1);
-    	motorLauncherFlywheelLeft.set(-1);
+    public void FlywheelBackward() {
+    	motorLauncherFlywheelRight.set(-.75);
+    	motorLauncherFlywheelLeft.set(.75);
     }
     
     public void FlywheelStop() {
     	motorLauncherFlywheelRight.set(0);
     	motorLauncherFlywheelLeft.set(0);
-    	motorLauncherFlywheelFeed.set(0);
     }
     
     public void FlywheelFeedIn() {
@@ -62,22 +52,35 @@ public class Launcher extends Subsystem {
     public void FlywheelFeedStop() {
     	motorLauncherFlywheelFeed.set(0);
     }
-    public void LauncherAngleDown(){
-    	motorLauncherAngle.set(.545);
-    }
-    public void LauncherAngleUp() {
-    	motorLauncherAngle.set(.35);
-    }
+    
     public void LauncherAngleStop() {
     	motorLauncherAngle.set(0.0);
     }
     
-    public double LauncherMotorGo(double input, double multiplier) {
-    	double diff = input - motorLauncherAngle.getPosition();
-    	double new_multiplier = multiplier + 0.15;
-    	if (new_multiplier > 10) new_multiplier = 10;
-    	motorLauncherAngle.set(new_multiplier*diff);
-    	return new_multiplier;
+    public void Intake() {
+    	motorLauncherFlywheelRight.set(-.75);
+    	motorLauncherFlywheelLeft.set(.75);
+    	motorLauncherFlywheelFeed.set(-1);
+    }
+    
+    public void IntakeStop() {
+    	motorLauncherFlywheelRight.set(0);
+    	motorLauncherFlywheelLeft.set(0);
+    	motorLauncherFlywheelFeed.set(0);
+    }
+    
+    public void LauncherAngleUp() {
+    	double diff = (Robot.start - 0.16) - motorLauncherAngle.getPosition();
+    	mult += 0.15;
+    	if (mult > 10) mult = 10;
+    	motorLauncherAngle.set(mult*diff);
+    }
+    
+    public void LauncherAngleDown() {
+    	double diff = Robot.start - motorLauncherAngle.getPosition();
+    	mult += 0.15;
+    	if (mult > 10) mult = 10;
+    	motorLauncherAngle.set(mult*diff);
     }
     
     public void FlywheelSpinUp(double inputSpeed){

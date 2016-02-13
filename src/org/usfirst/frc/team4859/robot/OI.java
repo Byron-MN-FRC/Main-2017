@@ -5,7 +5,6 @@ import org.usfirst.frc.team4859.robot.commands.FlywheelFeedIn;
 import org.usfirst.frc.team4859.robot.commands.FlywheelFeedOut;
 import org.usfirst.frc.team4859.robot.commands.FlywheelFeedStop;
 import org.usfirst.frc.team4859.robot.commands.FlywheelForward;
-import org.usfirst.frc.team4859.robot.commands.FlywheelForwardSpin;
 import org.usfirst.frc.team4859.robot.commands.FlywheelStop;
 import org.usfirst.frc.team4859.robot.commands.LauncherAngleDown;
 import org.usfirst.frc.team4859.robot.commands.LauncherAngleStop;

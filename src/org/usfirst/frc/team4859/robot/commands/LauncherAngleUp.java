@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class LauncherAngleUp extends Command {
-	private double mult;
 	
     public LauncherAngleUp() {
     	requires(Robot.launcher);
@@ -15,12 +14,12 @@ public class LauncherAngleUp extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	mult = 0;
+    	Robot.launcher.mult = 0;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	mult = Robot.launcher.LauncherMotorGo(0.45,mult);
+    	Robot.launcher.LauncherAngleUp();
     }
 
     // Make this return true when this Command no longer needs to run execute()

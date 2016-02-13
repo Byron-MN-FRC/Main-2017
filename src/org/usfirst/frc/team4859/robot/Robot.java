@@ -15,7 +15,9 @@ public class Robot extends IterativeRobot {
 	public static Chassis chassis;
 	public static Launcher launcher;
 	public static OI oi;
-
+	
+	public static double start;
+	
     Command autonomousCommand;
     SendableChooser autonomousChooser;
 
@@ -29,6 +31,7 @@ public class Robot extends IterativeRobot {
     	launcher = new Launcher();
 		oi = new OI();
 		
+		start = launcher.motorLauncherAngle.getPosition();
 		// Add autonomous modes
 		autonomousChooser = new SendableChooser();
 		autonomousChooser.addDefault("Default", new Autonomous());
