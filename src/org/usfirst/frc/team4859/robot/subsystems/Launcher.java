@@ -72,6 +72,7 @@ public class Launcher extends Subsystem {
     }
     
     public void LauncherAngleUp() {
+    	// difference variable is the up position minus the position it's actually at
     	double diff = (Robot.start - 0.16) - motorLauncherAngle.getPosition();
     	mult += 0.15;
     	if (mult > 10) mult = 10;
@@ -79,6 +80,7 @@ public class Launcher extends Subsystem {
     }
     
     public void LauncherAngleDown() {
+    	// difference variable is the down position minus where it's actually at
     	double diff = Robot.start - motorLauncherAngle.getPosition();
     	mult += 0.15;
     	if (mult > 10) mult = 10;
