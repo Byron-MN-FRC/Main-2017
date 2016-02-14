@@ -6,6 +6,8 @@ import org.usfirst.frc.team4859.robot.commands.FlywheelFeedOut;
 import org.usfirst.frc.team4859.robot.commands.FlywheelFeedStop;
 import org.usfirst.frc.team4859.robot.commands.FlywheelForward;
 import org.usfirst.frc.team4859.robot.commands.FlywheelStop;
+import org.usfirst.frc.team4859.robot.commands.Intake;
+import org.usfirst.frc.team4859.robot.commands.IntakeStop;
 import org.usfirst.frc.team4859.robot.commands.LauncherAngleDown;
 import org.usfirst.frc.team4859.robot.commands.LauncherAngleStop;
 import org.usfirst.frc.team4859.robot.commands.LauncherAngleUp;
@@ -27,7 +29,8 @@ public class OI {
 	Button precisionMode = new JoystickButton(joystickP0, 12);
 	
 	Button flywheelForward = new JoystickButton(xboxP1, 7);
-	Button flywheelBackward = new JoystickButton(xboxP1, 5);
+
+	Button flywheelBackward = new JoystickButton(xboxP1, 8);
 	
 	Button flywheelFeedIn = new JoystickButton(xboxP1, 3);
 	Button flywheelFeedOut = new JoystickButton(xboxP1, 2);
@@ -35,7 +38,8 @@ public class OI {
 	Button launcherAngleUp = new JoystickButton(xboxP1, 4);
 	Button launcherAngleDown = new JoystickButton(xboxP1, 1);
 	
-	Button autoShoot = new JoystickButton(xboxP1, 6);
+	Button intake = new JoystickButton(xboxP1, 5);
+	Button outtake = new JoystickButton(xboxP1, 6);
  
 	public OI() {
 		precisionMode.toggleWhenPressed(new PrecisionMode());
@@ -46,6 +50,12 @@ public class OI {
 		flywheelBackward.whenPressed(new FlywheelBackward());
 		flywheelBackward.whenReleased(new FlywheelStop());
 		
+		intake.whenPressed(new Intake());
+		intake.whenReleased(new IntakeStop());
+		
+		outtake.whenPressed(new Outtake());
+		outtake.whenReleased(new FlywheelStop());
+		
 		flywheelFeedIn.whenPressed(new FlywheelFeedIn());
 		flywheelFeedIn.whenReleased(new FlywheelFeedStop());
 		
@@ -55,9 +65,6 @@ public class OI {
 		launcherAngleUp.toggleWhenPressed(new LauncherAngleUp());
 		
 		launcherAngleDown.toggleWhenPressed(new LauncherAngleDown());
-		
-		autoShoot.whenPressed(new Outtake());
-		autoShoot.whenReleased(new FlywheelStop());
 	}
 	
 	public Joystick getJoystick() {
