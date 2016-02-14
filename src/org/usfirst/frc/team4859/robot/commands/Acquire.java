@@ -10,17 +10,18 @@ public class Acquire extends Command {
 	
     public Acquire() {
     	requires(Robot.launcher);
+    	requires(Robot.pivot);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.launcher.mult = 0;
-    	Robot.launcher.LauncherAngleDown();
+    	Robot.pivot.mult = 0;
+    	Robot.pivot.LauncherAngleDown();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.launcher.LauncherAngleStop();
+    	Robot.pivot.LauncherAngleStop();
     	Robot.launcher.Intake();
     }
 
@@ -31,7 +32,7 @@ public class Acquire extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.launcher.LauncherAngleStop();
+    	Robot.pivot.LauncherAngleStop();
     	Robot.launcher.IntakeStop();
 
     }

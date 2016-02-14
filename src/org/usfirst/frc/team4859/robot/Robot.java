@@ -3,6 +3,8 @@ package org.usfirst.frc.team4859.robot;
 import org.usfirst.frc.team4859.robot.autonomous.Autonomous;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Launcher;
+import org.usfirst.frc.team4859.robot.subsystems.Pivot;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -14,6 +16,7 @@ public class Robot extends IterativeRobot {
 	//Create subsystems
 	public static Chassis chassis;
 	public static Launcher launcher;
+	public static Pivot pivot;
 	public static OI oi;
 	
 	public static double start;
@@ -29,9 +32,13 @@ public class Robot extends IterativeRobot {
     	// Initialize subsystems
     	chassis = new Chassis();
     	launcher = new Launcher();
+    	pivot = new Pivot();
 		oi = new OI();
 		
-		start = launcher.motorLauncherAngle.getPosition(); //+ 0.1;
+		pivot.motorLauncherAngle.setPosition(0.9);
+		
+		start = pivot.motorLauncherAngle.getPosition(); //+ 0.1;
+		
 		// Add autonomous modes
 		autonomousChooser = new SendableChooser();
 		autonomousChooser.addDefault("Default", new Autonomous());
@@ -42,7 +49,7 @@ public class Robot extends IterativeRobot {
     }
 	
 	public void disabledPeriodic() {
-    	launcher.LauncherAngleStop();
+    	pivot.LauncherAngleStop();
 		Scheduler.getInstance().run();
 	}
 

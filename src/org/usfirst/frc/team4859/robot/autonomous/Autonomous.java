@@ -27,7 +27,7 @@ public class Autonomous extends CommandGroup {
     	//addSequential(new DriveStop(2));
     	//addSequential(new DriveStraight(-.5, 1));
     	//addSequential(new DriveStop(0));
-    	addSequential(new LauncherAngleDown());
+    	addSequential(new PivotAngleDown());
     	addSequential(new DriveStraight(-0.5,3));
     	addSequential(new DriveStop(0.5));
     	addSequential(new DriveRightCenter(0.5,1));

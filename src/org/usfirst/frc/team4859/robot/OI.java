@@ -8,9 +8,9 @@ import org.usfirst.frc.team4859.robot.commands.FlywheelForward;
 import org.usfirst.frc.team4859.robot.commands.FlywheelStop;
 import org.usfirst.frc.team4859.robot.commands.Intake;
 import org.usfirst.frc.team4859.robot.commands.IntakeStop;
-import org.usfirst.frc.team4859.robot.commands.LauncherAngleDown;
-import org.usfirst.frc.team4859.robot.commands.LauncherAngleStop;
-import org.usfirst.frc.team4859.robot.commands.LauncherAngleUp;
+import org.usfirst.frc.team4859.robot.commands.PivotAngleDown;
+import org.usfirst.frc.team4859.robot.commands.PivotAngleStop;
+import org.usfirst.frc.team4859.robot.commands.PivotAngleUp;
 import org.usfirst.frc.team4859.robot.commands.Outtake;
 import org.usfirst.frc.team4859.robot.commands.PrecisionMode;
 import edu.wpi.first.wpilibj.Joystick;
@@ -62,9 +62,9 @@ public class OI {
 		flywheelFeedOut.whenPressed(new FlywheelFeedOut());
 		flywheelFeedOut.whenReleased(new FlywheelFeedStop());
 		
-		launcherAngleUp.toggleWhenPressed(new LauncherAngleUp());
+		launcherAngleUp.toggleWhenPressed(new PivotAngleUp());
 		
-		launcherAngleDown.toggleWhenPressed(new LauncherAngleDown());
+		launcherAngleDown.toggleWhenPressed(new PivotAngleDown());
 	}
 	
 	public Joystick getJoystick() {
