@@ -26,12 +26,13 @@ public class PivotAngleUp extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Robot.pivot.LimitSwitchCheck();
     }
 
     // Called once after isFinished returns true
     protected void end() {
     	Robot.pivot.LauncherAngleStop();
+    	Robot.pivot.motorLauncherAngle.setPosition(0.1);
 
     }
 
