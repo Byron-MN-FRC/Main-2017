@@ -1,11 +1,15 @@
 package org.usfirst.frc.team4859.robot;
 
+import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.Autonomous;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Launcher;
 import org.usfirst.frc.team4859.robot.subsystems.Pivot;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -18,6 +22,8 @@ public class Robot extends IterativeRobot {
 	public static Launcher launcher;
 	public static Pivot pivot;
 	public static OI oi;
+	public static AnalogInput ultra;
+	public static ADXRS450_Gyro gyro;
 	
 	public static double start;
 	
@@ -34,13 +40,16 @@ public class Robot extends IterativeRobot {
     	launcher = new Launcher();
     	pivot = new Pivot();
 		oi = new OI();
+		ultra = new AnalogInput(0);
+		gyro = new ADXRS450_Gyro();
 		
-		pivot.motorLauncherAngle.setPosition(0.1);
+		pivot.motorLauncherAngle.setPosition(RobotMap.upPosition);
 		start = pivot.motorLauncherAngle.getPosition();
 		
 		// Add autonomous modes
 		autonomousChooser = new SendableChooser();
 		autonomousChooser.addDefault("Default", new Autonomous());
+		autonomousChooser.addObject("Nothing", new AutoNothing());
 		SmartDashboard.putData("Autonomous Mode Chooser", autonomousChooser);
 		
         // Instantiate the command used for the autonomous period

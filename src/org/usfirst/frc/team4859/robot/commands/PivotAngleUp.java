@@ -1,6 +1,9 @@
 package org.usfirst.frc.team4859.robot.commands;
 
 import org.usfirst.frc.team4859.robot.Robot;
+import org.usfirst.frc.team4859.robot.RobotMap;
+import org.usfirst.frc.team4859.robot.subsystems.Pivot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -14,7 +17,7 @@ public class PivotAngleUp extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.pivot.mult = 0;
+    	Pivot.mult = 0;
     	Robot.pivot.LauncherAngleStop();
     	
     }
@@ -26,14 +29,13 @@ public class PivotAngleUp extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.pivot.LimitSwitchCheck();
+        return Robot.pivot.LimitSwitchUp();
     }
 
     // Called once after isFinished returns true
     protected void end() {
     	Robot.pivot.LauncherAngleStop();
-    	Robot.pivot.motorLauncherAngle.setPosition(0.1);
-
+    	Robot.pivot.motorLauncherAngle.setPosition(RobotMap.upPosition);
     }
 
     // Called when another command which requires one or more of the same

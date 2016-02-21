@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4859.robot.subsystems;
 
+import org.usfirst.frc.team4859.robot.Robot;
 import org.usfirst.frc.team4859.robot.RobotMap;
 import org.usfirst.frc.team4859.robot.ThrottleLookup.ThrottleLookup;
 import org.usfirst.frc.team4859.robot.commands.DriveWithJoystick;
@@ -25,8 +26,7 @@ public class Chassis extends Subsystem {
 	static CANTalon motorChassisLeftSlave = new CANTalon(RobotMap.talonDevIDChassisLeftSlave);
 	
 	// Sensors
-	AnalogInput distanceSensor = new AnalogInput(0);
-	Gyro gyro = new AnalogGyro(1);
+	
 	AnalogInput ai = new AnalogInput(2);
 	Potentiometer potentiometer = new AnalogPotentiometer(ai, 360, 30);
 	
@@ -73,8 +73,9 @@ public class Chassis extends Subsystem {
 		SmartDashboard.putBoolean("Precision Mode", RobotMap.pMode);
 		
 		// Sensors
-		SmartDashboard.putNumber("Distance (feet)", (distanceSensor.getVoltage()*3.28084));
-		SmartDashboard.putNumber("Gyro Angle", (gyro.getAngle()));
+		SmartDashboard.putNumber("Distance (inches)", Robot.ultra.getVoltage()*3.28084*12);
+		SmartDashboard.putNumber("Distance (feet)", (Robot.ultra.getVoltage()*3.28084));
+		SmartDashboard.putNumber("Gyro Angle", (Robot.gyro.getAngle()));
 		SmartDashboard.putNumber("Potentiometer Angle", potentiometer.get());
 		SmartDashboard.putNumber("Accel X", accel.getX());
 		SmartDashboard.putNumber("Accel Y", accel.getY());

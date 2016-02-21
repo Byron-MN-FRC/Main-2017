@@ -9,7 +9,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Pivot extends Subsystem {
 	
 	public CANTalon motorLauncherAngle = new CANTalon(RobotMap.talonDevIDLauncherAngle);
-	public DigitalInput limitSwitch = new DigitalInput(0);
+	public DigitalInput limitSwitchUp = new DigitalInput(0);
+	public DigitalInput limitSwitchDown = new DigitalInput(1);
 	public static double mult;
 	
 	public Pivot() {
@@ -24,25 +25,37 @@ public class Pivot extends Subsystem {
       
     public void LauncherAngleUp() {
     	// difference variable is the up position minus the position it's actually at
-    	double diff = (0.15 /*Max is about 0.74 OLD VALUES: Normal: 0.24 Max: 0.24*/) - motorLauncherAngle.getPosition();
-    	mult += 0.1;
+    	double diff = RobotMap.shootPosition - motorLauncherAngle.getPosition();
+    	mult += 0.15;
     	if (mult > 10) mult = 10;
     	motorLauncherAngle.set(mult*diff);
     }
     
     public void LauncherAngleDown() {
     	double power = 0.0;
-    	if (motorLauncherAngle.getPosition() < 0.7)
+    	if (motorLauncherAngle.getPosition() < 0.6)
     		power = 0.4;
     	
     	motorLauncherAngle.set(power);
+    }
+    
+    public void LauncherAngleFlat() {
+    	// difference variable is the up position minus the position it's actually at
+    	double diff = RobotMap.flatPosition - motorLauncherAngle.getPosition();
+    	mult += 0.15;
+    	if (mult > 10) mult = 10;
+    	motorLauncherAngle.set(mult*diff);
     }
     
     public void LauncherAngleStop() {
     	motorLauncherAngle.set(0.0);
     } 
     
-    public boolean LimitSwitchCheck() {
-    	return limitSwitch.get();
+    public boolean LimitSwitchUp() {
+    	return limitSwitchUp.get();
+    }
+    
+    public boolean LimitSwitchDown() {
+    	return limitSwitchDown.get();
     }
 }

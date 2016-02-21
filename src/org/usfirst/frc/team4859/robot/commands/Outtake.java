@@ -9,8 +9,8 @@ public class Outtake extends CommandGroup {
 	
     public  Outtake() {
     	
-        addSequential(new FlywheelForwardTime(1, 2));
-        addParallel(new FlywheelForwardTime(1, 2));
+        addSequential(new FlywheelForwardTime(2));
+        addParallel(new FlywheelForwardTime(2));
         addSequential(new FlywheelFeedOutTime(1, 2));
         addParallel(new FlywheelStop());
         addSequential(new FlywheelFeedStop());

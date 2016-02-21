@@ -1,40 +1,46 @@
-package org.usfirst.frc.team4859.robot.autonomous;
+package org.usfirst.frc.team4859.robot.commands;
 
 import org.usfirst.frc.team4859.robot.Robot;
+import org.usfirst.frc.team4859.robot.RobotMap;
+import org.usfirst.frc.team4859.robot.subsystems.Pivot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
-public class FlywheelForwardTime extends Command {
-
-	private double time;
+/**
+ *
+ */
+public class PivotAngleFlat extends Command {
 	
-    public FlywheelForwardTime(double inputTime) {
-        // Use requires() here to declare subsystem dependencies
-        requires(Robot.launcher);
-        time = inputTime;
+    public PivotAngleFlat() {
+    	requires(Robot.pivot);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.launcher.FlywheelForward();
-    	setTimeout(time);
+    	Pivot.mult = 0;
+    	Robot.pivot.LauncherAngleStop();
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.launcher.FlywheelForward();
+    	Robot.pivot.LauncherAngleFlat();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return isTimedOut();
+        return Robot.pivot.LimitSwitchUp();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.pivot.LauncherAngleStop();
+    	Robot.pivot.motorLauncherAngle.setPosition(RobotMap.upPosition);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+       	Robot.pivot.LauncherAngleStop();
     }
 }

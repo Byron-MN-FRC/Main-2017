@@ -1,6 +1,8 @@
 package org.usfirst.frc.team4859.robot.subsystems;
 
 import org.usfirst.frc.team4859.robot.RobotMap;
+
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -9,6 +11,7 @@ public class Launcher extends Subsystem {
 	static Talon motorLauncherFlywheelRight = new Talon(RobotMap.talonDevIDLauncherFlywheelRight);
 	static Talon motorLauncherFlywheelLeft = new Talon(RobotMap.talonDevIDLauncherFlywheelLeft);
 	static Talon motorLauncherFlywheelFeed = new Talon(RobotMap.talonDevIDLauncherFlywheelFeed);
+	double voltage = DriverStation.getInstance().getBatteryVoltage();
 	
 	public Launcher() {
 		super();
@@ -20,8 +23,9 @@ public class Launcher extends Subsystem {
     }
     
     public void FlywheelForward() {
-    	motorLauncherFlywheelRight.set(1);
-    	motorLauncherFlywheelLeft.set(-1);
+    	voltage = DriverStation.getInstance().getBatteryVoltage();
+    	motorLauncherFlywheelRight.set(11/voltage);
+    	motorLauncherFlywheelLeft.set(-11/voltage);
     }
     
     public void FlywheelBackward() {
@@ -47,8 +51,8 @@ public class Launcher extends Subsystem {
     }
     
     public void Intake() {
-    	motorLauncherFlywheelRight.set(-.75);
-    	motorLauncherFlywheelLeft.set(.75);
+    	motorLauncherFlywheelRight.set(-.6);
+    	motorLauncherFlywheelLeft.set(.6);
     	motorLauncherFlywheelFeed.set(-1);
     }
     
@@ -58,10 +62,11 @@ public class Launcher extends Subsystem {
     	motorLauncherFlywheelFeed.set(0);
     }
     
-    public void FlywheelSpinUp(double inputSpeed){
-    	motorLauncherFlywheelRight.set(inputSpeed);
-    	motorLauncherFlywheelLeft.set(-inputSpeed);
-	}
+//  public void FlywheelSpinUp(double inputSpeed){
+//    	voltage = DriverStation.getInstance().getBatteryVoltage();
+//    	motorLauncherFlywheelRight.set(inputSpeed/voltage);
+//    	motorLauncherFlywheelLeft.set(-inputSpeed/voltage);
+//	}
     
     public void FlywheelFeedOutTime(double inputSpeed) {
     	motorLauncherFlywheelFeed.set(-inputSpeed);
