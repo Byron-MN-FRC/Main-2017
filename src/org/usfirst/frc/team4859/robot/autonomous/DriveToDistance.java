@@ -36,6 +36,6 @@ public class DriveToDistance extends Command {
 
 	@Override
 	protected void interrupted() {
+    	Robot.chassis.DriveStop();
 	}
-
 }

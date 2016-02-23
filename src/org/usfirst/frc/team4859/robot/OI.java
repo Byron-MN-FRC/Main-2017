@@ -52,14 +52,14 @@ public class OI {
 //		flywheelFeedIn.whenPressed(new FlywheelFeedIn());
 //		flywheelFeedIn.whenReleased(new FlywheelFeedStop());
 		
-		flywheelFeedOut.whenPressed(new FlywheelFeedOut());
-		flywheelFeedOut.whenReleased(new FlywheelFeedStop());
+		flywheelFeedOut.whenPressed(new FeedOut());
+		flywheelFeedOut.whenReleased(new FeedStop());
 		
-		launcherAngleUp.toggleWhenPressed(new PivotAngleUp());
+		launcherAngleUp.toggleWhenPressed(new PivotUp());
 		
-		launcherAngleDown.toggleWhenPressed(new PivotAngleDown());
+		launcherAngleDown.toggleWhenPressed(new PivotDown());
 		
-		flatAngle.toggleWhenPressed(new PivotAngleFlat());
+		flatAngle.toggleWhenPressed(new PivotFlat());
 		
 		center.whenPressed(new CenterBall());
 		center.whenReleased(new FlywheelStop());

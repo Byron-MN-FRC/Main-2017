@@ -9,19 +9,19 @@ public class FlywheelForwardTime extends Command {
 	
     public FlywheelForwardTime(double inputTime) {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.launcher);
+        requires(Robot.flywheels);
         time = inputTime;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.launcher.FlywheelForward();
+    	Robot.flywheels.FlywheelForward();
     	setTimeout(time);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.launcher.FlywheelForward();
+    	Robot.flywheels.FlywheelForward();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -31,10 +31,12 @@ public class FlywheelForwardTime extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.flywheels.FlywheelStop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.flywheels.FlywheelStop();
     }
 }

@@ -23,7 +23,7 @@ public class Pivot extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
       
-    public void LauncherAngleUp() {
+    public void AngleUp() {
     	// difference variable is the up position minus the position it's actually at
     	double diff = RobotMap.upPosition - motorLauncherAngle.getPosition();
     	mult += 0.15;
@@ -31,7 +31,7 @@ public class Pivot extends Subsystem {
     	motorLauncherAngle.set(mult*diff);
     }
     
-    public void LauncherAngleDown() {
+    public void AngleDown() {
     	double power = 0.0;
     	if (motorLauncherAngle.getPosition() < 0.6)
     		power = 0.4;
@@ -39,7 +39,7 @@ public class Pivot extends Subsystem {
     	motorLauncherAngle.set(power);
     }
     
-    public void LauncherAngleFlat() {
+    public void AngleFlat() {
     	// difference variable is the up position minus the position it's actually at
     	double diff = RobotMap.flatPosition - motorLauncherAngle.getPosition();
     	mult += 0.15;
@@ -47,7 +47,7 @@ public class Pivot extends Subsystem {
     	motorLauncherAngle.set(mult*diff);
     }
     
-    public void LauncherAngleStop() {
+    public void AngleStop() {
     	motorLauncherAngle.set(0.0);
     } 
     

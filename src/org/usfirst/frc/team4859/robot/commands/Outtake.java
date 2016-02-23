@@ -8,11 +8,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Outtake extends CommandGroup {
 	
     public  Outtake() {
-    	
         addSequential(new FlywheelForwardTime(2));
         addParallel(new FlywheelForwardTime(2));
         addSequential(new FlywheelFeedOutTime(1, 2));
         addParallel(new FlywheelStop());
-        addSequential(new FlywheelFeedStop());
+        addSequential(new FeedStop());
     }
 }  

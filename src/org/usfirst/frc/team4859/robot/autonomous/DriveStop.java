@@ -35,5 +35,6 @@ public class DriveStop extends Command {
     }
 	
 	protected void interrupted() {
+    	Robot.chassis.DriveStop();
 	}
 }

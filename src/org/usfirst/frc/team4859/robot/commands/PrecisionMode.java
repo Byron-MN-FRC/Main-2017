@@ -21,6 +21,6 @@ public class PrecisionMode extends Command {
 	}
 	
 	protected void interrupted() {
-		end();
+		RobotMap.pMode = false;
 	}
 }

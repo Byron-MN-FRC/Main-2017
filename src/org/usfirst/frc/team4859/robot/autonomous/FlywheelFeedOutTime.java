@@ -12,20 +12,20 @@ public class FlywheelFeedOutTime extends Command {
 	private double speed;
 	
     public FlywheelFeedOutTime(double inputSpeed, double inputTime) {
-    	requires(Robot.launcher);
+    	requires(Robot.flywheels);
     	speed = inputSpeed;
         time = inputTime;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.launcher.FlywheelFeedOutTime(speed);
+    	Robot.feeder.FeedOutTime(speed);
     	setTimeout(time);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.launcher.FlywheelFeedOutTime(speed);
+    	Robot.feeder.FeedOutTime(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -35,12 +35,13 @@ public class FlywheelFeedOutTime extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.launcher.FlywheelFeedStop();
+    	Robot.feeder.FeedStop();
 
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.feeder.FeedStop();
     }
 }

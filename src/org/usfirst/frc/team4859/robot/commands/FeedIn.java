@@ -6,20 +6,20 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class FlywheelFeedStop extends Command {
+public class FeedIn extends Command {
 
-    public FlywheelFeedStop() {
-    	requires(Robot.launcher);
+    public FeedIn() {
+    	requires(Robot.feeder);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.launcher.FlywheelFeedStop();
+    	Robot.feeder.FeedIn();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.launcher.FlywheelFeedStop();
+    	Robot.feeder.FeedIn();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -29,7 +29,7 @@ public class FlywheelFeedStop extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.launcher.FlywheelFeedStop();
+    	Robot.feeder.FeedStop();
 
     }
 

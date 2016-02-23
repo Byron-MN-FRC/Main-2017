@@ -3,13 +3,12 @@ package org.usfirst.frc.team4859.robot;
 import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.Autonomous;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
-import org.usfirst.frc.team4859.robot.subsystems.Launcher;
+import org.usfirst.frc.team4859.robot.subsystems.Feeder;
+import org.usfirst.frc.team4859.robot.subsystems.Flywheels;
 import org.usfirst.frc.team4859.robot.subsystems.Pivot;
-
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -19,12 +18,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 	//Create subsystems
 	public static Chassis chassis;
-	public static Launcher launcher;
+	public static Flywheels flywheels;
+	public static Feeder feeder;
 	public static Pivot pivot;
-	public static OI oi;
 	public static AnalogInput ultra;
 	public static ADXRS450_Gyro gyro;
-	
+	public static OI oi;
+
 	public static double start;
 	
     Command autonomousCommand;
@@ -37,11 +37,12 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	// Initialize subsystems
     	chassis = new Chassis();
-    	launcher = new Launcher();
+    	flywheels = new Flywheels();
+    	feeder = new Feeder();
     	pivot = new Pivot();
-		oi = new OI();
 		ultra = new AnalogInput(0);
 		gyro = new ADXRS450_Gyro();
+		oi = new OI();
 		gyro.reset();
 		
 		start = pivot.motorLauncherAngle.getPosition();
@@ -57,7 +58,7 @@ public class Robot extends IterativeRobot {
     }
 	
 	public void disabledPeriodic() {
-    	pivot.LauncherAngleStop();
+    	pivot.AngleStop();
 		Scheduler.getInstance().run();
 	}
 
