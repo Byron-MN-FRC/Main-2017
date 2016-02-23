@@ -22,8 +22,8 @@ public class PivotAngleDown extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
        	Robot.pivot.LauncherAngleDown();
-       	if (Robot.pivot.LimitSwitchDown()) 
-       		Robot.pivot.motorLauncherAngle.setPosition(RobotMap.downPosition);
+       	//if (Robot.pivot.LimitSwitchDown()) 
+       		//Robot.pivot.motorLauncherAngle.setPosition(RobotMap.downPosition);
     }
 
     // Make this return true when this Command no longer needs to run execute()

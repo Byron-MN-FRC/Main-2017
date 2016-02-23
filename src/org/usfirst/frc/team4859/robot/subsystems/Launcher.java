@@ -39,11 +39,11 @@ public class Launcher extends Subsystem {
     }
     
     public void FlywheelFeedIn() {
-    	motorLauncherFlywheelFeed.set(1);
+    	motorLauncherFlywheelFeed.set(-1);
     }
     
     public void FlywheelFeedOut() {
-    	motorLauncherFlywheelFeed.set(-1);
+    	motorLauncherFlywheelFeed.set(1);
     }
     
     public void FlywheelFeedStop() {
@@ -51,8 +51,8 @@ public class Launcher extends Subsystem {
     }
     
     public void Intake() {
-    	motorLauncherFlywheelRight.set(-.6);
-    	motorLauncherFlywheelLeft.set(.6);
+    	motorLauncherFlywheelRight.set(-.75);
+    	motorLauncherFlywheelLeft.set(.75);
     	motorLauncherFlywheelFeed.set(-1);
     }
     

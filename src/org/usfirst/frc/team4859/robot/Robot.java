@@ -42,14 +42,14 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		ultra = new AnalogInput(0);
 		gyro = new ADXRS450_Gyro();
+		gyro.reset();
 		
-		pivot.motorLauncherAngle.setPosition(RobotMap.upPosition);
 		start = pivot.motorLauncherAngle.getPosition();
 		
 		// Add autonomous modes
 		autonomousChooser = new SendableChooser();
-		autonomousChooser.addDefault("Default", new Autonomous());
-		autonomousChooser.addObject("Nothing", new AutoNothing());
+		autonomousChooser.addDefault("Nothing", new AutoNothing());
+		autonomousChooser.addObject("Default", new Autonomous());
 		SmartDashboard.putData("Autonomous Mode Chooser", autonomousChooser);
 		
         // Instantiate the command used for the autonomous period
@@ -62,6 +62,7 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
+		pivot.motorLauncherAngle.setPosition(RobotMap.upPosition);
     	autonomousCommand = (Command) autonomousChooser.getSelected();
     	
     	if (autonomousCommand != null) autonomousCommand.start();

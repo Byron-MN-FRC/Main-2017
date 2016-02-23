@@ -25,7 +25,7 @@ public class Pivot extends Subsystem {
       
     public void LauncherAngleUp() {
     	// difference variable is the up position minus the position it's actually at
-    	double diff = RobotMap.shootPosition - motorLauncherAngle.getPosition();
+    	double diff = RobotMap.upPosition - motorLauncherAngle.getPosition();
     	mult += 0.15;
     	if (mult > 10) mult = 10;
     	motorLauncherAngle.set(mult*diff);
