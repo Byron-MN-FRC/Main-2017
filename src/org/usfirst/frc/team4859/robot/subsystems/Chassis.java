@@ -42,8 +42,8 @@ public class Chassis extends Subsystem {
 		motorChassisRightSlave.set(RobotMap.talonDevIDChassisRight);
 		motorChassisLeftSlave.set(RobotMap.talonDevIDChassisLeft);
 		
-		motorChassisRight.changeControlMode(TalonControlMode.Speed);
-		motorChassisLeft.changeControlMode(TalonControlMode.Speed);
+		//motorChassisRight.changeControlMode(TalonControlMode.Speed);
+		//motorChassisLeft.changeControlMode(TalonControlMode.Speed);
 		
 		// Set a timeout for the motors (1 seconds)
 		chassisDrive.setSafetyEnabled(true);
@@ -80,7 +80,7 @@ public class Chassis extends Subsystem {
 		SmartDashboard.putNumber("Accel Y", accel.getY());
 		SmartDashboard.putNumber("Accel Z", accel.getZ());
 		
-		chassisDrive.arcadeDrive(-yAxis*1000, -twist*1000);
+		chassisDrive.arcadeDrive(-yAxis/*562*/, -twist*0.7/*562*/);
 	}
 	
 	public void DriveStraight(double inputSpeed)

@@ -96,9 +96,10 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-    	//if (launcher.limitDown.get()) start = launcher.motorLauncherAngle.getPosition();
+        SmartDashboard.putBoolean("Upper Limit Switch", pivot.limitSwitchUp.get());
+        SmartDashboard.putBoolean("Lower Limit Switch", pivot.limitSwitchDown.get());
+        SmartDashboard.putNumber("Encoder", pivot.motorLauncherAngle.getPosition());
         Scheduler.getInstance().run();
-        
     }
     
     /**

@@ -33,8 +33,8 @@ public class Pivot extends Subsystem {
     
     public void AngleDown() {
     	double power = 0.0;
-    	if (motorLauncherAngle.getPosition() < 0.7)
-    		power = 0.5;
+    	if (motorLauncherAngle.getPosition() < 0.6)
+    		power = 0.4;
     	
     	motorLauncherAngle.set(power);
     }

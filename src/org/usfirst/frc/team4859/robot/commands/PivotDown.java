@@ -1,6 +1,8 @@
 package org.usfirst.frc.team4859.robot.commands;
 
 import org.usfirst.frc.team4859.robot.Robot;
+import org.usfirst.frc.team4859.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -20,8 +22,8 @@ public class PivotDown extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
        	Robot.pivot.AngleDown();
-       	//if (Robot.pivot.LimitSwitchDown()) 
-       		//Robot.pivot.motorLauncherAngle.setPosition(RobotMap.downPosition);
+       	if (Robot.pivot.LimitSwitchDown()) 
+       		Robot.pivot.motorLauncherAngle.setPosition(RobotMap.downPosition);
     }
 
     // Make this return true when this Command no longer needs to run execute()
