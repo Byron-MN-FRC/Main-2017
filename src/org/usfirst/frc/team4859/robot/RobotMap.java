@@ -30,11 +30,11 @@ public class RobotMap {
 	
 	public static int talonDevIDLauncherAngle = 10;
 	
-	public static double shootPosition = 0.12;
+	public static double shootPosition = 0.2 ;
 	
-	public static double upPosition = 0.1;
+	public static double upPosition = 0.2;
 	public static double flatPosition = 0.6;
-	public static double downPosition = 0.803;
+	public static double downPosition = 0.8;
 	
 	// Create precision mode variable and set to false by default
 	public static boolean pMode = false;

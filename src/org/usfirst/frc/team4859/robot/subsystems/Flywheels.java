@@ -24,8 +24,8 @@ public class Flywheels extends Subsystem {
     
     public void FlywheelForward() {
     	voltage = DriverStation.getInstance().getBatteryVoltage();
-    	motorLauncherFlywheelRight.set((11/voltage)*SmartDashboard.getNumber("Flywheel"));
-    	motorLauncherFlywheelLeft.set(-11/voltage);
+    	motorLauncherFlywheelRight.set((11/voltage)/**SmartDashboard.getNumber("Flywheel")*/);
+    	motorLauncherFlywheelLeft.set((-11/voltage));
     }
     
     public void FlywheelBackward() {

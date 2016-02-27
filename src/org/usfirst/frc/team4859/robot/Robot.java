@@ -45,7 +45,7 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		gyro.reset();
 		
-		start = pivot.motorLauncherAngle.getPosition();
+		//start = pivot.motorLauncherAngle.getPosition();
 		
 		// Add autonomous modes
 		autonomousChooser = new SendableChooser();

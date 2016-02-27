@@ -24,15 +24,18 @@ public class OI {
 	//Button flywheelFeedIn = new JoystickButton(xboxP1, 3);
 	Button flywheelFeedOut = new JoystickButton(xboxP1, 6);
 	
-	Button launcherAngleUp = new JoystickButton(xboxP1, 4);
-	Button launcherAngleDown = new JoystickButton(xboxP1, 1);
-	Button flatAngle = new JoystickButton(xboxP1, 2);
+	Button angleUp = new JoystickButton(xboxP1, 3);
+	Button angleDown = new JoystickButton(xboxP1, 1);
+	
+	Button angleShoot = new JoystickButton(xboxP1, 4);
+	
+	Button angleFlat = new JoystickButton(xboxP1, 2);
 	
 	Button intake = new JoystickButton(joystickP0, 1);
 	
 	//Button outtake = new JoystickButton(xboxP1, 6);
 	
-	Button center = new JoystickButton(xboxP1, 3);
+	//Button center = new JoystickButton(xboxP1, 3);
  
 	public OI() {
 		precisionMode.toggleWhenPressed(new PrecisionMode());
@@ -55,14 +58,16 @@ public class OI {
 		flywheelFeedOut.whenPressed(new FeedOut());
 		flywheelFeedOut.whenReleased(new FeedStop());
 		
-		launcherAngleUp.toggleWhenPressed(new PivotUp());
+		angleUp.toggleWhenPressed(new PivotUp());
 		
-		launcherAngleDown.toggleWhenPressed(new PivotDown());
+		angleDown.toggleWhenPressed(new PivotDown());
 		
-		flatAngle.toggleWhenPressed(new PivotFlat());
+		angleShoot.toggleWhenPressed(new PivotShoot());
 		
-		center.whenPressed(new CenterBall());
-		center.whenReleased(new FlywheelStop());
+		angleFlat.toggleWhenPressed(new PivotFlat());
+		
+		//center.whenPressed(new CenterBall());
+		//center.whenReleased(new FlywheelStop());
 	}
 	
 	public Joystick getJoystick() {

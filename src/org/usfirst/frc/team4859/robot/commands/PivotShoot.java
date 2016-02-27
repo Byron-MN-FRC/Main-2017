@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class PivotUp extends Command {
+public class PivotShoot extends Command {
 	
-    public PivotUp() {
+    public PivotShoot() {
     	requires(Robot.pivot);
     }
 
@@ -24,7 +24,7 @@ public class PivotUp extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.pivot.AngleUp();
+    	Robot.pivot.AngleShoot();
     	
     	if (Robot.pivot.LimitSwitchUp())
     		Robot.pivot.motorLauncherAngle.setPosition(RobotMap.upPosition);

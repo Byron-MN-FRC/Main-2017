@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Pivot extends Subsystem {
 	
@@ -15,6 +16,7 @@ public class Pivot extends Subsystem {
 	
 	public Pivot() {
 		super();
+		SmartDashboard.putNumber("Pivot Angle", RobotMap.shootPosition);
 		motorLauncherAngle.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Absolute);
 	}
 
@@ -23,10 +25,11 @@ public class Pivot extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
       
-    public void AngleUp() {
+    public void AngleShoot() {
     	// difference variable is the up position minus the position it's actually at
-    	double diff = RobotMap.upPosition - motorLauncherAngle.getPosition();
-    	mult += 0.15;
+    	//SmartDashboard.getNumber("Pivot Angle")
+    	double diff = RobotMap.shootPosition - motorLauncherAngle.getPosition();
+    	mult += 0.2;
     	if (mult > 10) mult = 10;
     	motorLauncherAngle.set(mult*diff);
     }
@@ -39,10 +42,19 @@ public class Pivot extends Subsystem {
     	motorLauncherAngle.set(power);
     }
     
+    public void AngleUp() {
+    	// difference variable is the up position minus the position it's actually at
+    	//SmartDashboard.getNumber("Pivot Angle")
+    	double diff = RobotMap.upPosition - motorLauncherAngle.getPosition();
+    	mult += 0.2;
+    	if (mult > 10) mult = 10;
+    	motorLauncherAngle.set(mult*diff);
+    }
+    
     public void AngleFlat() {
     	// difference variable is the up position minus the position it's actually at
     	double diff = RobotMap.flatPosition - motorLauncherAngle.getPosition();
-    	mult += 0.15;
+    	mult += 0.2;
     	if (mult > 10) mult = 10;
     	motorLauncherAngle.set(mult*diff);
     }
