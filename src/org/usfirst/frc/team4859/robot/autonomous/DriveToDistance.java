@@ -16,17 +16,17 @@ public class DriveToDistance extends Command {
 	
 	@Override
 	protected void initialize() {
-		Robot.chassis.DriveStraight(inputSpeed);
+		Robot.chassis.DriveStraightGyro(inputSpeed);
 	}
 
 	@Override
 	protected void execute() {
-		Robot.chassis.DriveStraight(inputSpeed);
+		Robot.chassis.DriveStraightGyro(inputSpeed);
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return Robot.ultra.getVoltage()*3.28084*12 <= distance;
+		return Robot.ultra.getVoltage()*8.8365*12 <= distance;
 	}
 
 	@Override

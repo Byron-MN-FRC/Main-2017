@@ -2,6 +2,7 @@ package org.usfirst.frc.team4859.robot;
 
 import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.Autonomous;
+import org.usfirst.frc.team4859.robot.autonomous.LowBarAndGoal;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Feeder;
 import org.usfirst.frc.team4859.robot.subsystems.Flywheels;
@@ -9,6 +10,7 @@ import org.usfirst.frc.team4859.robot.subsystems.Pivot;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -50,7 +52,8 @@ public class Robot extends IterativeRobot {
 		// Add autonomous modes
 		autonomousChooser = new SendableChooser();
 		autonomousChooser.addDefault("Nothing", new AutoNothing());
-		autonomousChooser.addObject("Default", new Autonomous());
+		autonomousChooser.addObject("Normal", new Autonomous());
+		autonomousChooser.addObject("Low Bar and Goal", new LowBarAndGoal());
 		SmartDashboard.putData("Autonomous Mode Chooser", autonomousChooser);
 		
         // Instantiate the command used for the autonomous period
@@ -63,7 +66,13 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
-		pivot.motorLauncherAngle.setPosition(RobotMap.upPosition);
+		//pivot.motorLauncherAngle.setPosition(RobotMap.upPosition);
+		Chassis.motorChassisRight.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motorChassisLeft.changeControlMode(TalonControlMode.PercentVbus);
+		//Chassis.motorChassisRight.changeControlMode(TalonControlMode.Speed);
+		//Chassis.motorChassisLeft.changeControlMode(TalonControlMode.Speed);
+
+		gyro.reset();
     	autonomousCommand = (Command) autonomousChooser.getSelected();
     	
     	if (autonomousCommand != null) autonomousCommand.start();
@@ -74,6 +83,9 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
     	//if (launcher.limitDown.get()) start = launcher.motorLauncherAngle.getPosition();
+    	SmartDashboard.putNumber("Distance (inches)", Robot.ultra.getVoltage()*8.8365*12);
+		SmartDashboard.putNumber("Distance (feet)", (Robot.ultra.getVoltage()*8.8365));
+		SmartDashboard.putNumber("Gyro Angle", (Robot.gyro.getAngle()));
         Scheduler.getInstance().run();
     }
 
@@ -82,7 +94,12 @@ public class Robot extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
+
+		gyro.reset();
         if (autonomousCommand != null) autonomousCommand.cancel();
+        
+		Chassis.motorChassisRight.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motorChassisLeft.changeControlMode(TalonControlMode.PercentVbus);
     }
 
     /**

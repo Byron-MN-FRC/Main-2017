@@ -4,12 +4,12 @@ import org.usfirst.frc.team4859.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class DriveStraight extends Command {
+public class DriveStraightGyro extends Command {
 
 	private double Time;
 	private double Speed;
 	
-    public DriveStraight(double inputSpeed, double inputTime) {
+    public DriveStraightGyro(double inputSpeed, double inputTime) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.chassis);
         Speed = inputSpeed;
@@ -18,19 +18,17 @@ public class DriveStraight extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.chassis.DriveStraight(Speed);
+    	Robot.chassis.DriveStraightGyro(Speed);
     	setTimeout(Time);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.chassis.DriveStraight(Speed);
-    	SmartDashboard.putBoolean("isFinished", isTimedOut());
+    	Robot.chassis.DriveStraightGyro(Speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	SmartDashboard.putBoolean("isFinished", isTimedOut());
         return isTimedOut();
     }
 

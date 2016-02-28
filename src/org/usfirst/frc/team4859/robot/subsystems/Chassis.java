@@ -17,11 +17,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Chassis extends Subsystem {
 	// Creating and setting motors
-	static CANTalon motorChassisRight = new CANTalon(RobotMap.talonDevIDChassisRight);
-	static CANTalon motorChassisRightSlave = new CANTalon(RobotMap.talonDevIDChassisRightSlave);
+	public static CANTalon motorChassisRight = new CANTalon(RobotMap.talonDevIDChassisRight);
+	public static CANTalon motorChassisRightSlave = new CANTalon(RobotMap.talonDevIDChassisRightSlave);
 	
-	static CANTalon motorChassisLeft = new CANTalon(RobotMap.talonDevIDChassisLeft);
-	static CANTalon motorChassisLeftSlave = new CANTalon(RobotMap.talonDevIDChassisLeftSlave);
+	public static CANTalon motorChassisLeft = new CANTalon(RobotMap.talonDevIDChassisLeft);
+	public static CANTalon motorChassisLeftSlave = new CANTalon(RobotMap.talonDevIDChassisLeftSlave);
 	
 	// Sensors
 	
@@ -35,6 +35,9 @@ public class Chassis extends Subsystem {
 	
 	public Chassis() {
 		super();
+		
+		motorChassisRight.changeControlMode(TalonControlMode.PercentVbus);
+		motorChassisLeft.changeControlMode(TalonControlMode.PercentVbus);
 		
 		motorChassisRightSlave.changeControlMode(TalonControlMode.Follower);
 		motorChassisLeftSlave.changeControlMode(TalonControlMode.Follower);
@@ -72,8 +75,8 @@ public class Chassis extends Subsystem {
 		SmartDashboard.putBoolean("Precision Mode", RobotMap.pMode);
 		
 		// Sensors
-		SmartDashboard.putNumber("Distance (inches)", Robot.ultra.getVoltage()*3.28084*12);
-		SmartDashboard.putNumber("Distance (feet)", (Robot.ultra.getVoltage()*3.28084));
+		SmartDashboard.putNumber("Distance (inches)", Robot.ultra.getVoltage()*8.8365*12);
+		SmartDashboard.putNumber("Distance (feet)", (Robot.ultra.getVoltage()*8.8365));
 		SmartDashboard.putNumber("Gyro Angle", (Robot.gyro.getAngle()));
 		SmartDashboard.putNumber("Potentiometer Angle", potentiometer.get());
 		SmartDashboard.putNumber("Accel X", accel.getX());
@@ -85,54 +88,64 @@ public class Chassis extends Subsystem {
 	
 	public void DriveStraight(double inputSpeed)
 	{
-		//motorChassisRight.changeControlMode(ControlMode.Speed);
-		//motorChassisLeft.changeControlMode(ControlMode.Speed);
+		Chassis.motorChassisRight.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motorChassisLeft.changeControlMode(TalonControlMode.PercentVbus);
+//		motorChassisRight.changeControlMode(TalonControlMode.Speed);
+//		motorChassisLeft.changeControlMode(TalonControlMode.Speed);
 		chassisDrive.arcadeDrive(inputSpeed,0);
+		//motorChassisRight.set(-inputSpeed*562);
+		//motorChassisLeft.set(inputSpeed*562);
+	}
+	
+	public void DriveStraightGyro(double inputSpeed)
+	{
+		Chassis.motorChassisRight.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motorChassisLeft.changeControlMode(TalonControlMode.PercentVbus);
+		chassisDrive.arcadeDrive(inputSpeed,Robot.gyro.getAngle()*0.03);
 	}
 	
 	public void DriveBackwards(double inputSpeed){		
-		//motorChassisRight.changeControlMode(ControlMode.Speed);
-		//motorChassisLeft.changeControlMode(ControlMode.Speed);
-		chassisDrive.arcadeDrive(-inputSpeed,0);
+		motorChassisRight.changeControlMode(TalonControlMode.Speed);
+		motorChassisLeft.changeControlMode(TalonControlMode.Speed);
+		chassisDrive.arcadeDrive(-inputSpeed*562,0);
 	}
 	
 	public void DriveStop(){
-		chassisDrive.arcadeDrive(0,0);
+		motorChassisRight.set(0);
+		motorChassisLeft.set(0);
 	}
 	
 	public void DriveLeftCenter(double inputSpeed){
-		//motorChassisRight.changeControlMode(ControlMode.Speed);
-		//motorChassisLeft.changeControlMode(ControlMode.Speed);
-		chassisDrive.arcadeDrive(0,inputSpeed);
+		motorChassisRight.changeControlMode(TalonControlMode.Speed);
+		motorChassisLeft.changeControlMode(TalonControlMode.Speed);
+		chassisDrive.arcadeDrive(0,inputSpeed*562);
 	}
 	
 	public void DriveLeftForwards(double inputSpeed){
-		//motorChassisRight.changeControlMode(ControlMode.Speed);
-		//motorChassisLeft.changeControlMode(ControlMode.Speed);
-		chassisDrive.arcadeDrive(inputSpeed,inputSpeed);
+		motorChassisRight.changeControlMode(TalonControlMode.Speed);
+		motorChassisLeft.changeControlMode(TalonControlMode.Speed);
+		chassisDrive.arcadeDrive(inputSpeed*562,inputSpeed*562);
 	}
 	
 	public void DriveLeftBackwards(double inputSpeed){
-		//motorChassisRight.changeControlMode(ControlMode.Speed);
-		//motorChassisLeft.changeControlMode(ControlMode.Speed);
-		chassisDrive.arcadeDrive(-inputSpeed,inputSpeed);
+		motorChassisRight.changeControlMode(TalonControlMode.Speed);
+		motorChassisLeft.changeControlMode(TalonControlMode.Speed);
+		chassisDrive.arcadeDrive(-inputSpeed*562,inputSpeed*562);
 	}
 	
 	public void DriveRightCenter(double inputSpeed){
-	//	motorChassisRight.changeControlMode(ControlMode.Speed);
-		//motorChassisLeft.changeControlMode(ControlMode.Speed);
 		chassisDrive.arcadeDrive(0,-inputSpeed);
 	}
 	
 	public void DriveRightForwards(double inputSpeed){
-		//	motorChassisRight.changeControlMode(ControlMode.Speed);
-			//motorChassisLeft.changeControlMode(ControlMode.Speed);
-			chassisDrive.arcadeDrive(inputSpeed,-inputSpeed);
+		motorChassisRight.changeControlMode(TalonControlMode.Speed);
+		motorChassisLeft.changeControlMode(TalonControlMode.Speed);
+		chassisDrive.arcadeDrive(inputSpeed*562,-inputSpeed*562);
 		}
 	
 	public void DriveRightBackwards(double inputSpeed){
-		//	motorChassisRight.changeControlMode(ControlMode.Speed);
-			//motorChassisLeft.changeControlMode(ControlMode.Speed);
-			chassisDrive.arcadeDrive(-inputSpeed,-inputSpeed);
+		motorChassisRight.changeControlMode(TalonControlMode.Speed);
+		motorChassisLeft.changeControlMode(TalonControlMode.Speed);
+		chassisDrive.arcadeDrive(-inputSpeed*562,-inputSpeed*562);
 		}
 }
