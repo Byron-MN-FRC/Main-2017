@@ -18,6 +18,8 @@ public class OI {
 	Button precisionMode = new JoystickButton(joystickP0, 12);
 	
 	Button flywheelForward = new JoystickButton(xboxP1, 5);
+	
+	Button flywheelForwardSlow = new JoystickButton(xboxP1, 8);
 
 	//Button flywheelBackward = new JoystickButton(xboxP1, 8);
 	
@@ -33,7 +35,9 @@ public class OI {
 	
 	Button intake = new JoystickButton(joystickP0, 1);
 	
-	Button portcullus = new JoystickButton(joystickP0, 8);
+	Button intakePower = new JoystickButton(xboxP1, 7);
+	
+	Button portcullis = new JoystickButton(joystickP0, 8);
 	
 	//Button outtake = new JoystickButton(xboxP1, 6);
 	
@@ -45,11 +49,17 @@ public class OI {
 		flywheelForward.whenPressed(new FlywheelForward());
 		flywheelForward.whenReleased(new FlywheelStop());
 		
+		flywheelForwardSlow.whenPressed(new FlywheelForwardSlow());
+		flywheelForwardSlow.whenReleased(new FlywheelStop());
+		
 //		flywheelBackward.whenPressed(new FlywheelBackward());
 //		flywheelBackward.whenReleased(new FlywheelStop());
 		
 		intake.whenPressed(new Intake());
 		intake.whenReleased(new IntakeStop());
+		
+		intakePower.whenPressed(new IntakePower());
+		intakePower.whenReleased(new IntakeStop());
 		
 //		outtake.whenPressed(new Outtake());
 //		outtake.whenReleased(new FlywheelStop());
@@ -68,7 +78,7 @@ public class OI {
 		
 		angleFlat.toggleWhenPressed(new PivotFlat());
 		
-		portcullus.toggleWhenPressed(new Portcullus());
+		portcullis.toggleWhenPressed(new Portcullis());
 		
 		//center.whenPressed(new CenterBall());
 		//center.whenReleased(new FlywheelStop());

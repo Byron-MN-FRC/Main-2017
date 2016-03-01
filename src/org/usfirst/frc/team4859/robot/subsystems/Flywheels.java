@@ -29,6 +29,12 @@ public class Flywheels extends Subsystem {
     	motorLauncherFlywheelLeft.set((-11/voltage));
     }
     
+    public void FlywheelForwardSlow() {
+    	voltage = DriverStation.getInstance().getBatteryVoltage();
+    	motorLauncherFlywheelRight.set((11/voltage)*0.6);
+    	motorLauncherFlywheelLeft.set((-11/voltage)*0.6);
+    }
+    
     public void FlywheelBackward() {
     	motorLauncherFlywheelRight.set(-.2);
     	motorLauncherFlywheelLeft.set(.2);
@@ -42,6 +48,12 @@ public class Flywheels extends Subsystem {
     public void Intake() {
     	motorLauncherFlywheelRight.set(-.75);
     	motorLauncherFlywheelLeft.set(.75);
+    	Feeder.motorLauncherFlywheelFeed.set(-1);
+    }
+    
+    public void IntakePower() {
+    	motorLauncherFlywheelRight.set(-1);
+    	motorLauncherFlywheelLeft.set(1);
     	Feeder.motorLauncherFlywheelFeed.set(-1);
     }
     

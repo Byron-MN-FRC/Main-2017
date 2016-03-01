@@ -6,22 +6,23 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class IntakeStop extends Command {
+public class IntakePower extends Command {
 
-    public IntakeStop() {
+    public IntakePower() {
     	requires(Robot.flywheels);
+    	requires(Robot.pivot);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.flywheels.IntakeStop();
-    	Robot.pivot.AngleFlat();
+    	Robot.pivot.AngleDown();
+    	Robot.flywheels.IntakePower();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.flywheels.IntakeStop();
-    	Robot.pivot.AngleFlat();
+    	Robot.flywheels.IntakePower();
+    	Robot.pivot.AngleDown();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -31,13 +32,14 @@ public class IntakeStop extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.pivot.AngleStop();
     	Robot.flywheels.IntakeStop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.flywheels.IntakeStop();
     	Robot.pivot.AngleStop();
+    	Robot.flywheels.IntakeStop();
     }
 }
