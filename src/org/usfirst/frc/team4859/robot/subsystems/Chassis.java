@@ -22,13 +22,6 @@ public class Chassis extends Subsystem {
 	
 	public static CANTalon motorChassisLeft = new CANTalon(RobotMap.talonDevIDChassisLeft);
 	public static CANTalon motorChassisLeftSlave = new CANTalon(RobotMap.talonDevIDChassisLeftSlave);
-	
-	// Sensors
-	
-	AnalogInput ai = new AnalogInput(2);
-	Potentiometer potentiometer = new AnalogPotentiometer(ai, 360, 30);
-	
-	BuiltInAccelerometer accel = new BuiltInAccelerometer();
 
 	// Creates robot drive configuration with four motors
 	static RobotDrive chassisDrive = new RobotDrive(motorChassisLeft, motorChassisRight);
@@ -77,75 +70,57 @@ public class Chassis extends Subsystem {
 		// Sensors
 		SmartDashboard.putNumber("Distance (inches)", Robot.ultra.getVoltage()*8.8365*12);
 		SmartDashboard.putNumber("Distance (feet)", (Robot.ultra.getVoltage()*8.8365));
+		SmartDashboard.putNumber("Distance 2 (inches)", Robot.ultra2.getVoltage()*8.8365*12);
+		SmartDashboard.putNumber("Distance 2 (feet)", (Robot.ultra2.getVoltage()*8.8365));
 		SmartDashboard.putNumber("Gyro Angle", (Robot.gyro.getAngle()));
-		SmartDashboard.putNumber("Potentiometer Angle", potentiometer.get());
-		SmartDashboard.putNumber("Accel X", accel.getX());
-		SmartDashboard.putNumber("Accel Y", accel.getY());
-		SmartDashboard.putNumber("Accel Z", accel.getZ());
 		
-		chassisDrive.arcadeDrive(-yAxis/*562*/, -twist*0.7/*562*/);
+		chassisDrive.arcadeDrive(-yAxis, -twist*0.8);
 	}
 	
 	public void DriveStraight(double inputSpeed)
 	{
 		Chassis.motorChassisRight.changeControlMode(TalonControlMode.PercentVbus);
 		Chassis.motorChassisLeft.changeControlMode(TalonControlMode.PercentVbus);
-//		motorChassisRight.changeControlMode(TalonControlMode.Speed);
-//		motorChassisLeft.changeControlMode(TalonControlMode.Speed);
 		chassisDrive.arcadeDrive(inputSpeed,0);
-		//motorChassisRight.set(-inputSpeed*562);
-		//motorChassisLeft.set(inputSpeed*562);
 	}
 	
 	public void DriveStraightGyro(double inputSpeed)
 	{
 		Chassis.motorChassisRight.changeControlMode(TalonControlMode.PercentVbus);
 		Chassis.motorChassisLeft.changeControlMode(TalonControlMode.PercentVbus);
-		chassisDrive.arcadeDrive(inputSpeed,Robot.gyro.getAngle()*0.03);
+		chassisDrive.arcadeDrive(inputSpeed,Robot.gyro.getAngle()*0.04);
 	}
 	
 	public void DriveBackwards(double inputSpeed){		
-		motorChassisRight.changeControlMode(TalonControlMode.Speed);
-		motorChassisLeft.changeControlMode(TalonControlMode.Speed);
-		chassisDrive.arcadeDrive(-inputSpeed*562,0);
+		chassisDrive.arcadeDrive(-inputSpeed,0);
 	}
 	
 	public void DriveStop(){
-		motorChassisRight.set(0);
-		motorChassisLeft.set(0);
+		chassisDrive.arcadeDrive(0,0);
 	}
 	
 	public void DriveLeftCenter(double inputSpeed){
-		motorChassisRight.changeControlMode(TalonControlMode.Speed);
-		motorChassisLeft.changeControlMode(TalonControlMode.Speed);
-		chassisDrive.arcadeDrive(0,inputSpeed*562);
+		chassisDrive.arcadeDrive(0,inputSpeed);
 	}
 	
 	public void DriveLeftForwards(double inputSpeed){
-		motorChassisRight.changeControlMode(TalonControlMode.Speed);
-		motorChassisLeft.changeControlMode(TalonControlMode.Speed);
-		chassisDrive.arcadeDrive(inputSpeed*562,inputSpeed*562);
+
+		chassisDrive.arcadeDrive(inputSpeed,inputSpeed);
 	}
 	
 	public void DriveLeftBackwards(double inputSpeed){
-		motorChassisRight.changeControlMode(TalonControlMode.Speed);
-		motorChassisLeft.changeControlMode(TalonControlMode.Speed);
-		chassisDrive.arcadeDrive(-inputSpeed*562,inputSpeed*562);
+		chassisDrive.arcadeDrive(-inputSpeed,inputSpeed);
 	}
 	
-	public void DriveRightCenter(double inputSpeed){
-		chassisDrive.arcadeDrive(0,-inputSpeed);
+	public void DriveRightCenterGyro(double angle){
+		chassisDrive.arcadeDrive(0,(Robot.gyro.getAngle()%360-angle)*0.03);
 	}
 	
 	public void DriveRightForwards(double inputSpeed){
-		motorChassisRight.changeControlMode(TalonControlMode.Speed);
-		motorChassisLeft.changeControlMode(TalonControlMode.Speed);
-		chassisDrive.arcadeDrive(inputSpeed*562,-inputSpeed*562);
+		chassisDrive.arcadeDrive(inputSpeed,-inputSpeed);
 		}
 	
 	public void DriveRightBackwards(double inputSpeed){
-		motorChassisRight.changeControlMode(TalonControlMode.Speed);
-		motorChassisLeft.changeControlMode(TalonControlMode.Speed);
-		chassisDrive.arcadeDrive(-inputSpeed*562,-inputSpeed*562);
+		chassisDrive.arcadeDrive(-inputSpeed,-inputSpeed);
 		}
 }

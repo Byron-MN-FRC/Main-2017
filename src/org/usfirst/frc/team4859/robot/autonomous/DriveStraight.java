@@ -25,12 +25,10 @@ public class DriveStraight extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.chassis.DriveStraight(Speed);
-    	SmartDashboard.putBoolean("isFinished", isTimedOut());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	SmartDashboard.putBoolean("isFinished", isTimedOut());
         return isTimedOut();
     }
 

@@ -17,12 +17,12 @@ public class TurnToAngle extends Command {
 	
 	@Override
 	protected void initialize() {
-		Robot.chassis.DriveRightCenter(twist);
+		Robot.chassis.DriveRightCenterGyro(twist);
 	}
 
 	@Override
 	protected void execute() {
-		Robot.chassis.DriveRightCenter(twist);
+		Robot.chassis.DriveRightCenterGyro(twist);
 	}
 
 	@Override

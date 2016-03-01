@@ -33,6 +33,8 @@ public class OI {
 	
 	Button intake = new JoystickButton(joystickP0, 1);
 	
+	Button portcullus = new JoystickButton(joystickP0, 8);
+	
 	//Button outtake = new JoystickButton(xboxP1, 6);
 	
 	//Button center = new JoystickButton(xboxP1, 3);
@@ -65,6 +67,8 @@ public class OI {
 		angleShoot.toggleWhenPressed(new PivotShoot());
 		
 		angleFlat.toggleWhenPressed(new PivotFlat());
+		
+		portcullus.toggleWhenPressed(new Portcullus());
 		
 		//center.whenPressed(new CenterBall());
 		//center.whenReleased(new FlywheelStop());

@@ -7,15 +7,18 @@ public class DriveToDistance extends Command {
 
 	private double inputSpeed;
 	private double distance;
+	private boolean ultra;
 	
-	public DriveToDistance(double inputSpeed, double distance) {
+	public DriveToDistance(double inputSpeed, double distance, boolean ultra) {
 		requires(Robot.chassis);
 		this.inputSpeed = inputSpeed;
 		this.distance = distance;
+		this.ultra = ultra;
 	}	
 	
 	@Override
 	protected void initialize() {
+    	Robot.gyro.reset();
 		Robot.chassis.DriveStraightGyro(inputSpeed);
 	}
 
@@ -26,7 +29,10 @@ public class DriveToDistance extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return Robot.ultra.getVoltage()*8.8365*12 <= distance;
+		if (ultra)
+			return Robot.ultra.getVoltage()*8.8365*12 <= distance;
+		else 
+			return Robot.ultra2.getVoltage()*8.8365*12 <= distance;
 	}
 
 	@Override

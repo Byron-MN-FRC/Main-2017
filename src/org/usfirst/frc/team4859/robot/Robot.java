@@ -24,6 +24,7 @@ public class Robot extends IterativeRobot {
 	public static Feeder feeder;
 	public static Pivot pivot;
 	public static AnalogInput ultra;
+	public static AnalogInput ultra2;
 	public static ADXRS450_Gyro gyro;
 	public static OI oi;
 
@@ -43,6 +44,7 @@ public class Robot extends IterativeRobot {
     	feeder = new Feeder();
     	pivot = new Pivot();
 		ultra = new AnalogInput(0);
+		ultra2 = new AnalogInput(1);
 		gyro = new ADXRS450_Gyro();
 		oi = new OI();
 		gyro.reset();
@@ -52,7 +54,7 @@ public class Robot extends IterativeRobot {
 		// Add autonomous modes
 		autonomousChooser = new SendableChooser();
 		autonomousChooser.addDefault("Nothing", new AutoNothing());
-		autonomousChooser.addObject("Normal", new Autonomous());
+		autonomousChooser.addObject("Straight", new Autonomous());
 		autonomousChooser.addObject("Low Bar and Goal", new LowBarAndGoal());
 		SmartDashboard.putData("Autonomous Mode Chooser", autonomousChooser);
 		
@@ -85,6 +87,8 @@ public class Robot extends IterativeRobot {
     	//if (launcher.limitDown.get()) start = launcher.motorLauncherAngle.getPosition();
     	SmartDashboard.putNumber("Distance (inches)", Robot.ultra.getVoltage()*8.8365*12);
 		SmartDashboard.putNumber("Distance (feet)", (Robot.ultra.getVoltage()*8.8365));
+		SmartDashboard.putNumber("Distance 2 (inches) ", Robot.ultra2.getVoltage()*8.8365*12);
+		SmartDashboard.putNumber("Distance 2 (feet)", (Robot.ultra2.getVoltage()*8.8365));
 		SmartDashboard.putNumber("Gyro Angle", (Robot.gyro.getAngle()));
         Scheduler.getInstance().run();
     }

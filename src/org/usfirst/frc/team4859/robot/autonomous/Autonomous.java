@@ -23,14 +23,8 @@ public class Autonomous extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	addSequential(new PivotFlat());
-    	addSequential(new DriveStraight(-0.5,5));
-    	//addSequential(new DriveToDistance(-0.5, 72));
-    	addSequential(new TurnToAngle(0.25, 56));
-    	addSequential(new DriveStop(0.5));
-    	//addSequential(new DriveToDistance(-0.5, 18));
-    	addSequential(new DriveStraight(-0.5,2));
-    	addSequential(new DriveStop(0.5));
-    	addSequential(new Outtake());
+    	addSequential(new PivotDown());
+    	addParallel(new PivotFlat());
+    	addSequential(new DriveStraightGyro(0.6, 4));
     }
 }
