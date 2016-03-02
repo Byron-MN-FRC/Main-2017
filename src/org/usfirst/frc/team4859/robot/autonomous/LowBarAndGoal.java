@@ -5,6 +5,7 @@ import org.usfirst.frc.team4859.robot.commands.FeedStop;
 import org.usfirst.frc.team4859.robot.commands.FlywheelStop;
 import org.usfirst.frc.team4859.robot.commands.PivotDown;
 import org.usfirst.frc.team4859.robot.commands.PivotFlat;
+import org.usfirst.frc.team4859.robot.commands.PivotStop;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
@@ -17,17 +18,19 @@ public class LowBarAndGoal extends CommandGroup {
 		Chassis.motorChassisLeft.changeControlMode(TalonControlMode.PercentVbus);
 		
     	addSequential(new DriveStop(0));
-    	addSequential(new PivotDown());
+    	addSequential(new PivotDownTime(2));
     	addParallel(new PivotFlat());
-    	addSequential(new DriveStraightGyro(0.6, 3));
-    	addSequential(new DriveToDistance(0.6, 72, true));
-    	addSequential(new TurnToAngle(60, 2));
+    	addSequential(new DriveStraightGyro(0.6, 3.5));
+    	addSequential(new PivotDownTime(1));
+    	addSequential(new DriveToDistance(0.6, 90, true));
+    	addSequential(new TurnToAngle(54, 2));
     	addSequential(new DriveStop(0));
-    	addSequential(new DriveToDistance(0.6, 50, false));
+    	addSequential(new DriveToDistance(0.6, 80, false));
     	
         addSequential(new FlywheelForwardTime(1.5));
-        addParallel(new FlywheelForwardTime(1.5));
-        addSequential(new FlywheelFeedOutTime(1, 1.5));
+        addParallel(new FlywheelFeedOutTime(1.5));
+        addSequential(new FlywheelForwardTime(1.5));
+        addParallel(new PivotStop());
         addParallel(new FlywheelStop());
         addSequential(new FeedStop());
         

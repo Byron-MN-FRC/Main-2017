@@ -63,16 +63,8 @@ public class Chassis extends Subsystem {
 		SmartDashboard.putString("ROBOT MODE", (RobotMap.pMode) ? "Slow" : "Normal");	
 				
 		SmartDashboard.putNumber("JoystickY", yAxis);
-		SmartDashboard.putNumber("JoystickX", xAxis);
 		SmartDashboard.putNumber("JoystickTwist", twist);
 		SmartDashboard.putBoolean("Precision Mode", RobotMap.pMode);
-		
-		// Sensors
-		SmartDashboard.putNumber("Distance (inches)", Robot.ultra.getVoltage()*8.8365*12);
-		SmartDashboard.putNumber("Distance (feet)", (Robot.ultra.getVoltage()*8.8365));
-		SmartDashboard.putNumber("Distance 2 (inches)", Robot.ultra2.getVoltage()*8.8365*12);
-		SmartDashboard.putNumber("Distance 2 (feet)", (Robot.ultra2.getVoltage()*8.8365));
-		SmartDashboard.putNumber("Gyro Angle", (Robot.gyro.getAngle()));
 		
 		chassisDrive.arcadeDrive(-yAxis, -twist*0.8);
 	}
@@ -88,7 +80,7 @@ public class Chassis extends Subsystem {
 	{
 		Chassis.motorChassisRight.changeControlMode(TalonControlMode.PercentVbus);
 		Chassis.motorChassisLeft.changeControlMode(TalonControlMode.PercentVbus);
-		chassisDrive.arcadeDrive(inputSpeed,Robot.gyro.getAngle()*0.04);
+		chassisDrive.arcadeDrive(inputSpeed,Robot.gyro.getAngle()*0.06);
 	}
 	
 	public void DriveBackwards(double inputSpeed){		
@@ -113,7 +105,7 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void DriveRightCenterGyro(double angle){
-		chassisDrive.arcadeDrive(0,(Robot.gyro.getAngle()%360-angle)*0.03);
+		chassisDrive.arcadeDrive(0,(Robot.gyro.getAngle()%360-angle)*0.04);
 	}
 	
 	public void DriveRightForwards(double inputSpeed){

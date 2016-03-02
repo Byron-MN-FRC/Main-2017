@@ -29,7 +29,7 @@ public class Feeder extends Subsystem {
     	motorLauncherFlywheelFeed.set(0);
     }
     
-    public void FeedOutTime(double inputSpeed) {
-    	motorLauncherFlywheelFeed.set(-inputSpeed);
+    public void FeedOutTime() {
+    	motorLauncherFlywheelFeed.set(1);
     }
 }

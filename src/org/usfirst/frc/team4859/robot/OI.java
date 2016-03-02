@@ -1,6 +1,5 @@
 package org.usfirst.frc.team4859.robot;
 
-import org.usfirst.frc.team4859.robot.autonomous.CenterBall;
 import org.usfirst.frc.team4859.robot.commands.*;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
