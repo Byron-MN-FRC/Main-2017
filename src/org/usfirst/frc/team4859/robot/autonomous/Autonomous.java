@@ -24,7 +24,6 @@ public class Autonomous extends CommandGroup {
         // arm.
     	
     	addSequential(new PivotDownTime(2));
-    	addParallel(new PivotFlat());
     	addSequential(new DriveStraightGyro(0.6, 4));
     }
 }

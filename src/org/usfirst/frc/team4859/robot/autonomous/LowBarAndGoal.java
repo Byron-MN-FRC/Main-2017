@@ -19,17 +19,18 @@ public class LowBarAndGoal extends CommandGroup {
 		
     	addSequential(new DriveStop(0));
     	addSequential(new PivotDownTime(2));
-    	addParallel(new PivotFlat());
     	addSequential(new DriveStraightGyro(0.6, 3.5));
     	addSequential(new PivotDownTime(1));
-    	addSequential(new DriveToDistance(0.6, 90, true));
+    	addSequential(new DriveToDistance(0.6, 80));
     	addSequential(new TurnToAngle(54, 2));
     	addSequential(new DriveStop(0));
-    	addSequential(new DriveToDistance(0.6, 80, false));
+//    	addSequential(new DriveToDistance(0.6, 70));
+    	addSequential(new DriveStraightGyro(0.5, 1.5));
     	
         addSequential(new FlywheelForwardTime(1.5));
-        addParallel(new FlywheelFeedOutTime(1.5));
-        addSequential(new FlywheelForwardTime(1.5));
+        addParallel(new FlywheelForwardTime(5));
+        addSequential(new FlywheelFeedOutTime(5));
+        
         addParallel(new PivotStop());
         addParallel(new FlywheelStop());
         addSequential(new FeedStop());

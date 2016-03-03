@@ -3,6 +3,9 @@ package org.usfirst.frc.team4859.robot;
 import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.Autonomous;
 import org.usfirst.frc.team4859.robot.autonomous.LowBarAndGoal;
+import org.usfirst.frc.team4859.robot.autonomous.SlowAndGun;
+import org.usfirst.frc.team4859.robot.commands.ChevalDeFrise;
+import org.usfirst.frc.team4859.robot.commands.PortcullisAuto;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Feeder;
 import org.usfirst.frc.team4859.robot.subsystems.Flywheels;
@@ -25,7 +28,7 @@ public class Robot extends IterativeRobot {
 	public static Feeder feeder;
 	public static Pivot pivot;
 	public static AnalogInput ultra;
-	public static AnalogInput ultra2;
+	//public static AnalogInput ultra2;
 	public static ADXRS450_Gyro gyro;
 	public static int ultraCounter;
 	public static OI oi;
@@ -46,7 +49,9 @@ public class Robot extends IterativeRobot {
     	feeder = new Feeder();
     	pivot = new Pivot();
 		ultra = new AnalogInput(0);
-		ultra2 = new AnalogInput(1);
+		ultra.setOversampleBits(6);
+		ultra.setAverageBits(6);
+		//ultra2 = new AnalogInput(1);
 		gyro = new ADXRS450_Gyro();
 		oi = new OI();
 		gyro.reset();
@@ -55,9 +60,12 @@ public class Robot extends IterativeRobot {
 		
 		// Add autonomous modes
 		autonomousChooser = new SendableChooser();
-		autonomousChooser.addDefault("Nothing", new AutoNothing());
-		autonomousChooser.addObject("Straight", new Autonomous());
-		autonomousChooser.addObject("Low Bar and Goal", new LowBarAndGoal());
+		autonomousChooser.addDefault("N0thing", new AutoNothing());
+		autonomousChooser.addObject("Str8", new Autonomous());
+		autonomousChooser.addObject("SlowMo And GunRun", new SlowAndGun());
+		autonomousChooser.addObject("Poetcullis", new PortcullisAuto());
+		autonomousChooser.addObject("Cheval De Auto", new ChevalDeFrise());
+		autonomousChooser.addObject("Low Bar and hashtagWin", new LowBarAndGoal());
 		SmartDashboard.putData("Autonomous Mode Chooser", autonomousChooser);
 		
         // Instantiate the command used for the autonomous period
@@ -85,12 +93,10 @@ public class Robot extends IterativeRobot {
     public void autonomousPeriodic() {
     	//if (launcher.limitDown.get()) start = launcher.motorLauncherAngle.getPosition();
     	
-    	
-    	
     	SmartDashboard.putNumber("Distance (inches)", Robot.ultra.getAverageVoltage()*8.8365*12);
 		SmartDashboard.putNumber("Distance (feet)", (Robot.ultra.getAverageVoltage()*8.8365));
-		SmartDashboard.putNumber("Distance 2 (inches) ", Robot.ultra2.getAverageVoltage()*8.8365*12);
-		SmartDashboard.putNumber("Distance 2 (feet)", (Robot.ultra2.getAverageVoltage()*8.8365));
+//		SmartDashboard.putNumber("Distance 2 (inches) ", Robot.ultra2.getAverageVoltage()*8.8365*12);
+//		SmartDashboard.putNumber("Distance 2 (feet)", (Robot.ultra2.getAverageVoltage()*8.8365));
 		SmartDashboard.putNumber("Gyro Angle", (Robot.gyro.getAngle()));
 		
         Scheduler.getInstance().run();
@@ -126,8 +132,8 @@ public class Robot extends IterativeRobot {
         
     	SmartDashboard.putNumber("Distance (inches)", Robot.ultra.getVoltage()*8.8365*12);
 		SmartDashboard.putNumber("Distance (feet)", (Robot.ultra.getVoltage()*8.8365));
-		SmartDashboard.putNumber("Distance 2 (inches) ", Robot.ultra2.getVoltage()*8.8365*12);
-		SmartDashboard.putNumber("Distance 2 (feet)", (Robot.ultra2.getVoltage()*8.8365));
+//		SmartDashboard.putNumber("Distance 2 (inches) ", Robot.ultra2.getVoltage()*8.8365*12);
+//		SmartDashboard.putNumber("Distance 2 (feet)", (Robot.ultra2.getVoltage()*8.8365));
 		
 		SmartDashboard.putNumber("Gyro Angle", (Robot.gyro.getAngle()));
         Scheduler.getInstance().run();
