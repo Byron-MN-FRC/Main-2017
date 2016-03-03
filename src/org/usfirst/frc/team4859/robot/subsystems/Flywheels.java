@@ -48,13 +48,13 @@ public class Flywheels extends Subsystem {
     public void Intake() {
     	motorLauncherFlywheelRight.set(-.75);
     	motorLauncherFlywheelLeft.set(.75);
-    	Feeder.motorLauncherFlywheelFeed.set(-1);
+    	Feeder.motorLauncherFlywheelFeed.set(1);
     }
     
     public void IntakePower() {
     	motorLauncherFlywheelRight.set(-1);
     	motorLauncherFlywheelLeft.set(1);
-    	Feeder.motorLauncherFlywheelFeed.set(-1);
+    	Feeder.motorLauncherFlywheelFeed.set(1);
     }
     
     public void IntakeStop() {

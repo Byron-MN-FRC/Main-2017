@@ -18,11 +18,11 @@ public class Feeder extends Subsystem {
     }
     
     public void FeedIn() {
-    	motorLauncherFlywheelFeed.set(-1);
+    	motorLauncherFlywheelFeed.set(1);
     }
     
     public void FeedOut() {
-    	motorLauncherFlywheelFeed.set(1);
+    	motorLauncherFlywheelFeed.set(-1);
     }
     
     public void FeedStop() {
@@ -30,6 +30,6 @@ public class Feeder extends Subsystem {
     }
     
     public void FeedOutTime() {
-    	motorLauncherFlywheelFeed.set(1);
+    	motorLauncherFlywheelFeed.set(-1);
     }
 }
