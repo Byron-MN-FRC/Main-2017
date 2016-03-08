@@ -29,6 +29,10 @@ public class PivotUp extends Command {
     	if (Robot.pivot.LimitSwitchUp())
     		Robot.pivot.motorLauncherAngle.setPosition(RobotMap.upPosition);
     		
+       	if (Robot.pivot.motorLauncherAngle.getOutputCurrent() >= 40) {
+       		Robot.pivot.AngleStop();
+       		Robot.pivot.motorLauncherAngle.setPosition(RobotMap.upPosition);
+       	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

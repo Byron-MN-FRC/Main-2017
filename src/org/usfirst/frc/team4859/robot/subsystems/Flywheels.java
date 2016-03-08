@@ -23,16 +23,22 @@ public class Flywheels extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
+    public void FlywheelForwardMax() {
+    	voltage = DriverStation.getInstance().getBatteryVoltage();
+    	motorLauncherFlywheelRight.set((11/voltage));
+    	motorLauncherFlywheelLeft.set((-11/voltage));
+    }
+    
     public void FlywheelForward() {
     	voltage = DriverStation.getInstance().getBatteryVoltage();
-    	motorLauncherFlywheelRight.set((11/voltage)/**SmartDashboard.getNumber("Flywheel")*/);
-    	motorLauncherFlywheelLeft.set((-11/voltage));
+    	motorLauncherFlywheelRight.set((11/voltage)*0.85);
+    	motorLauncherFlywheelLeft.set((-11/voltage)*0.85);
     }
     
     public void FlywheelForwardSlow() {
     	voltage = DriverStation.getInstance().getBatteryVoltage();
-    	motorLauncherFlywheelRight.set((11/voltage)*0.6);
-    	motorLauncherFlywheelLeft.set((-11/voltage)*0.6);
+    	motorLauncherFlywheelRight.set((11/voltage)*0.4);
+    	motorLauncherFlywheelLeft.set((-11/voltage)*0.4);
     }
     
     public void FlywheelBackward() {
@@ -46,8 +52,8 @@ public class Flywheels extends Subsystem {
     }
     
     public void Intake() {
-    	motorLauncherFlywheelRight.set(-.75);
-    	motorLauncherFlywheelLeft.set(.75);
+    	motorLauncherFlywheelRight.set(-0.65);
+    	motorLauncherFlywheelLeft.set(0.65);
     	Feeder.motorLauncherFlywheelFeed.set(1);
     }
     

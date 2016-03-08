@@ -5,6 +5,7 @@ import org.usfirst.frc.team4859.robot.autonomous.Autonomous;
 import org.usfirst.frc.team4859.robot.autonomous.LowBarAndGoal;
 import org.usfirst.frc.team4859.robot.autonomous.PortcullisAuto;
 import org.usfirst.frc.team4859.robot.autonomous.SlowAndGun;
+import org.usfirst.frc.team4859.robot.autonomous.SlowAndGun2;
 import org.usfirst.frc.team4859.robot.commands.ChevalDeFrise;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Feeder;
@@ -60,12 +61,13 @@ public class Robot extends IterativeRobot {
 		
 		// Add autonomous modes
 		autonomousChooser = new SendableChooser();
-		autonomousChooser.addDefault("N0thing", new AutoNothing());
-		autonomousChooser.addObject("Str8", new Autonomous());
-		autonomousChooser.addObject("SlowMo And GunRun", new SlowAndGun());
-		autonomousChooser.addObject("Poetcullis", new PortcullisAuto());
-		autonomousChooser.addObject("Cheval De Auto", new ChevalDeFrise());
-		autonomousChooser.addObject("Low Bar and hashtagWin", new LowBarAndGoal());
+		autonomousChooser.addDefault("Nothing", new AutoNothing());
+		autonomousChooser.addObject("Straight (Shooter Down)", new Autonomous());
+		autonomousChooser.addObject("Slow and Gun", new SlowAndGun());
+		autonomousChooser.addObject("Slow, Gun, Pass, and Turn", new SlowAndGun2());
+		autonomousChooser.addObject("Portcullis", new PortcullisAuto());
+		autonomousChooser.addObject("Cheval De Frise", new ChevalDeFrise());
+		autonomousChooser.addObject("Low Bar", new LowBarAndGoal());
 		SmartDashboard.putData("Autonomous Mode Chooser", autonomousChooser);
 		
         // Instantiate the command used for the autonomous period
@@ -98,6 +100,8 @@ public class Robot extends IterativeRobot {
 //		SmartDashboard.putNumber("Distance 2 (inches) ", Robot.ultra2.getAverageVoltage()*8.8365*12);
 //		SmartDashboard.putNumber("Distance 2 (feet)", (Robot.ultra2.getAverageVoltage()*8.8365));
 		SmartDashboard.putNumber("Gyro Angle", (Robot.gyro.getAngle()));
+		
+		SmartDashboard.putNumber("Pivot Current", Robot.pivot.motorLauncherAngle.getOutputCurrent());
 		
         Scheduler.getInstance().run();
     }
@@ -136,6 +140,9 @@ public class Robot extends IterativeRobot {
 //		SmartDashboard.putNumber("Distance 2 (feet)", (Robot.ultra2.getVoltage()*8.8365));
 		
 		SmartDashboard.putNumber("Gyro Angle", (Robot.gyro.getAngle()));
+		
+		SmartDashboard.putNumber("Pivot Current", Robot.pivot.motorLauncherAngle.getOutputCurrent());
+		
         Scheduler.getInstance().run();
     }
     

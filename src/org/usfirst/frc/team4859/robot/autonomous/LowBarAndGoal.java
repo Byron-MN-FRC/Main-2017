@@ -18,16 +18,18 @@ public class LowBarAndGoal extends CommandGroup {
 		Chassis.motorChassisLeft.changeControlMode(TalonControlMode.PercentVbus);
 		
     	addSequential(new DriveStop(0));
-    	addSequential(new PivotDownTime(2));
-    	addSequential(new DriveStraightGyro(0.6, 4.5));
-    	addSequential(new PivotDownTime(1.5));
-    	addSequential(new DriveToDistance(0.6, 80));
-    	addSequential(new TurnToAngle(54, 2));
+    	addSequential(new PivotDownTime(1));
+    	addSequential(new DriveStraightGyro(0.6, 5));
+    	addSequential(new DriveStraightGyro(0.6, 2.02));
+    	//addSequential(new DriveToDistance(0.6, 25));
+    	addSequential(new TurnToAngle(52, 1.5));
     	addSequential(new DriveStop(0));
 //    	addSequential(new DriveToDistance(0.6, 70));
-    	addSequential(new DriveStraightGyro(0.5, 1.5));
+    	addParallel(new PivotFlat());
+        addParallel(new FlywheelForwardTime(3.75));
+    	addSequential(new DriveStraightGyro(0.6, 1.75));
     	
-        addSequential(new FlywheelForwardTime(1.5));
+
         addParallel(new FlywheelForwardTime(5));
         addSequential(new FlywheelFeedOutTime(5));
         

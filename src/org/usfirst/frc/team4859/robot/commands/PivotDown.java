@@ -24,6 +24,11 @@ public class PivotDown extends Command {
        	Robot.pivot.AngleDown();
        	if (Robot.pivot.LimitSwitchDown()) 
        		Robot.pivot.motorLauncherAngle.setPosition(RobotMap.downPosition);
+       	
+//       	if (Robot.pivot.motorLauncherAngle.getOutputCurrent() >= 50) {
+//       		Robot.pivot.AngleStop();
+//       		Robot.pivot.motorLauncherAngle.setPosition(RobotMap.downPosition);
+//       	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
