@@ -1,15 +1,11 @@
 package org.usfirst.frc.team4859.robot.autonomous;
 
+import org.usfirst.frc.team4859.robot.commands.*;
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team4859.robot.RobotMap;
 
 public class Autonomous extends CommandGroup {
     
-    public  Autonomous()
-    {
+    public  Autonomous() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -27,11 +23,6 @@ public class Autonomous extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	//double timel = NetworkTable.getTable("SmartDashboard").getNumber("timel");
-    	addSequential(new DriveStop(0));
-    	//addSequential(new DriveStraight(.5, timel));
-    	addSequential(new DriveStop(2));
-    	addSequential(new DriveStraight(-.5, 1));
-    	addSequential(new DriveStop(0));
+    	addSequential(new DriveStraightGyro(0.6, 4));
     }
 }

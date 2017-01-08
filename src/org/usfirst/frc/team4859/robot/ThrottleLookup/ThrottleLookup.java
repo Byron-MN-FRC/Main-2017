@@ -2,26 +2,26 @@ package org.usfirst.frc.team4859.robot.ThrottleLookup;
 
 public class ThrottleLookup 
 {
-	
 
 		// SlowY
 		public static double[][] correctionTable1 = {
 			{.015, .25, .500, .7500, 1.00},
-			{.000, .05, .1, .2, 0.4}};
+			{.000, .1, .25, .35, 0.5}};
+		
 		// NormY
 		public static double[][] correctionTable2 = {
 			{.015, .25, .50, .75, 1.0},
-			{.000, .15, .35, .75, 1.0}};
+			{.000, .15, .35, .60, 1.0}};
 
 		// SlowT
 		public static double[][] correctionTable3 = {
-			{.015, .25, .5, .75, 1.0},
-			{.000, .05, .1, .20, 0.4}};
+			{.015, .2500, .5, .75, 1.0},
+			{.000, .2, .35, .45, 0.6}};
 
 		// NormT
 		public static double[][] correctionTable4 = {
-			{.015, .250, .50, .75, 1.0},
-			{.000, .075, .15, .30, 0.6}};
+			{.015, .25, .500, .75, 1.0},
+			{.000, .10, .45, .7, .9}};
 	
 	public static double calcJoystickCorrection(String tableName, double x)
 	{
@@ -46,7 +46,7 @@ public class ThrottleLookup
 		int pos = 0; 
 		double returnValue;
 		
-		while ((pos < 5) && (x > correctionTable1[0][pos]))
+		while ((pos < 5) && (x > correctionTable[0][pos]))
 		{
 			pos++;
 		}
@@ -63,7 +63,7 @@ public class ThrottleLookup
 			}
 			else
 			{
-				return 0;
+				return 0.0;
 			}
 		}
 		else

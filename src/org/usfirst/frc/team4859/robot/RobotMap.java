@@ -1,7 +1,5 @@
 package org.usfirst.frc.team4859.robot;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -19,16 +17,12 @@ public class RobotMap {
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
 	
-	public static int talonDevIDChassisFrontRight = 12;
-	public static int talonDevIDChassisBackRight = 15;
+	public static int talonDevIDChassisRight = 3;
+	public static int talonDevIDChassisRightSlave = 5;
 	
-	public static int talonDevIDChassisFrontLeft = 16;
-	public static int talonDevIDChassisBackLeft = 11;
-	
-	public static int solenoidDevIDSolenoid = 10;
+	public static int talonDevIDChassisLeft = 4;
+	public static int talonDevIDChassisLeftSlave = 6;
 	
 	// Create precision mode variable and set to false by default
 	public static boolean pMode = false;
-	
-	
 }

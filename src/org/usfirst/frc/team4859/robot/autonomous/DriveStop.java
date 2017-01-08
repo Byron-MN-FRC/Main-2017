@@ -6,39 +6,35 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DriveStop extends Command {
 	
 	private double Time;
-	public DriveStop(double inputTime)
-    {
+	
+	public DriveStop(double inputTime) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.chassis);
         Time = inputTime;
     }
 
     // Called just before this Command runs the first time
-    protected void initialize()
-    {
+    protected void initialize() {
     	Robot.chassis.DriveStop();
     	setTimeout(Time);
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute()
-    {
+    protected void execute() {
     	Robot.chassis.DriveStop();
     }
 
     // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished()
-    {
+    protected boolean isFinished() {
         return isTimedOut();
     }
 
     // Called once after isFinished returns true
-    protected void end()
-    {
+    protected void end() {
     	Robot.chassis.DriveStop();
     }
 	
-	protected void interrupted()
-	{
+	protected void interrupted() {
+    	Robot.chassis.DriveStop();
 	}
 }

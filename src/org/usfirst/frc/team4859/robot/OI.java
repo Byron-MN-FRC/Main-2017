@@ -1,10 +1,6 @@
 package org.usfirst.frc.team4859.robot;
 
-import org.usfirst.frc.team4859.robot.commands.PrecisionMode;
-import org.usfirst.frc.team4859.robot.commands.SolenoidForward;
-import org.usfirst.frc.team4859.robot.commands.SolenoidReverse;
-import org.usfirst.frc.team4859.robot.commands.SolenoidStop;
-
+import org.usfirst.frc.team4859.robot.commands.*;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -16,27 +12,47 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {	
 	// Create a joystick on port 0
 	private final Joystick joystickP0 = new Joystick(0);
+	private final Joystick xboxP1 = new Joystick(1);
 	
-	// Create button for precision mode for joystick button 12
 	Button precisionMode = new JoystickButton(joystickP0, 12);
-	Button solenoidForward = new JoystickButton(joystickP0, 5);
-	Button solenoidReverse = new JoystickButton(joystickP0, 3);
-	Button solenoidStop = new JoystickButton(joystickP0, 2);
+	
+	Button flywheelForward = new JoystickButton(xboxP1, 5);
+	
+	Button flywheelForwardSlow = new JoystickButton(xboxP1, 8);
 
-	public OI()
-	{
+	//Button flywheelBackward = new JoystickButton(xboxP1, 8);
+	
+	//Button flywheelFeedIn = new JoystickButton(xboxP1, 3);
+	Button flywheelFeedOut = new JoystickButton(xboxP1, 6);
+	
+	Button angleUp = new JoystickButton(xboxP1, 3);
+	Button angleDown = new JoystickButton(xboxP1, 1);
+	
+	Button angleShoot = new JoystickButton(xboxP1, 4);
+	
+	Button angleFlat = new JoystickButton(xboxP1, 2);
+	
+	Button intake = new JoystickButton(joystickP0, 1);
+	
+	Button intakePower = new JoystickButton(xboxP1, 7);
+	
+	Button portcullis = new JoystickButton(joystickP0, 8);
+	
+	//Button outtake = new JoystickButton(xboxP1, 6);
+	
+	//Button center = new JoystickButton(xboxP1, 3);
+ 
+	public OI() {
 		precisionMode.toggleWhenPressed(new PrecisionMode());
-		solenoidForward.whenPressed(new SolenoidForward());
-		solenoidForward.whenReleased(new SolenoidStop());
-		solenoidReverse.whenPressed(new SolenoidReverse());
-		solenoidReverse.whenReleased(new SolenoidStop());
-		solenoidStop.whileHeld(new SolenoidStop());
 		
+//		flywheelBackward.whenPressed(new FlywheelBackward());
+//		flywheelBackward.whenReleased(new FlywheelStop());
+		
+//		flywheelFeedIn.whenPressed(new FlywheelFeedIn());
+//		flywheelFeedIn.whenReleased(new FlywheelFeedStop());
 	}
 	
-	public Joystick getJoystick()
-	{
+	public Joystick getJoystick() {
 		return joystickP0;
 	}
 }
-
