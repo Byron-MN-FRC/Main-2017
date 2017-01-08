@@ -45,42 +45,11 @@ public class OI {
 	public OI() {
 		precisionMode.toggleWhenPressed(new PrecisionMode());
 		
-		flywheelForward.whenPressed(new FlywheelForward());
-		flywheelForward.whenReleased(new FlywheelStop());
-		
-		flywheelForwardSlow.whenPressed(new FlywheelForwardSlow());
-		flywheelForwardSlow.whenReleased(new FlywheelStop());
-		
 //		flywheelBackward.whenPressed(new FlywheelBackward());
 //		flywheelBackward.whenReleased(new FlywheelStop());
 		
-		intake.whenPressed(new Intake());
-		intake.whenReleased(new IntakeStop());
-		
-		intakePower.whenPressed(new IntakePower());
-		intakePower.whenReleased(new IntakeStop());
-		
-//		outtake.whenPressed(new Outtake());
-//		outtake.whenReleased(new FlywheelStop());
-		
 //		flywheelFeedIn.whenPressed(new FlywheelFeedIn());
 //		flywheelFeedIn.whenReleased(new FlywheelFeedStop());
-		
-		flywheelFeedOut.whenPressed(new FeedOut());
-		flywheelFeedOut.whenReleased(new FeedStop());
-		
-		angleUp.toggleWhenPressed(new PivotUp());
-		
-		angleDown.toggleWhenPressed(new PivotDown());
-		
-		angleShoot.toggleWhenPressed(new PivotShoot());
-		
-		angleFlat.toggleWhenPressed(new PivotFlat());
-		
-		portcullis.toggleWhenPressed(new Portcullis());
-		
-		//center.whenPressed(new CenterBall());
-		//center.whenReleased(new FlywheelStop());
 	}
 	
 	public Joystick getJoystick() {
