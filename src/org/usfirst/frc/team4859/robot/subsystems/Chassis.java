@@ -32,11 +32,8 @@ public class Chassis extends Subsystem {
 		motorChassisRight.changeControlMode(TalonControlMode.PercentVbus);
 		motorChassisLeft.changeControlMode(TalonControlMode.PercentVbus);
 		
-		motorChassisRightSlave.changeControlMode(TalonControlMode.Follower);
-		motorChassisLeftSlave.changeControlMode(TalonControlMode.Follower);
-		
-		motorChassisRightSlave.set(RobotMap.talonDevIDChassisRight);
-		motorChassisLeftSlave.set(RobotMap.talonDevIDChassisLeft);
+		motorChassisRightSlave.changeControlMode(TalonControlMode.PercentVbus);
+		motorChassisLeftSlave.changeControlMode(TalonControlMode.PercentVbus);
 		
 		//motorChassisRight.changeControlMode(TalonControlMode.Speed);
 		//motorChassisLeft.changeControlMode(TalonControlMode.Speed);
@@ -58,6 +55,7 @@ public class Chassis extends Subsystem {
 		
 		// Apply translations to the values from the controller
 		yAxis = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", yAxis) : ThrottleLookup.calcJoystickCorrection("NormY", yAxis);
+		xAxis = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowX", xAxis) : ThrottleLookup.calcJoystickCorrection("NormX", xAxis);
 		twist = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowT", twist) : ThrottleLookup.calcJoystickCorrection("NormT", twist);
 		
 		SmartDashboard.putString("ROBOT MODE", (RobotMap.pMode) ? "Slow" : "Normal");	
@@ -66,7 +64,7 @@ public class Chassis extends Subsystem {
 		SmartDashboard.putNumber("JoystickTwist", twist);
 		SmartDashboard.putBoolean("Precision Mode", RobotMap.pMode);
 		
-		chassisDrive.arcadeDrive(-yAxis, -twist*0.8);
+		chassisDrive.mecanumDrive_Cartesian(xAxis, yAxis, twist, 0);
 	}
 	
 	public void DriveStraight(double inputSpeed)

@@ -18,7 +18,6 @@ public class Robot extends IterativeRobot {
 	//Create subsystems
 	public static Chassis chassis;
 	public static AnalogInput ultra;
-	//public static AnalogInput ultra2;
 	public static ADXRS450_Gyro gyro;
 	public static int ultraCounter;
 	public static OI oi;
@@ -36,14 +35,11 @@ public class Robot extends IterativeRobot {
     	// Initialize subsystems
     	chassis = new Chassis();
 		ultra = new AnalogInput(0);
-		ultra.setOversampleBits(6);
-		ultra.setAverageBits(6);
-		//ultra2 = new AnalogInput(1);
+//		ultra.setOversampleBits(6);
+//		ultra.setAverageBits(6);
 		gyro = new ADXRS450_Gyro();
 		oi = new OI();
 		gyro.reset();
-		
-		//start = pivot.motorLauncherAngle.getPosition();
 		
 		// Add autonomous modes
 		autonomousChooser = new SendableChooser();
@@ -77,8 +73,6 @@ public class Robot extends IterativeRobot {
     	
     	SmartDashboard.putNumber("Distance (inches)", Robot.ultra.getAverageVoltage()*8.8365*12);
 		SmartDashboard.putNumber("Distance (feet)", (Robot.ultra.getAverageVoltage()*8.8365));
-//		SmartDashboard.putNumber("Distance 2 (inches) ", Robot.ultra2.getAverageVoltage()*8.8365*12);
-//		SmartDashboard.putNumber("Distance 2 (feet)", (Robot.ultra2.getAverageVoltage()*8.8365));
 		SmartDashboard.putNumber("Gyro Angle", (Robot.gyro.getAngle()));
 		
         Scheduler.getInstance().run();
@@ -111,8 +105,6 @@ public class Robot extends IterativeRobot {
         
     	SmartDashboard.putNumber("Distance (inches)", Robot.ultra.getVoltage()*8.8365*12);
 		SmartDashboard.putNumber("Distance (feet)", (Robot.ultra.getVoltage()*8.8365));
-//		SmartDashboard.putNumber("Distance 2 (inches) ", Robot.ultra2.getVoltage()*8.8365*12);
-//		SmartDashboard.putNumber("Distance 2 (feet)", (Robot.ultra2.getVoltage()*8.8365));
 		SmartDashboard.putNumber("Gyro Angle", (Robot.gyro.getAngle()));
 		
         Scheduler.getInstance().run();

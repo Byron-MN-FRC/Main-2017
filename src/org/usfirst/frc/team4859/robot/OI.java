@@ -16,31 +16,7 @@ public class OI {
 	
 	Button precisionMode = new JoystickButton(joystickP0, 12);
 	
-	Button flywheelForward = new JoystickButton(xboxP1, 5);
-	
-	Button flywheelForwardSlow = new JoystickButton(xboxP1, 8);
-
-	//Button flywheelBackward = new JoystickButton(xboxP1, 8);
-	
-	//Button flywheelFeedIn = new JoystickButton(xboxP1, 3);
-	Button flywheelFeedOut = new JoystickButton(xboxP1, 6);
-	
-	Button angleUp = new JoystickButton(xboxP1, 3);
-	Button angleDown = new JoystickButton(xboxP1, 1);
-	
-	Button angleShoot = new JoystickButton(xboxP1, 4);
-	
-	Button angleFlat = new JoystickButton(xboxP1, 2);
-	
-	Button intake = new JoystickButton(joystickP0, 1);
-	
-	Button intakePower = new JoystickButton(xboxP1, 7);
-	
-	Button portcullis = new JoystickButton(joystickP0, 8);
-	
-	//Button outtake = new JoystickButton(xboxP1, 6);
-	
-	//Button center = new JoystickButton(xboxP1, 3);
+	//Button flywheelForward = new JoystickButton(xboxP1, 5);
  
 	public OI() {
 		precisionMode.toggleWhenPressed(new PrecisionMode());
