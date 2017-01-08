@@ -19,7 +19,6 @@ public class Robot extends IterativeRobot {
 	public static Chassis chassis;
 	public static AnalogInput ultra;
 	public static ADXRS450_Gyro gyro;
-	public static int ultraCounter;
 	public static OI oi;
 
 	public static double start;
@@ -36,7 +35,7 @@ public class Robot extends IterativeRobot {
     	chassis = new Chassis();
 		ultra = new AnalogInput(0);
 //		ultra.setOversampleBits(6);
-//		ultra.setAverageBits(6);
+//		ultra.setAverageBits(6)
 		gyro = new ADXRS450_Gyro();
 		oi = new OI();
 		gyro.reset();
@@ -56,8 +55,8 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
-		Chassis.motorChassisRight.changeControlMode(TalonControlMode.PercentVbus);
-		Chassis.motorChassisLeft.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motor1.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motor2.changeControlMode(TalonControlMode.PercentVbus);
 
 		gyro.reset();
     	autonomousCommand = (Command) autonomousChooser.getSelected();
@@ -87,8 +86,8 @@ public class Robot extends IterativeRobot {
 		gyro.reset();
         if (autonomousCommand != null) autonomousCommand.cancel();
         
-		Chassis.motorChassisRight.changeControlMode(TalonControlMode.PercentVbus);
-		Chassis.motorChassisLeft.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motor1.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motor2.changeControlMode(TalonControlMode.PercentVbus);
     }
 
     /**

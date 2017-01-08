@@ -17,23 +17,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Chassis extends Subsystem {
 	// Creating and setting motors
-	public static CANTalon motorChassisRight = new CANTalon(RobotMap.talonDevIDChassisRight);
-	public static CANTalon motorChassisRightSlave = new CANTalon(RobotMap.talonDevIDChassisRightSlave);
+	public static CANTalon motor1 = new CANTalon(RobotMap.talonIDMotor1);
 	
-	public static CANTalon motorChassisLeft = new CANTalon(RobotMap.talonDevIDChassisLeft);
-	public static CANTalon motorChassisLeftSlave = new CANTalon(RobotMap.talonDevIDChassisLeftSlave);
+	public static CANTalon motor2 = new CANTalon(RobotMap.talonIDMotor2);
 
 	// Creates robot drive configuration with four motors
-	static RobotDrive chassisDrive = new RobotDrive(motorChassisLeft, motorChassisRight);
+	static RobotDrive chassisDrive = new RobotDrive(motor1, motor2);
 	
 	public Chassis() {
 		super();
 		
-		motorChassisRight.changeControlMode(TalonControlMode.PercentVbus);
-		motorChassisLeft.changeControlMode(TalonControlMode.PercentVbus);
-		
-		motorChassisRightSlave.changeControlMode(TalonControlMode.PercentVbus);
-		motorChassisLeftSlave.changeControlMode(TalonControlMode.PercentVbus);
+		motor1.changeControlMode(TalonControlMode.PercentVbus);
+		motor2.changeControlMode(TalonControlMode.PercentVbus);
 		
 		//motorChassisRight.changeControlMode(TalonControlMode.Speed);
 		//motorChassisLeft.changeControlMode(TalonControlMode.Speed);
@@ -50,12 +45,10 @@ public class Chassis extends Subsystem {
 	public void driveWithJoystick(Joystick joystickP0) {
 		// Get raw values from joystick controller
 		double yAxis = joystickP0.getY();
-		double xAxis = joystickP0.getX();
 		double twist = joystickP0.getTwist();
 		
 		// Apply translations to the values from the controller
 		yAxis = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", yAxis) : ThrottleLookup.calcJoystickCorrection("NormY", yAxis);
-		xAxis = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowX", xAxis) : ThrottleLookup.calcJoystickCorrection("NormX", xAxis);
 		twist = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowT", twist) : ThrottleLookup.calcJoystickCorrection("NormT", twist);
 		
 		SmartDashboard.putString("ROBOT MODE", (RobotMap.pMode) ? "Slow" : "Normal");	
@@ -64,20 +57,20 @@ public class Chassis extends Subsystem {
 		SmartDashboard.putNumber("JoystickTwist", twist);
 		SmartDashboard.putBoolean("Precision Mode", RobotMap.pMode);
 		
-		chassisDrive.mecanumDrive_Cartesian(xAxis, yAxis, twist, 0);
+		chassisDrive.arcadeDrive(yAxis, twist*0.8);
 	}
 	
 	public void DriveStraight(double inputSpeed)
 	{
-		Chassis.motorChassisRight.changeControlMode(TalonControlMode.PercentVbus);
-		Chassis.motorChassisLeft.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motor1.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motor2.changeControlMode(TalonControlMode.PercentVbus);
 		chassisDrive.arcadeDrive(inputSpeed,0);
 	}
 	
 	public void DriveStraightGyro(double inputSpeed)
 	{
-		Chassis.motorChassisRight.changeControlMode(TalonControlMode.PercentVbus);
-		Chassis.motorChassisLeft.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motor1.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motor2.changeControlMode(TalonControlMode.PercentVbus);
 		chassisDrive.arcadeDrive(inputSpeed,Robot.gyro.getAngle()*0.06);
 	}
 	

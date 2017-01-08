@@ -13,23 +13,13 @@ public class ThrottleLookup
 			{.015, .25, .50, .75, 1.0},
 			{.000, .15, .35, .60, 1.0}};
 		
-		// SlowX
+		// SlowT
 		public static double[][] correctionTable3 = {
 			{.015, .2500, .5, .75, 1.0},
 			{.000, .2, .35, .45, 0.6}};
 
-		// NormX
-		public static double[][] correctionTable4 = {
-			{.015, .25, .500, .75, 1.0},
-			{.000, .10, .45, .7, .9}};
-
-		// SlowT
-		public static double[][] correctionTable5 = {
-			{.015, .2500, .5, .75, 1.0},
-			{.000, .2, .35, .45, 0.6}};
-
 		// NormT
-		public static double[][] correctionTable6 = {
+		public static double[][] correctionTable4 = {
 			{.015, .25, .500, .75, 1.0},
 			{.000, .10, .45, .7, .9}};
 	
@@ -43,13 +33,9 @@ public class ThrottleLookup
 				break;
 			case "NormY" : correctionTable = correctionTable2;
 				break;
-			case "SlowX" : correctionTable = correctionTable3;
+			case "SlowT" : correctionTable = correctionTable3;
 				break;
-			case "NormX" : correctionTable = correctionTable4;
-				break;
-			case "SlowT": correctionTable = correctionTable5;
-				break;
-			case "NormT": correctionTable = correctionTable6;
+			case "NormT" : correctionTable = correctionTable4;
 				break;
 			default : correctionTable = correctionTable1;
 		}
