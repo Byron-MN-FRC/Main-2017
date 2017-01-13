@@ -71,7 +71,7 @@ public class Chassis extends Subsystem {
 	{
 		Chassis.motor1.changeControlMode(TalonControlMode.PercentVbus);
 		Chassis.motor2.changeControlMode(TalonControlMode.PercentVbus);
-		chassisDrive.arcadeDrive(inputSpeed,Robot.gyro.getAngle()*0.06);
+//		chassisDrive.arcadeDrive(inputSpeed,Robot.gyro.getAngle()*0.06);
 	}
 	
 	public void DriveBackwards(double inputSpeed){		
@@ -96,7 +96,7 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void DriveRightCenterGyro(double angle){
-		chassisDrive.arcadeDrive(0,(Robot.gyro.getAngle()%360-angle)*0.04);
+//		chassisDrive.arcadeDrive(0,(Robot.gyro.getAngle()%360-angle)*0.04);
 	}
 	
 	public void DriveRightForwards(double inputSpeed){

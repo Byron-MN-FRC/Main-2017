@@ -10,7 +10,7 @@ public class TurnToAngle extends Command {
 
 	public TurnToAngle(double twist, double angle) {
 		requires(Robot.chassis);
-		Robot.gyro.reset();
+//		Robot.gyro.reset();
 		this.twist = twist;
 		this.angle = angle;
 	}
@@ -27,7 +27,8 @@ public class TurnToAngle extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return Robot.gyro.getAngle() >= angle;
+		return false;
+//		return Robot.gyro.getAngle() >= angle;
 	}
 
 	@Override

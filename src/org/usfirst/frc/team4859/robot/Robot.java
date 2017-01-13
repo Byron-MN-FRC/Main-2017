@@ -4,10 +4,9 @@ import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.Autonomous;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import com.ctre.CANTalon.TalonControlMode;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.AnalogInput;
+import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Counter;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -17,8 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 	//Create subsystems
 	public static Chassis chassis;
-	public static AnalogInput ultra;
-	public static ADXRS450_Gyro gyro;
+	public static AHRS ahrs;
 	public static OI oi;
 
 	public static double start;
@@ -33,12 +31,8 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	// Initialize subsystems
     	chassis = new Chassis();
-		ultra = new AnalogInput(0);
-//		ultra.setOversampleBits(6);
-//		ultra.setAverageBits(6)
-		gyro = new ADXRS450_Gyro();
 		oi = new OI();
-		gyro.reset();
+		ahrs = new AHRS(SerialPort.Port.kUSB);
 		
 		// Add autonomous modes
 		autonomousChooser = new SendableChooser();
@@ -58,7 +52,7 @@ public class Robot extends IterativeRobot {
 		Chassis.motor1.changeControlMode(TalonControlMode.PercentVbus);
 		Chassis.motor2.changeControlMode(TalonControlMode.PercentVbus);
 
-		gyro.reset();
+//		gyro.reset();
     	autonomousCommand = (Command) autonomousChooser.getSelected();
     	
     	if (autonomousCommand != null) autonomousCommand.start();
@@ -69,10 +63,6 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
     	//if (launcher.limitDown.get()) start = launcher.motorLauncherAngle.getPosition();
-    	
-    	SmartDashboard.putNumber("Distance (inches)", Robot.ultra.getAverageVoltage()*8.8365*12);
-		SmartDashboard.putNumber("Distance (feet)", (Robot.ultra.getAverageVoltage()*8.8365));
-		SmartDashboard.putNumber("Gyro Angle", (Robot.gyro.getAngle()));
 		
         Scheduler.getInstance().run();
     }
@@ -83,7 +73,6 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
 
-		gyro.reset();
         if (autonomousCommand != null) autonomousCommand.cancel();
         
 		Chassis.motor1.changeControlMode(TalonControlMode.PercentVbus);
@@ -101,11 +90,31 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-        
-    	SmartDashboard.putNumber("Distance (inches)", Robot.ultra.getVoltage()*8.8365*12);
-		SmartDashboard.putNumber("Distance (feet)", (Robot.ultra.getVoltage()*8.8365));
-		SmartDashboard.putNumber("Gyro Angle", (Robot.gyro.getAngle()));
-		
+         SmartDashboard.putNumber(   "IMU_Yaw",              ahrs.getYaw());
+         SmartDashboard.putNumber(   "IMU_Pitch",            ahrs.getPitch());
+         SmartDashboard.putNumber(   "IMU_Roll",             ahrs.getRoll());
+         
+         SmartDashboard.putNumber(   "IMU_Accel_X",          ahrs.getWorldLinearAccelX());
+         SmartDashboard.putNumber(   "IMU_Accel_Y",          ahrs.getWorldLinearAccelY());
+         
+         SmartDashboard.putNumber(   "Velocity_X",           ahrs.getVelocityX());
+         SmartDashboard.putNumber(   "Velocity_Y",           ahrs.getVelocityY());
+         SmartDashboard.putNumber(   "Displacement_X",       ahrs.getDisplacementX()*39.370);
+         SmartDashboard.putNumber(   "Displacement_Y",       ahrs.getDisplacementY()*39.370);
+         
+         SmartDashboard.putNumber(   "RawGyro_X",            ahrs.getRawGyroX());
+         SmartDashboard.putNumber(   "RawGyro_Y",            ahrs.getRawGyroY());
+         SmartDashboard.putNumber(   "RawGyro_Z",            ahrs.getRawGyroZ());
+         SmartDashboard.putNumber(   "RawAccel_X",           ahrs.getRawAccelX());
+         SmartDashboard.putNumber(   "RawAccel_Y",           ahrs.getRawAccelY());
+         SmartDashboard.putNumber(   "RawAccel_Z",           ahrs.getRawAccelZ());
+         SmartDashboard.putNumber(   "RawMag_X",             ahrs.getRawMagX());
+         SmartDashboard.putNumber(   "RawMag_Y",             ahrs.getRawMagY());
+         SmartDashboard.putNumber(   "RawMag_Z",             ahrs.getRawMagZ());
+         SmartDashboard.putNumber(   "IMU_Temp_C",           ahrs.getTempC());
+         
+         
+    	
         Scheduler.getInstance().run();
     }
     

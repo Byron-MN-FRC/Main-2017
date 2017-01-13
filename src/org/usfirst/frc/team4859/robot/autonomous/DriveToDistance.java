@@ -23,7 +23,7 @@ public class DriveToDistance extends Command {
 	
 	@Override
 	protected void initialize() {
-    	Robot.gyro.reset();
+//    	Robot.gyro.reset();
 		Robot.chassis.DriveStraightGyro(inputSpeed);
 	}
 
@@ -34,6 +34,7 @@ public class DriveToDistance extends Command {
 
 	@Override
 	protected boolean isFinished() {
+		return false;
 //		double val = 0.0;
 //		if (ultra)
 //			val = Robot.ultra.getAverageVoltage()*8.8365*12;
@@ -51,7 +52,7 @@ public class DriveToDistance extends Command {
 //		SmartDashboard.putNumber("Pethan", copied[25]);
 //		return copied[25] <= distance;
 		
-		return Robot.ultra.getAverageVoltage()*8.8365*12 <= distance;
+//		return Robot.ultra.getAverageVoltage()*8.8365*12 <= distance;
 	}
 
 	@Override

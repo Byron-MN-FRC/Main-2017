@@ -16,7 +16,7 @@ public class TurnToAngle extends Command {
 	
 	@Override
 	protected void initialize() {
-		Robot.gyro.reset();
+//		Robot.gyro.reset();
 		setTimeout(time);
 		Robot.chassis.DriveRightCenterGyro(angle);
 	}
