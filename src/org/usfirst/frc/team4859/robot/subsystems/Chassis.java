@@ -6,27 +6,20 @@ import org.usfirst.frc.team4859.robot.ThrottleLookup.ThrottleLookup;
 import org.usfirst.frc.team4859.robot.commands.DriveWithJoystick;
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.TalonControlMode;
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Chassis extends Subsystem {
 	// Creating and setting motors
 	public static CANTalon motor1 = new CANTalon(RobotMap.talonIDMotor1);
-	
 	public static CANTalon motor2 = new CANTalon(RobotMap.talonIDMotor2);
 
 	// Creates robot drive configuration with four motors
 	static RobotDrive chassisDrive = new RobotDrive(motor1, motor2);
 	
 	public Chassis() {
-		super();
-		
 		motor1.changeControlMode(TalonControlMode.PercentVbus);
 		motor2.changeControlMode(TalonControlMode.PercentVbus);
 		

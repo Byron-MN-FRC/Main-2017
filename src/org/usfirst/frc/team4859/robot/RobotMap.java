@@ -17,8 +17,13 @@ public class RobotMap {
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
 	
+	// Create variables with simple numbers
+	// They will be used in subsystems to map motors to IDs
 	public static int talonIDMotor1 = 3;
 	public static int talonIDMotor2 = 4;
+	
+	public static int talonIDMotor3 = 5;
+	public static int talonIDMotor4 = 6;
 	
 	// Create precision mode variable and set to false by default
 	public static boolean pMode = false;

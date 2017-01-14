@@ -3,6 +3,8 @@ package org.usfirst.frc.team4859.robot;
 import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.Autonomous;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
+import org.usfirst.frc.team4859.robot.subsystems.Motors;
+
 import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -15,9 +17,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 	//Create subsystems
-	public static Chassis chassis;
-	public static AHRS ahrs;
 	public static OI oi;
+	public static Chassis chassis;
+	public static Motors motors;
+	public static AHRS ahrs;
 
 	public static double start;
 	
@@ -30,8 +33,9 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	// Initialize subsystems
-    	chassis = new Chassis();
 		oi = new OI();
+    	chassis = new Chassis();
+		motors = new Motors();
 		ahrs = new AHRS(SerialPort.Port.kUSB);
 		
 		// Add autonomous modes
@@ -52,7 +56,6 @@ public class Robot extends IterativeRobot {
 		Chassis.motor1.changeControlMode(TalonControlMode.PercentVbus);
 		Chassis.motor2.changeControlMode(TalonControlMode.PercentVbus);
 
-//		gyro.reset();
     	autonomousCommand = (Command) autonomousChooser.getSelected();
     	
     	if (autonomousCommand != null) autonomousCommand.start();
@@ -62,9 +65,14 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-    	//if (launcher.limitDown.get()) start = launcher.motorLauncherAngle.getPosition();
-		
         Scheduler.getInstance().run();
+        
+        SmartDashboard.putNumber("Yaw", ahrs.getYaw());
+        SmartDashboard.putNumber("Pitch", ahrs.getPitch());
+        SmartDashboard.putNumber("Roll", ahrs.getRoll());
+        
+        SmartDashboard.putNumber("Velocity (X)", ahrs.getVelocityX());
+        SmartDashboard.putNumber("Velocity (Y)", ahrs.getVelocityY());
     }
 
     public void teleopInit() {
@@ -90,31 +98,13 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-         SmartDashboard.putNumber(   "IMU_Yaw",              ahrs.getYaw());
-         SmartDashboard.putNumber(   "IMU_Pitch",            ahrs.getPitch());
-         SmartDashboard.putNumber(   "IMU_Roll",             ahrs.getRoll());
-         
-         SmartDashboard.putNumber(   "IMU_Accel_X",          ahrs.getWorldLinearAccelX());
-         SmartDashboard.putNumber(   "IMU_Accel_Y",          ahrs.getWorldLinearAccelY());
-         
-         SmartDashboard.putNumber(   "Velocity_X",           ahrs.getVelocityX());
-         SmartDashboard.putNumber(   "Velocity_Y",           ahrs.getVelocityY());
-         SmartDashboard.putNumber(   "Displacement_X",       ahrs.getDisplacementX()*39.370);
-         SmartDashboard.putNumber(   "Displacement_Y",       ahrs.getDisplacementY()*39.370);
-         
-         SmartDashboard.putNumber(   "RawGyro_X",            ahrs.getRawGyroX());
-         SmartDashboard.putNumber(   "RawGyro_Y",            ahrs.getRawGyroY());
-         SmartDashboard.putNumber(   "RawGyro_Z",            ahrs.getRawGyroZ());
-         SmartDashboard.putNumber(   "RawAccel_X",           ahrs.getRawAccelX());
-         SmartDashboard.putNumber(   "RawAccel_Y",           ahrs.getRawAccelY());
-         SmartDashboard.putNumber(   "RawAccel_Z",           ahrs.getRawAccelZ());
-         SmartDashboard.putNumber(   "RawMag_X",             ahrs.getRawMagX());
-         SmartDashboard.putNumber(   "RawMag_Y",             ahrs.getRawMagY());
-         SmartDashboard.putNumber(   "RawMag_Z",             ahrs.getRawMagZ());
-         SmartDashboard.putNumber(   "IMU_Temp_C",           ahrs.getTempC());
-         
-         
-    	
+        SmartDashboard.putNumber("Yaw", ahrs.getYaw());
+        SmartDashboard.putNumber("Pitch", ahrs.getPitch());
+        SmartDashboard.putNumber("Roll", ahrs.getRoll());
+        
+        SmartDashboard.putNumber("Velocity (X)", ahrs.getVelocityX());
+        SmartDashboard.putNumber("Velocity (Y)", ahrs.getVelocityY());
+        
         Scheduler.getInstance().run();
     }
     
