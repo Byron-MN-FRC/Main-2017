@@ -24,8 +24,6 @@ public class Chassis extends Subsystem {
 	static RobotDrive chassisDrive = new RobotDrive(motorChassisBackLeft, motorChassisFrontLeft);
 	
 	public Chassis() {
-		super();
-		
 		motorChassisFrontLeft.changeControlMode(TalonControlMode.PercentVbus);
 		motorChassisBackLeft.changeControlMode(TalonControlMode.PercentVbus);
 		
@@ -52,9 +50,10 @@ public class Chassis extends Subsystem {
 		xAxis = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowX", xAxis) : ThrottleLookup.calcJoystickCorrection("NormX", xAxis);
 		twist = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowT", twist) : ThrottleLookup.calcJoystickCorrection("NormT", twist);
 		
-		SmartDashboard.putString("ROBOT MODE", (RobotMap.pMode) ? "Slow" : "Normal");	
+		SmartDashboard.putString("Robot Mode", (RobotMap.pMode) ? "Slow" : "Normal");	
 				
 		SmartDashboard.putNumber("JoystickY", yAxis);
+		SmartDashboard.putNumber("JoystickX", xAxis);
 		SmartDashboard.putNumber("JoystickTwist", twist);
 		SmartDashboard.putBoolean("Precision Mode", RobotMap.pMode);
 		

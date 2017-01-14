@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -35,7 +36,7 @@ public class Robot extends IterativeRobot {
     	chassis = new Chassis();
     	ahrs = new AHRS(SerialPort.Port.kUSB);
 		oi = new OI();
-//		gyro.reset();
+		ahrs.reset();
 		
 		// Add autonomous modes
 		autonomousChooser = new SendableChooser();
@@ -60,6 +61,8 @@ public class Robot extends IterativeRobot {
     	autonomousCommand = (Command) autonomousChooser.getSelected();
     	
     	if (autonomousCommand != null) autonomousCommand.start();
+    	
+    	ahrs.reset();
     }
 
     /**
@@ -69,6 +72,13 @@ public class Robot extends IterativeRobot {
     	//if (launcher.limitDown.get()) start = launcher.motorLauncherAngle.getPosition();
 		
         Scheduler.getInstance().run();
+        
+        SmartDashboard.putNumber("Yaw (use this)", ahrs.getYaw());
+        SmartDashboard.putNumber("Pitch", ahrs.getPitch());
+        SmartDashboard.putNumber("Roll", ahrs.getRoll());
+        SmartDashboard.putNumber("Velocity (X)", ahrs.getVelocityX());
+        SmartDashboard.putNumber("Velocity (Y)", ahrs.getVelocityY());
+        SmartDashboard.putNumber("Velocity (Z)", ahrs.getVelocityZ());
     }
 
     public void teleopInit() {
@@ -83,6 +93,8 @@ public class Robot extends IterativeRobot {
 		Chassis.motorChassisFrontRight.changeControlMode(TalonControlMode.PercentVbus);
 		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.PercentVbus);
 		Chassis.motorChassisBackRight.changeControlMode(TalonControlMode.PercentVbus);
+		
+		ahrs.reset();
     }
 
     /**
@@ -97,6 +109,13 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        
+        SmartDashboard.putNumber("Yaw (use this)", ahrs.getYaw());
+        SmartDashboard.putNumber("Pitch", ahrs.getPitch());
+        SmartDashboard.putNumber("Roll", ahrs.getRoll());
+        SmartDashboard.putNumber("Velocity (X)", ahrs.getVelocityX());
+        SmartDashboard.putNumber("Velocity (Y)", ahrs.getVelocityY());
+        SmartDashboard.putNumber("Velocity (Z)", ahrs.getVelocityZ());
     }
     
     /**
