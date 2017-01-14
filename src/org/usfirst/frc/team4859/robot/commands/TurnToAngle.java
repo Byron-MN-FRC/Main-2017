@@ -17,23 +17,22 @@ public class TurnToAngle extends Command {
 	
 	@Override
 	protected void initialize() {
-		Robot.chassis.DriveRightCenterGyro(twist);
+		Robot.chassis.driveRightCenterGyro(twist);
 	}
 
 	@Override
 	protected void execute() {
-		Robot.chassis.DriveRightCenterGyro(twist);
+		Robot.chassis.driveRightCenterGyro(twist);
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return false;
-//		return Robot.gyro.getAngle() >= angle;
+		return Robot.ahrs.getYaw() >= angle;
 	}
 
 	@Override
 	protected void end() {
-		Robot.chassis.DriveStop();
+		Robot.chassis.driveStop();
 	}
 
 	@Override

@@ -20,11 +20,6 @@ public class Chassis extends Subsystem {
 	static RobotDrive chassisDrive = new RobotDrive(motor1, motor2);
 	
 	public Chassis() {
-		motor1.changeControlMode(TalonControlMode.PercentVbus);
-		motor2.changeControlMode(TalonControlMode.PercentVbus);
-		
-		//motorChassisRight.changeControlMode(TalonControlMode.Speed);
-		//motorChassisLeft.changeControlMode(TalonControlMode.Speed);
 		
 		// Set a timeout for the motors (1 seconds)
 		chassisDrive.setSafetyEnabled(true);
@@ -53,50 +48,50 @@ public class Chassis extends Subsystem {
 		chassisDrive.arcadeDrive(yAxis, twist*0.8);
 	}
 	
-	public void DriveStraight(double inputSpeed)
+	public void driveStraight(double inputSpeed)
 	{
 		Chassis.motor1.changeControlMode(TalonControlMode.PercentVbus);
 		Chassis.motor2.changeControlMode(TalonControlMode.PercentVbus);
 		chassisDrive.arcadeDrive(inputSpeed,0);
 	}
 	
-	public void DriveStraightGyro(double inputSpeed)
+	public void driveStraightGyro(double inputSpeed)
 	{
 		Chassis.motor1.changeControlMode(TalonControlMode.PercentVbus);
 		Chassis.motor2.changeControlMode(TalonControlMode.PercentVbus);
-//		chassisDrive.arcadeDrive(inputSpeed,Robot.gyro.getAngle()*0.06);
+		chassisDrive.arcadeDrive(inputSpeed, Robot.ahrs.getYaw()*0.06);
 	}
 	
-	public void DriveBackwards(double inputSpeed){		
+	public void driveBackwards(double inputSpeed){		
 		chassisDrive.arcadeDrive(-inputSpeed,0);
 	}
 	
-	public void DriveStop(){
+	public void driveStop(){
 		chassisDrive.arcadeDrive(0,0);
 	}
 	
-	public void DriveLeftCenter(double inputSpeed){
+	public void driveLeftCenter(double inputSpeed){
 		chassisDrive.arcadeDrive(0,inputSpeed);
 	}
 	
-	public void DriveLeftForwards(double inputSpeed){
+	public void driveLeftForwards(double inputSpeed){
 
 		chassisDrive.arcadeDrive(inputSpeed,inputSpeed);
 	}
 	
-	public void DriveLeftBackwards(double inputSpeed){
+	public void driveLeftBackwards(double inputSpeed){
 		chassisDrive.arcadeDrive(-inputSpeed,inputSpeed);
 	}
 	
-	public void DriveRightCenterGyro(double angle){
-//		chassisDrive.arcadeDrive(0,(Robot.gyro.getAngle()%360-angle)*0.04);
+	public void driveRightCenterGyro(double angle){
+		chassisDrive.arcadeDrive(0,(Robot.ahrs.getYaw()%360-angle)*0.04);
 	}
 	
-	public void DriveRightForwards(double inputSpeed){
+	public void driveRightForwards(double inputSpeed){
 		chassisDrive.arcadeDrive(inputSpeed,-inputSpeed);
 		}
 	
-	public void DriveRightBackwards(double inputSpeed){
+	public void driveRightBackwards(double inputSpeed){
 		chassisDrive.arcadeDrive(-inputSpeed,-inputSpeed);
 		}
 }

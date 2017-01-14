@@ -20,6 +20,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static Chassis chassis;
 	public static Motors motors;
+	
 	public static AHRS ahrs;
 
 	public static double start;
@@ -36,12 +37,12 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
     	chassis = new Chassis();
 		motors = new Motors();
+		
 		ahrs = new AHRS(SerialPort.Port.kUSB);
 		
 		// Add autonomous modes
 		autonomousChooser = new SendableChooser();
 		autonomousChooser.addDefault("Nothing", new AutoNothing());
-		autonomousChooser.addObject("Straight (Shooter Down)", new Autonomous());
 		SmartDashboard.putData("Autonomous Mode Chooser", autonomousChooser);
 		
         // Instantiate the command used for the autonomous period
@@ -55,6 +56,8 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
 		Chassis.motor1.changeControlMode(TalonControlMode.PercentVbus);
 		Chassis.motor2.changeControlMode(TalonControlMode.PercentVbus);
+		Motors.motor3.changeControlMode(TalonControlMode.PercentVbus);
+		Motors.motor4.changeControlMode(TalonControlMode.PercentVbus);
 
     	autonomousCommand = (Command) autonomousChooser.getSelected();
     	
@@ -83,8 +86,10 @@ public class Robot extends IterativeRobot {
 
         if (autonomousCommand != null) autonomousCommand.cancel();
         
-		Chassis.motor1.changeControlMode(TalonControlMode.PercentVbus);
+        Chassis.motor1.changeControlMode(TalonControlMode.PercentVbus);
 		Chassis.motor2.changeControlMode(TalonControlMode.PercentVbus);
+		Motors.motor3.changeControlMode(TalonControlMode.PercentVbus);
+		Motors.motor4.changeControlMode(TalonControlMode.PercentVbus);
     }
 
     /**
@@ -95,7 +100,7 @@ public class Robot extends IterativeRobot {
     }
 
     /**
-     * This function is called periodically during operator control
+     * This function is called periodically (50x per second) during operator control
      */
     public void teleopPeriodic() {
         SmartDashboard.putNumber("Yaw", ahrs.getYaw());

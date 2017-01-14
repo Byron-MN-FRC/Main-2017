@@ -19,6 +19,7 @@ public class OI {
 	// Create button precisionMode on joystickP0, button 12
 	Button precisionMode = new JoystickButton(joystickP0, 12);
 	
+	// Create buttons motorForward and motorBackward on ports 1 and 3
 	Button motorForward = new JoystickButton(xboxP1, 1);
 	Button motorBackward = new JoystickButton(xboxP1, 3);
  
@@ -26,13 +27,24 @@ public class OI {
 		// Bind button precisionMode to toggle PrecisionMode command when pressed
 		precisionMode.toggleWhenPressed(new PrecisionMode());
 		
+		
+		/*
+		 * Bind button motorForward to run command MotorForward
+		 * when pressed, and MotorStop when released
+		*/
+		
 		motorForward.whenPressed(new MotorForward());
 		motorForward.whenReleased(new MotorStop());
 		
+		/*
+		 * Bind button motorBackward to run command MotorBackward
+		 * when pressed, and MotorStop when released
+		*/
 		motorBackward.whenPressed(new MotorBackward());
 		motorBackward.whenReleased(new MotorStop());
 	}
 	
+	// Create a simple method that returns joystickP0 (its values) when called
 	public Joystick getJoystick() {
 		return joystickP0;
 	}

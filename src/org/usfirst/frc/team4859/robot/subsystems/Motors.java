@@ -1,10 +1,8 @@
 package org.usfirst.frc.team4859.robot.subsystems;
 
 import org.usfirst.frc.team4859.robot.RobotMap;
-
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.TalonControlMode;
-
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -19,8 +17,6 @@ public class Motors extends Subsystem {
     // here. Call these from Commands.
 	
 	public Motors() {
-		motor3.changeControlMode(TalonControlMode.PercentVbus);
-		motor4.changeControlMode(TalonControlMode.PercentVbus);
 	}
 
     public void initDefaultCommand() {

@@ -23,6 +23,6 @@ public class Autonomous extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	addSequential(new DriveStraightGyro(0.6, 4));
+    	//addSequential(new DriveStraightGyro(0.6, 4));
     }
 }

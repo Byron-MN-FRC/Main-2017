@@ -18,12 +18,12 @@ public class TurnToAngle extends Command {
 	protected void initialize() {
 //		Robot.gyro.reset();
 		setTimeout(time);
-		Robot.chassis.DriveRightCenterGyro(angle);
+		Robot.chassis.driveRightCenterGyro(angle);
 	}
 
 	@Override
 	protected void execute() {
-		Robot.chassis.DriveRightCenterGyro(angle);
+		Robot.chassis.driveRightCenterGyro(angle);
 		
 	}
 
@@ -35,12 +35,12 @@ public class TurnToAngle extends Command {
 
 	@Override
 	protected void end() {
-		Robot.chassis.DriveStop();
+		Robot.chassis.driveStop();
 	}
 
 	@Override
 	protected void interrupted() {
-		Robot.chassis.DriveStop();
+		Robot.chassis.driveStop();
 	}
 
 }
