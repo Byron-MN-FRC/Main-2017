@@ -19,11 +19,11 @@ public class RobotMap {
 	
 	// Create variables with simple numbers
 	// They will be used in subsystems to map motors to IDs
-	public static int talonIDMotor1 = 3;
-	public static int talonIDMotor2 = 4;
+	public static int talonIDMotor1 = 2;
+	public static int talonIDMotor2 = 3;
 	
-	public static int talonIDMotor3 = 5;
-	public static int talonIDMotor4 = 6;
+	public static int talonIDMotor3 = 4;
+	public static int talonIDMotor4 = 5;
 	
 	// Create precision mode variable and set to false by default
 	public static boolean pMode = false;

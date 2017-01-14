@@ -20,7 +20,6 @@ public class Robot extends IterativeRobot {
 	public static Chassis chassis;
 	public static Motors motors;
 	public static OI oi;
-	
 	public static AHRS ahrs;
 
 	public static double start;
@@ -37,7 +36,6 @@ public class Robot extends IterativeRobot {
     	chassis = new Chassis();
 		motors = new Motors();
 		oi = new OI();
-		
 		ahrs = new AHRS(SerialPort.Port.kUSB);
 		
 		// Add autonomous modes
