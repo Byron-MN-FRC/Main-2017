@@ -6,37 +6,31 @@ import org.usfirst.frc.team4859.robot.ThrottleLookup.ThrottleLookup;
 import org.usfirst.frc.team4859.robot.commands.DriveWithJoystick;
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.TalonControlMode;
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Chassis extends Subsystem {
 	// Creating and setting motors
-	public static CANTalon motorChassisRight = new CANTalon(RobotMap.talonDevIDChassisRight);
-	public static CANTalon motorChassisRightSlave = new CANTalon(RobotMap.talonDevIDChassisRightSlave);
+	public static CANTalon motorChassisFrontLeft = new CANTalon(RobotMap.talonIDChassisFrontLeft);
+	public static CANTalon motorChassisFrontRight = new CANTalon(RobotMap.talonIDChassisFrontRight);
 	
-	public static CANTalon motorChassisLeft = new CANTalon(RobotMap.talonDevIDChassisLeft);
-	public static CANTalon motorChassisLeftSlave = new CANTalon(RobotMap.talonDevIDChassisLeftSlave);
+	public static CANTalon motorChassisBackLeft = new CANTalon(RobotMap.talonIDChassisBackLeft);
+	public static CANTalon motorChassisBackRight = new CANTalon(RobotMap.talonIDChassisBackRight);
 
 	// Creates robot drive configuration with four motors
-	static RobotDrive chassisDrive = new RobotDrive(motorChassisLeft, motorChassisRight);
+	static RobotDrive chassisDrive = new RobotDrive(motorChassisBackLeft, motorChassisFrontLeft);
 	
 	public Chassis() {
 		super();
 		
-		motorChassisRight.changeControlMode(TalonControlMode.PercentVbus);
-		motorChassisLeft.changeControlMode(TalonControlMode.PercentVbus);
+		motorChassisFrontLeft.changeControlMode(TalonControlMode.PercentVbus);
+		motorChassisBackLeft.changeControlMode(TalonControlMode.PercentVbus);
 		
-		motorChassisRightSlave.changeControlMode(TalonControlMode.PercentVbus);
-		motorChassisLeftSlave.changeControlMode(TalonControlMode.PercentVbus);
-		
-		//motorChassisRight.changeControlMode(TalonControlMode.Speed);
-		//motorChassisLeft.changeControlMode(TalonControlMode.Speed);
+		motorChassisFrontRight.changeControlMode(TalonControlMode.PercentVbus);
+		motorChassisBackRight.changeControlMode(TalonControlMode.PercentVbus);
 		
 		// Set a timeout for the motors (1 seconds)
 		chassisDrive.setSafetyEnabled(true);
@@ -69,16 +63,16 @@ public class Chassis extends Subsystem {
 	
 	public void DriveStraight(double inputSpeed)
 	{
-		Chassis.motorChassisRight.changeControlMode(TalonControlMode.PercentVbus);
-		Chassis.motorChassisLeft.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motorChassisFrontLeft.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.PercentVbus);
 		chassisDrive.arcadeDrive(inputSpeed,0);
 	}
 	
 	public void DriveStraightGyro(double inputSpeed)
 	{
-		Chassis.motorChassisRight.changeControlMode(TalonControlMode.PercentVbus);
-		Chassis.motorChassisLeft.changeControlMode(TalonControlMode.PercentVbus);
-		chassisDrive.arcadeDrive(inputSpeed,Robot.gyro.getAngle()*0.06);
+		Chassis.motorChassisFrontLeft.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.PercentVbus);
+//		chassisDrive.arcadeDrive(inputSpeed,Robot.gyro.getAngle()*0.06);
 	}
 	
 	public void DriveBackwards(double inputSpeed){		
@@ -103,7 +97,7 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void DriveRightCenterGyro(double angle){
-		chassisDrive.arcadeDrive(0,(Robot.gyro.getAngle()%360-angle)*0.04);
+//		chassisDrive.arcadeDrive(0,(Robot.gyro.getAngle()%360-angle)*0.04);
 	}
 	
 	public void DriveRightForwards(double inputSpeed){

@@ -4,10 +4,11 @@ import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.Autonomous;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import com.ctre.CANTalon.TalonControlMode;
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -17,9 +18,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 	//Create subsystems
 	public static Chassis chassis;
-	public static AnalogInput ultra;
-	public static ADXRS450_Gyro gyro;
-	public static int ultraCounter;
+	public static AHRS ahrs;
+//	public static ADXRS450_Gyro gyro;
 	public static OI oi;
 
 	public static double start;
@@ -34,12 +34,9 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	// Initialize subsystems
     	chassis = new Chassis();
-		ultra = new AnalogInput(0);
-//		ultra.setOversampleBits(6);
-//		ultra.setAverageBits(6);
-		gyro = new ADXRS450_Gyro();
+    	ahrs = new AHRS(kSerialBus);
 		oi = new OI();
-		gyro.reset();
+//		gyro.reset();
 		
 		// Add autonomous modes
 		autonomousChooser = new SendableChooser();
@@ -56,10 +53,11 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
-		Chassis.motorChassisRight.changeControlMode(TalonControlMode.PercentVbus);
-		Chassis.motorChassisLeft.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motorChassisFrontLeft.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motorChassisFrontRight.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motorChassisBackRight.changeControlMode(TalonControlMode.PercentVbus);
 
-		gyro.reset();
     	autonomousCommand = (Command) autonomousChooser.getSelected();
     	
     	if (autonomousCommand != null) autonomousCommand.start();
@@ -70,10 +68,6 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
     	//if (launcher.limitDown.get()) start = launcher.motorLauncherAngle.getPosition();
-    	
-    	SmartDashboard.putNumber("Distance (inches)", Robot.ultra.getAverageVoltage()*8.8365*12);
-		SmartDashboard.putNumber("Distance (feet)", (Robot.ultra.getAverageVoltage()*8.8365));
-		SmartDashboard.putNumber("Gyro Angle", (Robot.gyro.getAngle()));
 		
         Scheduler.getInstance().run();
     }
@@ -84,11 +78,12 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
 
-		gyro.reset();
         if (autonomousCommand != null) autonomousCommand.cancel();
         
-		Chassis.motorChassisRight.changeControlMode(TalonControlMode.PercentVbus);
-		Chassis.motorChassisLeft.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motorChassisFrontLeft.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motorChassisFrontRight.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motorChassisBackRight.changeControlMode(TalonControlMode.PercentVbus);
     }
 
     /**
@@ -102,11 +97,6 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-        
-    	SmartDashboard.putNumber("Distance (inches)", Robot.ultra.getVoltage()*8.8365*12);
-		SmartDashboard.putNumber("Distance (feet)", (Robot.ultra.getVoltage()*8.8365));
-		SmartDashboard.putNumber("Gyro Angle", (Robot.gyro.getAngle()));
-		
         Scheduler.getInstance().run();
     }
     
