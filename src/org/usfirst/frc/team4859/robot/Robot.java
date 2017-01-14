@@ -5,7 +5,6 @@ import org.usfirst.frc.team4859.robot.autonomous.Autonomous;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
-
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -34,7 +33,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	// Initialize subsystems
     	chassis = new Chassis();
-    	ahrs = new AHRS(kSerialBus);
+    	ahrs = new AHRS(SerialPort.Port.kUSB);
 		oi = new OI();
 //		gyro.reset();
 		
