@@ -17,9 +17,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 	//Create subsystems
-	public static OI oi;
 	public static Chassis chassis;
 	public static Motors motors;
+	public static OI oi;
 	
 	public static AHRS ahrs;
 
@@ -34,9 +34,9 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	// Initialize subsystems
-		oi = new OI();
     	chassis = new Chassis();
 		motors = new Motors();
+		oi = new OI();
 		
 		ahrs = new AHRS(SerialPort.Port.kUSB);
 		
