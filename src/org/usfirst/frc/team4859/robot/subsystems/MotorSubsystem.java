@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class Motors extends Subsystem {
+public class MotorSubsystem extends Subsystem {
 
 	public static CANTalon motor3 = new CANTalon(RobotMap.talonIDMotor3);
 	public static CANTalon motor4 = new CANTalon(RobotMap.talonIDMotor4);
@@ -16,7 +16,7 @@ public class Motors extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	public Motors() {
+	public MotorSubsystem() {
 	}
 
     public void initDefaultCommand() {
