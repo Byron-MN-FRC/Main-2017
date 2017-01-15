@@ -2,7 +2,6 @@ package org.usfirst.frc.team4859.robot.autonomous;
 
 import org.usfirst.frc.team4859.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveStraight extends Command {
 
