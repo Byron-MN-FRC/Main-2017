@@ -17,11 +17,11 @@ public class RobotMap {
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
 	
-	public static int talonIDChassisFrontLeft = 3;
-	public static int talonIDChassisFrontRight = 5;
+	public static int talonIDChassisFrontLeft = 2;
+	public static int talonIDChassisFrontRight = 3;
 	
 	public static int talonIDChassisBackLeft = 4;
-	public static int talonIDChassisBackRight = 6;
+	public static int talonIDChassisBackRight = 5;
 	
 	// Create precision mode variable and set to false by default
 	public static boolean pMode = false;

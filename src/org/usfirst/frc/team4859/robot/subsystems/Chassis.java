@@ -19,7 +19,7 @@ public class Chassis extends Subsystem {
 	public static CANTalon motorChassisBackRight = new CANTalon(RobotMap.talonIDChassisBackRight);
 
 	// Creates robot drive configuration with four motors
-	static RobotDrive chassisDrive = new RobotDrive(motorChassisBackLeft, motorChassisFrontLeft);
+	static RobotDrive chassisDrive = new RobotDrive(motorChassisFrontLeft, motorChassisBackLeft, motorChassisFrontRight, motorChassisBackRight);
 	
 	public Chassis() {
 		motorChassisFrontLeft.changeControlMode(TalonControlMode.PercentVbus);
@@ -55,7 +55,7 @@ public class Chassis extends Subsystem {
 		SmartDashboard.putNumber("JoystickTwist", twist);
 		SmartDashboard.putBoolean("Precision Mode", RobotMap.pMode);
 		
-		chassisDrive.mecanumDrive_Cartesian(xAxis, yAxis, twist, 0);
+		chassisDrive.mecanumDrive_Cartesian(xAxis, -twist*0.9, -yAxis, 0);
 	}
 	
 	public void DriveStraight(double inputSpeed)
