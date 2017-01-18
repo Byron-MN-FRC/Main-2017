@@ -28,6 +28,9 @@ public class Chassis extends Subsystem {
 		motorChassisFrontRight.changeControlMode(TalonControlMode.PercentVbus);
 		motorChassisBackRight.changeControlMode(TalonControlMode.PercentVbus);
 		
+		motorChassisFrontRight.setInverted(true);
+		motorChassisBackRight.setInverted(true);
+		
 		// Set a timeout for the motors (1 seconds)
 		chassisDrive.setSafetyEnabled(true);
 		chassisDrive.setExpiration(1);
@@ -55,7 +58,7 @@ public class Chassis extends Subsystem {
 		SmartDashboard.putNumber("JoystickTwist", twist);
 		SmartDashboard.putBoolean("Precision Mode", RobotMap.pMode);
 		
-		chassisDrive.mecanumDrive_Cartesian(xAxis, -twist*0.9, -yAxis, 0);
+		chassisDrive.mecanumDrive_Cartesian(xAxis*0.8, yAxis, twist, 0);
 	}
 	
 	public void DriveStraight(double inputSpeed)
