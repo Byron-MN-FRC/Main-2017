@@ -3,12 +3,15 @@ package org.usfirst.frc.team4859.robot;
 import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.Autonomous;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
+import org.usfirst.frc.team4859.robot.subsystems.Climber;
+
 import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -16,6 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 	//Create subsystems
 	public static Chassis chassis;
+	public static Climber climber;
 	public static AHRS ahrs;
 //	public static ADXRS450_Gyro gyro;
 	public static OI oi;
@@ -31,6 +35,7 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	// Initialize subsystems
+    	climber = new Climber ();
     	chassis = new Chassis();
     	ahrs = new AHRS(SerialPort.Port.kUSB);
 		oi = new OI();
