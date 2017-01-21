@@ -1,10 +1,13 @@
 package org.usfirst.frc.team4859.robot.subsystems;
 
+import org.usfirst.frc.team4859.robot.Robot;
 import org.usfirst.frc.team4859.robot.RobotMap;
 import org.usfirst.frc.team4859.robot.ThrottleLookup.ThrottleLookup;
 import org.usfirst.frc.team4859.robot.commands.DriveWithJoystick;
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.TalonControlMode;
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -40,16 +43,22 @@ public class Chassis extends Subsystem {
 		setDefaultCommand(new DriveWithJoystick());
 	}
 	
-	public void driveWithJoystick(Joystick joystickP0) {
+	public void driveWithJoystick(Joystick xboxP1) {
 		// Get raw values from joystick controller
-		double yAxis = joystickP0.getY();
-		double xAxis = joystickP0.getX();
-		double twist = joystickP0.getTwist();
+		double yAxis = -xboxP1.getRawAxis(1);
+		double xAxis = -xboxP1.getRawAxis(0);
+		double twist = xboxP1.getRawAxis(4);
 		
 		// Apply translations to the values from the controller
 		yAxis = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", yAxis) : ThrottleLookup.calcJoystickCorrection("NormY", yAxis);
 		xAxis = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowX", xAxis) : ThrottleLookup.calcJoystickCorrection("NormX", xAxis);
 		twist = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowT", twist) : ThrottleLookup.calcJoystickCorrection("NormT", twist);
+		
+		if (RobotMap.fMode) {
+			yAxis = -yAxis;
+			xAxis = -xAxis;
+			twist = -twist;
+		}
 		
 		SmartDashboard.putString("Robot Mode", (RobotMap.pMode) ? "Slow" : "Normal");	
 				

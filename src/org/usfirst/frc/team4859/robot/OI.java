@@ -14,12 +14,15 @@ public class OI {
 	private final Joystick joystickP0 = new Joystick(0);
 	private final Joystick xboxP1 = new Joystick(1);
 	
-	Button precisionMode = new JoystickButton(joystickP0, 12);
+	Button precisionMode = new JoystickButton(xboxP1, 1);
+	Button flipMode = new JoystickButton(xboxP1, 5);
 	
 	//Button flywheelForward = new JoystickButton(xboxP1, 5);
  
 	public OI() {
 		precisionMode.toggleWhenPressed(new PrecisionMode());
+		
+		flipMode.toggleWhenPressed(new FlipMode());
 		
 //		flywheelBackward.whenPressed(new FlywheelBackward());
 //		flywheelBackward.whenReleased(new FlywheelStop());
@@ -30,5 +33,9 @@ public class OI {
 	
 	public Joystick getJoystick() {
 		return joystickP0;
+	}
+	
+	public Joystick getXbox() {
+		return xboxP1;
 	}
 }

@@ -3,16 +3,16 @@ package org.usfirst.frc.team4859.robot.commands;
 import org.usfirst.frc.team4859.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class DriveWithJoystick extends Command {
+public class DriveWithXbox extends Command {
 
-	public DriveWithJoystick() {
+	public DriveWithXbox() {
 		requires(Robot.chassis);
 	}
 	
 	protected void initialize(){}
 	
 	protected void execute() {
-		Robot.chassis.driveWithJoystick(Robot.oi.getXbox());
+		Robot.chassis.driveWithJoystick(Robot.oi.getJoystick());
 	}
 	
 	protected boolean isFinished() {

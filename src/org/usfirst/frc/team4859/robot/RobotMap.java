@@ -25,4 +25,6 @@ public class RobotMap {
 	
 	// Create precision mode variable and set to false by default
 	public static boolean pMode = false;
+	
+	public static boolean fMode = false;
 }
