@@ -51,6 +51,12 @@ public class Chassis extends Subsystem {
 		xAxis = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowX", xAxis) : ThrottleLookup.calcJoystickCorrection("NormX", xAxis);
 		twist = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowT", twist) : ThrottleLookup.calcJoystickCorrection("NormT", twist);
 		
+		if (RobotMap.fMode) {
+			yAxis *= -1;
+			xAxis *= -1;
+			twist *= -1;
+		}
+		
 		SmartDashboard.putString("Robot Mode", (RobotMap.pMode) ? "Slow" : "Normal");	
 				
 		SmartDashboard.putNumber("JoystickY", yAxis);
