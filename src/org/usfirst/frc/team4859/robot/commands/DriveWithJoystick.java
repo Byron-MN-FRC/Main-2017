@@ -9,7 +9,7 @@ public class DriveWithJoystick extends Command {
 		requires(Robot.chassis);
 	}
 	
-	protected void initialize(){}
+	protected void initialize() {}
 	
 	protected void execute() {
 		Robot.chassis.driveWithJoystick(Robot.oi.getXbox());
@@ -19,10 +19,7 @@ public class DriveWithJoystick extends Command {
 		return false;
 	}
 	
-	protected void end() {
-		//Robot.chassis.driveWithJoystick(0,0);
-	}
+	protected void end() {}
 	
-	protected void interrupted() {
-	}	
+	protected void interrupted() {}	
 }
