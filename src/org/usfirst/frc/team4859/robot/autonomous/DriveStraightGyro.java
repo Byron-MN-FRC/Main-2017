@@ -5,26 +5,26 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class DriveStraightGyro extends Command {
 
-	private double Time;
-	private double Speed;
+	private double time;
+	private double speed;
 	
     public DriveStraightGyro(double inputSpeed, double inputTime) {
-        // Use requires() here to declare subsystem dependencies
         requires(Robot.chassis);
-        Speed = inputSpeed;
-        Time = inputTime;
+        
+        speed = inputSpeed;
+        time = inputTime;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.ahrs.reset();
-    	Robot.chassis.DriveStraightGyro(Speed);
-    	setTimeout(Time);
+    	Robot.chassis.driveStraightGyro(speed);
+    	setTimeout(time);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.chassis.DriveStraightGyro(Speed);
+    	Robot.chassis.driveStraightGyro(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -34,12 +34,12 @@ public class DriveStraightGyro extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.chassis.DriveStop();
+    	Robot.chassis.driveStop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.chassis.DriveStop();
+    	Robot.chassis.driveStop();
     }
 }

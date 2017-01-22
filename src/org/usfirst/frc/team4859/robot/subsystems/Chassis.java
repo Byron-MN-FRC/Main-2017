@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4859.robot.subsystems;
 
+import org.usfirst.frc.team4859.robot.Robot;
 import org.usfirst.frc.team4859.robot.RobotMap;
 import org.usfirst.frc.team4859.robot.ThrottleLookup.ThrottleLookup;
 import org.usfirst.frc.team4859.robot.commands.DriveWithJoystick;
@@ -31,9 +32,9 @@ public class Chassis extends Subsystem {
 		motorChassisFrontRight.setInverted(true);
 		motorChassisBackRight.setInverted(true);
 		
-		// Set a timeout for the motors (1 seconds)
+		// Set a timeout for the motors (0.1 seconds)
 		chassisDrive.setSafetyEnabled(true);
-		chassisDrive.setExpiration(1);
+		chassisDrive.setExpiration(0.1);
 	}
 	
 	public void initDefaultCommand () {
@@ -42,75 +43,60 @@ public class Chassis extends Subsystem {
 	
 	public void driveWithJoystick(Joystick joystickP0) {
 		// Get raw values from joystick controller
-		double yAxis = joystickP0.getY();
-		double xAxis = joystickP0.getX();
+		double y = joystickP0.getY();
+		double x = joystickP0.getX();
 		double twist = joystickP0.getTwist();
 		
 		// Apply translations to the values from the controller
-		yAxis = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", yAxis) : ThrottleLookup.calcJoystickCorrection("NormY", yAxis);
-		xAxis = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowX", xAxis) : ThrottleLookup.calcJoystickCorrection("NormX", xAxis);
+		y = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", y) : ThrottleLookup.calcJoystickCorrection("NormY", y);
+		x = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowX", x) : ThrottleLookup.calcJoystickCorrection("NormX", x);
 		twist = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowT", twist) : ThrottleLookup.calcJoystickCorrection("NormT", twist);
 		
+		// Apply flip if the flip button is toggled
 		if (RobotMap.fMode) {
-			yAxis *= -1;
-			xAxis *= -1;
+			y *= -1;
+			x *= -1;
 			twist *= -1;
 		}
 		
 		SmartDashboard.putString("Robot Mode", (RobotMap.pMode) ? "Slow" : "Normal");	
 				
-		SmartDashboard.putNumber("JoystickY", yAxis);
-		SmartDashboard.putNumber("JoystickX", xAxis);
+		SmartDashboard.putNumber("JoystickY", y);
+		SmartDashboard.putNumber("JoystickX", x);
 		SmartDashboard.putNumber("JoystickTwist", twist);
 		SmartDashboard.putBoolean("Precision Mode", RobotMap.pMode);
 		
-		chassisDrive.mecanumDrive_Cartesian(xAxis*0.8, yAxis, twist, 0);
+		//final joystick value adjustments
+		x *= RobotMap.xAxisScale;
+		y *= RobotMap.yAxisScale;
+		twist *= RobotMap.twistScale;
+		
+		chassisDrive.mecanumDrive_Cartesian(x, y, twist, 0);
 	}
 	
-	public void DriveStraight(double inputSpeed)
+	public void driveStraight(double inputSpeed)
 	{
 		Chassis.motorChassisFrontLeft.changeControlMode(TalonControlMode.PercentVbus);
 		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.PercentVbus);
-		chassisDrive.arcadeDrive(inputSpeed,0);
+		chassisDrive.mecanumDrive_Cartesian(0, inputSpeed, 0, 0);
 	}
 	
-	public void DriveStraightGyro(double inputSpeed)
+	public void driveStraightGyro(double inputSpeed)
 	{
 		Chassis.motorChassisFrontLeft.changeControlMode(TalonControlMode.PercentVbus);
 		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.PercentVbus);
-//		chassisDrive.arcadeDrive(inputSpeed,Robot.gyro.getAngle()*0.06);
+		chassisDrive.mecanumDrive_Cartesian(0, inputSpeed, Robot.ahrs.getYaw()*0.06, 0);
 	}
 	
-	public void DriveBackwards(double inputSpeed){		
-		chassisDrive.arcadeDrive(-inputSpeed,0);
+	public void driveBackwards(double inputSpeed){		
+		chassisDrive.mecanumDrive_Cartesian(0, -inputSpeed, 0 ,0);
 	}
 	
-	public void DriveStop(){
-		chassisDrive.arcadeDrive(0,0);
+	public void driveStop(){
+		chassisDrive.mecanumDrive_Cartesian(0, 0, 0 ,0);
 	}
 	
-	public void DriveLeftCenter(double inputSpeed){
-		chassisDrive.arcadeDrive(0,inputSpeed);
+	public void turnToAngle(double angle){
+		chassisDrive.mecanumDrive_Cartesian(0, 0, (Robot.ahrs.getYaw()%360-angle)*0.04, 0);
 	}
-	
-	public void DriveLeftForwards(double inputSpeed){
-
-		chassisDrive.arcadeDrive(inputSpeed,inputSpeed);
-	}
-	
-	public void DriveLeftBackwards(double inputSpeed){
-		chassisDrive.arcadeDrive(-inputSpeed,inputSpeed);
-	}
-	
-	public void DriveRightCenterGyro(double angle){
-//		chassisDrive.arcadeDrive(0,(Robot.gyro.getAngle()%360-angle)*0.04);
-	}
-	
-	public void DriveRightForwards(double inputSpeed){
-		chassisDrive.arcadeDrive(inputSpeed,-inputSpeed);
-		}
-	
-	public void DriveRightBackwards(double inputSpeed){
-		chassisDrive.arcadeDrive(-inputSpeed,-inputSpeed);
-		}
 }

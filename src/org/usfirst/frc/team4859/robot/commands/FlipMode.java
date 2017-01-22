@@ -9,8 +9,7 @@ public class FlipMode extends Command {
 		RobotMap.fMode = true;
 	}
 	
-	protected void execute(){
-	}
+	protected void execute() {}
 	
 	protected boolean isFinished() {
 		return false;

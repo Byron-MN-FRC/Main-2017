@@ -1,8 +1,6 @@
 package org.usfirst.frc.team4859.robot.commands;
 
 import org.usfirst.frc.team4859.robot.Robot;
-import org.usfirst.frc.team4859.robot.subsystems.Climber;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -11,7 +9,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ClimbUp extends Command {
 
     public ClimbUp() {
-        // Use requires() here to declare subsystem dependencies
         requires(Robot.climber);
     }
 

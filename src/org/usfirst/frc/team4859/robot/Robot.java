@@ -1,7 +1,6 @@
 package org.usfirst.frc.team4859.robot;
 
 import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
-import org.usfirst.frc.team4859.robot.autonomous.Autonomous;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
 
@@ -11,44 +10,43 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
-	//Create subsystems
+	// Creating subsystems
 	public static Chassis chassis;
 	public static Climber climber;
 	public static AHRS ahrs;
-//	public static ADXRS450_Gyro gyro;
 	public static OI oi;
-
-	public static double start;
 	
     Command autonomousCommand;
-    SendableChooser autonomousChooser;
+    SendableChooser<CommandGroup> autonomousChooser;
 
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
-    	// Initialize subsystems
+    	// Initializing subsystems (and gyro)
     	climber = new Climber ();
     	chassis = new Chassis();
     	ahrs = new AHRS(SerialPort.Port.kUSB);
 		oi = new OI();
+		
 		ahrs.reset();
 		
-		// Add autonomous modes
-		autonomousChooser = new SendableChooser();
+		// Adding autonomous modes
+		autonomousChooser = new SendableChooser<CommandGroup>();
 		autonomousChooser.addDefault("Nothing", new AutoNothing());
-		autonomousChooser.addObject("Straight (Shooter Down)", new Autonomous());
+//		autonomousChooser.addObject("Straight (Shooter Down)", new Autonomous());
 		SmartDashboard.putData("Autonomous Mode Chooser", autonomousChooser);
 		
         // Instantiate the command used for the autonomous period
-        autonomousCommand = new Autonomous();
+//        autonomousCommand = new Autonomous();
     }
 	
 	public void disabledPeriodic() {
@@ -72,16 +70,14 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-    	//if (launcher.limitDown.get()) start = launcher.motorLauncherAngle.getPosition();
-		
         Scheduler.getInstance().run();
         
-        SmartDashboard.putNumber("Yaw (use this)", ahrs.getYaw());
-        SmartDashboard.putNumber("Pitch", ahrs.getPitch());
-        SmartDashboard.putNumber("Roll", ahrs.getRoll());
-        SmartDashboard.putNumber("Velocity (X)", ahrs.getVelocityX());
-        SmartDashboard.putNumber("Velocity (Y)", ahrs.getVelocityY());
-        SmartDashboard.putNumber("Velocity (Z)", ahrs.getVelocityZ());
+        // Putting the gyro values on the Smart Dashboard
+        SmartDashboard.putNumber("Yaw (turning)", ahrs.getYaw());
+
+        SmartDashboard.putNumber("Velocity (X)", ahrs.getVelocityX()*3.28084);
+        SmartDashboard.putNumber("Velocity (Y)", ahrs.getVelocityY()*3.28084);
+        SmartDashboard.putNumber("Velocity (Z)", ahrs.getVelocityZ()*3.28084);
     }
 
     public void teleopInit() {
@@ -113,12 +109,12 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         
-        SmartDashboard.putNumber("Yaw (use this)", ahrs.getYaw());
-        SmartDashboard.putNumber("Pitch", ahrs.getPitch());
-        SmartDashboard.putNumber("Roll", ahrs.getRoll());
-        SmartDashboard.putNumber("Velocity (X)", ahrs.getVelocityX());
-        SmartDashboard.putNumber("Velocity (Y)", ahrs.getVelocityY());
-        SmartDashboard.putNumber("Velocity (Z)", ahrs.getVelocityZ());
+        // Putting the gyro values on the Smart Dashboard
+        SmartDashboard.putNumber("Yaw (turning)", ahrs.getYaw());
+
+        SmartDashboard.putNumber("Velocity (X)", ahrs.getVelocityX()*3.28084);
+        SmartDashboard.putNumber("Velocity (Y)", ahrs.getVelocityY()*3.28084);
+        SmartDashboard.putNumber("Velocity (Z)", ahrs.getVelocityZ()*3.28084);
     }
     
     /**

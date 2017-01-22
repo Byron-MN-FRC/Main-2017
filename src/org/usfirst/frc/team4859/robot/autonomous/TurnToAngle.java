@@ -8,39 +8,35 @@ public class TurnToAngle extends Command {
 	private double angle;
 	private double time;
 	
-	public TurnToAngle(double angle, double time) {
+	public TurnToAngle(double inputAngle, double inputTime) {
 		requires(Robot.chassis);
-		this.angle = angle;
-        this.time = time;
+		
+		angle = inputAngle;
+        time = inputTime;
 	}
 	
-	@Override
 	protected void initialize() {
 		Robot.ahrs.reset();
 		setTimeout(time);
-		Robot.chassis.DriveRightCenterGyro(angle);
+		Robot.chassis.turnToAngle(angle);
 	}
 
-	@Override
 	protected void execute() {
-		Robot.chassis.DriveRightCenterGyro(angle);
+		Robot.chassis.turnToAngle(angle);
 		
 	}
 
-	@Override
 	protected boolean isFinished() {
 		return isTimedOut();
-				//Robot.gyro.getAngle()%360 >= angle;
+		//Robot.ahrs.getYaw()%360 >= angle;
 	}
 
-	@Override
 	protected void end() {
-		Robot.chassis.DriveStop();
+		Robot.chassis.driveStop();
 	}
 
-	@Override
 	protected void interrupted() {
-		Robot.chassis.DriveStop();
+		Robot.chassis.driveStop();
 	}
 
 }

@@ -10,28 +10,29 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {	
-	// Create a joystick on port 0
+	// Create a joysticks on port 0 and 1
 	private final Joystick joystickP0 = new Joystick(0);
 	private final Joystick xboxP1 = new Joystick(1);
 	
+	// Creating buttons
 	Button precisionMode = new JoystickButton(joystickP0, 1);
-	Button climbUp = new JoystickButton(joystickP0, 3);
-	Button climbStop = new JoystickButton(joystickP0, 4);
+	Button flipMode = new JoystickButton(joystickP0, 2);
 	
-	//Button flywheelForward = new JoystickButton(xboxP1, 5);
+	Button climbUp = new JoystickButton(joystickP0, 3);
+	Button climbDown = new JoystickButton(joystickP0, 4);
  
 	public OI() {
+		// Mapping buttons to command
 		precisionMode.toggleWhenPressed(new PrecisionMode());
-		climbUp.toggleWhenPressed(new ClimbUp());
-		climbStop.whenPressed(new ClimbStop());
 		
-//		flywheelBackward.whenPressed(new FlywheelBackward());
-//		flywheelBackward.whenReleased(new FlywheelStop());
+		climbUp.whenPressed(new ClimbUp());
+		climbUp.whenReleased(new ClimbStop());
 		
-//		flywheelFeedIn.whenPressed(new FlywheelFeedIn());
-//		flywheelFeedIn.whenReleased(new FlywheelFeedStop());
+		climbDown.whenPressed(new ClimbDown());
+		climbDown.whenReleased(new ClimbStop());
 	}
 	
+	// Creating a method that returns joystick values for driving
 	public Joystick getJoystick() {
 		return joystickP0;
 	}

@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class DriveToDistance extends Command {
 
-	private double inputSpeed;
+	private double speed;
 	private double distance;
 //	private boolean ultra;
 //	private double[] last_fifty = {1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0};
@@ -13,23 +13,20 @@ public class DriveToDistance extends Command {
 	
 	public DriveToDistance(double inputSpeed, double distance) {
 		requires(Robot.chassis);
-		this.inputSpeed = inputSpeed;
+		speed = inputSpeed;
 		this.distance = distance;
 //		this.ultra = ultra;
 	}
 	
-	@Override
 	protected void initialize() {
     	Robot.ahrs.reset();
-		Robot.chassis.DriveStraightGyro(inputSpeed);
+		Robot.chassis.driveStraightGyro(speed);
 	}
 
-	@Override
 	protected void execute() {
-		Robot.chassis.DriveStraightGyro(inputSpeed);
+		Robot.chassis.driveStraightGyro(speed);
 	}
 
-	@Override
 	protected boolean isFinished() {
 //		double val = 0.0;
 //		if (ultra)
@@ -51,13 +48,11 @@ public class DriveToDistance extends Command {
 		return true;
 	}
 
-	@Override
 	protected void end() {
-		Robot.chassis.DriveStop();
+		Robot.chassis.driveStop();
 	}
 
-	@Override
 	protected void interrupted() {
-    	Robot.chassis.DriveStop();
+    	Robot.chassis.driveStop();
 	}
 }

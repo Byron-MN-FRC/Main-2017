@@ -18,12 +18,19 @@ public class RobotMap {
     // public static int rangefinderModule = 1;
 	
 	public static int talonIDChassisFrontLeft = 2;
-	public static int talonIDChassisFrontRight = 8;
+	public static int talonIDChassisFrontRight = 3;
 	
 	public static int talonIDChassisBackLeft = 4;
 	public static int talonIDChassisBackRight = 5;
 	
-	// Create precision mode variable and set to false by default
+	public static int talonIDClimberMotor = 6;
+	
+	// Creating variables to scale axis' across the entire curve (values from 0 to 1)
+	public static double xAxisScale = 0.8;
+	public static double yAxisScale = 1;
+	public static double twistScale = 1;
+	
+	// Creating precision mode variable and set to false by default
 	public static boolean pMode = false;
 	
 	public static boolean fMode = false;
