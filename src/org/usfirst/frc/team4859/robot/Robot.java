@@ -7,6 +7,7 @@ import org.usfirst.frc.team4859.robot.subsystems.Climber;
 import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Command;
@@ -34,7 +35,7 @@ public class Robot extends IterativeRobot {
     	// Initializing subsystems (and gyro)
     	climber = new Climber ();
     	chassis = new Chassis();
-    	ahrs = new AHRS(SerialPort.Port.kUSB);
+    	ahrs = new AHRS(I2C.Port.kMXP);
 		oi = new OI();
 		
 		ahrs.reset();
@@ -115,6 +116,8 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Velocity (X)", ahrs.getVelocityX()*3.28084);
         SmartDashboard.putNumber("Velocity (Y)", ahrs.getVelocityY()*3.28084);
         SmartDashboard.putNumber("Velocity (Z)", ahrs.getVelocityZ()*3.28084);
+        
+        SmartDashboard.putNumber("", chassis.motorChassisFrontLeft.);
     }
     
     /**

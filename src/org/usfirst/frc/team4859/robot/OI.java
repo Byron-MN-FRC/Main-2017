@@ -18,18 +18,20 @@ public class OI {
 	Button precisionMode = new JoystickButton(joystickP0, 1);
 	Button flipMode = new JoystickButton(joystickP0, 2);
 	
-	Button climbUp = new JoystickButton(joystickP0, 3);
-	Button climbDown = new JoystickButton(joystickP0, 4);
+	//Button climbUp = new JoystickButton(joystickP0, 3);
+	//Button climbDown = new JoystickButton(joystickP0, 4);
  
 	public OI() {
 		// Mapping buttons to command
 		precisionMode.toggleWhenPressed(new PrecisionMode());
 		
-		climbUp.whenPressed(new ClimbUp());
-		climbUp.whenReleased(new ClimbStop());
+		flipMode.toggleWhenPressed(new FlipMode());
 		
-		climbDown.whenPressed(new ClimbDown());
-		climbDown.whenReleased(new ClimbStop());
+		//climbUp.whenPressed(new ClimbUp());
+		//climbUp.whenReleased(new ClimbStop());
+		
+		//climbDown.whenPressed(new ClimbDown());
+		//climbDown.whenReleased(new ClimbStop());
 	}
 	
 	// Creating a method that returns joystick values for driving

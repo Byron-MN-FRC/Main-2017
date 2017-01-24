@@ -5,6 +5,7 @@ import org.usfirst.frc.team4859.robot.RobotMap;
 import org.usfirst.frc.team4859.robot.ThrottleLookup.ThrottleLookup;
 import org.usfirst.frc.team4859.robot.commands.DriveWithJoystick;
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -29,6 +30,8 @@ public class Chassis extends Subsystem {
 		motorChassisFrontRight.changeControlMode(TalonControlMode.PercentVbus);
 		motorChassisBackRight.changeControlMode(TalonControlMode.PercentVbus);
 		
+		motorChassisFrontLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		
 		motorChassisFrontRight.setInverted(true);
 		motorChassisBackRight.setInverted(true);
 		
@@ -47,6 +50,10 @@ public class Chassis extends Subsystem {
 		double x = joystickP0.getX();
 		double twist = joystickP0.getTwist();
 		
+		SmartDashboard.putNumber("Y input", y);
+		SmartDashboard.putNumber("X input", x);
+		SmartDashboard.putNumber("Twist input", twist);
+		
 		// Apply translations to the values from the controller
 		y = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", y) : ThrottleLookup.calcJoystickCorrection("NormY", y);
 		x = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowX", x) : ThrottleLookup.calcJoystickCorrection("NormX", x);
@@ -56,20 +63,18 @@ public class Chassis extends Subsystem {
 		if (RobotMap.fMode) {
 			y *= -1;
 			x *= -1;
-			twist *= -1;
 		}
-		
-		SmartDashboard.putString("Robot Mode", (RobotMap.pMode) ? "Slow" : "Normal");	
-				
-		SmartDashboard.putNumber("JoystickY", y);
-		SmartDashboard.putNumber("JoystickX", x);
-		SmartDashboard.putNumber("JoystickTwist", twist);
-		SmartDashboard.putBoolean("Precision Mode", RobotMap.pMode);
 		
 		//final joystick value adjustments
 		x *= RobotMap.xAxisScale;
 		y *= RobotMap.yAxisScale;
 		twist *= RobotMap.twistScale;
+		
+		SmartDashboard.putString("Robot Mode", (RobotMap.pMode) ? "Slow" : "Normal");	
+		
+		SmartDashboard.putNumber("Y output", y);
+		SmartDashboard.putNumber("X output", x);
+		SmartDashboard.putNumber("Twist output", twist);
 		
 		chassisDrive.mecanumDrive_Cartesian(x, y, twist, 0);
 	}

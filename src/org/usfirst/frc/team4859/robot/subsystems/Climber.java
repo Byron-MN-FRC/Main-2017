@@ -9,7 +9,7 @@ public class Climber extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	public static CANTalon climberMotor = new CANTalon(RobotMap.talonIDClimberMotor);
+	//public static CANTalon climberMotor = new CANTalon(RobotMap.talonIDClimberMotor);
 	
 	public Climber() {
 	}
@@ -17,10 +17,10 @@ public class Climber extends Subsystem {
     public void initDefaultCommand() {}
     
     public void climbUp() {
-		climberMotor.set(1.0);
+		//climberMotor.set(1.0);
 	}
     
     public void climbStop() {
-    	climberMotor.set(0.0);
+    	//climberMotor.set(0.0);
 	}
 }
