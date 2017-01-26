@@ -24,13 +24,10 @@ public class Chassis extends Subsystem {
 	static RobotDrive chassisDrive = new RobotDrive(motorChassisFrontLeft, motorChassisBackLeft, motorChassisFrontRight, motorChassisBackRight);
 	
 	public Chassis() {
-		motorChassisFrontLeft.changeControlMode(TalonControlMode.PercentVbus);
-		motorChassisBackLeft.changeControlMode(TalonControlMode.PercentVbus);
-		
-		motorChassisFrontRight.changeControlMode(TalonControlMode.PercentVbus);
-		motorChassisBackRight.changeControlMode(TalonControlMode.PercentVbus);
-		
 		motorChassisFrontLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		motorChassisBackLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		motorChassisFrontRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		motorChassisBackRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		
 		motorChassisFrontRight.setInverted(true);
 		motorChassisBackRight.setInverted(true);
@@ -81,8 +78,6 @@ public class Chassis extends Subsystem {
 	
 	public void driveStraight(double inputSpeed)
 	{
-		Chassis.motorChassisFrontLeft.changeControlMode(TalonControlMode.PercentVbus);
-		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.PercentVbus);
 		chassisDrive.mecanumDrive_Cartesian(0, inputSpeed, 0, 0);
 	}
 	

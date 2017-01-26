@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4859.robot;
 
 import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
+import org.usfirst.frc.team4859.robot.autonomous.AutoTest;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
 
@@ -43,7 +44,7 @@ public class Robot extends IterativeRobot {
 		// Adding autonomous modes
 		autonomousChooser = new SendableChooser<CommandGroup>();
 		autonomousChooser.addDefault("Nothing", new AutoNothing());
-//		autonomousChooser.addObject("Straight (Shooter Down)", new Autonomous());
+		autonomousChooser.addObject("Test", new AutoTest());
 		SmartDashboard.putData("Autonomous Mode Chooser", autonomousChooser);
 		
         // Instantiate the command used for the autonomous period
@@ -55,10 +56,10 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
-		Chassis.motorChassisFrontLeft.changeControlMode(TalonControlMode.PercentVbus);
-		Chassis.motorChassisFrontRight.changeControlMode(TalonControlMode.PercentVbus);
-		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.PercentVbus);
-		Chassis.motorChassisBackRight.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motorChassisFrontLeft.changeControlMode(TalonControlMode.Speed);
+		Chassis.motorChassisFrontRight.changeControlMode(TalonControlMode.Speed);
+		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.Speed);
+		Chassis.motorChassisBackRight.changeControlMode(TalonControlMode.Speed);
 
     	autonomousCommand = (Command) autonomousChooser.getSelected();
     	
@@ -79,6 +80,11 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Velocity (X)", ahrs.getVelocityX()*3.28084);
         SmartDashboard.putNumber("Velocity (Y)", ahrs.getVelocityY()*3.28084);
         SmartDashboard.putNumber("Velocity (Z)", ahrs.getVelocityZ()*3.28084);
+        
+        SmartDashboard.putNumber("FL", Chassis.motorChassisFrontLeft.getSpeed());
+        SmartDashboard.putNumber("FR", Chassis.motorChassisFrontRight.getSpeed());
+        SmartDashboard.putNumber("BL", Chassis.motorChassisBackLeft.getSpeed());
+        SmartDashboard.putNumber("BR", Chassis.motorChassisBackRight.getSpeed());
     }
 
     public void teleopInit() {
@@ -117,7 +123,10 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Velocity (Y)", ahrs.getVelocityY()*3.28084);
         SmartDashboard.putNumber("Velocity (Z)", ahrs.getVelocityZ()*3.28084);
         
-        SmartDashboard.putNumber("", chassis.motorChassisFrontLeft.);
+        SmartDashboard.putNumber("FL", Chassis.motorChassisFrontLeft.getSpeed());
+        SmartDashboard.putNumber("FR", Chassis.motorChassisFrontRight.getSpeed());
+        SmartDashboard.putNumber("BL", Chassis.motorChassisBackLeft.getSpeed());
+        SmartDashboard.putNumber("BR", Chassis.motorChassisBackRight.getSpeed());
     }
     
     /**
