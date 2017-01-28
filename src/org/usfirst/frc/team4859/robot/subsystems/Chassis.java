@@ -78,6 +78,11 @@ public class Chassis extends Subsystem {
 	
 	public void driveStraight(double inputSpeed)
 	{
+		Chassis.motorChassisFrontLeft.changeControlMode(TalonControlMode.Speed);
+		Chassis.motorChassisFrontRight.changeControlMode(TalonControlMode.Speed);
+		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.Speed);
+		Chassis.motorChassisBackRight.changeControlMode(TalonControlMode.Speed);
+		
 		chassisDrive.mecanumDrive_Cartesian(0, inputSpeed, 0, 0);
 	}
 	
@@ -93,6 +98,11 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void driveStop(){
+		Chassis.motorChassisFrontLeft.changeControlMode(TalonControlMode.Speed);
+		Chassis.motorChassisFrontRight.changeControlMode(TalonControlMode.Speed);
+		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.Speed);
+		Chassis.motorChassisBackRight.changeControlMode(TalonControlMode.Speed);
+		
 		chassisDrive.mecanumDrive_Cartesian(0, 0, 0 ,0);
 	}
 	

@@ -43,12 +43,9 @@ public class Robot extends IterativeRobot {
 		
 		// Adding autonomous modes
 		autonomousChooser = new SendableChooser<CommandGroup>();
-		autonomousChooser.addDefault("Nothing", new AutoNothing());
+		autonomousChooser.addDefault("Nothing", new AutoTest());
 		autonomousChooser.addObject("Test", new AutoTest());
 		SmartDashboard.putData("Autonomous Mode Chooser", autonomousChooser);
-		
-        // Instantiate the command used for the autonomous period
-//        autonomousCommand = new Autonomous();
     }
 	
 	public void disabledPeriodic() {
