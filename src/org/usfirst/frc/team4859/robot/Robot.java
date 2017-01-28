@@ -4,6 +4,7 @@ import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.Autonomous;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Motors;
+import org.usfirst.frc.team4859.robot.subsystems.Other;
 
 import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
@@ -19,6 +20,7 @@ public class Robot extends IterativeRobot {
 	//Create subsystems
 	public static Chassis chassis;
 	public static Motors motors;
+	public static Other other;
 	public static OI oi;
 	public static AHRS ahrs;
 
@@ -35,6 +37,7 @@ public class Robot extends IterativeRobot {
     	// Initialize subsystems
     	chassis = new Chassis();
 		motors = new Motors();
+		other = new Other();
 		oi = new OI();
 		ahrs = new AHRS(SerialPort.Port.kUSB);
 		
