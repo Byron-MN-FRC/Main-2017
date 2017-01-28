@@ -78,35 +78,42 @@ public class Chassis extends Subsystem {
 	
 	public void driveStraight(double inputSpeed)
 	{
-		Chassis.motorChassisFrontLeft.changeControlMode(TalonControlMode.Speed);
-		Chassis.motorChassisFrontRight.changeControlMode(TalonControlMode.Speed);
-		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.Speed);
-		Chassis.motorChassisBackRight.changeControlMode(TalonControlMode.Speed);
-		
-		chassisDrive.mecanumDrive_Cartesian(0, inputSpeed, 0, 0);
+		motorChassisFrontLeft.set(inputSpeed);
+		motorChassisFrontRight.set(inputSpeed);
+		motorChassisBackLeft.set(inputSpeed);
+		motorChassisBackRight.set(inputSpeed);
 	}
 	
 	public void driveStraightGyro(double inputSpeed)
 	{
-		Chassis.motorChassisFrontLeft.changeControlMode(TalonControlMode.PercentVbus);
-		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.PercentVbus);
-		chassisDrive.mecanumDrive_Cartesian(0, inputSpeed, Robot.ahrs.getYaw()*0.06, 0);
+		double twist = Robot.ahrs.getYaw()*0.06;
+		
+		motorChassisFrontLeft.set(inputSpeed + twist);
+		motorChassisFrontRight.set(inputSpeed - twist);
+		motorChassisBackLeft.set(inputSpeed + twist);
+		motorChassisBackRight.set(inputSpeed - twist);
 	}
 	
 	public void driveBackwards(double inputSpeed){		
-		chassisDrive.mecanumDrive_Cartesian(0, -inputSpeed, 0 ,0);
+		motorChassisFrontLeft.set(-inputSpeed);
+		motorChassisFrontRight.set(-inputSpeed);
+		motorChassisBackLeft.set(-inputSpeed);
+		motorChassisBackRight.set(-inputSpeed);
 	}
 	
 	public void driveStop(){
-		Chassis.motorChassisFrontLeft.changeControlMode(TalonControlMode.Speed);
-		Chassis.motorChassisFrontRight.changeControlMode(TalonControlMode.Speed);
-		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.Speed);
-		Chassis.motorChassisBackRight.changeControlMode(TalonControlMode.Speed);
-		
-		chassisDrive.mecanumDrive_Cartesian(0, 0, 0 ,0);
+		motorChassisFrontLeft.set(0);
+		motorChassisFrontRight.set(0);
+		motorChassisBackLeft.set(0);
+		motorChassisBackRight.set(0);
 	}
 	
 	public void turnToAngle(double angle){
-		chassisDrive.mecanumDrive_Cartesian(0, 0, (Robot.ahrs.getYaw()%360-angle)*0.04, 0);
+		double twist = (Robot.ahrs.getYaw()%360-angle)*0.04;
+		
+		motorChassisFrontLeft.set(twist);
+		motorChassisFrontRight.set(-twist);
+		motorChassisBackLeft.set(twist);
+		motorChassisBackRight.set(-twist);
 	}
 }

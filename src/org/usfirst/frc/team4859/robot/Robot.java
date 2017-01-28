@@ -57,6 +57,23 @@ public class Robot extends IterativeRobot {
 		Chassis.motorChassisFrontRight.changeControlMode(TalonControlMode.Speed);
 		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.Speed);
 		Chassis.motorChassisBackRight.changeControlMode(TalonControlMode.Speed);
+		
+		Chassis.motorChassisFrontLeft.enableControl();
+		Chassis.motorChassisFrontRight.enableControl();
+		Chassis.motorChassisBackLeft.enableControl();
+		Chassis.motorChassisBackRight.enableControl();
+		
+		Chassis.motorChassisFrontLeft.configNominalOutputVoltage(+0.0f, -0.0f);
+		Chassis.motorChassisFrontLeft.configPeakOutputVoltage(+12.0f, -12.0f);
+		
+		Chassis.motorChassisFrontRight.configNominalOutputVoltage(+0.0f, -0.0f);
+		Chassis.motorChassisFrontRight.configPeakOutputVoltage(+12.0f, -12.0f);
+		
+		Chassis.motorChassisBackLeft.configNominalOutputVoltage(+0.0f, -0.0f);
+		Chassis.motorChassisBackLeft.configPeakOutputVoltage(+12.0f, -12.0f);
+		
+		Chassis.motorChassisBackRight.configNominalOutputVoltage(+0.0f, -0.0f);
+		Chassis.motorChassisBackRight.configPeakOutputVoltage(+12.0f, -12.0f);
 
     	autonomousCommand = (Command) autonomousChooser.getSelected();
     	
@@ -96,6 +113,11 @@ public class Robot extends IterativeRobot {
 		Chassis.motorChassisFrontRight.changeControlMode(TalonControlMode.PercentVbus);
 		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.PercentVbus);
 		Chassis.motorChassisBackRight.changeControlMode(TalonControlMode.PercentVbus);
+		
+		Chassis.motorChassisFrontLeft.enableControl();
+		Chassis.motorChassisFrontRight.enableControl();
+		Chassis.motorChassisBackLeft.enableControl();
+		Chassis.motorChassisBackRight.enableControl();
 		
 		ahrs.reset();
     }
