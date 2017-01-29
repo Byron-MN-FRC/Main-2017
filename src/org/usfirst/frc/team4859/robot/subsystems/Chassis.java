@@ -33,8 +33,8 @@ public class Chassis extends Subsystem {
 		motorChassisBackRight.setInverted(true);
 		
 		// Set a timeout for the motors (0.1 seconds)
-		chassisDrive.setSafetyEnabled(true);
-		chassisDrive.setExpiration(0.1);
+		chassisDrive.setSafetyEnabled(false);
+		//chassisDrive.setExpiration(1);
 	}
 	
 	public void initDefaultCommand () {
@@ -78,15 +78,17 @@ public class Chassis extends Subsystem {
 	
 	public void driveStraight(double inputSpeed)
 	{
+		inputSpeed = inputSpeed * 1200;
+		
 		motorChassisFrontLeft.set(inputSpeed);
 		motorChassisFrontRight.set(inputSpeed);
 		motorChassisBackLeft.set(inputSpeed);
 		motorChassisBackRight.set(inputSpeed);
 	}
 	
-	public void driveStraightGyro(double inputSpeed)
-	{
+	public void driveStraightGyro(double inputSpeed) {
 		double twist = Robot.ahrs.getYaw()*0.06;
+		inputSpeed = inputSpeed * 1200;
 		
 		motorChassisFrontLeft.set(inputSpeed + twist);
 		motorChassisFrontRight.set(inputSpeed - twist);
@@ -94,21 +96,41 @@ public class Chassis extends Subsystem {
 		motorChassisBackRight.set(inputSpeed - twist);
 	}
 	
-	public void driveBackwards(double inputSpeed){		
+	public void driveBackwards(double inputSpeed) {
+		inputSpeed = inputSpeed * 1200;
+		
 		motorChassisFrontLeft.set(-inputSpeed);
 		motorChassisFrontRight.set(-inputSpeed);
 		motorChassisBackLeft.set(-inputSpeed);
 		motorChassisBackRight.set(-inputSpeed);
 	}
 	
-	public void driveStop(){
+	public void strafeLeft(double inputSpeed) {
+		inputSpeed = inputSpeed * 1200;
+		
+		motorChassisFrontLeft.set(-inputSpeed);
+		motorChassisFrontRight.set(inputSpeed);
+		motorChassisBackLeft.set(inputSpeed);
+		motorChassisBackRight.set(-inputSpeed);
+	}
+	
+	public void strafeRight(double inputSpeed) {
+		inputSpeed = inputSpeed * 1200;
+		
+		motorChassisFrontLeft.set(inputSpeed);
+		motorChassisFrontRight.set(-inputSpeed);
+		motorChassisBackLeft.set(-inputSpeed);
+		motorChassisBackRight.set(inputSpeed);
+	}
+	
+	public void driveStop() {
 		motorChassisFrontLeft.set(0);
 		motorChassisFrontRight.set(0);
 		motorChassisBackLeft.set(0);
 		motorChassisBackRight.set(0);
 	}
 	
-	public void turnToAngle(double angle){
+	public void turnToAngle(double angle) {
 		double twist = (Robot.ahrs.getYaw()%360-angle)*0.04;
 		
 		motorChassisFrontLeft.set(twist);

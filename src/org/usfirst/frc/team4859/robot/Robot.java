@@ -43,7 +43,7 @@ public class Robot extends IterativeRobot {
 		
 		// Adding autonomous modes
 		autonomousChooser = new SendableChooser<CommandGroup>();
-		autonomousChooser.addDefault("Nothing", new AutoTest());
+		autonomousChooser.addDefault("Nothing", new AutoNothing());
 		autonomousChooser.addObject("Test", new AutoTest());
 		SmartDashboard.putData("Autonomous Mode Chooser", autonomousChooser);
     }
