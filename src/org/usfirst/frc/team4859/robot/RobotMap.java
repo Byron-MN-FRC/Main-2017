@@ -26,7 +26,7 @@ public class RobotMap {
 	public static int talonIDClimberMotor = 6;
 	
 	// Creating variables to scale axis' across the entire curve (values from 0 to 1)
-	public static double xAxisScale = 0.8;
+	public static double xAxisScale = 1;
 	public static double yAxisScale = 1;
 	public static double twistScale = 1;
 	

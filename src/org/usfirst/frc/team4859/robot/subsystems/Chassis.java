@@ -57,7 +57,7 @@ public class Chassis extends Subsystem {
 		if (RobotMap.fMode) {
 			yAxis = -yAxis;
 			xAxis = -xAxis;
-			twist = -twist;
+			//twist = -twist;
 		}
 		
 		SmartDashboard.putString("Robot Mode", (RobotMap.pMode) ? "Slow" : "Normal");	
@@ -67,28 +67,28 @@ public class Chassis extends Subsystem {
 		SmartDashboard.putNumber("JoystickTwist", twist);
 		SmartDashboard.putBoolean("Precision Mode", RobotMap.pMode);
 		
-		chassisDrive.mecanumDrive_Cartesian(xAxis*0.8, yAxis, twist, 0);
+		chassisDrive.mecanumDrive_Cartesian(xAxis, yAxis, twist, 0);
 	}
 	
-	public void DriveStraight(double inputSpeed)
+	public void driveStraight(double inputSpeed)
 	{
 		Chassis.motorChassisFrontLeft.changeControlMode(TalonControlMode.PercentVbus);
 		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.PercentVbus);
 		chassisDrive.arcadeDrive(inputSpeed,0);
 	}
 	
-	public void DriveStraightGyro(double inputSpeed)
+	public void driveStraightGyro(double inputSpeed)
 	{
 		Chassis.motorChassisFrontLeft.changeControlMode(TalonControlMode.PercentVbus);
 		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.PercentVbus);
 //		chassisDrive.arcadeDrive(inputSpeed,Robot.gyro.getAngle()*0.06);
 	}
 	
-	public void DriveBackwards(double inputSpeed){		
+	public void driveBackwards(double inputSpeed){		
 		chassisDrive.arcadeDrive(-inputSpeed,0);
 	}
 	
-	public void DriveStop(){
+	public void driveStop(){
 		chassisDrive.arcadeDrive(0,0);
 	}
 	
@@ -105,7 +105,7 @@ public class Chassis extends Subsystem {
 		chassisDrive.arcadeDrive(-inputSpeed,inputSpeed);
 	}
 	
-	public void DriveRightCenterGyro(double angle){
+	public void turnToAngle(double angle){
 //		chassisDrive.arcadeDrive(0,(Robot.gyro.getAngle()%360-angle)*0.04);
 	}
 	
