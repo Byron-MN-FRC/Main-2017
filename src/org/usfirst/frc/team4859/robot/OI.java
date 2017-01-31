@@ -14,8 +14,11 @@ public class OI {
 	private final Joystick joystickP0 = new Joystick(0);
 	private final Joystick xboxP1 = new Joystick(1);
 	
-	Button precisionMode = new JoystickButton(xboxP1, 1);
+	Button precisionMode = new JoystickButton(xboxP1, 6);
 	Button flipMode = new JoystickButton(xboxP1, 5);
+	
+	Button climbUp = new JoystickButton(xboxP1, 4);
+	Button climbDown = new JoystickButton(xboxP1, 1);
 	
 	//Button flywheelForward = new JoystickButton(xboxP1, 5);
  
@@ -24,11 +27,11 @@ public class OI {
 		
 		flipMode.toggleWhenPressed(new FlipMode());
 		
-//		flywheelBackward.whenPressed(new FlywheelBackward());
-//		flywheelBackward.whenReleased(new FlywheelStop());
+		climbUp.whenPressed(new ClimbUp());
+		climbUp.whenReleased(new ClimbStop());
 		
-//		flywheelFeedIn.whenPressed(new FlywheelFeedIn());
-//		flywheelFeedIn.whenReleased(new FlywheelFeedStop());
+		climbDown.whenPressed(new ClimbDown());
+		climbDown.whenReleased(new ClimbStop());
 	}
 	
 	public Joystick getJoystick() {
