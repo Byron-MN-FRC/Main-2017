@@ -1,14 +1,13 @@
 package org.usfirst.frc.team4859.robot;
 
 import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
+import org.usfirst.frc.team4859.robot.autonomous.AutoTest;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
-
 import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
-
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -34,7 +33,7 @@ public class Robot extends IterativeRobot {
     	// Initializing subsystems (and gyro)
     	climber = new Climber ();
     	chassis = new Chassis();
-    	ahrs = new AHRS(SerialPort.Port.kUSB);
+    	ahrs = new AHRS(I2C.Port.kMXP);
 		oi = new OI();
 		
 		ahrs.reset();
@@ -42,11 +41,8 @@ public class Robot extends IterativeRobot {
 		// Adding autonomous modes
 		autonomousChooser = new SendableChooser<CommandGroup>();
 		autonomousChooser.addDefault("Nothing", new AutoNothing());
-//		autonomousChooser.addObject("Straight (Shooter Down)", new Autonomous());
+		autonomousChooser.addObject("Test", new AutoTest());
 		SmartDashboard.putData("Autonomous Mode Chooser", autonomousChooser);
-		
-        // Instantiate the command used for the autonomous period
-//        autonomousCommand = new Autonomous();
     }
 	
 	public void disabledPeriodic() {
@@ -54,10 +50,27 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
-		Chassis.motorChassisFrontLeft.changeControlMode(TalonControlMode.PercentVbus);
-		Chassis.motorChassisFrontRight.changeControlMode(TalonControlMode.PercentVbus);
-		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.PercentVbus);
-		Chassis.motorChassisBackRight.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motorChassisFrontLeft.changeControlMode(TalonControlMode.Speed);
+		Chassis.motorChassisFrontRight.changeControlMode(TalonControlMode.Speed);
+		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.Speed);
+		Chassis.motorChassisBackRight.changeControlMode(TalonControlMode.Speed);
+		
+		Chassis.motorChassisFrontLeft.enableControl();
+		Chassis.motorChassisFrontRight.enableControl();
+		Chassis.motorChassisBackLeft.enableControl();
+		Chassis.motorChassisBackRight.enableControl();
+		
+		Chassis.motorChassisFrontLeft.configNominalOutputVoltage(+0.0f, -0.0f);
+		Chassis.motorChassisFrontLeft.configPeakOutputVoltage(+12.0f, -12.0f);
+		
+		Chassis.motorChassisFrontRight.configNominalOutputVoltage(+0.0f, -0.0f);
+		Chassis.motorChassisFrontRight.configPeakOutputVoltage(+12.0f, -12.0f);
+		
+		Chassis.motorChassisBackLeft.configNominalOutputVoltage(+0.0f, -0.0f);
+		Chassis.motorChassisBackLeft.configPeakOutputVoltage(+12.0f, -12.0f);
+		
+		Chassis.motorChassisBackRight.configNominalOutputVoltage(+0.0f, -0.0f);
+		Chassis.motorChassisBackRight.configPeakOutputVoltage(+12.0f, -12.0f);
 
     	autonomousCommand = (Command) autonomousChooser.getSelected();
     	
@@ -78,6 +91,11 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Velocity (X)", ahrs.getVelocityX()*3.28084);
         SmartDashboard.putNumber("Velocity (Y)", ahrs.getVelocityY()*3.28084);
         SmartDashboard.putNumber("Velocity (Z)", ahrs.getVelocityZ()*3.28084);
+        
+        SmartDashboard.putNumber("FL", Chassis.motorChassisFrontLeft.getSpeed());
+        SmartDashboard.putNumber("FR", Chassis.motorChassisFrontRight.getSpeed());
+        SmartDashboard.putNumber("BL", Chassis.motorChassisBackLeft.getSpeed());
+        SmartDashboard.putNumber("BR", Chassis.motorChassisBackRight.getSpeed());
     }
 
     public void teleopInit() {
@@ -92,6 +110,11 @@ public class Robot extends IterativeRobot {
 		Chassis.motorChassisFrontRight.changeControlMode(TalonControlMode.PercentVbus);
 		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.PercentVbus);
 		Chassis.motorChassisBackRight.changeControlMode(TalonControlMode.PercentVbus);
+		
+		Chassis.motorChassisFrontLeft.enableControl();
+		Chassis.motorChassisFrontRight.enableControl();
+		Chassis.motorChassisBackLeft.enableControl();
+		Chassis.motorChassisBackRight.enableControl();
 		
 		ahrs.reset();
     }
@@ -115,6 +138,11 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Velocity (X)", ahrs.getVelocityX()*3.28084);
         SmartDashboard.putNumber("Velocity (Y)", ahrs.getVelocityY()*3.28084);
         SmartDashboard.putNumber("Velocity (Z)", ahrs.getVelocityZ()*3.28084);
+        
+        SmartDashboard.putNumber("FL", Chassis.motorChassisFrontLeft.getSpeed());
+        SmartDashboard.putNumber("FR", Chassis.motorChassisFrontRight.getSpeed());
+        SmartDashboard.putNumber("BL", Chassis.motorChassisBackLeft.getSpeed());
+        SmartDashboard.putNumber("BR", Chassis.motorChassisBackRight.getSpeed());
     }
     
     /**

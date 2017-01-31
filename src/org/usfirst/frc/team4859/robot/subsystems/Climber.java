@@ -17,7 +17,11 @@ public class Climber extends Subsystem {
     public void initDefaultCommand() {}
     
     public void climbUp() {
-		climberMotor.set(1.0);
+		climberMotor.set(1);
+	}
+    
+    public void climbDown() {
+    	climberMotor.set(-1);
 	}
     
     public void climbStop() {
