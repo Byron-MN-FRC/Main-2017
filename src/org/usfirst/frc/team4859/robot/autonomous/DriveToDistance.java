@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DriveToDistance extends Command {
 
 	private double speed;
-	private double distance;
+//	private double distance;
 //	private boolean ultra;
 //	private double[] last_fifty = {1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0};
 	public double pethan;
@@ -14,7 +14,7 @@ public class DriveToDistance extends Command {
 	public DriveToDistance(double inputSpeed, double distance) {
 		requires(Robot.chassis);
 		speed = inputSpeed;
-		this.distance = distance;
+//		this.distance = distance;
 //		this.ultra = ultra;
 	}
 	
