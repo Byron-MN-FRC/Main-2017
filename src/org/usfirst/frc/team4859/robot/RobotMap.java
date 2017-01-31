@@ -1,5 +1,7 @@
 package org.usfirst.frc.team4859.robot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -34,4 +36,6 @@ public class RobotMap {
 	public static boolean pMode = false;
 	
 	public static boolean fMode = false;
+	
+	public static double sd = SmartDashboard.getNumber("1", 1);
 }

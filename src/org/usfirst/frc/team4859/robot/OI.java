@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {	
 	// Create a joysticks on port 0 and 1
 	private final Joystick joystickP0 = new Joystick(0);
-	private final Joystick xboxP1 = new Joystick(1);
+	//private final Joystick xboxP1 = new Joystick(1);
 	
 	// Creating buttons
 	Button precisionMode = new JoystickButton(joystickP0, 1);
