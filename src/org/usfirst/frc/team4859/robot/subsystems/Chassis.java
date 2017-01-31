@@ -5,9 +5,8 @@ import org.usfirst.frc.team4859.robot.RobotMap;
 import org.usfirst.frc.team4859.robot.ThrottleLookup.ThrottleLookup;
 import org.usfirst.frc.team4859.robot.commands.DriveWithJoystick;
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
-import com.kauailabs.navx.frc.AHRS;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -25,18 +24,17 @@ public class Chassis extends Subsystem {
 	static RobotDrive chassisDrive = new RobotDrive(motorChassisFrontLeft, motorChassisBackLeft, motorChassisFrontRight, motorChassisBackRight);
 	
 	public Chassis() {
-		motorChassisFrontLeft.changeControlMode(TalonControlMode.PercentVbus);
-		motorChassisBackLeft.changeControlMode(TalonControlMode.PercentVbus);
-		
-		motorChassisFrontRight.changeControlMode(TalonControlMode.PercentVbus);
-		motorChassisBackRight.changeControlMode(TalonControlMode.PercentVbus);
+		motorChassisFrontLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		motorChassisBackLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		motorChassisFrontRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		motorChassisBackRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		
 		motorChassisFrontRight.setInverted(true);
 		motorChassisBackRight.setInverted(true);
 		
-		// Set a timeout for the motors (1 seconds)
-		chassisDrive.setSafetyEnabled(true);
-		chassisDrive.setExpiration(1);
+		// Set a timeout for the motors (0.1 seconds)
+		chassisDrive.setSafetyEnabled(false);
+		//chassisDrive.setExpiration(1);
 	}
 	
 	public void initDefaultCommand () {
