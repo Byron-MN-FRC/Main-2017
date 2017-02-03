@@ -23,11 +23,6 @@ public class Chassis extends Subsystem {
 	static RobotDrive chassisDrive = new RobotDrive(motorChassisFrontLeft, motorChassisBackLeft, motorChassisFrontRight, motorChassisBackRight);
 	
 	public Chassis() {
-		motorChassisFrontLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		motorChassisBackLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		motorChassisFrontRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		motorChassisBackRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		
 		motorChassisFrontRight.setInverted(true);
 		motorChassisBackRight.setInverted(true);
 		

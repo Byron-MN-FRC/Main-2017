@@ -4,6 +4,8 @@ import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.AutoTest;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
+
+import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.I2C;
@@ -50,6 +52,16 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
+    	Chassis.motorChassisFrontLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	Chassis.motorChassisBackLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	Chassis.motorChassisFrontRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	Chassis.motorChassisBackRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	
+    	Chassis.motorChassisFrontLeft.configEncoderCodesPerRev(360);
+    	Chassis.motorChassisBackLeft.configEncoderCodesPerRev(360);
+    	Chassis.motorChassisFrontRight.configEncoderCodesPerRev(360);
+    	Chassis.motorChassisBackRight.configEncoderCodesPerRev(360);
+    	
 		Chassis.motorChassisFrontLeft.changeControlMode(TalonControlMode.Speed);
 		Chassis.motorChassisFrontRight.changeControlMode(TalonControlMode.Speed);
 		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.Speed);
