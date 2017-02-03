@@ -72,17 +72,19 @@ public class Robot extends IterativeRobot {
 		Chassis.motorChassisBackLeft.enableControl();
 		Chassis.motorChassisBackRight.enableControl();
 		
-		Chassis.motorChassisFrontLeft.configNominalOutputVoltage(+0.0f, -0.0f);
-		Chassis.motorChassisFrontLeft.configPeakOutputVoltage(+12.0f, -12.0f);
+//		Chassis.motorChassisFrontLeft.configNominalOutputVoltage(+0.0f, -0.0f);
+//		Chassis.motorChassisFrontLeft.configPeakOutputVoltage(+12.0f, -12.0f);
+//		
+//		Chassis.motorChassisFrontRight.configNominalOutputVoltage(+0.0f, -0.0f);
+//		Chassis.motorChassisFrontRight.configPeakOutputVoltage(+12.0f, -12.0f);
+//		
+//		Chassis.motorChassisBackLeft.configNominalOutputVoltage(+0.0f, -0.0f);
+//		Chassis.motorChassisBackLeft.configPeakOutputVoltage(+12.0f, -12.0f);
+//		
+//		Chassis.motorChassisBackRight.configNominalOutputVoltage(+0.0f, -0.0f);
+//		Chassis.motorChassisBackRight.configPeakOutputVoltage(+12.0f, -12.0f);
 		
-		Chassis.motorChassisFrontRight.configNominalOutputVoltage(+0.0f, -0.0f);
-		Chassis.motorChassisFrontRight.configPeakOutputVoltage(+12.0f, -12.0f);
-		
-		Chassis.motorChassisBackLeft.configNominalOutputVoltage(+0.0f, -0.0f);
-		Chassis.motorChassisBackLeft.configPeakOutputVoltage(+12.0f, -12.0f);
-		
-		Chassis.motorChassisBackRight.configNominalOutputVoltage(+0.0f, -0.0f);
-		Chassis.motorChassisBackRight.configPeakOutputVoltage(+12.0f, -12.0f);
+		Chassis.chassisDrive.setSafetyEnabled(false);
 
     	autonomousCommand = (Command) autonomousChooser.getSelected();
     	

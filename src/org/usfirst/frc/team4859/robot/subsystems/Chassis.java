@@ -5,7 +5,6 @@ import org.usfirst.frc.team4859.robot.RobotMap;
 import org.usfirst.frc.team4859.robot.ThrottleLookup.ThrottleLookup;
 import org.usfirst.frc.team4859.robot.commands.DriveWithJoystick;
 import com.ctre.CANTalon;
-import com.ctre.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -20,11 +19,11 @@ public class Chassis extends Subsystem {
 	public static CANTalon motorChassisBackRight = new CANTalon(RobotMap.talonIDChassisBackRight);
 
 	// Creates robot drive configuration with four motors
-	static RobotDrive chassisDrive = new RobotDrive(motorChassisFrontLeft, motorChassisBackLeft, motorChassisFrontRight, motorChassisBackRight);
+	public static RobotDrive chassisDrive = new RobotDrive(motorChassisFrontLeft, motorChassisBackLeft, motorChassisFrontRight, motorChassisBackRight);
 	
 	public Chassis() {
-		motorChassisFrontRight.setInverted(true);
-		motorChassisBackRight.setInverted(true);
+		chassisDrive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
+		chassisDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
 		
 		// Set a timeout for the motors (0.1 seconds)
 		chassisDrive.setSafetyEnabled(false);
