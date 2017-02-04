@@ -4,12 +4,12 @@ import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.AutoTest;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
-
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -21,8 +21,29 @@ public class Robot extends IterativeRobot {
 	// Creating subsystems
 	public static Chassis chassis;
 	public static Climber climber;
+	public static Preferences prefs;
 	public static AHRS ahrs;
 	public static OI oi;
+	
+	//lots of dumb variable creation that could probably be automated
+	public static double speed1;
+	public static double time1;
+	public static double speed2;
+	public static double time2;
+	public static double speed3;
+	public static double time3;
+	public static double speed4;
+	public static double time4;
+	public static double speed5;
+	public static double time5;
+	public static double speed6;
+	public static double time6;
+	public static double speed7;
+	public static double time7;
+	public static double speed8;
+	public static double time8;
+	public static double speed9;
+	public static double time9;
 	
     Command autonomousCommand;
     SendableChooser<CommandGroup> autonomousChooser;
@@ -35,10 +56,31 @@ public class Robot extends IterativeRobot {
     	// Initializing subsystems (and gyro)
     	climber = new Climber ();
     	chassis = new Chassis();
+    	prefs = Preferences.getInstance();
     	ahrs = new AHRS(I2C.Port.kMXP);
 		oi = new OI();
 		
 		ahrs.reset();
+		
+		//lots of dumb variable creation that could probably be automated
+    	time1 = Robot.prefs.getDouble("time1", 0);
+    	speed1 = Robot.prefs.getDouble("speed1", 0);
+    	time2 = Robot.prefs.getDouble("time2", 0);
+    	speed2 = Robot.prefs.getDouble("speed2", 0);
+    	time3 = Robot.prefs.getDouble("time3", 0);
+    	speed3 = Robot.prefs.getDouble("speed3", 0);
+    	time4 = Robot.prefs.getDouble("time4", 0);
+    	speed4 = Robot.prefs.getDouble("speed4", 0);
+    	time5 = Robot.prefs.getDouble("time5", 0);
+    	speed5 = Robot.prefs.getDouble("speed5", 0);
+    	time6 = Robot.prefs.getDouble("time6", 0);
+    	speed6 = Robot.prefs.getDouble("speed6", 0);
+    	time7 = Robot.prefs.getDouble("time7", 0);
+    	speed7 = Robot.prefs.getDouble("speed7", 0);
+    	time8 = Robot.prefs.getDouble("time8", 0);
+    	speed8 = Robot.prefs.getDouble("speed8", 0);
+    	time9 = Robot.prefs.getDouble("time9", 0);
+    	speed9 = Robot.prefs.getDouble("speed9", 0);
 		
 		// Adding autonomous modes
 		autonomousChooser = new SendableChooser<CommandGroup>();
@@ -52,6 +94,7 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
+    	
     	Chassis.motorChassisFrontLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	Chassis.motorChassisBackLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	Chassis.motorChassisFrontRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
