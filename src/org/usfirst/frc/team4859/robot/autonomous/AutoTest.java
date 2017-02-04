@@ -8,11 +8,11 @@ public class AutoTest extends CommandGroup {
 	
     public  AutoTest() {
     	addSequential(new DriveStraight(Robot.speed1, Robot.time1));
-    	addSequential(new DriveStop(0.5));
-    	addSequential(new StrafeLeft(Robot.speed2, Robot.time2));
-    	addSequential(new DriveStop(0.5));
-    	addSequential(new DriveBackwards(Robot.speed3, Robot.time3));
-    	addSequential(new DriveStop(0.5));
-    	addSequential(new StrafeRight(Robot.speed4, Robot.time4));
+//    	addSequential(new DriveStop(0.5));
+//    	addSequential(new StrafeLeft(Robot.speed2, Robot.time2));
+//    	addSequential(new DriveStop(0.5));
+//    	addSequential(new DriveBackwards(Robot.speed3, Robot.time3));
+//    	addSequential(new DriveStop(0.5));
+//    	addSequential(new StrafeRight(Robot.speed4, Robot.time4));
     }
 }
