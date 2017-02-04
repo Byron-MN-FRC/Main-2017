@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4859.robot;
 
 import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
+import org.usfirst.frc.team4859.robot.autonomous.AutoStraightForwardGear;
 import org.usfirst.frc.team4859.robot.autonomous.AutoTest;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
@@ -86,6 +87,7 @@ public class Robot extends IterativeRobot {
 		autonomousChooser = new SendableChooser<CommandGroup>();
 		autonomousChooser.addDefault("Nothing", new AutoNothing());
 		autonomousChooser.addObject("Test", new AutoTest());
+		autonomousChooser.addObject("Test", new AutoStraightForwardGear());
 		SmartDashboard.putData("Autonomous Mode Chooser", autonomousChooser);
     }
 	
