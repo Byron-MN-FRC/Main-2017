@@ -19,7 +19,7 @@ public class DriveToDistance extends Command {
 	}
 	
 	protected void initialize() {
-    	Robot.ahrs.reset();
+    	Robot.gyro.reset();
 		Robot.chassis.driveStraightGyro(speed);
 	}
 

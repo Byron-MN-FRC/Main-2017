@@ -16,7 +16,7 @@ public class TurnToAngle extends Command {
 	}
 	
 	protected void initialize() {
-		Robot.ahrs.reset();
+		Robot.gyro.reset();
 		setTimeout(time);
 		Robot.chassis.turnToAngle(angle);
 	}
@@ -38,5 +38,4 @@ public class TurnToAngle extends Command {
 	protected void interrupted() {
 		Robot.chassis.driveStop();
 	}
-
 }

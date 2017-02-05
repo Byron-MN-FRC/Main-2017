@@ -1,4 +1,4 @@
-package org.usfirst.frc.team4859.robot;
+ package org.usfirst.frc.team4859.robot;
 
 import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.AutoStraightForwardGear;
@@ -7,8 +7,7 @@ import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
-import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
@@ -23,7 +22,7 @@ public class Robot extends IterativeRobot {
 	public static Chassis chassis;
 	public static Climber climber;
 	public static Preferences prefs;
-	public static AHRS ahrs;
+	public static ADXRS450_Gyro gyro;
 	public static OI oi;
 	
 	//lots of dumb variable creation that could probably be automated
@@ -58,11 +57,18 @@ public class Robot extends IterativeRobot {
     	climber = new Climber ();
     	chassis = new Chassis();
     	prefs = Preferences.getInstance();
-    	ahrs = new AHRS(I2C.Port.kMXP);
+    	gyro = new ADXRS450_Gyro();
 		oi = new OI();
 		
-		ahrs.reset();
-		
+		gyro.reset();
+    }
+	
+	public void disabledPeriodic() {
+		Scheduler.getInstance().run();
+	}
+
+    public void autonomousInit() {
+    	
 		//lots of dumb variable creation that could probably be automated
     	time1 = Robot.prefs.getDouble("time1", 0);
     	speed1 = Robot.prefs.getDouble("speed1", 0);
@@ -82,20 +88,13 @@ public class Robot extends IterativeRobot {
     	speed8 = Robot.prefs.getDouble("speed8", 0);
     	time9 = Robot.prefs.getDouble("time9", 0);
     	speed9 = Robot.prefs.getDouble("speed9", 0);
-		
+    	
 		// Adding autonomous modes
 		autonomousChooser = new SendableChooser<CommandGroup>();
 		autonomousChooser.addDefault("Nothing", new AutoNothing());
 		autonomousChooser.addObject("Test", new AutoTest());
-		autonomousChooser.addObject("Test", new AutoStraightForwardGear());
+		autonomousChooser.addObject("ehyjhfd6tu", new AutoStraightForwardGear());
 		SmartDashboard.putData("Autonomous Mode Chooser", autonomousChooser);
-    }
-	
-	public void disabledPeriodic() {
-		Scheduler.getInstance().run();
-	}
-
-    public void autonomousInit() {
     	
     	Chassis.motorChassisFrontLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	Chassis.motorChassisBackLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
@@ -135,7 +134,7 @@ public class Robot extends IterativeRobot {
     	
     	if (autonomousCommand != null) autonomousCommand.start();
     	
-    	ahrs.reset();
+    	gyro.reset();
     }
 
     /**
@@ -144,12 +143,14 @@ public class Robot extends IterativeRobot {
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
         
+        SmartDashboard.putNumber("angle", gyro.getAngle());
+        
         // Putting the gyro values on the Smart Dashboard
-        SmartDashboard.putNumber("Yaw (turning)", ahrs.getYaw());
-
-        SmartDashboard.putNumber("Velocity (X)", ahrs.getVelocityX()*3.28084);
-        SmartDashboard.putNumber("Velocity (Y)", ahrs.getVelocityY()*3.28084);
-        SmartDashboard.putNumber("Velocity (Z)", ahrs.getVelocityZ()*3.28084);
+//        SmartDashboard.putNumber("Yaw (turning)", gyro.getYaw());
+//
+//        SmartDashboard.putNumber("Velocity (X)", gyro.getVelocityX()*3.28084);
+//        SmartDashboard.putNumber("Velocity (Y)", gyro.getVelocityY()*3.28084);
+//        SmartDashboard.putNumber("Velocity (Z)", gyro.getVelocityZ()*3.28084);
         
         SmartDashboard.putNumber("FL", Chassis.motorChassisFrontLeft.getSpeed());
         SmartDashboard.putNumber("FR", Chassis.motorChassisFrontRight.getSpeed());
@@ -175,7 +176,7 @@ public class Robot extends IterativeRobot {
 		Chassis.motorChassisBackLeft.enableControl();
 		Chassis.motorChassisBackRight.enableControl();
 		
-		ahrs.reset();
+		gyro.reset();
     }
 
     /**
@@ -191,12 +192,14 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         
+        SmartDashboard.putNumber("angle", gyro.getAngle());
+        
         // Putting the gyro values on the Smart Dashboard
-        SmartDashboard.putNumber("Yaw (turning)", ahrs.getYaw());
-
-        SmartDashboard.putNumber("Velocity (X)", ahrs.getVelocityX()*3.28084);
-        SmartDashboard.putNumber("Velocity (Y)", ahrs.getVelocityY()*3.28084);
-        SmartDashboard.putNumber("Velocity (Z)", ahrs.getVelocityZ()*3.28084);
+//        SmartDashboard.putNumber("Yaw (turning)", gyro.getYaw());
+//
+//        SmartDashboard.putNumber("Velocity (X)", gyro.getVelocityX()*3.28084);
+//        SmartDashboard.putNumber("Velocity (Y)", gyro.getVelocityY()*3.28084);
+//        SmartDashboard.putNumber("Velocity (Z)", gyro.getVelocityZ()*3.28084);
         
         SmartDashboard.putNumber("FL", Chassis.motorChassisFrontLeft.getSpeed());
         SmartDashboard.putNumber("FR", Chassis.motorChassisFrontRight.getSpeed());
