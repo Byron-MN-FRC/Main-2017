@@ -4,6 +4,7 @@ import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.AutoRightGear;
 import org.usfirst.frc.team4859.robot.autonomous.AutoStraightForwardGear;
 import org.usfirst.frc.team4859.robot.autonomous.AutoTest;
+import org.usfirst.frc.team4859.robot.autonomous.AutoTest2;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
 import com.ctre.CANTalon.FeedbackDevice;
@@ -98,6 +99,7 @@ public class Robot extends IterativeRobot {
 		autonomousChooser.addObject("Test", new AutoTest());
 		autonomousChooser.addObject("Straight Forward", new AutoStraightForwardGear());
 		autonomousChooser.addObject("Auto Left Gear", new AutoRightGear());
+		autonomousChooser.addObject("Test2", new AutoTest2());
 		SmartDashboard.putData("Autonomous Mode Chooser", autonomousChooser);
     	
     	Chassis.motorChassisFrontLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);

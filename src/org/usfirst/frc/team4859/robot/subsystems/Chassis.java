@@ -138,4 +138,20 @@ public class Chassis extends Subsystem {
 		motorChassisBackLeft.set(turn);
 		motorChassisBackRight.set(-turn);
 	}
+	
+	public void circleTurn(double speed, double ratio) {
+		ratio -= 1;
+		ratio /= 2;
+		ratio += 1;
+		
+		double divide = (speed/ratio)*500;
+		double multiply = (speed*ratio)*500;
+		
+		SmartDashboard.putNumber("anglemod", Robot.ahrs.getYaw()%360);
+		
+		motorChassisFrontLeft.set(divide);
+		motorChassisFrontRight.set(multiply);
+		motorChassisBackLeft.set(divide);
+		motorChassisBackRight.set(multiply);
+	}
 }
