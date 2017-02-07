@@ -17,8 +17,8 @@ public class DriveStraightGyro extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.gyro.reset();
-    	Robot.chassis.driveStraightGyro(speed);
+    	Robot.ahrs.reset();
+    	//Robot.chassis.driveStraightGyro(speed);
     	setTimeout(time);
     }
 

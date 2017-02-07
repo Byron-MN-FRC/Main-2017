@@ -1,15 +1,17 @@
  package org.usfirst.frc.team4859.robot;
 
 import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
+import org.usfirst.frc.team4859.robot.autonomous.AutoRightGear;
 import org.usfirst.frc.team4859.robot.autonomous.AutoStraightForwardGear;
 import org.usfirst.frc.team4859.robot.autonomous.AutoTest;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -22,7 +24,7 @@ public class Robot extends IterativeRobot {
 	public static Chassis chassis;
 	public static Climber climber;
 	public static Preferences prefs;
-	public static ADXRS450_Gyro gyro;
+	public static AHRS ahrs;
 	public static OI oi;
 	
 	//lots of dumb variable creation that could probably be automated
@@ -53,14 +55,14 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-    	// Initializing subsystems (and gyro)
-    	climber = new Climber ();
+    	// Initializing subsystems (and ahrs)
+    	climber = new Climber();
     	chassis = new Chassis();
     	prefs = Preferences.getInstance();
-    	gyro = new ADXRS450_Gyro();
+    	ahrs = new AHRS(SerialPort.Port.kUSB1);
 		oi = new OI();
 		
-		gyro.reset();
+		ahrs.reset();
     }
 	
 	public void disabledPeriodic() {
@@ -68,6 +70,7 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
+    	ahrs.reset();
     	
 		//lots of dumb variable creation that could probably be automated
     	time1 = Robot.prefs.getDouble("time1", 0);
@@ -93,7 +96,8 @@ public class Robot extends IterativeRobot {
 		autonomousChooser = new SendableChooser<CommandGroup>();
 		autonomousChooser.addDefault("Nothing", new AutoNothing());
 		autonomousChooser.addObject("Test", new AutoTest());
-		autonomousChooser.addObject("ehyjhfd6tu", new AutoStraightForwardGear());
+		autonomousChooser.addObject("Straight Forward", new AutoStraightForwardGear());
+		autonomousChooser.addObject("Auto Left Gear", new AutoRightGear());
 		SmartDashboard.putData("Autonomous Mode Chooser", autonomousChooser);
     	
     	Chassis.motorChassisFrontLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
@@ -115,26 +119,10 @@ public class Robot extends IterativeRobot {
 		Chassis.motorChassisFrontRight.enableControl();
 		Chassis.motorChassisBackLeft.enableControl();
 		Chassis.motorChassisBackRight.enableControl();
-		
-//		Chassis.motorChassisFrontLeft.configNominalOutputVoltage(+0.0f, -0.0f);
-//		Chassis.motorChassisFrontLeft.configPeakOutputVoltage(+12.0f, -12.0f);
-//		
-//		Chassis.motorChassisFrontRight.configNominalOutputVoltage(+0.0f, -0.0f);
-//		Chassis.motorChassisFrontRight.configPeakOutputVoltage(+12.0f, -12.0f);
-//		
-//		Chassis.motorChassisBackLeft.configNominalOutputVoltage(+0.0f, -0.0f);
-//		Chassis.motorChassisBackLeft.configPeakOutputVoltage(+12.0f, -12.0f);
-//		
-//		Chassis.motorChassisBackRight.configNominalOutputVoltage(+0.0f, -0.0f);
-//		Chassis.motorChassisBackRight.configPeakOutputVoltage(+12.0f, -12.0f);
-		
-		Chassis.chassisDrive.setSafetyEnabled(false);
 
     	autonomousCommand = (Command) autonomousChooser.getSelected();
     	
     	if (autonomousCommand != null) autonomousCommand.start();
-    	
-    	gyro.reset();
     }
 
     /**
@@ -143,14 +131,14 @@ public class Robot extends IterativeRobot {
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
         
-        SmartDashboard.putNumber("angle", gyro.getAngle());
+        SmartDashboard.putNumber("angle", ahrs.getYaw());
         
-        // Putting the gyro values on the Smart Dashboard
-//        SmartDashboard.putNumber("Yaw (turning)", gyro.getYaw());
-//
-//        SmartDashboard.putNumber("Velocity (X)", gyro.getVelocityX()*3.28084);
-//        SmartDashboard.putNumber("Velocity (Y)", gyro.getVelocityY()*3.28084);
-//        SmartDashboard.putNumber("Velocity (Z)", gyro.getVelocityZ()*3.28084);
+        // Putting the ahrs values on the Smart Dashboard
+        SmartDashboard.putNumber("Yaw (turning)", ahrs.getYaw());
+
+        SmartDashboard.putNumber("Velocity (X)", ahrs.getVelocityX()*3.28084);
+        SmartDashboard.putNumber("Velocity (Y)", ahrs.getVelocityY()*3.28084);
+        SmartDashboard.putNumber("Velocity (Z)", ahrs.getVelocityZ()*3.28084);
         
         SmartDashboard.putNumber("FL", Chassis.motorChassisFrontLeft.getSpeed());
         SmartDashboard.putNumber("FR", Chassis.motorChassisFrontRight.getSpeed());
@@ -176,7 +164,7 @@ public class Robot extends IterativeRobot {
 		Chassis.motorChassisBackLeft.enableControl();
 		Chassis.motorChassisBackRight.enableControl();
 		
-		gyro.reset();
+		ahrs.reset();
     }
 
     /**
@@ -192,14 +180,14 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         
-        SmartDashboard.putNumber("angle", gyro.getAngle());
+        SmartDashboard.putNumber("angle", ahrs.getYaw());
         
-        // Putting the gyro values on the Smart Dashboard
-//        SmartDashboard.putNumber("Yaw (turning)", gyro.getYaw());
-//
-//        SmartDashboard.putNumber("Velocity (X)", gyro.getVelocityX()*3.28084);
-//        SmartDashboard.putNumber("Velocity (Y)", gyro.getVelocityY()*3.28084);
-//        SmartDashboard.putNumber("Velocity (Z)", gyro.getVelocityZ()*3.28084);
+        // Putting the ahrs values on the Smart Dashboard
+        SmartDashboard.putNumber("Yaw (turning)", ahrs.getYaw());
+
+        SmartDashboard.putNumber("Velocity (X)", ahrs.getVelocityX()*3.28084);
+        SmartDashboard.putNumber("Velocity (Y)", ahrs.getVelocityY()*3.28084);
+        SmartDashboard.putNumber("Velocity (Z)", ahrs.getVelocityZ()*3.28084);
         
         SmartDashboard.putNumber("FL", Chassis.motorChassisFrontLeft.getSpeed());
         SmartDashboard.putNumber("FR", Chassis.motorChassisFrontRight.getSpeed());

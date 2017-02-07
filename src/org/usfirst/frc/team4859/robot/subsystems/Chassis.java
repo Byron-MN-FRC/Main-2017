@@ -81,7 +81,7 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void driveStraightGyro(double inputSpeed) {
-		double twist = -(Robot.gyro.getAngle()%360)*10;
+		double twist = -(Robot.ahrs.getYaw()%360)*5;
 		inputSpeed = inputSpeed * 500;
 		
 		motorChassisFrontLeft.set(inputSpeed + twist);
@@ -124,14 +124,15 @@ public class Chassis extends Subsystem {
 		motorChassisBackRight.set(0);
 	}
 	
-	public void turnToAngle(double angle) {
-		double turn = ((Math.abs(Robot.gyro.getAngle())%360)+angle)*4;
-		//turn *= 600;
+	public void turnToAngle(double targetAngle) {
+		double sensorAngle = Robot.ahrs.getYaw() % 360;
+		double turn = (targetAngle-sensorAngle)*2;
+		//if (sensorAngle < 2) { turn *= (1/sensorAngle)*20; }
+		//if ((sensorAngle < 2) && (turn > 50)) { turn = 20; }
 		
-		SmartDashboard.putNumber("anglemod", Robot.gyro.getAngle()%360);
+		SmartDashboard.putNumber("anglemod", Robot.ahrs.getYaw()%360);
 		SmartDashboard.putNumber("turnspd", turn);
 		
-		//for turning left
 		motorChassisFrontLeft.set(turn);
 		motorChassisFrontRight.set(-turn);
 		motorChassisBackLeft.set(turn);
