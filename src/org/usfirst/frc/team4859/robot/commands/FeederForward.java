@@ -3,18 +3,18 @@ package org.usfirst.frc.team4859.robot.commands;
 import org.usfirst.frc.team4859.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ClimbDown extends Command {
+public class FeederForward extends Command {
 
-    public ClimbDown() {
-        requires(Robot.climber);
+    public FeederForward() {
+        requires(Robot.feeder);
     }
 
     protected void initialize() {
-    	Robot.climber.climbDown();
+    	Robot.feeder.feederForward();
     }
 
     protected void execute() {
-    	Robot.climber.climbDown();
+    	Robot.feeder.feederForward();
     }
 
     protected boolean isFinished() {
@@ -22,10 +22,10 @@ public class ClimbDown extends Command {
     }
 
     protected void end() {
-    	Robot.climber.climbStop();
+    	Robot.feeder.feederStop();
     }
 
     protected void interrupted() {
-    	Robot.climber.climbStop();
+    	Robot.feeder.feederStop();
     }
 }

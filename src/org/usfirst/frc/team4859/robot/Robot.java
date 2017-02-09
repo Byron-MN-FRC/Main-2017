@@ -7,6 +7,9 @@ import org.usfirst.frc.team4859.robot.autonomous.AutoTest;
 import org.usfirst.frc.team4859.robot.autonomous.AutoTest2;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
+import org.usfirst.frc.team4859.robot.subsystems.Feeder;
+import org.usfirst.frc.team4859.robot.subsystems.Flywheels;
+
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
@@ -24,6 +27,8 @@ public class Robot extends IterativeRobot {
 	// Creating subsystems
 	public static Chassis chassis;
 	public static Climber climber;
+	public static Flywheels flywheels;
+	public static Feeder feeder;
 	public static Preferences prefs;
 	public static AHRS ahrs;
 	public static OI oi;
@@ -57,8 +62,10 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	// Initializing subsystems (and ahrs)
-    	climber = new Climber();
     	chassis = new Chassis();
+    	climber = new Climber();
+    	feeder = new Feeder();
+    	flywheels = new Flywheels();
     	prefs = Preferences.getInstance();
     	ahrs = new AHRS(SerialPort.Port.kUSB1);
 		oi = new OI();
