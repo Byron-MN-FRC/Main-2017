@@ -140,8 +140,6 @@ public class Robot extends IterativeRobot {
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
         
-        SmartDashboard.putNumber("angle", ahrs.getYaw());
-        
         // Putting the ahrs values on the Smart Dashboard
         SmartDashboard.putNumber("Yaw (turning)", ahrs.getYaw());
 

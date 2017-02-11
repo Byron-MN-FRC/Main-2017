@@ -19,7 +19,6 @@ public class CircleTurn extends Command {
 	
 	protected void initialize() {
 		setTimeout(time);
-		Robot.chassis.circleTurn(speed, ratio);
 	}
 
 	protected void execute() {
@@ -32,7 +31,7 @@ public class CircleTurn extends Command {
 	}
 
 	protected void end() {
-		//Robot.chassis.driveStop();
+		Robot.chassis.driveStop();
 	}
 
 	protected void interrupted() {

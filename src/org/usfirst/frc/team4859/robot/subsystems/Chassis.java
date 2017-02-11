@@ -30,8 +30,8 @@ public class Chassis extends Subsystem {
 		chassisDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
 		
 		// Set a timeout for the motors (0.1 seconds)
-		chassisDrive.setSafetyEnabled(true);
-		chassisDrive.setExpiration(1);
+		chassisDrive.setSafetyEnabled(false);
+		//chassisDrive.setExpiration(1);
 	}
 	
 	public void initDefaultCommand () {
