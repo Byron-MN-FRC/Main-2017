@@ -13,6 +13,9 @@ import org.usfirst.frc.team4859.robot.subsystems.Flywheels;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -71,6 +74,9 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		
 		ahrs.reset();
+		
+		UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backword", 1);
+		cameraBackward.setResolution(640, 480);
     }
 	
 	public void disabledPeriodic() {
