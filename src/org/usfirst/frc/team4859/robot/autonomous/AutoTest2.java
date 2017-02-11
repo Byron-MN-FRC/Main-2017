@@ -6,7 +6,7 @@ public class AutoTest2 extends CommandGroup {
 	
     public  AutoTest2() {
     	addSequential(new CircleTurn(0.25, 1.106, 0.5));
-    	addSequential(new CircleTurn(0.4, 1.125, 2));
+    	addSequential(new CircleTurn(0.4, 1.106, 2));
     	addSequential(new CircleTurn(0.25, 1.106, 0.5));
     	addSequential(new DriveStop(1));
     }

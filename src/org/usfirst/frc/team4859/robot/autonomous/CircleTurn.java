@@ -29,7 +29,6 @@ public class CircleTurn extends Command {
 
 	protected boolean isFinished() {
 		return isTimedOut();
-		//Robot.ahrs.getYaw()%360 >= ratio;
 	}
 
 	protected void end() {
