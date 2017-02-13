@@ -75,8 +75,12 @@ public class Robot extends IterativeRobot {
 		
 		ahrs.reset();
 		
-		UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backword", 1);
-		cameraBackward.setResolution(640, 480);
+		UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backword", 0);
+		cameraBackward.setResolution(320, 240);
+		cameraBackward.setFPS(10);
+		UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 1);
+		cameraForward.setResolution(320, 240);
+		cameraForward.setFPS(10);
     }
 	
 	public void disabledPeriodic() {
