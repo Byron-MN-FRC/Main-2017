@@ -23,12 +23,12 @@ public class RobotMap {
 	public static int talonIDChassisBackLeft = 4;
 	public static int talonIDChassisBackRight = 5;
 	
-	public static int talonIDFeeder = 6;
+	public static int talonIDClimberMotor = 6;
 	
-	public static int talonIDFlywheelLeft = 7;
-	public static int talonIDFlywheelRight = 8;
+	public static int talonIDFeeder = 7;
 	
-	public static int talonIDClimberMotor = 9;
+	public static int talonIDFlywheelLeft = 8;
+	public static int talonIDFlywheelRight = 9;
 	
 	// Creating variables to scale axis' across the entire curve (values from 0 to 1)
 	public static double xAxisScale = 1;

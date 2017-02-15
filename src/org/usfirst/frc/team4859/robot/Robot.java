@@ -4,7 +4,7 @@ import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.AutoRightGear;
 import org.usfirst.frc.team4859.robot.autonomous.AutoStraightForwardGear;
 import org.usfirst.frc.team4859.robot.autonomous.AutoTest;
-import org.usfirst.frc.team4859.robot.autonomous.AutoTest2;
+import org.usfirst.frc.team4859.robot.autonomous.AutoCircleTurn;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
 import org.usfirst.frc.team4859.robot.subsystems.Feeder;
@@ -115,8 +115,8 @@ public class Robot extends IterativeRobot {
 		autonomousChooser.addDefault("Nothing", new AutoNothing());
 		autonomousChooser.addObject("Test", new AutoTest());
 		autonomousChooser.addObject("Straight Forward", new AutoStraightForwardGear());
-		autonomousChooser.addObject("Auto Left Gear", new AutoRightGear());
-		autonomousChooser.addObject("Test2", new AutoTest2());
+		autonomousChooser.addObject("Auto Right Gear", new AutoRightGear());
+		autonomousChooser.addObject("Circle Turn", new AutoCircleTurn());
 		SmartDashboard.putData("Autonomous Mode Chooser", autonomousChooser);
     	
     	Chassis.motorChassisFrontLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
@@ -152,10 +152,6 @@ public class Robot extends IterativeRobot {
         
         // Putting the ahrs values on the Smart Dashboard
         SmartDashboard.putNumber("Yaw (turning)", ahrs.getYaw());
-
-        SmartDashboard.putNumber("Velocity (X)", ahrs.getVelocityX()*3.28084);
-        SmartDashboard.putNumber("Velocity (Y)", ahrs.getVelocityY()*3.28084);
-        SmartDashboard.putNumber("Velocity (Z)", ahrs.getVelocityZ()*3.28084);
         
         SmartDashboard.putNumber("FL", Chassis.motorChassisFrontLeft.getSpeed());
         SmartDashboard.putNumber("FR", Chassis.motorChassisFrontRight.getSpeed());
@@ -201,10 +197,6 @@ public class Robot extends IterativeRobot {
         
         // Putting the ahrs values on the Smart Dashboard
         SmartDashboard.putNumber("Yaw (turning)", ahrs.getYaw());
-
-        SmartDashboard.putNumber("Velocity (X)", ahrs.getVelocityX()*3.28084);
-        SmartDashboard.putNumber("Velocity (Y)", ahrs.getVelocityY()*3.28084);
-        SmartDashboard.putNumber("Velocity (Z)", ahrs.getVelocityZ()*3.28084);
         
         SmartDashboard.putNumber("FL", Chassis.motorChassisFrontLeft.getSpeed());
         SmartDashboard.putNumber("FR", Chassis.motorChassisFrontRight.getSpeed());

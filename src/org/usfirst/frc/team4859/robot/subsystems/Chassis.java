@@ -31,7 +31,7 @@ public class Chassis extends Subsystem {
 		
 		// Set a timeout for the motors (0.1 seconds)
 		chassisDrive.setSafetyEnabled(false);
-		//chassisDrive.setExpiration(1);
+		chassisDrive.setExpiration(5);
 	}
 	
 	public void initDefaultCommand () {
@@ -77,7 +77,6 @@ public class Chassis extends Subsystem {
 	{
 		inputSpeed = inputSpeed * 500;
 		
-//		chassisDrive.mecanumDrive_Cartesian(0, inputSpeed, 0, 0);
 		motorChassisFrontLeft.set(inputSpeed);
 		motorChassisFrontRight.set(inputSpeed);
 		motorChassisBackLeft.set(inputSpeed);

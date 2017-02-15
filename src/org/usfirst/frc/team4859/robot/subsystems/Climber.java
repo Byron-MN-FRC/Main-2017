@@ -1,10 +1,12 @@
 package org.usfirst.frc.team4859.robot.subsystems;
 
+import org.usfirst.frc.team4859.robot.RobotMap;
+import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Climber extends Subsystem {
 
-	//public static CANTalon climberMotor = new CANTalon(RobotMap.talonIDClimberMotor);
+	public static CANTalon climberMotor = new CANTalon(RobotMap.talonIDClimberMotor);
 	
 	public Climber() {
 	}
@@ -12,14 +14,14 @@ public class Climber extends Subsystem {
     public void initDefaultCommand() {}
     
     public void climbUp() {
-		//climberMotor.set(1);
+		climberMotor.set(1);
 	}
     
     public void climbDown() {
-    	//climberMotor.set(-1);
+    	climberMotor.set(-1);
 	}
     
     public void climbStop() {
-    	//climberMotor.set(0.0);
+    	climberMotor.set(0.0);
 	}
 }
