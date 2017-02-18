@@ -2,9 +2,9 @@ package org.usfirst.frc.team4859.robot.autonomous;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class AutoRightGear extends CommandGroup {
+public class AutoRightGearAndShoot extends CommandGroup {
 	
-    public  AutoRightGear() {
+    public  AutoRightGearAndShoot() {
     	addSequential(new DriveStraightGyro(0.25, 2.15));
     	addSequential(new DriveStop(0.1));
     	addSequential(new TurnToAngle(-37, 4));

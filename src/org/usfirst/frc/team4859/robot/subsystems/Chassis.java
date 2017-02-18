@@ -73,9 +73,8 @@ public class Chassis extends Subsystem {
 		chassisDrive.mecanumDrive_Cartesian(x, y, twist, 0);
 	}
 	
-	public void driveStraight(double inputSpeed)
-	{
-		inputSpeed = inputSpeed * 500;
+	public void driveStraight(double inputSpeed) {
+		inputSpeed *= 500;
 		
 		motorChassisFrontLeft.set(inputSpeed);
 		motorChassisFrontRight.set(inputSpeed);
@@ -84,17 +83,17 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void driveStraightGyro(double inputSpeed) {
-		double twist = -(Robot.ahrs.getYaw()%360)*5;
-		inputSpeed = inputSpeed * 500;
+		inputSpeed *= 500;
+		double inputTwist = -(Robot.ahrs.getYaw()%360)*4;
 		
-		motorChassisFrontLeft.set(inputSpeed + twist);
-		motorChassisFrontRight.set(inputSpeed - twist);
-		motorChassisBackLeft.set(inputSpeed + twist);
-		motorChassisBackRight.set(inputSpeed - twist);
+		motorChassisFrontLeft.set(inputSpeed + inputTwist);
+		motorChassisFrontRight.set(inputSpeed - inputTwist);
+		motorChassisBackLeft.set(inputSpeed + inputTwist);
+		motorChassisBackRight.set(inputSpeed - inputTwist);
 	}
 	
 	public void driveBackwards(double inputSpeed) {
-		inputSpeed = inputSpeed * 500;
+		inputSpeed *= 500;
 		
 		motorChassisFrontLeft.set(-inputSpeed);
 		motorChassisFrontRight.set(-inputSpeed);
@@ -103,7 +102,7 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void strafeLeft(double inputSpeed) {
-		inputSpeed = inputSpeed * 500;
+		inputSpeed *= 500;
 		
 		motorChassisFrontLeft.set(-inputSpeed);
 		motorChassisFrontRight.set(inputSpeed);
@@ -112,7 +111,7 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void strafeRight(double inputSpeed) {
-		inputSpeed = inputSpeed * 500;
+		inputSpeed *= 500;
 		
 		motorChassisFrontLeft.set(inputSpeed);
 		motorChassisFrontRight.set(-inputSpeed);
@@ -130,8 +129,7 @@ public class Chassis extends Subsystem {
 	public void turnToAngle(double targetAngle) {
 		double sensorAngle = Robot.ahrs.getYaw() % 360;
 		double turn = (targetAngle-sensorAngle)*2;
-		//if (sensorAngle < 2) { turn *= (1/sensorAngle)*20; }
-		//if ((sensorAngle < 2) && (turn > 50)) { turn = 20; }
+		if (turn < 30) { turn = 30; }
 		
 		SmartDashboard.putNumber("anglemod", Robot.ahrs.getYaw()%360);
 		SmartDashboard.putNumber("turnspd", turn);
