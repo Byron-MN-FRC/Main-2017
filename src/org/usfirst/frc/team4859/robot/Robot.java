@@ -4,16 +4,14 @@ import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.AutoRightGear;
 import org.usfirst.frc.team4859.robot.autonomous.AutoStraightForwardGear;
 import org.usfirst.frc.team4859.robot.autonomous.AutoTest;
-import org.usfirst.frc.team4859.robot.autonomous.AutoCircleTurn;
+import org.usfirst.frc.team4859.robot.autonomous.AutoLeftPin;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
 import org.usfirst.frc.team4859.robot.subsystems.Feeder;
 import org.usfirst.frc.team4859.robot.subsystems.Flywheels;
-
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
-
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -116,7 +114,7 @@ public class Robot extends IterativeRobot {
 		autonomousChooser.addObject("Test", new AutoTest());
 		autonomousChooser.addObject("Straight Forward", new AutoStraightForwardGear());
 		autonomousChooser.addObject("Auto Right Gear", new AutoRightGear());
-		autonomousChooser.addObject("Circle Turn", new AutoCircleTurn());
+		autonomousChooser.addObject("Circle Turn", new AutoLeftPin());
 		SmartDashboard.putData("Autonomous Mode Chooser", autonomousChooser);
     	
     	Chassis.motorChassisFrontLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);

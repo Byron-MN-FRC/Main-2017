@@ -142,12 +142,21 @@ public class Chassis extends Subsystem {
 		motorChassisBackRight.set(-turn);
 	}
 	
-	public void circleTurn(double speed, double ratio) {
+	public void circleTurnLeft(double speed, double ratio) {
 		speed *= 500;
 		
 		motorChassisFrontLeft.set(speed);
 		motorChassisFrontRight.set(speed*ratio);
 		motorChassisBackLeft.set(speed);
 		motorChassisBackRight.set(speed*ratio);
+	}
+	
+	public void circleTurnRight(double speed, double ratio) {
+		speed *= 500;
+		
+		motorChassisFrontLeft.set(speed*ratio);
+		motorChassisFrontRight.set(speed);
+		motorChassisBackLeft.set(speed*ratio);
+		motorChassisBackRight.set(speed);
 	}
 }

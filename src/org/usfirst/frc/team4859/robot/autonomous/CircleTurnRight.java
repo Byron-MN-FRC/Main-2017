@@ -3,13 +3,13 @@ package org.usfirst.frc.team4859.robot.autonomous;
 import org.usfirst.frc.team4859.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class CircleTurn extends Command {
+public class CircleTurnRight extends Command {
 	
 	private double speed;
 	private double ratio;
 	private double time;
 	
-	public CircleTurn(double inputSpeed, double inputRatio, double inputTime) {
+	public CircleTurnRight(double inputSpeed, double inputRatio, double inputTime) {
 		requires(Robot.chassis);
 		
 		speed = inputSpeed;
@@ -22,7 +22,7 @@ public class CircleTurn extends Command {
 	}
 
 	protected void execute() {
-		Robot.chassis.circleTurn(speed, ratio);
+		Robot.chassis.circleTurnRight(speed, ratio);
 		
 	}
 
