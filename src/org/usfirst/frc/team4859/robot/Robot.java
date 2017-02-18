@@ -2,9 +2,11 @@
 
 import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.AutoRightGear;
-import org.usfirst.frc.team4859.robot.autonomous.AutoStraightForwardGear;
+import org.usfirst.frc.team4859.robot.autonomous.AutoRightGearCurve;
+import org.usfirst.frc.team4859.robot.autonomous.AutoCenterGear;
+import org.usfirst.frc.team4859.robot.autonomous.AutoLeftGear;
 import org.usfirst.frc.team4859.robot.autonomous.AutoTest;
-import org.usfirst.frc.team4859.robot.autonomous.AutoLeftPin;
+import org.usfirst.frc.team4859.robot.autonomous.AutoLeftGearCurve;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
 import org.usfirst.frc.team4859.robot.subsystems.Feeder;
@@ -73,7 +75,7 @@ public class Robot extends IterativeRobot {
 		
 		ahrs.reset();
 		
-		UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backword", 0);
+		UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
 		cameraBackward.setResolution(320, 240);
 		cameraBackward.setFPS(10);
 		UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 1);
@@ -112,9 +114,11 @@ public class Robot extends IterativeRobot {
 		autonomousChooser = new SendableChooser<CommandGroup>();
 		autonomousChooser.addDefault("Nothing", new AutoNothing());
 		autonomousChooser.addObject("Test", new AutoTest());
-		autonomousChooser.addObject("Straight Forward", new AutoStraightForwardGear());
-		autonomousChooser.addObject("Auto Right Gear", new AutoRightGear());
-		autonomousChooser.addObject("Circle Turn", new AutoLeftPin());
+		autonomousChooser.addObject("Center Gear", new AutoCenterGear());
+		autonomousChooser.addObject("Right Gear Curve", new AutoRightGearCurve());
+		autonomousChooser.addObject("Left Gear Curve", new AutoLeftGearCurve());
+		autonomousChooser.addObject("Right Gear", new AutoRightGear());
+		autonomousChooser.addObject("Left Gear", new AutoLeftGear());
 		SmartDashboard.putData("Autonomous Mode Chooser", autonomousChooser);
     	
     	Chassis.motorChassisFrontLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
@@ -131,11 +135,6 @@ public class Robot extends IterativeRobot {
 		Chassis.motorChassisFrontRight.changeControlMode(TalonControlMode.Speed);
 		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.Speed);
 		Chassis.motorChassisBackRight.changeControlMode(TalonControlMode.Speed);
-		
-		Chassis.motorChassisFrontLeft.enableControl();
-		Chassis.motorChassisFrontRight.enableControl();
-		Chassis.motorChassisBackLeft.enableControl();
-		Chassis.motorChassisBackRight.enableControl();
 
     	autonomousCommand = (Command) autonomousChooser.getSelected();
     	
@@ -170,11 +169,6 @@ public class Robot extends IterativeRobot {
 		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.PercentVbus);
 		Chassis.motorChassisBackRight.changeControlMode(TalonControlMode.PercentVbus);
 		
-		Chassis.motorChassisFrontLeft.enableControl();
-		Chassis.motorChassisFrontRight.enableControl();
-		Chassis.motorChassisBackLeft.enableControl();
-		Chassis.motorChassisBackRight.enableControl();
-		
 		ahrs.reset();
     }
 
@@ -190,8 +184,6 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        
-        SmartDashboard.putNumber("angle", ahrs.getYaw());
         
         // Putting the ahrs values on the Smart Dashboard
         SmartDashboard.putNumber("Yaw (turning)", ahrs.getYaw());
