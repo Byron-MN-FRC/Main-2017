@@ -28,4 +28,9 @@ public class Flywheels extends Subsystem {
     	flywheelLeft.set(0);
     	flywheelRight.set(0);
 	}
+    
+    public void flywheelSpinUp(double inputSpeed) {
+    	flywheelLeft.set(inputSpeed);
+    	flywheelRight.set(-inputSpeed);
+	}
 }

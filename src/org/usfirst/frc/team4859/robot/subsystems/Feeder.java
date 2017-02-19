@@ -14,14 +14,18 @@ public class Feeder extends Subsystem {
     public void initDefaultCommand() {}
     
     public void feederForward() {
-    	feederMotor.set(1);
+    	feederMotor.set(0.42);
 	}
     
     public void feederBackward() {
-    	feederMotor.set(-1);
+    	feederMotor.set(-0.42);
 	}
     
     public void feederStop() {
     	feederMotor.set(0);
+	}
+    
+    public void feederForwardTime(double inputSpeed) {
+    	feederMotor.set(inputSpeed);
 	}
 }
