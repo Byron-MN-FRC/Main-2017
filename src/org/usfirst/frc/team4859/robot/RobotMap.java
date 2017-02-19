@@ -23,7 +23,7 @@ public class RobotMap {
 	public static int talonIDChassisBackLeft = 4;
 	public static int talonIDChassisBackRight = 5;
 	
-	public static int talonIDClimberMotor = 6;
+	public static int talonIDClimberMotor = 0;
 	
 	public static int talonIDFeeder = 7;
 	

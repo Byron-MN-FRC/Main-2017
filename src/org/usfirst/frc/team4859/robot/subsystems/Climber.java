@@ -1,12 +1,12 @@
 package org.usfirst.frc.team4859.robot.subsystems;
 
 import org.usfirst.frc.team4859.robot.RobotMap;
-import com.ctre.CANTalon;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Climber extends Subsystem {
 
-	public static CANTalon climberMotor = new CANTalon(RobotMap.talonIDClimberMotor);
+	public static Talon climberMotor = new Talon(RobotMap.talonIDClimberMotor);
 	
 	public Climber() {
 	}
