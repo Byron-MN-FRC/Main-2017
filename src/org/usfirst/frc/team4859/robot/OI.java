@@ -19,10 +19,10 @@ public class OI {
 	Button flipMode = new JoystickButton(joystick, 2);
 	
 	Button climbUp = new JoystickButton(joystick, 6);
-	Button climbDown = new JoystickButton(joystick, 4);
+	//Button climbDown = new JoystickButton(joystick, 4);
 	
 	Button flywheelForward = new JoystickButton(xbox, 1);
-	Button flywheelBackward = new JoystickButton(xbox, 2);
+//	Button flywheelBackward = new JoystickButton(xbox, 2);
 	
 	Button feederForward = new JoystickButton(xbox, 3);
 	Button feederBackward = new JoystickButton(xbox, 4);
@@ -36,14 +36,14 @@ public class OI {
 		climbUp.whenPressed(new ClimbUp());
 		climbUp.whenReleased(new ClimbStop());
 		
-		climbDown.whenPressed(new ClimbDown());
-		climbDown.whenReleased(new ClimbStop());
+		//climbDown.whenPressed(new ClimbDown());
+		//climbDown.whenReleased(new ClimbStop());
 		
 		flywheelForward.whenPressed(new FlywheelForward());
 		flywheelForward.whenReleased(new FlywheelStop());
 		
-		flywheelBackward.whenPressed(new FlywheelBackward());
-		flywheelBackward.whenReleased(new FlywheelStop());
+//		flywheelBackward.whenPressed(new FlywheelBackward());
+//		flywheelBackward.whenReleased(new FlywheelStop());
 		
 		feederForward.whenPressed(new FeederForward());
 		feederForward.whenReleased(new FeederStop());

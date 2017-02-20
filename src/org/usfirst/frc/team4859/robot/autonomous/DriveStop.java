@@ -32,11 +32,9 @@ public class DriveStop extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.chassis.driveStop();
-    	Robot.ahrs.reset();
     }
 	
 	protected void interrupted() {
     	Robot.chassis.driveStop();
-    	Robot.ahrs.reset();
 	}
 }

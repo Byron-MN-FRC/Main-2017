@@ -1,11 +1,9 @@
 package org.usfirst.frc.team4859.robot.subsystems;
 
-import org.usfirst.frc.team4859.robot.Robot;
 import org.usfirst.frc.team4859.robot.RobotMap;
 import org.usfirst.frc.team4859.robot.ThrottleLookup.ThrottleLookup;
 import org.usfirst.frc.team4859.robot.commands.DriveWithJoystick;
 import com.ctre.CANTalon;
-
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -26,8 +24,10 @@ public class Chassis extends Subsystem {
 	public static RobotDrive chassisDrive = new RobotDrive(motorChassisFrontLeft, motorChassisBackLeft, motorChassisFrontRight, motorChassisBackRight);
 	
 	public Chassis() {
-		chassisDrive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
-		chassisDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
+		motorChassisFrontRight.setInverted(true);
+		motorChassisBackRight.setInverted(true);
+		//chassisDrive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
+		//chassisDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
 		
 		// Set a timeout for the motors (0.1 seconds)
 		chassisDrive.setSafetyEnabled(false);
@@ -70,11 +70,14 @@ public class Chassis extends Subsystem {
 		SmartDashboard.putNumber("X output", x);
 		SmartDashboard.putNumber("Twist output", twist);
 		
+		if (RobotMap.fMode) { lightStrip.set(true); }
+		else { lightStrip.set(false); }
+		
 		chassisDrive.mecanumDrive_Cartesian(x, y, twist, 0);
 	}
 	
 	public void driveStraight(double inputSpeed) {
-		inputSpeed *= 500;
+		inputSpeed *= 600;
 		
 		motorChassisFrontLeft.set(inputSpeed);
 		motorChassisFrontRight.set(inputSpeed);
@@ -83,17 +86,17 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void driveStraightGyro(double inputSpeed) {
-		inputSpeed *= 500;
-		double inputTwist = -(Robot.ahrs.getYaw()%360)*4;
+		inputSpeed *= 600;
+		//double inputTwist = -(Robot.ahrs.getYaw()%360)*4;
 		
-		motorChassisFrontLeft.set(inputSpeed + inputTwist);
-		motorChassisFrontRight.set(inputSpeed - inputTwist);
-		motorChassisBackLeft.set(inputSpeed + inputTwist);
-		motorChassisBackRight.set(inputSpeed - inputTwist);
+		//motorChassisFrontLeft.set(inputSpeed + inputTwist);
+		//motorChassisFrontRight.set(inputSpeed - inputTwist);
+		//motorChassisBackLeft.set(inputSpeed + inputTwist);
+		//motorChassisBackRight.set(inputSpeed - inputTwist);
 	}
 	
 	public void driveBackwards(double inputSpeed) {
-		inputSpeed *= 500;
+		inputSpeed *= 600;
 		
 		motorChassisFrontLeft.set(-inputSpeed);
 		motorChassisFrontRight.set(-inputSpeed);
@@ -102,7 +105,7 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void strafeLeft(double inputSpeed) {
-		inputSpeed *= 500;
+		inputSpeed *= 600;
 		
 		motorChassisFrontLeft.set(-inputSpeed);
 		motorChassisFrontRight.set(inputSpeed);
@@ -111,7 +114,7 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void strafeRight(double inputSpeed) {
-		inputSpeed *= 500;
+		inputSpeed *= 600;
 		
 		motorChassisFrontLeft.set(inputSpeed);
 		motorChassisFrontRight.set(-inputSpeed);
@@ -127,21 +130,21 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void turnToAngle(double targetAngle) {
-		double sensorAngle = Robot.ahrs.getYaw() % 360;
-		double turn = (targetAngle-sensorAngle)*2;
-		if (turn < 30) { turn = 30; }
-		
-		SmartDashboard.putNumber("anglemod", Robot.ahrs.getYaw()%360);
-		SmartDashboard.putNumber("turnspd", turn);
-		
-		motorChassisFrontLeft.set(turn);
-		motorChassisFrontRight.set(-turn);
-		motorChassisBackLeft.set(turn);
-		motorChassisBackRight.set(-turn);
+//		double sensorAngle = Robot.ahrs.getYaw() % 360;
+//		double turn = (targetAngle-sensorAngle)*2;
+//		if (turn < 30) { turn = 30; }
+//		
+//		SmartDashboard.putNumber("anglemod", Robot.ahrs.getYaw()%360);
+//		SmartDashboard.putNumber("turnspd", turn);
+//		
+//		motorChassisFrontLeft.set(turn);
+//		motorChassisFrontRight.set(-turn);
+//		motorChassisBackLeft.set(turn);
+//		motorChassisBackRight.set(-turn);
 	}
 	
 	public void circleTurnLeft(double speed, double ratio) {
-		speed *= 500;
+		speed *= 600;
 		
 		motorChassisFrontLeft.set(speed);
 		motorChassisFrontRight.set(speed*ratio);
@@ -150,7 +153,7 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void circleTurnRight(double speed, double ratio) {
-		speed *= 500;
+		speed *= 600;
 		
 		motorChassisFrontLeft.set(speed*ratio);
 		motorChassisFrontRight.set(speed);

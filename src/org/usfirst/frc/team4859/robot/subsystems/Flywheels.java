@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4859.robot.subsystems;
 
+import org.usfirst.frc.team4859.robot.Robot;
 import org.usfirst.frc.team4859.robot.RobotMap;
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -15,13 +16,13 @@ public class Flywheels extends Subsystem {
     public void initDefaultCommand() {}
     
     public void flywheelForward() {
-    	flywheelLeft.set(1);
-    	flywheelRight.set(-1);
+    	flywheelLeft.set(Robot.speed1);
+    	flywheelRight.set(-Robot.speed1);
 	}
     
     public void flywheelBackward() {
-    	flywheelLeft.set(-1);
-    	flywheelRight.set(1);
+    	flywheelLeft.set(-0.75);
+    	flywheelRight.set(0.75);
 	}
     
     public void flywheelStop() {
