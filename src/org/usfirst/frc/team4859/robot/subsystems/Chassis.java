@@ -24,13 +24,9 @@ public class Chassis extends Subsystem {
 	public static RobotDrive chassisDrive = new RobotDrive(motorChassisFrontLeft, motorChassisBackLeft, motorChassisFrontRight, motorChassisBackRight);
 	
 	public Chassis() {
-		motorChassisFrontRight.setInverted(true);
-		motorChassisBackRight.setInverted(true);
-		//chassisDrive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
-		//chassisDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
 		
 		// Set a timeout for the motors (0.1 seconds)
-		chassisDrive.setSafetyEnabled(false);
+		chassisDrive.setSafetyEnabled(true);
 		chassisDrive.setExpiration(5);
 	}
 	
