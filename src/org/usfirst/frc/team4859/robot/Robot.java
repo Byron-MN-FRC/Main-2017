@@ -15,10 +15,13 @@ import org.usfirst.frc.team4859.robot.subsystems.Feeder;
 import org.usfirst.frc.team4859.robot.subsystems.Flywheels;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -33,6 +36,7 @@ public class Robot extends IterativeRobot {
 	public static Flywheels flywheels;
 	public static Feeder feeder;
 	public static Preferences prefs;
+	public static AHRS ahrs;
 	public static OI oi;
 	
 	//lots of dumb variable creation that could probably be automated
@@ -69,9 +73,10 @@ public class Robot extends IterativeRobot {
     	feeder = new Feeder();
     	flywheels = new Flywheels();
     	prefs = Preferences.getInstance();
+    	ahrs = new AHRS(SerialPort.Port.kUSB);
 		oi = new OI();
 		
-		//ahrs.reset();
+		ahrs.reset();
 		
 		UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
 		cameraBackward.setResolution(320, 240);
@@ -79,14 +84,7 @@ public class Robot extends IterativeRobot {
 		UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 1);
 		cameraForward.setResolution(320, 240);
 		cameraForward.setFPS(10);
-    }
-	
-	public void disabledPeriodic() {
-		Scheduler.getInstance().run();
-	}
-
-    public void autonomousInit() {
-    	
+		
 		// Adding autonomous modes
 		autonomousChooser = new SendableChooser<CommandGroup>();
 		autonomousChooser.addDefault("Nothing", new AutoNothing());
@@ -98,23 +96,37 @@ public class Robot extends IterativeRobot {
 		autonomousChooser.addObject("Left Gear", new AutoLeftGear());
 		autonomousChooser.addObject("Right Gear and Shoot", new AutoRightGearAndShoot());
 		autonomousChooser.addObject("Left Gear and Shoot", new AutoLeftGearAndShoot());
-		
+				
 		SmartDashboard.putData("Autonomous Mode Chooser", autonomousChooser);
-    	
+    }
+	
+	public void disabledPeriodic() {
+		Scheduler.getInstance().run();
+	}
+
+    public void autonomousInit() {
     	Chassis.motorChassisFrontLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	Chassis.motorChassisBackLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	Chassis.motorChassisFrontRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	Chassis.motorChassisBackRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	
+    	Chassis.motorChassisFrontRight.reverseSensor(true);
+    	Chassis.motorChassisBackRight.reverseSensor(true);
     	
     	Chassis.motorChassisFrontLeft.configEncoderCodesPerRev(360);
     	Chassis.motorChassisBackLeft.configEncoderCodesPerRev(360);
     	Chassis.motorChassisFrontRight.configEncoderCodesPerRev(360);
     	Chassis.motorChassisBackRight.configEncoderCodesPerRev(360);
     	
-		Chassis.motorChassisFrontLeft.changeControlMode(TalonControlMode.Speed);
-		Chassis.motorChassisFrontRight.changeControlMode(TalonControlMode.Speed);
-		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.Speed);
-		Chassis.motorChassisBackRight.changeControlMode(TalonControlMode.Speed);
+		Chassis.motorChassisFrontLeft.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motorChassisFrontRight.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.PercentVbus);
+		Chassis.motorChassisBackRight.changeControlMode(TalonControlMode.PercentVbus);
+    	
+//		Chassis.motorChassisFrontLeft.changeControlMode(TalonControlMode.Speed);
+//		Chassis.motorChassisFrontRight.changeControlMode(TalonControlMode.Speed);
+//		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.Speed);
+//		Chassis.motorChassisBackRight.changeControlMode(TalonControlMode.Speed);
 
     	autonomousCommand = (Command) autonomousChooser.getSelected();
     	
@@ -126,6 +138,8 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        
+        SmartDashboard.putNumber("Yaw", ahrs.getYaw());
         
         SmartDashboard.putNumber("FL", Chassis.motorChassisFrontLeft.getSpeed());
         SmartDashboard.putNumber("FR", Chassis.motorChassisFrontRight.getSpeed());

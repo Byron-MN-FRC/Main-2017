@@ -1,9 +1,12 @@
 package org.usfirst.frc.team4859.robot.subsystems;
 
+import org.usfirst.frc.team4859.robot.Robot;
 import org.usfirst.frc.team4859.robot.RobotMap;
 import org.usfirst.frc.team4859.robot.ThrottleLookup.ThrottleLookup;
 import org.usfirst.frc.team4859.robot.commands.DriveWithJoystick;
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.VelocityMeasurementPeriod;
+
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -66,14 +69,14 @@ public class Chassis extends Subsystem {
 		SmartDashboard.putNumber("X output", x);
 		SmartDashboard.putNumber("Twist output", twist);
 		
-		if (RobotMap.fMode) { lightStrip.set(true); }
-		else { lightStrip.set(false); }
+		if (RobotMap.fMode) { lightStrip.set(false); }
+		else { lightStrip.set(true); }
 		
 		chassisDrive.mecanumDrive_Cartesian(x, y, twist, 0);
 	}
 	
 	public void driveStraight(double inputSpeed) {
-		inputSpeed *= 600;
+		//inputSpeed *= 500;
 		
 		motorChassisFrontLeft.set(inputSpeed);
 		motorChassisFrontRight.set(inputSpeed);
@@ -82,17 +85,17 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void driveStraightGyro(double inputSpeed) {
-		inputSpeed *= 600;
-		//double inputTwist = -(Robot.ahrs.getYaw()%360)*4;
+		//inputSpeed *= 500;
+		double inputTwist = -(Robot.ahrs.getYaw()%360)*0;
 		
-		//motorChassisFrontLeft.set(inputSpeed + inputTwist);
-		//motorChassisFrontRight.set(inputSpeed - inputTwist);
-		//motorChassisBackLeft.set(inputSpeed + inputTwist);
-		//motorChassisBackRight.set(inputSpeed - inputTwist);
+		motorChassisFrontLeft.set(inputSpeed + inputTwist);
+		motorChassisFrontRight.set(inputSpeed - inputTwist);
+		motorChassisBackLeft.set(inputSpeed + inputTwist);
+		motorChassisBackRight.set(inputSpeed - inputTwist);
 	}
 	
 	public void driveBackwards(double inputSpeed) {
-		inputSpeed *= 600;
+		inputSpeed *= 500;
 		
 		motorChassisFrontLeft.set(-inputSpeed);
 		motorChassisFrontRight.set(-inputSpeed);
@@ -101,7 +104,7 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void strafeLeft(double inputSpeed) {
-		inputSpeed *= 600;
+		inputSpeed *= 500;
 		
 		motorChassisFrontLeft.set(-inputSpeed);
 		motorChassisFrontRight.set(inputSpeed);
@@ -110,7 +113,7 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void strafeRight(double inputSpeed) {
-		inputSpeed *= 600;
+		inputSpeed *= 500;
 		
 		motorChassisFrontLeft.set(inputSpeed);
 		motorChassisFrontRight.set(-inputSpeed);
@@ -140,7 +143,7 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void circleTurnLeft(double speed, double ratio) {
-		speed *= 600;
+		//speed *= 500;
 		
 		motorChassisFrontLeft.set(speed);
 		motorChassisFrontRight.set(speed*ratio);
@@ -149,7 +152,7 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void circleTurnRight(double speed, double ratio) {
-		speed *= 600;
+		//speed *= 500;
 		
 		motorChassisFrontLeft.set(speed*ratio);
 		motorChassisFrontRight.set(speed);

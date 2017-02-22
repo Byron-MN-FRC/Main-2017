@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoLeftGearCurve extends CommandGroup {
 	
     public  AutoLeftGearCurve() {
-    	addSequential(new CircleTurnRight(0.2, 1.1057, 4));
+    	addSequential(new CircleTurnRight(0.3, 1.545, 3));
     	addSequential(new DriveStop(1));
     }
 }
