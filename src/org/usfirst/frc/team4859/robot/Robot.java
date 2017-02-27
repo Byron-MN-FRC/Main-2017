@@ -2,12 +2,9 @@ package org.usfirst.frc.team4859.robot;
 
 import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.AutoRightGear;
-import org.usfirst.frc.team4859.robot.autonomous.AutoRightGearAndShoot;
 import org.usfirst.frc.team4859.robot.autonomous.AutoRightGearCurve;
 import org.usfirst.frc.team4859.robot.autonomous.AutoCenterGear;
 import org.usfirst.frc.team4859.robot.autonomous.AutoLeftGear;
-import org.usfirst.frc.team4859.robot.autonomous.AutoLeftGearAndShoot;
-import org.usfirst.frc.team4859.robot.autonomous.AutoTest;
 import org.usfirst.frc.team4859.robot.autonomous.AutoLeftGearCurve;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
@@ -16,7 +13,6 @@ import org.usfirst.frc.team4859.robot.subsystems.Flywheels;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
-
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -39,35 +35,11 @@ public class Robot extends IterativeRobot {
 	public static AHRS ahrs;
 	public static OI oi;
 	
-	//lots of dumb variable creation that could probably be automated
-	public static double speed1;
-	public static double time1;
-	public static double speed2;
-	public static double time2;
-	public static double speed3;
-	public static double time3;
-	public static double speed4;
-	public static double time4;
-	public static double speed5;
-	public static double time5;
-	public static double speed6;
-	public static double time6;
-	public static double speed7;
-	public static double time7;
-	public static double speed8;
-	public static double time8;
-	public static double speed9;
-	public static double time9;
-	
     Command autonomousCommand;
     SendableChooser<CommandGroup> autonomousChooser;
 
-    /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
-     */
     public void robotInit() {
-    	// Initializing subsystems (and ahrs)
+    	// Initializing subsystems (and navx)
     	chassis = new Chassis();
     	climber = new Climber();
     	feeder = new Feeder();
@@ -88,14 +60,14 @@ public class Robot extends IterativeRobot {
 		// Adding autonomous modes
 		autonomousChooser = new SendableChooser<CommandGroup>();
 		autonomousChooser.addDefault("Nothing", new AutoNothing());
-		autonomousChooser.addObject("Test", new AutoTest());
+		//autonomousChooser.addObject("Test", new AutoTest());
 		autonomousChooser.addObject("Center Gear", new AutoCenterGear());
 		autonomousChooser.addObject("Right Gear Curve", new AutoRightGearCurve());
 		autonomousChooser.addObject("Left Gear Curve", new AutoLeftGearCurve());
 		autonomousChooser.addObject("Right Gear", new AutoRightGear());
 		autonomousChooser.addObject("Left Gear", new AutoLeftGear());
-		autonomousChooser.addObject("Right Gear and Shoot", new AutoRightGearAndShoot());
-		autonomousChooser.addObject("Left Gear and Shoot", new AutoLeftGearAndShoot());
+		//autonomousChooser.addObject("Right Gear and Shoot", new AutoRightGearAndShoot());
+		//autonomousChooser.addObject("Left Gear and Shoot", new AutoLeftGearAndShoot());
 				
 		SmartDashboard.putData("Autonomous Mode Chooser", autonomousChooser);
     }
@@ -122,37 +94,25 @@ public class Robot extends IterativeRobot {
 		Chassis.motorChassisFrontRight.changeControlMode(TalonControlMode.PercentVbus);
 		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.PercentVbus);
 		Chassis.motorChassisBackRight.changeControlMode(TalonControlMode.PercentVbus);
-    	
-//		Chassis.motorChassisFrontLeft.changeControlMode(TalonControlMode.Speed);
-//		Chassis.motorChassisFrontRight.changeControlMode(TalonControlMode.Speed);
-//		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.Speed);
-//		Chassis.motorChassisBackRight.changeControlMode(TalonControlMode.Speed);
 
     	autonomousCommand = (Command) autonomousChooser.getSelected();
     	
     	if (autonomousCommand != null) autonomousCommand.start();
     }
 
-    /**
-     * This function is called periodically during autonomous
-     */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
         
         SmartDashboard.putNumber("Yaw", ahrs.getYaw());
         
-        SmartDashboard.putNumber("FL", Chassis.motorChassisFrontLeft.getSpeed());
-        SmartDashboard.putNumber("FR", Chassis.motorChassisFrontRight.getSpeed());
-        SmartDashboard.putNumber("BL", Chassis.motorChassisBackLeft.getSpeed());
-        SmartDashboard.putNumber("BR", Chassis.motorChassisBackRight.getSpeed());
+//        SmartDashboard.putNumber("FL", Chassis.motorChassisFrontLeft.getSpeed());
+//        SmartDashboard.putNumber("FR", Chassis.motorChassisFrontRight.getSpeed());
+//        SmartDashboard.putNumber("BL", Chassis.motorChassisBackLeft.getSpeed());
+//        SmartDashboard.putNumber("BR", Chassis.motorChassisBackRight.getSpeed());
     }
 
     public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to 
-        // continue until interrupted by another command, remove
-        // this line or comment it out.
-
+    	
         if (autonomousCommand != null) autonomousCommand.cancel();
         
 		Chassis.motorChassisFrontLeft.changeControlMode(TalonControlMode.PercentVbus);
@@ -160,19 +120,12 @@ public class Robot extends IterativeRobot {
 		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.PercentVbus);
 		Chassis.motorChassisBackRight.changeControlMode(TalonControlMode.PercentVbus);
 		
-		//ahrs.reset();
+		ahrs.reset();
     }
 
-    /**
-     * This function is called when the disabled button is hit.
-     * You can use it to reset subsystems before shutting down.
-     */
     public void disabledInit() {
     }
 
-    /**
-     * This function is called periodically during operator control
-     */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         
@@ -182,9 +135,6 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("BR", Chassis.motorChassisBackRight.getSpeed());
     }
     
-    /**
-     * This function is called periodically during test mode
-     */
     public void testPeriodic() {
         LiveWindow.run();
     }

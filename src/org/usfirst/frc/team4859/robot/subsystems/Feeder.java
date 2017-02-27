@@ -1,6 +1,5 @@
 package org.usfirst.frc.team4859.robot.subsystems;
 
-import org.usfirst.frc.team4859.robot.Robot;
 import org.usfirst.frc.team4859.robot.RobotMap;
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -15,7 +14,7 @@ public class Feeder extends Subsystem {
     public void initDefaultCommand() {}
     
     public void feederForward() {
-    	feederMotor.set(Robot.speed2);
+    	feederMotor.set(0.80);
 	}
     
     public void feederBackward() {

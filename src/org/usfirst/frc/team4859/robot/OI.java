@@ -5,10 +5,6 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-/**
- * This class is the glue that binds the controls on the physical operator
- * interface to the commands and command groups that allow control of the robot.
- */
 public class OI {	
 	// Create a joysticks on port 0 and 1
 	private final Joystick joystick = new Joystick(0);
@@ -19,7 +15,7 @@ public class OI {
 	Button flipMode = new JoystickButton(joystick, 2);
 	
 	Button climbUp = new JoystickButton(joystick, 6);
-	//Button climbDown = new JoystickButton(joystick, 4);
+//	Button climbDown = new JoystickButton(joystick, 4);
 	
 	Button flywheelForward = new JoystickButton(xbox, 1);
 //	Button flywheelBackward = new JoystickButton(xbox, 2);
@@ -36,8 +32,8 @@ public class OI {
 		climbUp.whenPressed(new ClimbUp());
 		climbUp.whenReleased(new ClimbStop());
 		
-		//climbDown.whenPressed(new ClimbDown());
-		//climbDown.whenReleased(new ClimbStop());
+//		climbDown.whenPressed(new ClimbDown());
+//		climbDown.whenReleased(new ClimbStop());
 		
 		flywheelForward.whenPressed(new FlywheelForward());
 		flywheelForward.whenReleased(new FlywheelStop());
