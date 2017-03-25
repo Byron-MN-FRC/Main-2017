@@ -125,7 +125,14 @@ public class Chassis extends Subsystem {
 		motorChassisBackLeft.set(0);
 		motorChassisBackRight.set(0);
 	}
-	
+	public void driveLeft(double inputSpeed){
+		motorChassisFrontLeft.set(inputSpeed);
+		motorChassisBackLeft.set(inputSpeed);
+	}
+	public void driveRight(double inputSpeed){
+		motorChassisFrontRight.set(inputSpeed);
+		motorChassisBackRight.set(inputSpeed);
+	}
 	public void turnToAngle(double targetAngle) {
 //		double sensorAngle = Robot.ahrs.getYaw() % 360;
 //		double turn = (targetAngle-sensorAngle)*2;
