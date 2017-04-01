@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {	
 	// Create a joysticks on port 0 and 1
 	private final Joystick joystick = new Joystick(0);
-	private final Joystick xbox = new Joystick(1);
+	//private final Joystick xbox = new Joystick(1);
 	
 	// Creating buttons
 	Button precisionMode = new JoystickButton(joystick, 1);
@@ -17,11 +17,11 @@ public class OI {
 	Button climbUp = new JoystickButton(joystick, 6);
 //	Button climbDown = new JoystickButton(joystick, 4);
 	
-	Button flywheelForward = new JoystickButton(xbox, 1);
+	////Button flywheelForward = new JoystickButton(xbox, 1);
 //	Button flywheelBackward = new JoystickButton(xbox, 2);
 	
-	Button feederForward = new JoystickButton(xbox, 3);
-	Button feederBackward = new JoystickButton(xbox, 4);
+	////Button feederForward = new JoystickButton(xbox, 3);
+	////Button feederBackward = new JoystickButton(xbox, 4);
  
 	public OI() {
 		// Mapping buttons to command
@@ -35,17 +35,17 @@ public class OI {
 //		climbDown.whenPressed(new ClimbDown());
 //		climbDown.whenReleased(new ClimbStop());
 		
-		flywheelForward.whenPressed(new FlywheelForward());
-		flywheelForward.whenReleased(new FlywheelStop());
+		////flywheelForward.whenPressed(new FlywheelForward());
+		////flywheelForward.whenReleased(new FlywheelStop());
 		
 //		flywheelBackward.whenPressed(new FlywheelBackward());
 //		flywheelBackward.whenReleased(new FlywheelStop());
 		
-		feederForward.whenPressed(new FeederForward());
-		feederForward.whenReleased(new FeederStop());
+		////feederForward.whenPressed(new FeederForward());
+		////feederForward.whenReleased(new FeederStop());
 		
-		feederBackward.whenPressed(new FeederBackward());
-		feederBackward.whenReleased(new FeederStop());
+		////feederBackward.whenPressed(new FeederBackward());
+		////feederBackward.whenReleased(new FeederStop());
 	}
 	
 	// Creating a method that returns joystick values for driving

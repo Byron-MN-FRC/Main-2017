@@ -10,7 +10,6 @@ import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
 import org.usfirst.frc.team4859.robot.subsystems.Feeder;
 import org.usfirst.frc.team4859.robot.subsystems.Flywheels;
-import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.cscore.UsbCamera;
@@ -53,6 +52,7 @@ public class Robot extends IterativeRobot {
 		UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
 		cameraBackward.setResolution(320, 240);
 		cameraBackward.setFPS(10);
+
 		UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 1);
 		cameraForward.setResolution(320, 240);
 		cameraForward.setFPS(10);
@@ -77,18 +77,18 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
-    	Chassis.motorChassisFrontLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-    	Chassis.motorChassisBackLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-    	Chassis.motorChassisFrontRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-    	Chassis.motorChassisBackRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-    	
-    	Chassis.motorChassisFrontRight.reverseSensor(true);
-    	Chassis.motorChassisBackRight.reverseSensor(true);
-    	
-    	Chassis.motorChassisFrontLeft.configEncoderCodesPerRev(360);
-    	Chassis.motorChassisBackLeft.configEncoderCodesPerRev(360);
-    	Chassis.motorChassisFrontRight.configEncoderCodesPerRev(360);
-    	Chassis.motorChassisBackRight.configEncoderCodesPerRev(360);
+//    	Chassis.motorChassisFrontLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+//    	Chassis.motorChassisBackLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+//    	Chassis.motorChassisFrontRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+//    	Chassis.motorChassisBackRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+//    	
+//    	Chassis.motorChassisFrontRight.reverseSensor(true);
+//    	Chassis.motorChassisBackRight.reverseSensor(true);
+//    	
+//    	Chassis.motorChassisFrontLeft.configEncoderCodesPerRev(360);
+//    	Chassis.motorChassisBackLeft.configEncoderCodesPerRev(360);
+//    	Chassis.motorChassisFrontRight.configEncoderCodesPerRev(360);
+//    	Chassis.motorChassisBackRight.configEncoderCodesPerRev(360);
     	
 		Chassis.motorChassisFrontLeft.changeControlMode(TalonControlMode.PercentVbus);
 		Chassis.motorChassisFrontRight.changeControlMode(TalonControlMode.PercentVbus);
@@ -129,10 +129,10 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         
-        SmartDashboard.putNumber("FL", Chassis.motorChassisFrontLeft.getSpeed());
-        SmartDashboard.putNumber("FR", Chassis.motorChassisFrontRight.getSpeed());
-        SmartDashboard.putNumber("BL", Chassis.motorChassisBackLeft.getSpeed());
-        SmartDashboard.putNumber("BR", Chassis.motorChassisBackRight.getSpeed());
+//        SmartDashboard.putNumber("FL", Chassis.motorChassisFrontLeft.getSpeed());
+//        SmartDashboard.putNumber("FR", Chassis.motorChassisFrontRight.getSpeed());
+//        SmartDashboard.putNumber("BL", Chassis.motorChassisBackLeft.getSpeed());
+//        SmartDashboard.putNumber("BR", Chassis.motorChassisBackRight.getSpeed());
     }
     
     public void testPeriodic() {

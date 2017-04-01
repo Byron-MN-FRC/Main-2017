@@ -41,9 +41,9 @@ public class Chassis extends Subsystem {
 		double x = joystickP0.getX();
 		double twist = joystickP0.getTwist();
 		
-		SmartDashboard.putNumber("Y input", y);
-		SmartDashboard.putNumber("X input", x);
-		SmartDashboard.putNumber("Twist input", twist);
+//		SmartDashboard.putNumber("Y input", y);
+//		SmartDashboard.putNumber("X input", x);
+//		SmartDashboard.putNumber("Twist input", twist);
 		
 		// Apply translations to the values from the controller
 		y = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", y) : ThrottleLookup.calcJoystickCorrection("NormY", y);
@@ -63,9 +63,9 @@ public class Chassis extends Subsystem {
 		
 		SmartDashboard.putString("Robot Mode", (RobotMap.pMode) ? "Slow" : "Normal");	
 		
-		SmartDashboard.putNumber("Y output", y);
-		SmartDashboard.putNumber("X output", x);
-		SmartDashboard.putNumber("Twist output", twist);
+//		SmartDashboard.putNumber("Y output", y);
+//		SmartDashboard.putNumber("X output", x);
+//		SmartDashboard.putNumber("Twist output", twist);
 		
 		if (RobotMap.fMode) { lightStrip.set(false); }
 		else { lightStrip.set(true); }
