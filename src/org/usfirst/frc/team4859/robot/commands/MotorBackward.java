@@ -3,18 +3,18 @@ package org.usfirst.frc.team4859.robot.commands;
 import org.usfirst.frc.team4859.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class FeederForward extends Command {
+public class MotorBackward extends Command {
 
-    public FeederForward() {
-        requires(Robot.feeder);
+    public MotorBackward() {
+        requires(Robot.motors);
     }
 
     protected void initialize() {
-    	Robot.feeder.feederForward();
+    	Robot.motors.motorBackward();
     }
 
     protected void execute() {
-    	Robot.feeder.feederForward();
+    	Robot.motors.motorBackward();
     }
 
     protected boolean isFinished() {
@@ -22,10 +22,10 @@ public class FeederForward extends Command {
     }
 
     protected void end() {
-    	Robot.feeder.feederStop();
+    	Robot.motors.motorStop();
     }
 
     protected void interrupted() {
-    	Robot.feeder.feederStop();
+    	Robot.motors.motorStop();
     }
 }
