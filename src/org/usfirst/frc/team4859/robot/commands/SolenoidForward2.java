@@ -3,18 +3,18 @@ package org.usfirst.frc.team4859.robot.commands;
 import org.usfirst.frc.team4859.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class MotorBackward extends Command {
+public class SolenoidForward2 extends Command {
 
-    public MotorBackward() {
-        requires(Robot.motorss);
+    public SolenoidForward2() {
+        requires(Robot.pneumatics);
     }
 
     protected void initialize() {
-    	Robot.motorss.motorBackward();
+    	Robot.pneumatics.solenoidForward2();
     }
 
     protected void execute() {
-    	Robot.motorss.motorBackward();
+    	Robot.pneumatics.solenoidForward2();
     }
 
     protected boolean isFinished() {
@@ -22,10 +22,10 @@ public class MotorBackward extends Command {
     }
 
     protected void end() {
-    	Robot.motorss.motorStop();
+    	Robot.pneumatics.solenoidOff2();
     }
 
     protected void interrupted() {
-    	Robot.motorss.motorStop();
+    	Robot.pneumatics.solenoidOff2();
     }
 }

@@ -6,15 +6,15 @@ import edu.wpi.first.wpilibj.command.Command;
 public class MotorStop extends Command {
 
     public MotorStop() {
-        requires(Robot.motors);
+        requires(Robot.motorss);
     }
 
     protected void initialize() {
-    	Robot.motors.motorStop();
+    	Robot.motorss.motorStop();
     }
 
     protected void execute() {
-    	Robot.motors.motorStop();
+    	Robot.motorss.motorStop();
     }
 
     protected boolean isFinished() {
@@ -22,10 +22,10 @@ public class MotorStop extends Command {
     }
 
     protected void end() {
-    	Robot.motors.motorStop();
+    	Robot.motorss.motorStop();
     }
 
     protected void interrupted() {
-    	Robot.motors.motorStop();
+    	Robot.motorss.motorStop();
     }
 }
