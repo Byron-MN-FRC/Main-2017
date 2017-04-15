@@ -3,18 +3,18 @@ package org.usfirst.frc.team4859.robot.commands;
 import org.usfirst.frc.team4859.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class FlywheelForward extends Command {
+public class PneumaticStop extends Command {
 
-    public FlywheelForward() {
-        requires(Robot.flywheels);
+    public PneumaticStop() {
+        requires(Robot.pneumatics);
     }
 
     protected void initialize() {
-    	Robot.flywheels.flywheelForward();
+    	Robot.pneumatics.pneumaticStop();
     }
 
     protected void execute() {
-    	Robot.flywheels.flywheelForward();
+    	Robot.pneumatics.pneumaticStop();
     }
 
     protected boolean isFinished() {
@@ -22,10 +22,10 @@ public class FlywheelForward extends Command {
     }
 
     protected void end() {
-    	Robot.flywheels.flywheelStop();
+    	Robot.pneumatics.pneumaticStop();
     }
 
     protected void interrupted() {
-    	Robot.flywheels.flywheelStop();
+    	Robot.pneumatics.pneumaticStop();
     }
 }

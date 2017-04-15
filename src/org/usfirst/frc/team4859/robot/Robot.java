@@ -8,8 +8,8 @@ import org.usfirst.frc.team4859.robot.autonomous.AutoLeftGear;
 import org.usfirst.frc.team4859.robot.autonomous.AutoLeftGearCurve;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
-import org.usfirst.frc.team4859.robot.subsystems.Feeder;
-import org.usfirst.frc.team4859.robot.subsystems.Flywheels;
+import org.usfirst.frc.team4859.robot.subsystems.Pneumatics;
+
 import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.cscore.UsbCamera;
@@ -28,8 +28,7 @@ public class Robot extends IterativeRobot {
 	// Creating subsystems
 	public static Chassis chassis;
 	public static Climber climber;
-	public static Flywheels flywheels;
-	public static Feeder feeder;
+	public static Pneumatics pneumatics;
 	public static Preferences prefs;
 	public static AHRS ahrs;
 	public static OI oi;
@@ -41,8 +40,7 @@ public class Robot extends IterativeRobot {
     	// Initializing subsystems (and navx)
     	chassis = new Chassis();
     	climber = new Climber();
-    	feeder = new Feeder();
-    	flywheels = new Flywheels();
+    	pneumatics = new Pneumatics();
     	prefs = Preferences.getInstance();
     	ahrs = new AHRS(SerialPort.Port.kUSB);
 		oi = new OI();
@@ -66,8 +64,6 @@ public class Robot extends IterativeRobot {
 		autonomousChooser.addObject("Left Gear Curve", new AutoLeftGearCurve());
 		autonomousChooser.addObject("Right Gear", new AutoRightGear());
 		autonomousChooser.addObject("Left Gear", new AutoLeftGear());
-		//autonomousChooser.addObject("Right Gear and Shoot", new AutoRightGearAndShoot());
-		//autonomousChooser.addObject("Left Gear and Shoot", new AutoLeftGearAndShoot());
 				
 		SmartDashboard.putData("Autonomous Mode Chooser", autonomousChooser);
     }

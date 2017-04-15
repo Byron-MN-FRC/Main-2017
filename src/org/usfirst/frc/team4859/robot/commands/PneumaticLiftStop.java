@@ -3,18 +3,18 @@ package org.usfirst.frc.team4859.robot.commands;
 import org.usfirst.frc.team4859.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class FeederStop extends Command {
+public class PneumaticLiftStop extends Command {
 
-    public FeederStop() {
-        requires(Robot.feeder);
+    public PneumaticLiftStop() {
+        requires(Robot.pneumatics);
     }
 
     protected void initialize() {
-    	Robot.feeder.feederStop();
+    	Robot.pneumatics.pneumaticLiftStop();
     }
 
     protected void execute() {
-    	Robot.feeder.feederStop();
+    	Robot.pneumatics.pneumaticLiftStop();
     }
 
     protected boolean isFinished() {
@@ -22,10 +22,10 @@ public class FeederStop extends Command {
     }
 
     protected void end() {
-    	Robot.feeder.feederStop();
+    	Robot.pneumatics.pneumaticLiftStop();
     }
 
     protected void interrupted() {
-    	Robot.feeder.feederStop();
+    	Robot.pneumatics.pneumaticLiftStop();
     }
 }

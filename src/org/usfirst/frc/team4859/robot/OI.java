@@ -17,11 +17,11 @@ public class OI {
 	Button climbUp = new JoystickButton(joystick, 6);
 //	Button climbDown = new JoystickButton(joystick, 4);
 	
-	////Button flywheelForward = new JoystickButton(xbox, 1);
-//	Button flywheelBackward = new JoystickButton(xbox, 2);
+	Button pneumaticLock = new JoystickButton(joystick, 9);
+	Button pneumaticUnlock = new JoystickButton(joystick, 10);
 	
-	////Button feederForward = new JoystickButton(xbox, 3);
-	////Button feederBackward = new JoystickButton(xbox, 4);
+	Button pneumaticLiftUp = new JoystickButton(joystick, 11);
+	Button pneumaticLiftDown = new JoystickButton(joystick, 12);
  
 	public OI() {
 		// Mapping buttons to command
@@ -35,17 +35,17 @@ public class OI {
 //		climbDown.whenPressed(new ClimbDown());
 //		climbDown.whenReleased(new ClimbStop());
 		
-		////flywheelForward.whenPressed(new FlywheelForward());
-		////flywheelForward.whenReleased(new FlywheelStop());
+		pneumaticLock.whenPressed(new PneumaticLock());
+		pneumaticLock.whenReleased(new PneumaticStop());
 		
-//		flywheelBackward.whenPressed(new FlywheelBackward());
-//		flywheelBackward.whenReleased(new FlywheelStop());
+		pneumaticUnlock.whenPressed(new PneumaticUnlock());
+		pneumaticUnlock.whenReleased(new PneumaticStop());
 		
-		////feederForward.whenPressed(new FeederForward());
-		////feederForward.whenReleased(new FeederStop());
+		pneumaticLiftUp.whenPressed(new PneumaticLiftUp());
+		pneumaticLiftUp.whenReleased(new PneumaticLiftStop());
 		
-		////feederBackward.whenPressed(new FeederBackward());
-		////feederBackward.whenReleased(new FeederStop());
+		pneumaticLiftDown.whenPressed(new PneumaticLiftDown());
+		pneumaticLiftDown.whenReleased(new PneumaticLiftStop());
 	}
 	
 	// Creating a method that returns joystick values for driving
