@@ -10,14 +10,14 @@ public class OI {
 	private final Joystick joystick = new Joystick(0);
 	
 	// Creating buttons
-	Button motorForward = new JoystickButton(joystick, 1);
-	Button motorBackward = new JoystickButton(joystick, 2);
+	Button motorForward = new JoystickButton(joystick, 5);
+	Button motorBackward = new JoystickButton(joystick, 3);
 	
-	Button solenoidForward1 = new JoystickButton(joystick, 7);
-	Button solenoidBackward1 = new JoystickButton(joystick, 8);
+	Button solenoidForward1 = new JoystickButton(joystick, 9);
+	Button solenoidBackward1 = new JoystickButton(joystick, 10);
 	
-	Button solenoidForward2 = new JoystickButton(joystick, 9);
-	Button solenoidBackward2 = new JoystickButton(joystick, 10);
+	Button solenoidForward2 = new JoystickButton(joystick, 11);
+	Button solenoidBackward2 = new JoystickButton(joystick, 12);
  
 	public OI() {
 		// Mapping buttons to commands

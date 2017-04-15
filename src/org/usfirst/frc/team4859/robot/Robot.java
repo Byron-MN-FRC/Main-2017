@@ -1,6 +1,6 @@
 package org.usfirst.frc.team4859.robot;
 
-import org.usfirst.frc.team4859.robot.subsystems.Motorss;
+import org.usfirst.frc.team4859.robot.subsystems.Motors;
 import org.usfirst.frc.team4859.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import edu.wpi.cscore.UsbCamera;
@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 	// Creating subsystems
-	public static Motorss motorss;
+	public static Motors motors;
 	public static Pneumatics pneumatics;
 	public static ADXRS450_Gyro gyro;
 	public static Ultrasonic ultra;
@@ -30,7 +30,7 @@ public class Robot extends IterativeRobot {
 
     public void robotInit() {
     	// Initializing subsystems (and gyro)
-    	motorss = new Motorss();
+    	motors = new Motors();
     	pneumatics = new Pneumatics();
     	gyro = new ADXRS450_Gyro();
     	//ultra = new Ultrasonic();
@@ -90,8 +90,6 @@ public class Robot extends IterativeRobot {
 
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        
-        SmartDashboard.putBoolean("Compressor on/off", compressor.enabled());
         
 //        SmartDashboard.putNumber("FL", Chassis.motorChassisFrontLeft.getSpeed());
     }

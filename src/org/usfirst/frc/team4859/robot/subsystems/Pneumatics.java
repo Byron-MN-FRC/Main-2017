@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4859.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Pneumatics extends Subsystem {

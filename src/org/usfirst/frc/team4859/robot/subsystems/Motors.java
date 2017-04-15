@@ -6,14 +6,14 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class Motorss extends Subsystem {
+public class Motors extends Subsystem {
 
 	public static CANTalon talonSRX = new CANTalon(RobotMap.talonSRX);
 	public static Talon talonSR = new Talon(RobotMap.talonSR);
 	public static Spark spark1 = new Spark(RobotMap.spark1);
 	public static Spark spark2 = new Spark(RobotMap.spark2);
 	
-	public Motorss() {
+	public Motors() {
 	}
 	
     public void initDefaultCommand() {}
