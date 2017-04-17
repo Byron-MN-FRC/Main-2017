@@ -15,7 +15,6 @@ public class OI {
 	Button flipMode = new JoystickButton(joystick, 2);
 	
 	Button climbUp = new JoystickButton(joystick, 6);
-//	Button climbDown = new JoystickButton(joystick, 4);
 	
 	Button pneumaticLock = new JoystickButton(joystick, 9);
 	Button pneumaticUnlock = new JoystickButton(joystick, 10);
@@ -31,9 +30,6 @@ public class OI {
 		
 		climbUp.whenPressed(new ClimbUp());
 		climbUp.whenReleased(new ClimbStop());
-		
-//		climbDown.whenPressed(new ClimbDown());
-//		climbDown.whenReleased(new ClimbStop());
 		
 		pneumaticLock.whenPressed(new PneumaticLock());
 		pneumaticLock.whenReleased(new PneumaticStop());

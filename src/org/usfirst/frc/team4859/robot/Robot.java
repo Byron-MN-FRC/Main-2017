@@ -14,6 +14,7 @@ import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -30,6 +31,7 @@ public class Robot extends IterativeRobot {
 	public static Climber climber;
 	public static Pneumatics pneumatics;
 	public static Preferences prefs;
+	public static Compressor compressor;
 	public static AHRS ahrs;
 	public static OI oi;
 	
@@ -42,6 +44,7 @@ public class Robot extends IterativeRobot {
     	climber = new Climber();
     	pneumatics = new Pneumatics();
     	prefs = Preferences.getInstance();
+    	compressor = new Compressor();
     	ahrs = new AHRS(SerialPort.Port.kUSB);
 		oi = new OI();
 		
@@ -125,6 +128,7 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         
+        SmartDashboard.putNumber("compressor current", compressor.getCompressorCurrent());
 //        SmartDashboard.putNumber("FL", Chassis.motorChassisFrontLeft.getSpeed());
 //        SmartDashboard.putNumber("FR", Chassis.motorChassisFrontRight.getSpeed());
 //        SmartDashboard.putNumber("BL", Chassis.motorChassisBackLeft.getSpeed());
