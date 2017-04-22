@@ -1,6 +1,8 @@
 package org.usfirst.frc.team4859.robot.commands;
 
 import org.usfirst.frc.team4859.robot.Robot;
+import org.usfirst.frc.team4859.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 public class PneumaticLock extends Command {
@@ -14,6 +16,7 @@ public class PneumaticLock extends Command {
 
     protected void initialize() {
     	Robot.pneumatics.pneumaticLock();
+    	RobotMap.locked = false;
     	setTimeout(time);
     }
 

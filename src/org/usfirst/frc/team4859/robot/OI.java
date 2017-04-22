@@ -21,6 +21,8 @@ public class OI {
 	
 	Button pneumaticLiftUp = new JoystickButton(joystick, 4);
 	Button pneumaticLiftDown = new JoystickButton(joystick, 6);
+	
+	Button wiggle = new JoystickButton(joystick, 9);
  
 	public OI() {
 		// Mapping buttons to command
@@ -31,17 +33,20 @@ public class OI {
 		climbUp.whenPressed(new ClimbUp());
 		climbUp.whenReleased(new ClimbStop());
 		
-		pneumaticLock.whenPressed(new PneumaticLock());
-		pneumaticLock.whenReleased(new PneumaticStop());
+		// All commands are called with "-1" to pass the timeout check so they run normally
+		pneumaticLock.whenPressed(new PneumaticLock(-1));
+		pneumaticLock.whenReleased(new PneumaticStop(-1));
 		
-		pneumaticUnlock.whenPressed(new PneumaticUnlock());
-		pneumaticUnlock.whenReleased(new PneumaticStop());
+		pneumaticUnlock.whenPressed(new PneumaticUnlock(-1));
+		pneumaticUnlock.whenReleased(new PneumaticStop(-1));
 		
-		pneumaticLiftUp.whenPressed(new PneumaticLiftUp());
-		pneumaticLiftUp.whenReleased(new PneumaticLiftStop());
+		pneumaticLiftUp.whenPressed(new PneumaticLiftUp(-1));
+		pneumaticLiftUp.whenReleased(new PneumaticLiftStop(-1));
 		
-		pneumaticLiftDown.whenPressed(new PneumaticLiftDown());
-		pneumaticLiftDown.whenReleased(new PneumaticLiftStop());
+		pneumaticLiftDown.whenPressed(new PneumaticLiftDown(-1));
+		pneumaticLiftDown.whenReleased(new PneumaticLiftStop(-1));
+		
+		wiggle.whenPressed(new AutoGearGrab());
 	}
 	
 	// Creating a method that returns joystick values for driving

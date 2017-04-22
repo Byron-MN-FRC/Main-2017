@@ -127,7 +127,10 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         
-        SmartDashboard.putNumber("compressor current", compressor.getCompressorCurrent());
+        SmartDashboard.putBoolean("Lock extended", RobotMap.locked);
+        
+        //SmartDashboard.putNumber("compressor current", compressor.getCompressorCurrent());
+        
 //        SmartDashboard.putNumber("FL", Chassis.motorChassisFrontLeft.getSpeed());
 //        SmartDashboard.putNumber("FR", Chassis.motorChassisFrontRight.getSpeed());
 //        SmartDashboard.putNumber("BL", Chassis.motorChassisBackLeft.getSpeed());
