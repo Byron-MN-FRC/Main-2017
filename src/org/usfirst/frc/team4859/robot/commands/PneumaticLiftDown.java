@@ -4,13 +4,18 @@ import org.usfirst.frc.team4859.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class PneumaticLiftDown extends Command {
+	
+	private double time;
 
-    public PneumaticLiftDown() {
+    public PneumaticLiftDown(double inputTime) {
         requires(Robot.pneumatics);
+        time = inputTime;
     }
 
     protected void initialize() {
     	Robot.pneumatics.pneumaticLiftDown();
+    	Robot.pneumatics.pneumaticUnlock();
+    	setTimeout(time);
     }
 
     protected void execute() {
@@ -18,7 +23,8 @@ public class PneumaticLiftDown extends Command {
     }
 
     protected boolean isFinished() {
-        return false;
+    	if (time <= 0) return false;
+    	else return isTimedOut();
     }
 
     protected void end() {

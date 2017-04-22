@@ -5,32 +5,32 @@ public class ThrottleLookup
 
 		// SlowY
 		public static double[][] correctionTable1 = {
-			{.015, .25, .500, .75, 1.00},
+			{.02, .25, .500, .75, 1.00},
 			{.000, .10, .225, .35, 0.50}};
 		
 		// NormY
 		public static double[][] correctionTable2 = {
-			{.015, .25, .50, .75, 1.0},
+			{.02, .25, .50, .75, 1.0},
 			{.000, .15, .35, .60, 1.0}};
 		
 		// SlowX
 		public static double[][] correctionTable3 = {
-			{.015, .25, .500, .75, 1.0},
+			{.02, .25, .500, .75, 1.0},
 			{.000, .10, .225, .35, 0.5}};
 
 		// NormX
 		public static double[][] correctionTable4 = {
-			{.015, .25, .50, .75, 1.0},
+			{.02, .25, .50, .75, 1.0},
 			{.000, .15, .35, .60, 1.0}};
 
 		// SlowT
 		public static double[][] correctionTable5 = {
-			{.015, .25, .5, .75, 1.0},
+			{.02, .25, .5, .75, 1.0},
 			{.000, .15, .3, .45, 0.6}};
 
 		// NormT
 		public static double[][] correctionTable6 = {
-			{.015, .25, .50, .75, 1.00},
+			{.02, .25, .50, .75, 1.00},
 			{.000, .15, .35, .60, 0.85}};
 	
 	public static double calcJoystickCorrection(String tableName, double x)

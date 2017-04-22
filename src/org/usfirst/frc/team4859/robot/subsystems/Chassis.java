@@ -93,7 +93,7 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void driveBackwards(double inputSpeed) {
-		inputSpeed *= 500;
+		//inputSpeed *= 500;
 		
 		motorChassisFrontLeft.set(-inputSpeed);
 		motorChassisFrontRight.set(-inputSpeed);
@@ -102,7 +102,7 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void strafeLeft(double inputSpeed) {
-		inputSpeed *= 500;
+		//inputSpeed *= 500;
 		
 		motorChassisFrontLeft.set(-inputSpeed);
 		motorChassisFrontRight.set(inputSpeed);
@@ -111,7 +111,7 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void strafeRight(double inputSpeed) {
-		inputSpeed *= 500;
+		//inputSpeed *= 500;
 		
 		motorChassisFrontLeft.set(inputSpeed);
 		motorChassisFrontRight.set(-inputSpeed);
@@ -138,6 +138,10 @@ public class Chassis extends Subsystem {
 //		motorChassisFrontRight.set(-turn);
 //		motorChassisBackLeft.set(turn);
 //		motorChassisBackRight.set(-turn);
+	}
+	
+	public void wiggle(double forwardSpeed, double turnSpeed) {
+		chassisDrive.mecanumDrive_Cartesian(0, forwardSpeed, turnSpeed, 0);
 	}
 	
 	public void circleTurnLeft(double speed, double ratio) {

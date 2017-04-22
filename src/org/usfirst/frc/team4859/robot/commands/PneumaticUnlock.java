@@ -4,13 +4,16 @@ import org.usfirst.frc.team4859.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class PneumaticUnlock extends Command {
+	
+	private double time;
 
-    public PneumaticUnlock() {
+    public PneumaticUnlock(double inputTime) {
         requires(Robot.pneumatics);
     }
 
     protected void initialize() {
     	Robot.pneumatics.pneumaticUnlock();
+    	setTimeout(time);
     }
 
     protected void execute() {
@@ -18,7 +21,8 @@ public class PneumaticUnlock extends Command {
     }
 
     protected boolean isFinished() {
-        return false;
+    	if (time <= 0) return false;
+    	else return isTimedOut();
     }
 
     protected void end() {

@@ -13,6 +13,7 @@ import org.usfirst.frc.team4859.robot.subsystems.Pneumatics;
 import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoMode;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -51,12 +52,10 @@ public class Robot extends IterativeRobot {
 		ahrs.reset();
 		
 		UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
-		cameraBackward.setResolution(320, 240);
-		cameraBackward.setFPS(10);
+		cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 15);
 
 		UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 1);
-		cameraForward.setResolution(320, 240);
-		cameraForward.setFPS(10);
+		cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 15);
 		
 		// Adding autonomous modes
 		autonomousChooser = new SendableChooser<CommandGroup>();

@@ -14,13 +14,13 @@ public class OI {
 	Button precisionMode = new JoystickButton(joystick, 1);
 	Button flipMode = new JoystickButton(joystick, 2);
 	
-	Button climbUp = new JoystickButton(joystick, 6);
+	Button climbUp = new JoystickButton(joystick, 12);
 	
-	Button pneumaticLock = new JoystickButton(joystick, 9);
-	Button pneumaticUnlock = new JoystickButton(joystick, 10);
+	Button pneumaticLock = new JoystickButton(joystick, 3);
+	Button pneumaticUnlock = new JoystickButton(joystick, 5);
 	
-	Button pneumaticLiftUp = new JoystickButton(joystick, 11);
-	Button pneumaticLiftDown = new JoystickButton(joystick, 12);
+	Button pneumaticLiftUp = new JoystickButton(joystick, 4);
+	Button pneumaticLiftDown = new JoystickButton(joystick, 6);
  
 	public OI() {
 		// Mapping buttons to command

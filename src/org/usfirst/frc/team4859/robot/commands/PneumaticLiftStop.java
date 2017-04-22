@@ -4,13 +4,17 @@ import org.usfirst.frc.team4859.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class PneumaticLiftStop extends Command {
+	
+	private double time;
 
-    public PneumaticLiftStop() {
+    public PneumaticLiftStop(double inputTime) {
         requires(Robot.pneumatics);
+        time = inputTime;
     }
 
     protected void initialize() {
     	Robot.pneumatics.pneumaticLiftStop();
+    	setTimeout(time);
     }
 
     protected void execute() {
@@ -18,7 +22,8 @@ public class PneumaticLiftStop extends Command {
     }
 
     protected boolean isFinished() {
-        return false;
+    	if (time <= 0) return false;
+    	else return isTimedOut();
     }
 
     protected void end() {
