@@ -22,7 +22,7 @@ public class OI {
 	Button pneumaticLiftUp = new JoystickButton(joystick, 4);
 	Button pneumaticLiftDown = new JoystickButton(joystick, 6);
 	
-	Button wiggle = new JoystickButton(joystick, 9);
+	Button wiggle = new JoystickButton(joystick, 10);
  
 	public OI() {
 		// Mapping buttons to command
@@ -33,18 +33,18 @@ public class OI {
 		climbUp.whenPressed(new ClimbUp());
 		climbUp.whenReleased(new ClimbStop());
 		
-		// All commands are called with "-1" to pass the timeout check so they run normally
-		pneumaticLock.whenPressed(new PneumaticLock(-1));
-		pneumaticLock.whenReleased(new PneumaticStop(-1));
+		// All commands are called with "0" to pass the timeout check so they run normally
+		pneumaticLock.whenPressed(new PneumaticLock(0));
+		pneumaticLock.whenReleased(new PneumaticStop(0));
 		
-		pneumaticUnlock.whenPressed(new PneumaticUnlock(-1));
-		pneumaticUnlock.whenReleased(new PneumaticStop(-1));
+		pneumaticUnlock.whenPressed(new PneumaticUnlock(0));
+		pneumaticUnlock.whenReleased(new PneumaticStop(0));
 		
-		pneumaticLiftUp.whenPressed(new PneumaticLiftUp(-1));
-		pneumaticLiftUp.whenReleased(new PneumaticLiftStop(-1));
+		pneumaticLiftUp.whenPressed(new PneumaticLiftUp(0));
+		pneumaticLiftUp.whenReleased(new PneumaticLiftStop(0));
 		
-		pneumaticLiftDown.whenPressed(new PneumaticLiftDown(-1));
-		pneumaticLiftDown.whenReleased(new PneumaticLiftStop(-1));
+		pneumaticLiftDown.whenPressed(new PneumaticLiftDown(0));
+		pneumaticLiftDown.whenReleased(new PneumaticLiftStop(0));
 		
 		wiggle.whenPressed(new AutoGearGrab());
 	}

@@ -8,7 +8,8 @@ import org.usfirst.frc.team4859.robot.autonomous.AutoLeftGear;
 import org.usfirst.frc.team4859.robot.autonomous.AutoLeftGearCurve;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
-import org.usfirst.frc.team4859.robot.subsystems.Pneumatics;
+import org.usfirst.frc.team4859.robot.subsystems.PneumaticsLift;
+import org.usfirst.frc.team4859.robot.subsystems.PneumaticsLock;
 
 import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
@@ -30,7 +31,8 @@ public class Robot extends IterativeRobot {
 	// Creating subsystems
 	public static Chassis chassis;
 	public static Climber climber;
-	public static Pneumatics pneumatics;
+	public static PneumaticsLift pneumaticsLift;
+	public static PneumaticsLock pneumaticsLock;
 	public static Preferences prefs;
 	public static Compressor compressor;
 	public static AHRS ahrs;
@@ -43,7 +45,8 @@ public class Robot extends IterativeRobot {
     	// Initializing subsystems (and navx)
     	chassis = new Chassis();
     	climber = new Climber();
-    	pneumatics = new Pneumatics();
+    	pneumaticsLift = new PneumaticsLift();
+    	pneumaticsLock = new PneumaticsLock();
     	prefs = Preferences.getInstance();
     	compressor = new Compressor();
     	ahrs = new AHRS(SerialPort.Port.kUSB);

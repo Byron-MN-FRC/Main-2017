@@ -8,11 +8,15 @@ public class AutoGearGrab extends CommandGroup {
 
     public AutoGearGrab() {  	
     	requires(Robot.chassis);
-    	requires(Robot.pneumatics);
+    	requires(Robot.pneumaticsLift);
+    	requires(Robot.pneumaticsLock);
     	
     	addSequential(new PneumaticUnlock(0.2));
     	addSequential(new PneumaticLiftDown(1));
-    	addSequential(new Wiggle(0.25, 0.15, 1));
+    	addSequential(new Wiggle(0.25, 0.15, 0.2));
+    	addSequential(new Wiggle(0.25, -0.15, 0.2));
+    	addSequential(new Wiggle(0.25, 0.15, 0.2));
+    	addSequential(new Wiggle(0.25, -0.15, 0.2));
     	addSequential(new PneumaticLock(0.2));
     	addSequential(new PneumaticLiftUp(1));
     }

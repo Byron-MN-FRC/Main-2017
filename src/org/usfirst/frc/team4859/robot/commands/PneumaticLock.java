@@ -10,18 +10,19 @@ public class PneumaticLock extends Command {
 	private double time;
 
     public PneumaticLock(double inputTime) {
-        requires(Robot.pneumatics);
+        requires(Robot.pneumaticsLock);
         time = inputTime;
     }
 
     protected void initialize() {
-    	Robot.pneumatics.pneumaticLock();
+    	Robot.pneumaticsLock.pneumaticLock();
     	RobotMap.locked = false;
     	setTimeout(time);
     }
 
     protected void execute() {
-    	Robot.pneumatics.pneumaticLock();
+    	RobotMap.locked = false;
+    	Robot.pneumaticsLock.pneumaticLock();
     }
 
     protected boolean isFinished() {
@@ -30,10 +31,10 @@ public class PneumaticLock extends Command {
     }
 
     protected void end() {
-    	Robot.pneumatics.pneumaticLock();
+    	Robot.pneumaticsLock.pneumaticLock();
     }
 
     protected void interrupted() {
-    	Robot.pneumatics.pneumaticStop();
+    	Robot.pneumaticsLock.pneumaticStop();
     }
 }
