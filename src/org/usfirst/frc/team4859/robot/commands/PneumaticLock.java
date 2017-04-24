@@ -16,12 +16,12 @@ public class PneumaticLock extends Command {
 
     protected void initialize() {
     	Robot.pneumaticsLock.pneumaticLock();
-    	RobotMap.locked = false;
+    	RobotMap.locked = true;
     	setTimeout(time);
     }
 
     protected void execute() {
-    	RobotMap.locked = false;
+    	RobotMap.locked = true;
     	Robot.pneumaticsLock.pneumaticLock();
     }
 

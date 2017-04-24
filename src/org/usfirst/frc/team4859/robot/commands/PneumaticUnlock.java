@@ -15,12 +15,12 @@ public class PneumaticUnlock extends Command {
 
     protected void initialize() {
     	Robot.pneumaticsLock.pneumaticUnlock();
-    	RobotMap.locked = true;
+    	RobotMap.locked = false;
     	setTimeout(time);
     }
 
     protected void execute() {
-    	RobotMap.locked = true;
+    	RobotMap.locked = false;
     	Robot.pneumaticsLock.pneumaticUnlock();
     }
 

@@ -1,4 +1,4 @@
-package org.usfirst.frc.team4859.robot;
+	package org.usfirst.frc.team4859.robot;
 
 import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.AutoRightGear;
@@ -10,7 +10,6 @@ import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
 import org.usfirst.frc.team4859.robot.subsystems.PneumaticsLift;
 import org.usfirst.frc.team4859.robot.subsystems.PneumaticsLock;
-
 import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.cscore.UsbCamera;
@@ -18,7 +17,6 @@ import edu.wpi.cscore.VideoMode;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -33,7 +31,6 @@ public class Robot extends IterativeRobot {
 	public static Climber climber;
 	public static PneumaticsLift pneumaticsLift;
 	public static PneumaticsLock pneumaticsLock;
-	public static Preferences prefs;
 	public static Compressor compressor;
 	public static AHRS ahrs;
 	public static OI oi;
@@ -47,7 +44,6 @@ public class Robot extends IterativeRobot {
     	climber = new Climber();
     	pneumaticsLift = new PneumaticsLift();
     	pneumaticsLock = new PneumaticsLock();
-    	prefs = Preferences.getInstance();
     	compressor = new Compressor();
     	ahrs = new AHRS(SerialPort.Port.kUSB);
 		oi = new OI();
@@ -55,10 +51,10 @@ public class Robot extends IterativeRobot {
 		ahrs.reset();
 		
 		UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
-		cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 15);
+		cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
 
 		UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 1);
-		cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 15);
+		cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
 		
 		// Adding autonomous modes
 		autonomousChooser = new SendableChooser<CommandGroup>();
@@ -130,7 +126,7 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         
-        SmartDashboard.putBoolean("Lock extended", RobotMap.locked);
+        SmartDashboard.putBoolean("Is the gear locked", RobotMap.locked);
         
         //SmartDashboard.putNumber("compressor current", compressor.getCompressorCurrent());
         

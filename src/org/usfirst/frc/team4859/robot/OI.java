@@ -21,8 +21,6 @@ public class OI {
 	
 	Button pneumaticLiftUp = new JoystickButton(joystick, 4);
 	Button pneumaticLiftDown = new JoystickButton(joystick, 6);
-	
-	Button wiggle = new JoystickButton(joystick, 10);
  
 	public OI() {
 		// Mapping buttons to command
@@ -45,8 +43,6 @@ public class OI {
 		
 		pneumaticLiftDown.whenPressed(new PneumaticLiftDown(0));
 		pneumaticLiftDown.whenReleased(new PneumaticLiftStop(0));
-		
-		wiggle.whenPressed(new AutoGearGrab());
 	}
 	
 	// Creating a method that returns joystick values for driving
