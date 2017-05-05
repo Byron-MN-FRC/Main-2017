@@ -9,6 +9,7 @@ public class PneumaticLiftStop extends Command {
 
     public PneumaticLiftStop(double inputTime) {
         requires(Robot.pneumaticsLift);
+        requires(Robot.pneumaticsLock);
         time = inputTime;
     }
 

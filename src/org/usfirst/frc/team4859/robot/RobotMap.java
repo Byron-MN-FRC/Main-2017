@@ -31,5 +31,6 @@ public class RobotMap {
 	
 	public static boolean fMode = false; 
 	
-	public static boolean locked = false;
+	public static boolean locked;
+	public static boolean down;
 }

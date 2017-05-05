@@ -16,11 +16,11 @@ public class OI {
 	
 	Button climbUp = new JoystickButton(joystick, 12);
 	
-	Button pneumaticLock = new JoystickButton(joystick, 3);
-	Button pneumaticUnlock = new JoystickButton(joystick, 5);
+	Button pneumaticLock = new JoystickButton(joystick, 4);
+	Button pneumaticUnlock = new JoystickButton(joystick, 6);
 	
-	Button pneumaticLiftUp = new JoystickButton(joystick, 4);
-	Button pneumaticLiftDown = new JoystickButton(joystick, 6);
+	Button pneumaticLiftUp = new JoystickButton(joystick, 3);
+	Button pneumaticLiftDown = new JoystickButton(joystick, 5);
  
 	public OI() {
 		// Mapping buttons to command

@@ -1,6 +1,8 @@
 package org.usfirst.frc.team4859.robot.commands;
 
 import org.usfirst.frc.team4859.robot.Robot;
+import org.usfirst.frc.team4859.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 public class PneumaticLiftUp extends Command {
@@ -15,10 +17,12 @@ public class PneumaticLiftUp extends Command {
     protected void initialize() {
     	Robot.pneumaticsLift.pneumaticLiftUp();
     	setTimeout(time);
+    	RobotMap.down = false;
     }
 
     protected void execute() {
     	Robot.pneumaticsLift.pneumaticLiftUp();
+    	RobotMap.down = false;
     }
 
     protected boolean isFinished() {
