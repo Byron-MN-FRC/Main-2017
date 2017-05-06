@@ -33,4 +33,5 @@ public class RobotMap {
 	
 	public static boolean locked;
 	public static boolean down;
+	public static boolean gear;
 }
