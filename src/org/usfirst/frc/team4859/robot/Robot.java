@@ -67,8 +67,6 @@ public class Robot extends IterativeRobot {
 		autonomousChooser.addObject("Left Gear", new AutoLeftGear());
 				
 		SmartDashboard.putData("Autonomous Mode Chooser", autonomousChooser);
-		
-		Chassis.gearLED.set(true);
     }
 	
 	public void disabledPeriodic() {
@@ -104,7 +102,7 @@ public class Robot extends IterativeRobot {
         
         SmartDashboard.putNumber("Yaw", ahrs.getYaw());
         
-        if (Chassis.gearSensor.get() == true) RobotMap.gear = true;
+        if (Chassis.gearSensor.getVoltage() < 0.3) RobotMap.gear = true;
         else RobotMap.gear = false;
         
 //        SmartDashboard.putNumber("FL", Chassis.motorChassisFrontLeft.getSpeed());
@@ -133,9 +131,12 @@ public class Robot extends IterativeRobot {
         
         SmartDashboard.putBoolean("Is the grabber down", RobotMap.down);
         SmartDashboard.putBoolean("Is the gear locked", RobotMap.locked);
+        SmartDashboard.putBoolean("Is the gear in the robot", RobotMap.gear);
         
-        if (Chassis.gearSensor.get() == true) RobotMap.gear = true;
+        if (Chassis.gearSensor.getVoltage() < 0.3) RobotMap.gear = true;
         else RobotMap.gear = false;
+        
+        SmartDashboard.putNumber("voltage", Chassis.gearSensor.getVoltage());
         
         //SmartDashboard.putNumber("compressor current", compressor.);
         

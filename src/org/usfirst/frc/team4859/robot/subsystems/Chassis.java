@@ -6,6 +6,8 @@ import org.usfirst.frc.team4859.robot.ThrottleLookup.ThrottleLookup;
 import org.usfirst.frc.team4859.robot.commands.DriveWithJoystick;
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.AnalogOutput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Joystick;
@@ -22,8 +24,8 @@ public class Chassis extends Subsystem {
 	public static CANTalon motorChassisBackRight = new CANTalon(RobotMap.talonIDChassisBackRight);
 	
 	public static DigitalOutput lightStrip = new DigitalOutput(0);
-	public static DigitalInput gearSensor = new DigitalInput(1);
-	public static Analog gearLED = new DigitalOutput(2);
+	public static AnalogInput gearSensor = new AnalogInput(0);
+	public static AnalogOutput gearLED = new AnalogOutput(1);
 
 	// Creates robot drive configuration with four motors
 	public static RobotDrive chassisDrive = new RobotDrive(motorChassisFrontLeft, motorChassisBackLeft, motorChassisFrontRight, motorChassisBackRight);
