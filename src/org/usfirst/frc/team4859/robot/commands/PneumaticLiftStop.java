@@ -8,18 +8,17 @@ public class PneumaticLiftStop extends Command {
 	private double time;
 
     public PneumaticLiftStop(double inputTime) {
-        requires(Robot.pneumaticsLift);
-        requires(Robot.pneumaticsLock);
+        requires(Robot.pneumatics);
         time = inputTime;
     }
 
     protected void initialize() {
-    	Robot.pneumaticsLift.pneumaticLiftStop();
+    	Robot.pneumatics.pneumaticLiftStop();
     	setTimeout(time);
     }
 
     protected void execute() {
-    	Robot.pneumaticsLift.pneumaticLiftStop();
+    	Robot.pneumatics.pneumaticLiftStop();
     }
 
     protected boolean isFinished() {
@@ -28,10 +27,10 @@ public class PneumaticLiftStop extends Command {
     }
 
     protected void end() {
-    	Robot.pneumaticsLift.pneumaticLiftStop();
+    	Robot.pneumatics.pneumaticLiftStop();
     }
 
     protected void interrupted() {
-    	Robot.pneumaticsLift.pneumaticLiftStop();
+    	Robot.pneumatics.pneumaticLiftStop();
     }
 }

@@ -5,10 +5,8 @@ import org.usfirst.frc.team4859.robot.RobotMap;
 import org.usfirst.frc.team4859.robot.ThrottleLookup.ThrottleLookup;
 import org.usfirst.frc.team4859.robot.commands.DriveWithJoystick;
 import com.ctre.CANTalon;
-
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogOutput;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
