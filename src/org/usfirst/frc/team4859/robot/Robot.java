@@ -1,4 +1,4 @@
-	package org.usfirst.frc.team4859.robot;
+package org.usfirst.frc.team4859.robot;
 
 import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.AutoRightGear;
@@ -8,8 +8,7 @@ import org.usfirst.frc.team4859.robot.autonomous.AutoLeftGear;
 import org.usfirst.frc.team4859.robot.autonomous.AutoLeftGearCurve;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
-import org.usfirst.frc.team4859.robot.subsystems.PneumaticsLift;
-import org.usfirst.frc.team4859.robot.subsystems.PneumaticsLock;
+import org.usfirst.frc.team4859.robot.subsystems.Pneumatics;
 import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.cscore.UsbCamera;
@@ -29,8 +28,7 @@ public class Robot extends IterativeRobot {
 	// Creating subsystems
 	public static Chassis chassis;
 	public static Climber climber;
-	public static PneumaticsLift pneumaticsLift;
-	public static PneumaticsLock pneumaticsLock;
+	public static Pneumatics pneumatics;
 	public static Compressor compressor;
 	public static AHRS ahrs;
 	public static OI oi;
@@ -42,8 +40,7 @@ public class Robot extends IterativeRobot {
     	// Initializing subsystems (and navx)
     	chassis = new Chassis();
     	climber = new Climber();
-    	pneumaticsLift = new PneumaticsLift();
-    	pneumaticsLock = new PneumaticsLock();
+    	pneumatics = new Pneumatics();
     	compressor = new Compressor();
     	ahrs = new AHRS(SerialPort.Port.kUSB);
 		oi = new OI();
@@ -102,6 +99,9 @@ public class Robot extends IterativeRobot {
         
         SmartDashboard.putNumber("Yaw", ahrs.getYaw());
         
+        if (Chassis.gearSensor.getVoltage() < 0.3) RobotMap.isGearInRobot = true;
+        else RobotMap.isGearInRobot = false;
+        
 //        SmartDashboard.putNumber("FL", Chassis.motorChassisFrontLeft.getSpeed());
 //        SmartDashboard.putNumber("FR", Chassis.motorChassisFrontRight.getSpeed());
 //        SmartDashboard.putNumber("BL", Chassis.motorChassisBackLeft.getSpeed());
@@ -126,8 +126,14 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         
-        SmartDashboard.putBoolean("Is the grabber down", RobotMap.down);
-        SmartDashboard.putBoolean("Is the gear locked", RobotMap.locked);
+        SmartDashboard.putBoolean("Is the grabber down", RobotMap.isDown);
+        SmartDashboard.putBoolean("Is the gear locked", RobotMap.islocked);
+        SmartDashboard.putBoolean("Is the gear in the robot", RobotMap.isGearInRobot);
+        
+        if (Chassis.gearSensor.getVoltage() < 0.03) RobotMap.isGearInRobot = true;
+        else RobotMap.isGearInRobot = false;
+        
+        SmartDashboard.putNumber("voltage", Chassis.gearSensor.getVoltage());
         
         //SmartDashboard.putNumber("compressor current", compressor.);
         

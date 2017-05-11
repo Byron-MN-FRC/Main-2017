@@ -10,21 +10,19 @@ public class PneumaticLiftDown extends Command {
 	private double time;
 
     public PneumaticLiftDown(double inputTime) {
-        requires(Robot.pneumaticsLift);
-        requires(Robot.pneumaticsLock);
+        requires(Robot.pneumatics);
         time = inputTime;
     }
 
     protected void initialize() {
-    	Robot.pneumaticsLift.pneumaticLiftDown();
-    	Robot.pneumaticsLock.pneumaticUnlock();
-    	RobotMap.down = true;
+    	Robot.pneumatics.pneumaticLiftDown();
+    	RobotMap.isDown = true;
     	setTimeout(time);
     }
 
     protected void execute() {
-    	Robot.pneumaticsLift.pneumaticLiftDown();
-    	RobotMap.down = true;
+    	Robot.pneumatics.pneumaticLiftDown();
+    	RobotMap.isDown = true;
     }
 
     protected boolean isFinished() {
@@ -33,11 +31,10 @@ public class PneumaticLiftDown extends Command {
     }
 
     protected void end() {
-    	Robot.pneumaticsLift.pneumaticLiftStop();
-    	Robot.pneumaticsLock.pneumaticStop();
+    	Robot.pneumatics.pneumaticLiftStop();
     }
 
     protected void interrupted() {
-    	Robot.pneumaticsLift.pneumaticLiftStop();
+    	Robot.pneumatics.pneumaticLiftStop();
     }
 }

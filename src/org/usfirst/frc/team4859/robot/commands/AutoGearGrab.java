@@ -8,8 +8,7 @@ public class AutoGearGrab extends CommandGroup {
 
     public AutoGearGrab() {  	
     	requires(Robot.chassis);
-    	requires(Robot.pneumaticsLift);
-    	requires(Robot.pneumaticsLock);
+    	requires(Robot.pneumatics);
     	
     	addSequential(new PneumaticUnlock(0.2));
     	addSequential(new PneumaticLiftDown(1));
