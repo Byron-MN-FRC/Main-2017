@@ -11,6 +11,7 @@ public class PneumaticUnlock extends Command {
 
     public PneumaticUnlock(double inputTime) {
         requires(Robot.pneumatics);
+        time = inputTime;
     }
 
     protected void initialize() {

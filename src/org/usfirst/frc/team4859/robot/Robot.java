@@ -3,6 +3,7 @@ package org.usfirst.frc.team4859.robot;
 import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.AutoRightGear;
 import org.usfirst.frc.team4859.robot.autonomous.AutoRightGearCurve;
+import org.usfirst.frc.team4859.robot.commands.PneumaticLiftUp;
 import org.usfirst.frc.team4859.robot.autonomous.AutoCenterGear;
 import org.usfirst.frc.team4859.robot.autonomous.AutoLeftGear;
 import org.usfirst.frc.team4859.robot.autonomous.AutoLeftGearCurve;
@@ -118,6 +119,8 @@ public class Robot extends IterativeRobot {
 		Chassis.motorChassisBackRight.changeControlMode(TalonControlMode.PercentVbus);
 		
 		ahrs.reset();
+		
+		new PneumaticLiftUp(0.5);
     }
 
     public void disabledInit() {

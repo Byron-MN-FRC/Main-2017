@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Pneumatics extends Subsystem {
 	
 	DoubleSolenoid pneumaticLock = new DoubleSolenoid(2, 3);
-	DoubleSolenoid pneumaticLift = new DoubleSolenoid(0, 1);
+	DoubleSolenoid pneumaticLift = new DoubleSolenoid(1, 0);
 	DoubleSolenoid pneumaticRelease1 = new DoubleSolenoid(5, 4);
 	DoubleSolenoid pneumaticRelease2 = new DoubleSolenoid(7, 6);
 
@@ -23,6 +23,8 @@ public class Pneumatics extends Subsystem {
     
     public void pneumaticLiftUp() {
     	pneumaticLift.set(Value.kReverse);
+    	pneumaticRelease1.set(Value.kReverse);
+    	pneumaticRelease2.set(Value.kReverse);
 	}
     
     public void pneumaticLiftStop() {
