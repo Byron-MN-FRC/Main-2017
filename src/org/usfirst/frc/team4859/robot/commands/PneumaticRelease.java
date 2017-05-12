@@ -1,28 +1,24 @@
 package org.usfirst.frc.team4859.robot.commands;
 
 import org.usfirst.frc.team4859.robot.Robot;
-import org.usfirst.frc.team4859.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.command.Command;
 
-public class PneumaticLiftUp extends Command {
+public class PneumaticRelease extends Command {
 	
 	private double time;
 
-    public PneumaticLiftUp(double inputTime) {
+    public PneumaticRelease(double inputTime) {
         requires(Robot.pneumatics);
         time = inputTime;
     }
 
     protected void initialize() {
-    	Robot.pneumatics.pneumaticLiftUp();
-    	RobotMap.isDown = true;
+    	Robot.pneumatics.pneumaticRelease();
     	setTimeout(time);
     }
 
     protected void execute() {
-    	Robot.pneumatics.pneumaticLiftUp();
-    	RobotMap.isDown = true;
+    	Robot.pneumatics.pneumaticRelease();
     }
 
     protected boolean isFinished() {
@@ -31,10 +27,10 @@ public class PneumaticLiftUp extends Command {
     }
 
     protected void end() {
-    	Robot.pneumatics.pneumaticLiftStop();
+    	Robot.pneumatics.pneumaticStopRelease();
     }
 
     protected void interrupted() {
-    	Robot.pneumatics.pneumaticLiftStop();
+    	Robot.pneumatics.pneumaticStopRelease();
     }
 }

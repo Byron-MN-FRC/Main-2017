@@ -11,16 +11,18 @@ public class OI {
 	//private final Joystick xbox = new Joystick(1);
 	
 	// Creating buttons
-	Button precisionMode = new JoystickButton(joystick, 1);
+	Button precisionMode = new JoystickButton(joystick, 7);
 	Button flipMode = new JoystickButton(joystick, 2);
 	
 	Button climbUp = new JoystickButton(joystick, 12);
 	
 	Button pneumaticLock = new JoystickButton(joystick, 4);
-	Button pneumaticUnlock = new JoystickButton(joystick, 6);
+	Button pneumaticUnlock = new JoystickButton(joystick, 1);
 	
-	Button pneumaticLiftUp = new JoystickButton(joystick, 3);
-	Button pneumaticLiftDown = new JoystickButton(joystick, 5);
+	Button pneumaticGearRelease = new JoystickButton(joystick, 6);
+	
+	Button pneumaticLiftDown = new JoystickButton(joystick, 3);
+	Button pneumaticLiftUp = new JoystickButton(joystick, 5);
  
 	public OI() {
 		// Mapping buttons to command
@@ -38,11 +40,13 @@ public class OI {
 		pneumaticUnlock.whenPressed(new PneumaticUnlock(0));
 		pneumaticUnlock.whenReleased(new PneumaticStop(0));
 		
+		pneumaticLiftDown.whenPressed(new PneumaticLiftDown(0));
+		pneumaticLiftDown.whenReleased(new PneumaticLiftStop(0));
+		
 		pneumaticLiftUp.whenPressed(new PneumaticLiftUp(0));
 		pneumaticLiftUp.whenReleased(new PneumaticLiftStop(0));
 		
-		pneumaticLiftDown.whenPressed(new PneumaticLiftDown(0));
-		pneumaticLiftDown.whenReleased(new PneumaticLiftStop(0));
+		pneumaticGearRelease.whenPressed(new AutoGearRelease());
 	}
 	
 	// Creating a method that returns joystick values for driving

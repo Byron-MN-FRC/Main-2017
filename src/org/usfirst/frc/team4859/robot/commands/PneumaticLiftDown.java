@@ -6,23 +6,23 @@ import org.usfirst.frc.team4859.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class PneumaticLiftDown extends Command {
-	
+
 	private double time;
 
     public PneumaticLiftDown(double inputTime) {
-        requires(Robot.pneumatics);
+        requires(Robot.pneumatics);        
         time = inputTime;
     }
 
     protected void initialize() {
     	Robot.pneumatics.pneumaticLiftDown();
-    	RobotMap.isDown = true;
     	setTimeout(time);
+    	RobotMap.isDown = false;
     }
 
     protected void execute() {
     	Robot.pneumatics.pneumaticLiftDown();
-    	RobotMap.isDown = true;
+    	RobotMap.isDown = false;
     }
 
     protected boolean isFinished() {
@@ -31,7 +31,7 @@ public class PneumaticLiftDown extends Command {
     }
 
     protected void end() {
-    	Robot.pneumatics.pneumaticLiftStop();
+    	Robot.pneumatics.pneumaticLiftDown();
     }
 
     protected void interrupted() {
