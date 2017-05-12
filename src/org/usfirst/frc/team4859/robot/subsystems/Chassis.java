@@ -15,25 +15,22 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Chassis extends Subsystem {
-	// Creating and setting motors
 	public static CANTalon motorChassisFrontLeft = new CANTalon(RobotMap.talonIDChassisFrontLeft);
 	public static CANTalon motorChassisFrontRight = new CANTalon(RobotMap.talonIDChassisFrontRight);
 	
 	public static CANTalon motorChassisBackLeft = new CANTalon(RobotMap.talonIDChassisBackLeft);
 	public static CANTalon motorChassisBackRight = new CANTalon(RobotMap.talonIDChassisBackRight);
+
+	public static RobotDrive chassisDrive = new RobotDrive(motorChassisFrontLeft, motorChassisBackLeft, motorChassisFrontRight, motorChassisBackRight);
 	
 	public static DigitalOutput lightStrip = new DigitalOutput(0);
-
-	// Creates robot drive configuration with four motors
-	public static RobotDrive chassisDrive = new RobotDrive(motorChassisFrontLeft, motorChassisBackLeft, motorChassisFrontRight, motorChassisBackRight);
 	public static AnalogInput gearSensor = new AnalogInput(0);
 	public static AnalogOutput gearLED = new AnalogOutput(1);
 	
 	public Chassis() {
 		
-		// Set a timeout for the motors (0.1 seconds)
 		chassisDrive.setSafetyEnabled(true);
-		chassisDrive.setExpiration(5);
+		chassisDrive.setExpiration(3);
 	}
 	
 	public void initDefaultCommand () {
@@ -41,14 +38,9 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void driveWithJoystick(Joystick joystickP0) {
-		// Get raw values from joystick controller
 		double y = joystickP0.getY();
 		double x = joystickP0.getX();
 		double twist = joystickP0.getTwist();
-		
-//		SmartDashboard.putNumber("Y input", y);
-//		SmartDashboard.putNumber("X input", x);
-//		SmartDashboard.putNumber("Twist input", twist);
 		
 		// Apply translations to the values from the controller
 		y = (RobotMap.pMode) ? ThrottleLookup.calcJoystickCorrection("SlowY", y) : ThrottleLookup.calcJoystickCorrection("NormY", y);
@@ -61,30 +53,21 @@ public class Chassis extends Subsystem {
 			x *= -1;
 		}
 		
-		//final joystick value adjustments
+		// Final joystick value adjustments
 		x *= RobotMap.xAxisScale;
 		y *= RobotMap.yAxisScale;
 		twist *= RobotMap.twistScale;
 		
 		SmartDashboard.putString("Robot Mode", (RobotMap.pMode) ? "Slow" : "Normal");	
 		
-//		SmartDashboard.putNumber("Y output", y);
-//		SmartDashboard.putNumber("X output", x);
-//		SmartDashboard.putNumber("Twist output", twist);
-		
-		if (RobotMap.fMode) { lightStrip.set(false); }
-		else { lightStrip.set(true); }
+		if (RobotMap.fMode) lightStrip.set(false);
+		else lightStrip.set(true);
 		
 		chassisDrive.mecanumDrive_Cartesian(x, y, twist, 0);
 	}
 	
 	public void driveStraight(double inputSpeed) {
-		//inputSpeed *= 500;
-		
-		motorChassisFrontLeft.set(inputSpeed);
-		motorChassisFrontRight.set(inputSpeed);
-		motorChassisBackLeft.set(inputSpeed);
-		motorChassisBackRight.set(inputSpeed);
+		chassisDrive.mecanumDrive_Cartesian(0, inputSpeed, 0, 0);
 	}
 	
 	public void driveStraightGyro(double inputSpeed) {
@@ -98,37 +81,19 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void driveBackwards(double inputSpeed) {
-		//inputSpeed *= 500;
-		
-		motorChassisFrontLeft.set(-inputSpeed);
-		motorChassisFrontRight.set(-inputSpeed);
-		motorChassisBackLeft.set(-inputSpeed);
-		motorChassisBackRight.set(-inputSpeed);
+		chassisDrive.mecanumDrive_Cartesian(0, inputSpeed, 0, 0);
 	}
 	
 	public void strafeLeft(double inputSpeed) {
-		//inputSpeed *= 500;
-		
-		motorChassisFrontLeft.set(-inputSpeed);
-		motorChassisFrontRight.set(inputSpeed);
-		motorChassisBackLeft.set(inputSpeed);
-		motorChassisBackRight.set(-inputSpeed);
+		chassisDrive.mecanumDrive_Cartesian(-inputSpeed, 0, 0, 0);
 	}
 	
 	public void strafeRight(double inputSpeed) {
-		//inputSpeed *= 500;
-		
-		motorChassisFrontLeft.set(inputSpeed);
-		motorChassisFrontRight.set(-inputSpeed);
-		motorChassisBackLeft.set(-inputSpeed);
-		motorChassisBackRight.set(inputSpeed);
+		chassisDrive.mecanumDrive_Cartesian(inputSpeed, 0, 0, 0);
 	}
 	
 	public void driveStop() {
-		motorChassisFrontLeft.set(0);
-		motorChassisFrontRight.set(0);
-		motorChassisBackLeft.set(0);
-		motorChassisBackRight.set(0);
+		chassisDrive.mecanumDrive_Cartesian(0, 0, 0, 0);
 	}
 	
 	public void turnToAngle(double targetAngle) {
@@ -150,8 +115,6 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void circleTurnLeft(double speed, double ratio) {
-		//speed *= 500;
-		
 		motorChassisFrontLeft.set(speed);
 		motorChassisFrontRight.set(speed*ratio);
 		motorChassisBackLeft.set(speed);
@@ -159,8 +122,6 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void circleTurnRight(double speed, double ratio) {
-		//speed *= 500;
-		
 		motorChassisFrontLeft.set(speed*ratio);
 		motorChassisFrontRight.set(speed);
 		motorChassisBackLeft.set(speed*ratio);

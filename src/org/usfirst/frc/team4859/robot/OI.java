@@ -6,11 +6,8 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class OI {	
-	// Create a joysticks on port 0 and 1
 	private final Joystick joystick = new Joystick(0);
-	//private final Joystick xbox = new Joystick(1);
 	
-	// Creating buttons
 	Button precisionMode = new JoystickButton(joystick, 7);
 	Button flipMode = new JoystickButton(joystick, 2);
 	
@@ -18,14 +15,12 @@ public class OI {
 	
 	Button pneumaticLock = new JoystickButton(joystick, 4);
 	Button pneumaticUnlock = new JoystickButton(joystick, 1);
+	Button pneumaticAutoGearRelease = new JoystickButton(joystick, 6);
 	
-	Button pneumaticGearRelease = new JoystickButton(joystick, 6);
-	
-	Button pneumaticLiftDown = new JoystickButton(joystick, 3);
 	Button pneumaticLiftUp = new JoystickButton(joystick, 5);
+	Button pneumaticLiftDown = new JoystickButton(joystick, 3);
  
 	public OI() {
-		// Mapping buttons to command
 		precisionMode.toggleWhenPressed(new PrecisionMode());
 		
 		flipMode.toggleWhenPressed(new FlipMode());
@@ -46,10 +41,9 @@ public class OI {
 		pneumaticLiftUp.whenPressed(new PneumaticLiftUp(0));
 		pneumaticLiftUp.whenReleased(new PneumaticLiftStop(0));
 		
-		pneumaticGearRelease.whenPressed(new AutoGearRelease());
+		pneumaticAutoGearRelease.whenPressed(new AutoGearRelease());
 	}
 	
-	// Creating a method that returns joystick values for driving
 	public Joystick getJoystick() {
 		return joystick;
 	}

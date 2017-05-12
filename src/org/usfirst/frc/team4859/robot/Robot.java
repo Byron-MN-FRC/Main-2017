@@ -10,7 +10,6 @@ import org.usfirst.frc.team4859.robot.autonomous.AutoLeftGearCurve;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
 import org.usfirst.frc.team4859.robot.subsystems.Pneumatics;
-import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode;
@@ -26,7 +25,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
-	// Creating subsystems
 	public static Chassis chassis;
 	public static Climber climber;
 	public static Pneumatics pneumatics;
@@ -38,26 +36,22 @@ public class Robot extends IterativeRobot {
     SendableChooser<CommandGroup> autonomousChooser;
 
     public void robotInit() {
-    	// Initializing subsystems (and navx)
     	chassis = new Chassis();
     	climber = new Climber();
     	pneumatics = new Pneumatics();
-    	compressor = new Compressor();
     	ahrs = new AHRS(SerialPort.Port.kUSB);
 		oi = new OI();
 		
 		ahrs.reset();
 		
 		UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
-		cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
+		cameraBackward.setVideoMode(VideoMode.PixelFormat.kGray, 320, 240, 10);
 
 		UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 1);
-		cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
+		cameraForward.setVideoMode(VideoMode.PixelFormat.kGray, 320, 240, 10);
 		
-		// Adding autonomous modes
 		autonomousChooser = new SendableChooser<CommandGroup>();
 		autonomousChooser.addDefault("Nothing", new AutoNothing());
-		//autonomousChooser.addObject("Test", new AutoTest());
 		autonomousChooser.addObject("Center Gear", new AutoCenterGear());
 		autonomousChooser.addObject("Right Gear Curve", new AutoRightGearCurve());
 		autonomousChooser.addObject("Left Gear Curve", new AutoLeftGearCurve());
@@ -72,26 +66,7 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
-//    	Chassis.motorChassisFrontLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-//    	Chassis.motorChassisBackLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-//    	Chassis.motorChassisFrontRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-//    	Chassis.motorChassisBackRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-//    	
-//    	Chassis.motorChassisFrontRight.reverseSensor(true);
-//    	Chassis.motorChassisBackRight.reverseSensor(true);
-//    	
-//    	Chassis.motorChassisFrontLeft.configEncoderCodesPerRev(360);
-//    	Chassis.motorChassisBackLeft.configEncoderCodesPerRev(360);
-//    	Chassis.motorChassisFrontRight.configEncoderCodesPerRev(360);
-//    	Chassis.motorChassisBackRight.configEncoderCodesPerRev(360);
-    	
-		Chassis.motorChassisFrontLeft.changeControlMode(TalonControlMode.PercentVbus);
-		Chassis.motorChassisFrontRight.changeControlMode(TalonControlMode.PercentVbus);
-		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.PercentVbus);
-		Chassis.motorChassisBackRight.changeControlMode(TalonControlMode.PercentVbus);
-
-    	autonomousCommand = (Command) autonomousChooser.getSelected();
-    	
+    	autonomousCommand = (Command)autonomousChooser.getSelected();
     	if (autonomousCommand != null) autonomousCommand.start();
     }
 
@@ -102,24 +77,14 @@ public class Robot extends IterativeRobot {
         
         if (Chassis.gearSensor.getVoltage() < 0.3) RobotMap.isGearInRobot = true;
         else RobotMap.isGearInRobot = false;
-        
-//        SmartDashboard.putNumber("FL", Chassis.motorChassisFrontLeft.getSpeed());
-//        SmartDashboard.putNumber("FR", Chassis.motorChassisFrontRight.getSpeed());
-//        SmartDashboard.putNumber("BL", Chassis.motorChassisBackLeft.getSpeed());
-//        SmartDashboard.putNumber("BR", Chassis.motorChassisBackRight.getSpeed());
     }
 
     public void teleopInit() {
-    	
         if (autonomousCommand != null) autonomousCommand.cancel();
-        
-		Chassis.motorChassisFrontLeft.changeControlMode(TalonControlMode.PercentVbus);
-		Chassis.motorChassisFrontRight.changeControlMode(TalonControlMode.PercentVbus);
-		Chassis.motorChassisBackLeft.changeControlMode(TalonControlMode.PercentVbus);
-		Chassis.motorChassisBackRight.changeControlMode(TalonControlMode.PercentVbus);
 		
 		ahrs.reset();
 		
+		// Just to get the lifting solenoid flipped the right way
 		new PneumaticLiftUp(0.5);
     }
 
@@ -133,17 +98,8 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putBoolean("Is the gear locked", RobotMap.islocked);
         SmartDashboard.putBoolean("Is the gear in the robot", RobotMap.isGearInRobot);
         
-        if (Chassis.gearSensor.getVoltage() < 0.03) RobotMap.isGearInRobot = true;
+        if (Chassis.gearSensor.getVoltage() < 0.3) RobotMap.isGearInRobot = true;
         else RobotMap.isGearInRobot = false;
-        
-        SmartDashboard.putNumber("voltage", Chassis.gearSensor.getVoltage());
-        
-        //SmartDashboard.putNumber("compressor current", compressor.);
-        
-//        SmartDashboard.putNumber("FL", Chassis.motorChassisFrontLeft.getSpeed());
-//        SmartDashboard.putNumber("FR", Chassis.motorChassisFrontRight.getSpeed());
-//        SmartDashboard.putNumber("BL", Chassis.motorChassisBackLeft.getSpeed());
-//        SmartDashboard.putNumber("BR", Chassis.motorChassisBackRight.getSpeed());
     }
     
     public void testPeriodic() {
