@@ -6,25 +6,21 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class OI {	
-	// Create a joysticks on port 0 and 1
 	private final Joystick joystick = new Joystick(0);
-	private final Joystick xbox = new Joystick(1);
 	
-	// Creating buttons
-	Button precisionMode = new JoystickButton(joystick, 1);
+	Button precisionMode = new JoystickButton(joystick, 7);
 	Button flipMode = new JoystickButton(joystick, 2);
 	
-	Button climbUp = new JoystickButton(joystick, 6);
-//	Button climbDown = new JoystickButton(joystick, 4);
+	Button climbUp = new JoystickButton(joystick, 12);
 	
-	Button flywheelForward = new JoystickButton(xbox, 1);
-//	Button flywheelBackward = new JoystickButton(xbox, 2);
+	Button pneumaticLock = new JoystickButton(joystick, 4);
+	Button pneumaticUnlock = new JoystickButton(joystick, 1);
+	Button pneumaticAutoGearRelease = new JoystickButton(joystick, 6);
 	
-	Button feederForward = new JoystickButton(xbox, 3);
-	Button feederBackward = new JoystickButton(xbox, 4);
+	Button pneumaticLiftUp = new JoystickButton(joystick, 5);
+	Button pneumaticLiftDown = new JoystickButton(joystick, 3);
  
 	public OI() {
-		// Mapping buttons to command
 		precisionMode.toggleWhenPressed(new PrecisionMode());
 		
 		flipMode.toggleWhenPressed(new FlipMode());
@@ -32,23 +28,22 @@ public class OI {
 		climbUp.whenPressed(new ClimbUp());
 		climbUp.whenReleased(new ClimbStop());
 		
-//		climbDown.whenPressed(new ClimbDown());
-//		climbDown.whenReleased(new ClimbStop());
+		// All commands are called with "0" to pass the timeout check so they run normally
+		pneumaticLock.whenPressed(new PneumaticLock(0));
+		pneumaticLock.whenReleased(new PneumaticStop(0));
 		
-		flywheelForward.whenPressed(new FlywheelForward());
-		flywheelForward.whenReleased(new FlywheelStop());
+		pneumaticUnlock.whenPressed(new PneumaticUnlock(0));
+		pneumaticUnlock.whenReleased(new PneumaticStop(0));
 		
-//		flywheelBackward.whenPressed(new FlywheelBackward());
-//		flywheelBackward.whenReleased(new FlywheelStop());
+		pneumaticLiftDown.whenPressed(new PneumaticLiftDown(0));
+		pneumaticLiftDown.whenReleased(new PneumaticLiftStop(0));
 		
-		feederForward.whenPressed(new FeederForward());
-		feederForward.whenReleased(new FeederStop());
+		pneumaticLiftUp.whenPressed(new PneumaticLiftUp(0));
+		pneumaticLiftUp.whenReleased(new PneumaticLiftStop(0));
 		
-		feederBackward.whenPressed(new FeederBackward());
-		feederBackward.whenReleased(new FeederStop());
+		pneumaticAutoGearRelease.whenPressed(new AutoGearRelease());
 	}
 	
-	// Creating a method that returns joystick values for driving
 	public Joystick getJoystick() {
 		return joystick;
 	}

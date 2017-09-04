@@ -3,25 +3,27 @@ package org.usfirst.frc.team4859.robot.autonomous;
 import org.usfirst.frc.team4859.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class StrafeLeft extends Command {
+public class Wiggle extends Command {
 
+	private double forwardSpeed;
+	private double turnSpeed;
 	private double time;
-	private double speed;
 	
-    public StrafeLeft(double inputSpeed, double inputTime) {
+    public Wiggle(double inputForwardSpeed, double inputTurnSpeed, double inputTime) {
         requires(Robot.chassis);
         
-        speed = inputSpeed;
+        forwardSpeed = inputForwardSpeed;
+        turnSpeed = inputTurnSpeed;
         time = inputTime;
     }
 
     protected void initialize() {
-    	Robot.chassis.strafeLeft(speed);
+    	Robot.chassis.wiggle(forwardSpeed, turnSpeed);
     	setTimeout(time);
     }
 
     protected void execute() {
-    	Robot.chassis.strafeLeft(speed);
+    	Robot.chassis.wiggle(forwardSpeed, turnSpeed);
     }
 
     protected boolean isFinished() {
