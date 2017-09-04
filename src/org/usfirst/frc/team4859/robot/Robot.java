@@ -3,15 +3,12 @@ package org.usfirst.frc.team4859.robot;
 import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.AutoRightGear;
 import org.usfirst.frc.team4859.robot.autonomous.AutoRightGearCurve;
-<<<<<<< HEAD
 import org.usfirst.frc.team4859.robot.autonomous.VisionGearLeft;
 import org.usfirst.frc.team4859.robot.autonomous.VisionGearRight;
 import org.usfirst.frc.team4859.robot.autonomous.VisionGearStraight;
+import org.usfirst.frc.team4859.robot.commands.PneumaticLiftUp;
 import org.opencv.core.Rect;
 import org.opencv.imgproc.Imgproc;
-=======
-import org.usfirst.frc.team4859.robot.commands.PneumaticLiftUp;
->>>>>>> master
 import org.usfirst.frc.team4859.robot.autonomous.AutoCenterGear;
 import org.usfirst.frc.team4859.robot.autonomous.AutoLeftGear;
 import org.usfirst.frc.team4859.robot.autonomous.AutoLeftGearCurve;
@@ -52,7 +49,7 @@ public class Robot extends IterativeRobot {
 	private double centerXb = 0.0;
     //output values for gear
 	public static double power = 0;
-	 
+	
     Command autonomousCommand;
     SendableChooser<CommandGroup> autonomousChooser;
 
@@ -71,7 +68,6 @@ public class Robot extends IterativeRobot {
 		UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 1);
 		cameraForward.setVideoMode(VideoMode.PixelFormat.kGray, 320, 240, 10);
 		
-<<<<<<< HEAD
 		visionThread = new VisionThread(cameraBackward, new RoboPipeline(), pipeline -> {
 		    if (!pipeline.filterContoursOutput().isEmpty()) 
 		    {
@@ -86,9 +82,7 @@ public class Robot extends IterativeRobot {
         	 centerXG = (centerXr + centerXb)/2;
         	 }
           });
-		// Adding autonomous modes
-=======
->>>>>>> master
+		
 		autonomousChooser = new SendableChooser<CommandGroup>();
 		autonomousChooser.addDefault("Nothing", new AutoNothing());
 		autonomousChooser.addObject("Center Gear", new AutoCenterGear());
@@ -96,16 +90,10 @@ public class Robot extends IterativeRobot {
 		autonomousChooser.addObject("Left Gear Curve", new AutoLeftGearCurve());
 		autonomousChooser.addObject("Right Gear", new AutoRightGear());
 		autonomousChooser.addObject("Left Gear", new AutoLeftGear());
-<<<<<<< HEAD
 		autonomousChooser.addObject("Vision Gear Left", new VisionGearLeft());
 		autonomousChooser.addObject("Vision Gear Right", new VisionGearRight());
 		autonomousChooser.addObject("Vision Gear Straight", new VisionGearStraight());
-
-		//autonomousChooser.addObject("Right Gear and Shoot", new AutoRightGearAndShoot());
-		//autonomousChooser.addObject("Left Gear and Shoot", new AutoLeftGearAndShoot());
-=======
->>>>>>> master
-				
+		
 		SmartDashboard.putData("Autonomous Mode Chooser", autonomousChooser);
     }
 	
@@ -122,7 +110,6 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
         
         SmartDashboard.putNumber("Yaw", ahrs.getYaw());
-<<<<<<< HEAD
         double centerXG;
         double power;
         synchronized (imgLock) {
@@ -132,15 +119,9 @@ public class Robot extends IterativeRobot {
 		}
 		power = centerXG-(imgWidth/2);
 		
-//        SmartDashboard.putNumber("FL", Chassis.motorChassisFrontLeft.getSpeed());
-//        SmartDashboard.putNumber("FR", Chassis.motorChassisFrontRight.getSpeed());
-//        SmartDashboard.putNumber("BL", Chassis.motorChassisBackLeft.getSpeed());
-//        SmartDashboard.putNumber("BR", Chassis.motorChassisBackRight.getSpeed());
-=======
-        
+
         if (Chassis.gearSensor.getVoltage() < 0.3) RobotMap.isGearInRobot = true;
         else RobotMap.isGearInRobot = false;
->>>>>>> master
     }
 
     public void teleopInit() {
@@ -155,7 +136,7 @@ public class Robot extends IterativeRobot {
     public void disabledInit() {
     }
 
-    public void teleopPeriodic() {  
+    public void teleopPeriodic() {
         Scheduler.getInstance().run();
         
         SmartDashboard.putBoolean("Is the grabber down", RobotMap.isDown);

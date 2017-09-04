@@ -1,0 +1,53 @@
+[IMPORTS]
+import org.opencv.core.Rect;
+import org.opencv.imgproc.Imgproc;
+import org.usfirst.frc.team4859.robot.autonomous.VisionGearLeft;
+import org.usfirst.frc.team4859.robot.autonomous.VisionGearRight;
+import org.usfirst.frc.team4859.robot.autonomous.VisionGearStraight;
+import edu.wpi.first.wpilibj.vision.VisionThread;
+
+[VARIABLES]
+//VTrak stuff
+    private final Object imgLock = new Object();
+    private VisionThread visionThread;
+	private int imgWidth = 320;
+	private int imgHiegth = 240;
+	private int filtSize = 0;
+	private int findSize = 0;
+	private double centerXG = 0;
+    private double centerXr = 0.0;
+	private double centerXb = 0.0;
+    //output values for gear
+	public static double power = 0;
+
+[AFTER CAMERAS]
+visionThread = new VisionThread(cameraBackward, new RoboPipeline(), pipeline -> {
+		    if (!pipeline.filterContoursOutput().isEmpty()) 
+		    {
+		    	filtSize = pipeline.filterContoursOutput().size();
+		    }
+        	findSize = pipeline.findContoursOutput().size();
+        	Rect p = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
+        	Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(1));
+        	  synchronized (imgLock) {
+        	centerXr = p.x + (p.width/2);
+        	centerXb = r.x + (r.width/2);
+        	 centerXG = (centerXr + centerXb)/2;
+        	 }
+          });
+
+[AUTONOMOUSCHOOSER]
+	autonomousChooser.addObject("Vision Gear Left", new VisionGearLeft());
+		autonomousChooser.addObject("Vision Gear Right", new VisionGearRight());
+		autonomousChooser.addObject("Vision Gear Straight", new VisionGearStraight());
+
+[AUTON PERIODIC]
+  double centerXG;
+        double power;
+        synchronized (imgLock) {
+			
+			centerXG = this.centerXG;
+			power = this.power;
+		}
+		power = centerXG-(imgWidth/2);
+		
