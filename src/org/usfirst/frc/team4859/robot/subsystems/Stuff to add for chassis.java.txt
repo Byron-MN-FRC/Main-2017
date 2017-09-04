@@ -1,0 +1,9 @@
+[AFTER DRIVE STOP CODE]
+	public void driveLeft(double inputSpeed){
+		motorChassisFrontLeft.set(inputSpeed);
+		motorChassisBackLeft.set(inputSpeed);
+	}
+	public void driveRight(double inputSpeed){
+		motorChassisFrontRight.set(inputSpeed);
+		motorChassisBackRight.set(inputSpeed);
+	}
