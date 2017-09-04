@@ -32,17 +32,11 @@ private double bacon = 0;
     protected void execute() {
     	
     		bacon = Robot.power;
-    		if(bacon<-50 || bacon>50){
     		poop = speed;
     		speedBig = poop+(bacon/600);
     		Robot.chassis.driveLeft(speedBig);
     		Robot.chassis.driveRight(poop);
-    	}if(-50<=bacon && 50>=bacon){
-    		poop2 = speed/10;
-    		speedLittle = poop2+(bacon/6000);
-    		Robot.chassis.driveLeft(speedLittle);
-    		Robot.chassis.driveRight(poop2);
-    	}
+    	
     		}
     
 
