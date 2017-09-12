@@ -11,7 +11,6 @@ public class ClimbUp extends Command {
 
     protected void initialize() {
     	Robot.climber.climbUp();
-    	Robot.compressor.stop();
     }
 
     protected void execute() {
@@ -24,11 +23,9 @@ public class ClimbUp extends Command {
 
     protected void end() {
     	Robot.climber.climbStop();
-    	Robot.compressor.start();
     }
 
     protected void interrupted() {
     	Robot.climber.climbStop();
-    	Robot.compressor.start();
     }
 }

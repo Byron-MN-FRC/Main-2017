@@ -16,7 +16,7 @@ public class DriveStraightGyro extends Command {
     }
 
     protected void initialize() {
-    	Robot.ahrs.reset();
+    	//Robot.ahrs.reset();
     	setTimeout(time);
     }
 

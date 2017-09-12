@@ -1,11 +1,9 @@
 package org.usfirst.frc.team4859.robot.subsystems;
 
-import org.usfirst.frc.team4859.robot.Robot;
 import org.usfirst.frc.team4859.robot.RobotMap;
 import org.usfirst.frc.team4859.robot.ThrottleLookup.ThrottleLookup;
 import org.usfirst.frc.team4859.robot.commands.DriveWithJoystick;
 import com.ctre.CANTalon;
-
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogOutput;
 import edu.wpi.first.wpilibj.DigitalOutput;
@@ -60,9 +58,6 @@ public class Chassis extends Subsystem {
 		
 		SmartDashboard.putString("Robot Mode", (RobotMap.pMode) ? "Slow" : "Normal");	
 		
-		if (RobotMap.fMode) lightStrip.set(false);
-		else lightStrip.set(true);
-		
 		chassisDrive.mecanumDrive_Cartesian(x, y, twist, 0);
 	}
 	
@@ -72,12 +67,12 @@ public class Chassis extends Subsystem {
 	
 	public void driveStraightGyro(double inputSpeed) {
 		//inputSpeed *= 500;
-		double inputTwist = -(Robot.ahrs.getYaw()%360)*0;
+		//double inputTwist = -(Robot.ahrs.getYaw()%360)*0;
 		
-		motorChassisFrontLeft.set(inputSpeed + inputTwist);
-		motorChassisFrontRight.set(inputSpeed - inputTwist);
-		motorChassisBackLeft.set(inputSpeed + inputTwist);
-		motorChassisBackRight.set(inputSpeed - inputTwist);
+//		motorChassisFrontLeft.set(inputSpeed + inputTwist);
+//		motorChassisFrontRight.set(inputSpeed - inputTwist);
+//		motorChassisBackLeft.set(inputSpeed + inputTwist);
+//		motorChassisBackRight.set(inputSpeed - inputTwist);
 	}
 	
 	public void driveBackwards(double inputSpeed) {

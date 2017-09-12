@@ -10,13 +10,11 @@ import org.usfirst.frc.team4859.robot.autonomous.AutoLeftGearCurve;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
 import org.usfirst.frc.team4859.robot.subsystems.Pneumatics;
-import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -29,7 +27,7 @@ public class Robot extends IterativeRobot {
 	public static Climber climber;
 	public static Pneumatics pneumatics;
 	public static Compressor compressor;
-	public static AHRS ahrs;
+	//public static AHRS ahrs;
 	public static OI oi;
 	
     Command autonomousCommand;
@@ -39,16 +37,16 @@ public class Robot extends IterativeRobot {
     	chassis = new Chassis();
     	climber = new Climber();
     	pneumatics = new Pneumatics();
-    	ahrs = new AHRS(SerialPort.Port.kUSB);
+    	//ahrs = new AHRS(SerialPort.Port.kUSB);
 		oi = new OI();
 		
-		ahrs.reset();
+		//ahrs.reset();
 		
 		UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
-		cameraBackward.setVideoMode(VideoMode.PixelFormat.kGray, 320, 240, 10);
+		cameraBackward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
 
 		UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 1);
-		cameraForward.setVideoMode(VideoMode.PixelFormat.kGray, 320, 240, 10);
+		cameraForward.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 10);
 		
 		autonomousChooser = new SendableChooser<CommandGroup>();
 		autonomousChooser.addDefault("Nothing", new AutoNothing());
@@ -73,16 +71,22 @@ public class Robot extends IterativeRobot {
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
         
-        SmartDashboard.putNumber("Yaw", ahrs.getYaw());
+        //SmartDashboard.putNumber("Yaw", ahrs.getYaw());
         
-        if (Chassis.gearSensor.getVoltage() < 0.3) RobotMap.isGearInRobot = true;
-        else RobotMap.isGearInRobot = false;
+        if (Chassis.gearSensor.getVoltage() < 0.15) {
+        	RobotMap.isGearInRobot = true;
+        	Chassis.lightStrip.set(false);
+        }
+        else {
+        	RobotMap.isGearInRobot = false;
+        	Chassis.lightStrip.set(true);
+        }
     }
 
     public void teleopInit() {
         if (autonomousCommand != null) autonomousCommand.cancel();
 		
-		ahrs.reset();
+		//ahrs.reset();
 		
 		// Just to get the lifting solenoid flipped the right way
 		new PneumaticLiftUp(0.5);
@@ -98,8 +102,18 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putBoolean("Is the gear locked", RobotMap.islocked);
         SmartDashboard.putBoolean("Is the gear in the robot", RobotMap.isGearInRobot);
         
-        if (Chassis.gearSensor.getVoltage() < 0.3) RobotMap.isGearInRobot = true;
-        else RobotMap.isGearInRobot = false;
+        if (Chassis.gearSensor.getVoltage() < 0.15) {
+        	RobotMap.isGearInRobot = true;
+        	Chassis.lightStrip.set(true);
+        }
+        else {
+        	RobotMap.isGearInRobot = false;
+        	Chassis.lightStrip.set(false);
+        }
+        
+        //SmartDashboard.putBoolean("light strip", Chassis.lightStrip.get());
+        
+        //SmartDashboard.putNumber("voltage", Chassis.gearSensor.getVoltage());
     }
     
     public void testPeriodic() {
