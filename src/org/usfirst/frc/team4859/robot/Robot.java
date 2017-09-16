@@ -7,6 +7,11 @@ import org.usfirst.frc.team4859.robot.autonomous.VisionGearLeft;
 import org.usfirst.frc.team4859.robot.autonomous.VisionGearRight;
 import org.usfirst.frc.team4859.robot.autonomous.VisionGearStraight;
 import org.usfirst.frc.team4859.robot.commands.PneumaticLiftUp;
+
+import java.util.ArrayList;
+
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint;
 import org.opencv.core.Rect;
 import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team4859.robot.autonomous.AutoCenterGear;
@@ -16,6 +21,9 @@ import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
 import org.usfirst.frc.team4859.robot.subsystems.Pneumatics;
 import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode;
 import edu.wpi.first.wpilibj.CameraServer;
@@ -46,7 +54,8 @@ public class Robot extends IterativeRobot {
 	private int findSize = 0;
 	private double centerXG = 0;
     private double centerXr = 0.0;
-	private double centerXb = 0.0;
+	private double centerXb = 0.0; 
+	private int vtrakFps = 20;
     //output values for gear
 	public static double power = 0;
 	
@@ -63,25 +72,29 @@ public class Robot extends IterativeRobot {
 		ahrs.reset();
 		
 		UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
-		cameraBackward.setVideoMode(VideoMode.PixelFormat.kGray, 320, 240, 10);
-
+		cameraBackward.setResolution(imgWidth, imgHiegth);
+		cameraBackward.setFPS(vtrakFps);
 		UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 1);
-		cameraForward.setVideoMode(VideoMode.PixelFormat.kGray, 320, 240, 10);
-		
-		visionThread = new VisionThread(cameraBackward, new RoboPipeline(), pipeline -> {
+		cameraForward.setFPS(10);
+		visionThread = new VisionThread(cameraBackward, new GearPipeline(), pipeline -> {
 		    if (!pipeline.filterContoursOutput().isEmpty()) 
 		    {
-		    	filtSize = pipeline.filterContoursOutput().size();
+		    	 CvSource filtoutput = CameraServer.getInstance().putVideo("Filtered", imgWidth, imgHiegth);
+	      	  synchronized (imgLock) {
+	      	 	Rect p = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
+	        	Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(1));
+	          	centerXr = p.x + (p.width/2);
+	          	centerXb = r.x + (r.width/2);
+
+                filtoutput.putFrame(pipeline.filterContoursOutput().get(0));
+	          	 }
 		    }
-        	findSize = pipeline.findContoursOutput().size();
-        	Rect p = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
-        	Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(1));
-        	  synchronized (imgLock) {
-        	centerXr = p.x + (p.width/2);
-        	centerXb = r.x + (r.width/2);
-        	 centerXG = (centerXr + centerXb)/2;
-        	 }
+		   
+
+		    filtSize = pipeline.filterContoursOutput().size();
+          	findSize = pipeline.findContoursOutput().size();
           });
+		visionThread.start();
 		
 		autonomousChooser = new SendableChooser<CommandGroup>();
 		autonomousChooser.addDefault("Nothing", new AutoNothing());
@@ -109,17 +122,27 @@ public class Robot extends IterativeRobot {
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
         
+        
         SmartDashboard.putNumber("Yaw", ahrs.getYaw());
-        double centerXG;
-        double power;
+        double centerXr;
+        double centerXb;
+        double filtsize1;
+        double findsize1;
         synchronized (imgLock) {
-			
-			centerXG = this.centerXG;
-			power = this.power;
-		}
-		power = centerXG-(imgWidth/2);
+        	filtsize1 = this.filtSize;
+        	findsize1=this.findSize;
+			centerXr = this.centerXr;
+			centerXb = this.centerXb;
 		
-
+			}
+    	SmartDashboard.putNumber("Contours", findsize1);
+      	SmartDashboard.putNumber("Filtered", filtsize1);
+        centerXG = (centerXr + centerXb)/2;
+		power = centerXG-(imgWidth/2);
+        
+		
+    	
+        
         if (Chassis.gearSensor.getVoltage() < 0.3) RobotMap.isGearInRobot = true;
         else RobotMap.isGearInRobot = false;
     }
