@@ -108,6 +108,13 @@ public class Chassis extends Subsystem {
 	public void wiggle(double forwardSpeed, double turnSpeed) {
 		chassisDrive.mecanumDrive_Cartesian(0, forwardSpeed, turnSpeed, 0);
 	}
+	public void leftDrive(double speed) {
+		motorChassisFrontLeft.set(speed);
+		motorChassisBackLeft.set(speed);
+	}public void rightDrive(double speed) {
+		motorChassisFrontRight.set(speed);
+		motorChassisBackRight.set(speed);
+	}
 	
 	public void circleTurnLeft(double speed, double ratio) {
 		motorChassisFrontLeft.set(speed);
