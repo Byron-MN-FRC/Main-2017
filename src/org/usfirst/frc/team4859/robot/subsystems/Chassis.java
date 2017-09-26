@@ -67,29 +67,29 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void driveStraight(double inputSpeed) {
-		chassisDrive.mecanumDrive_Cartesian(0, inputSpeed, 0, 0);
+		//chassisDrive.mecanumDrive_Cartesian(0, inputSpeed, 0, 0);
 	}
 	
 	public void driveStraightGyro(double inputSpeed) {
-		//inputSpeed *= 500;
-		double inputTwist = -(Robot.ahrs.getYaw()%360)*0;
+	/*	//inputSpeed *= 500;
+		//double inputTwist = -(Robot.ahrs.getYaw()%360)*0;
 		
 		motorChassisFrontLeft.set(inputSpeed + inputTwist);
 		motorChassisFrontRight.set(inputSpeed - inputTwist);
 		motorChassisBackLeft.set(inputSpeed + inputTwist);
-		motorChassisBackRight.set(inputSpeed - inputTwist);
+		motorChassisBackRight.set(inputSpeed - inputTwist);*/
 	}
 	
 	public void driveBackwards(double inputSpeed) {
-		chassisDrive.mecanumDrive_Cartesian(0, inputSpeed, 0, 0);
+	//	chassisDrive.mecanumDrive_Cartesian(0, inputSpeed, 0, 0);
 	}
 	
 	public void strafeLeft(double inputSpeed) {
-		chassisDrive.mecanumDrive_Cartesian(-inputSpeed, 0, 0, 0);
+		//chassisDrive.mecanumDrive_Cartesian(-inputSpeed, 0, 0, 0);
 	}
 	
 	public void strafeRight(double inputSpeed) {
-		chassisDrive.mecanumDrive_Cartesian(inputSpeed, 0, 0, 0);
+		//chassisDrive.mecanumDrive_Cartesian(inputSpeed, 0, 0, 0);
 	}
 	
 	public void driveStop() {
@@ -118,7 +118,7 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void wiggle(double forwardSpeed, double turnSpeed) {
-		chassisDrive.mecanumDrive_Cartesian(0, forwardSpeed, turnSpeed, 0);
+		//chassisDrive.mecanumDrive_Cartesian(0, forwardSpeed, turnSpeed, 0);
 	}
 	
 	public void circleTurnLeft(double speed, double ratio) {

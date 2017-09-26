@@ -1,7 +1,7 @@
 package org.usfirst.frc.team4859.robot;
 
 import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
-import org.usfirst.frc.team4859.robot.autonomous.AutoRightGear;
+//import org.usfirst.frc.team4859.robot.autonomous.AutoRightGear;
 import org.usfirst.frc.team4859.robot.autonomous.AutoRightGearCurve;
 import org.usfirst.frc.team4859.robot.autonomous.VisionGearLeft;
 import org.usfirst.frc.team4859.robot.autonomous.VisionGearRight;
@@ -15,7 +15,7 @@ import org.opencv.core.MatOfPoint;
 import org.opencv.core.Rect;
 import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team4859.robot.autonomous.AutoCenterGear;
-import org.usfirst.frc.team4859.robot.autonomous.AutoLeftGear;
+//import org.usfirst.frc.team4859.robot.autonomous.AutoLeftGear;
 import org.usfirst.frc.team4859.robot.autonomous.AutoLeftGearCurve;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
@@ -43,7 +43,7 @@ public class Robot extends IterativeRobot {
 	public static Climber climber;
 	public static Pneumatics pneumatics;
 	public static Compressor compressor;
-	public static AHRS ahrs;
+//	public static AHRS ahrs;
 	public static OI oi;
 	//VTrak stuff
     private final Object imgLock = new Object();
@@ -55,7 +55,7 @@ public class Robot extends IterativeRobot {
 	private double centerXG = 0;
     private double centerXr = 0.0;
 	private double centerXb = 0.0; 
-	private int vtrakFps = 20;
+	private int vtrakFps = 10;
     //output values for gear
 	public static double power = 0;
 	
@@ -66,33 +66,45 @@ public class Robot extends IterativeRobot {
     	chassis = new Chassis();
     	climber = new Climber();
     	pneumatics = new Pneumatics();
-    	ahrs = new AHRS(SerialPort.Port.kUSB);
+    //	ahrs = new AHRS(SerialPort.Port.kUSB);
 		oi = new OI();
 		
-		ahrs.reset();
+		//ahrs.reset();
 		
-		UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
+		/*UsbCamera cameraBackward = CameraServer.getInstance().startAutomaticCapture("Backward", 0);
 		cameraBackward.setResolution(imgWidth, imgHiegth);
-		cameraBackward.setFPS(vtrakFps);
+		cameraBackward.setFPS(vtrakFps);*/
 		UsbCamera cameraForward = CameraServer.getInstance().startAutomaticCapture("Forward", 1);
-		cameraForward.setFPS(10);
-		visionThread = new VisionThread(cameraBackward, new GearPipeline(), pipeline -> {
+		cameraForward.setResolution(imgWidth, imgHiegth);
+		cameraForward.setFPS(vtrakFps);
+		visionThread = new VisionThread(cameraForward, new GearPipelinef(), pipeline -> {
 		    if (!pipeline.filterContoursOutput().isEmpty()) 
 		    {
-		    	 CvSource filtoutput = CameraServer.getInstance().putVideo("Filtered", imgWidth, imgHiegth);
+		    	// CvSource filtoutput = CameraServer.getInstance().putVideo("Filtered", imgWidth, imgHiegth);
 	      	  synchronized (imgLock) {
 	      	 	Rect p = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
 	        	Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(1));
 	          	centerXr = p.x + (p.width/2);
 	          	centerXb = r.x + (r.width/2);
+	            
 
-                filtoutput.putFrame(pipeline.filterContoursOutput().get(0));
+             //   filtoutput.putFrame(pipeline.filterContoursOutput().get(0));
 	          	 }
-		    }
-		   
-
+		    }/*if(pipeline.filterContoursOutput().isEmpty()) {
+		    	synchronized(imgLock) {
+		    	 	Rect p = Imgproc.boundingRect(pipeline.findContoursOutput().get(0));
+		        	Rect r = Imgproc.boundingRect(pipeline.findContoursOutput().get(1));
+		          	centerXr = p.x + (p.width/2);
+		          	centerXb = r.x + (r.width/2);
+		    	}
+		    }*/
 		    filtSize = pipeline.filterContoursOutput().size();
           	findSize = pipeline.findContoursOutput().size();
+          	SmartDashboard.putNumber("Contours", findSize);
+	      	SmartDashboard.putNumber("Filtered", filtSize);
+		   
+
+		
           });
 		visionThread.start();
 		
@@ -101,8 +113,8 @@ public class Robot extends IterativeRobot {
 		autonomousChooser.addObject("Center Gear", new AutoCenterGear());
 		autonomousChooser.addObject("Right Gear Curve", new AutoRightGearCurve());
 		autonomousChooser.addObject("Left Gear Curve", new AutoLeftGearCurve());
-		autonomousChooser.addObject("Right Gear", new AutoRightGear());
-		autonomousChooser.addObject("Left Gear", new AutoLeftGear());
+	//	autonomousChooser.addObject("Right Gear", new AutoRightGear());
+		//autonomousChooser.addObject("Left Gear", new AutoLeftGear());
 		autonomousChooser.addObject("Vision Gear Left", new VisionGearLeft());
 		autonomousChooser.addObject("Vision Gear Right", new VisionGearRight());
 		autonomousChooser.addObject("Vision Gear Straight", new VisionGearStraight());
@@ -123,7 +135,7 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
         
         
-        SmartDashboard.putNumber("Yaw", ahrs.getYaw());
+    //    SmartDashboard.putNumber("Yaw", ahrs.getYaw());
         double centerXr;
         double centerXb;
         double filtsize1;
@@ -135,8 +147,7 @@ public class Robot extends IterativeRobot {
 			centerXb = this.centerXb;
 		
 			}
-    	SmartDashboard.putNumber("Contours", findsize1);
-      	SmartDashboard.putNumber("Filtered", filtsize1);
+    	
         centerXG = (centerXr + centerXb)/2;
 		power = centerXG-(imgWidth/2);
         
@@ -150,7 +161,7 @@ public class Robot extends IterativeRobot {
     public void teleopInit() {
         if (autonomousCommand != null) autonomousCommand.cancel();
 		
-		ahrs.reset();
+	//	ahrs.reset();
 		
 		// Just to get the lifting solenoid flipped the right way
 		new PneumaticLiftUp(0.5);

@@ -33,9 +33,9 @@ private double oldbacon = 0;
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    		
+    	bacon = Robot.power;
     		poop = speed;
-    		speedBig = poop-(bacon/600);
+    		speedBig = poop+(bacon/600);
     		if(speedBig>.2) {
     			speedBig = .2;
     		}if(speedBig<.1) {
@@ -46,12 +46,12 @@ private double oldbacon = 0;
     		Robot.chassis.driveRight(poop);
     		
     		
-    		if(oldbacon == bacon && bacon != 0) {
-    			bacon = 0;
-    		}else {
-    			bacon = Robot.power;
-    		}
-    		double oldbacon = bacon;
+    	//	if(oldbacon == bacon && bacon != 0) {
+    	//		bacon = 0;
+    	//	}else {
+    		//	bacon = Robot.power;
+    	//	}
+    	//	double oldbacon = bacon;
     		
     		
      		}

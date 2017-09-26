@@ -13,7 +13,7 @@ public class VisionGearStraight extends CommandGroup {
         //      addSequential(new Command2());
         // these will run in order.
     //	4859 4859 4859 4859 4859 4859 4859 4859
-        addSequential(new GearTarget(.15,7));
+        addSequential(new GearTarget(.15,15));
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());
