@@ -103,6 +103,13 @@ public class Chassis extends Subsystem {
 //		motorChassisFrontRight.set(-turn);
 //		motorChassisBackLeft.set(turn);
 //		motorChassisBackRight.set(-turn);
+	}	public void driveLeft(double inputSpeed){
+		motorChassisFrontLeft.set(inputSpeed);
+		motorChassisBackLeft.set(inputSpeed);
+	}
+	public void driveRight(double inputSpeed){
+		motorChassisFrontRight.set(inputSpeed);
+		motorChassisBackRight.set(inputSpeed);
 	}
 	
 	public void wiggle(double forwardSpeed, double turnSpeed) {
