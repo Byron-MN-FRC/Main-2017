@@ -37,18 +37,19 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	
 //vision tracking variables
-	private double imgWidth = 640;
+	private double imgWidth = 480;
 	NetworkTable table;
 	private double centerXG = 0;
     private double centerXr = 0.0;
 	private double centerXb = 0.0;
+	private int tablesize = 0;
     //output values for gear
 	public static double power = 0;
 	//what networktable/key that the code will look at and the default value(what will appear if it doesnt see anything)
 	private static String networktable = "GRIP/myContoursReport";
 	private static String contour1 = "centerX";
 	private static String contour2 = "centerX";
-	private double defaultValue = imgWidth/2;
+	private double defaultValue1 = imgWidth/2;
 	
     Command autonomousCommand;
     SendableChooser<CommandGroup> autonomousChooser;
@@ -59,10 +60,10 @@ public class Robot extends IterativeRobot {
     	pneumatics = new Pneumatics();
     	/*ahrs = new AHRS(SerialPort.Port.kUSB);*/
 		oi = new OI();
+		SmartDashboard.putNumber("Poop", 0);
 		
-		
-		table = NetworkTable.getTable(networktable);
-		
+		table = NetworkTable.getTable("GRIP/myContoursReport");
+		SmartDashboard.putNumber("Poop", 1);
 		
 		/*ahrs.reset();*/
     
@@ -97,20 +98,38 @@ public class Robot extends IterativeRobot {
 
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-       
-      /*  double[] defaultValue = new double [320];
+        SmartDashboard.putNumber("Poop", 2);
+        double[] defaultValue = new double [480/2];
+        SmartDashboard.putNumber("Poop", 3);
         //SmartDashboard.putNumber("Yaw", ahrs.getYaw());
-        double[] tablX1 = table.getNumberArray("x", defaultValue); */
-        
+        double[] tablX1 = table.getNumberArray(contour1, defaultValue); 
+        SmartDashboard.putNumber("Poop", 4);
+       tablesize = tablX1.length;
+        if(tablesize <2 || table.containsKey(contour1) == false) {
+        	centerXr = defaultValue1;
+        	centerXb = defaultValue1;
+        	 SmartDashboard.putNumber("yeet", 2);
+        	SmartDashboard.putNumber("Poop", 4.5);
+        } if(tablesize >=2 && table.containsKey(contour1) == true) {
+            SmartDashboard.putNumber("Poop", 4.7);
+        	centerXr = tablX1[0];
+            SmartDashboard.putNumber("Poop", 5);
+            SmartDashboard.putNumber("yeet", 5);
+            centerXb = tablX1[1];
+            SmartDashboard.putNumber("Poop", 6);
+        }
+SmartDashboard.putBoolean("yeet1", table.containsKey(contour1));
         //Moved this here because the sections ending in "periodic" are loops that run while that mode of the robot is running
-    	centerXr = table.getNumber(contour1, defaultValue);
-		centerXb = table.getNumber(contour2, defaultValue);
+    	//centerXr = table.getNumber(contour1, defaultValue);
+		//centerXb = table.getNumber(contour2, defaultValue);
+        SmartDashboard.putNumber("Poop", 6.5);
 		 centerXG = (centerXr + centerXb)/2;
 			power = centerXG-(imgWidth/2);
 			SmartDashboard.putNumber("centerAv", centerXG);
 			SmartDashboard.putNumber("center1", centerXr);
 			SmartDashboard.putNumber("center2", centerXb);
 			SmartDashboard.putNumber("POWER", power);
+			SmartDashboard.putNumber("Poop", 7);
 			//This code won't work right now, as grip outputs an array of values to the networktables. To fix this we would 
 			//either find a way to get a specific value from the networktables array(i havent been able to find one) or
 			//get an array from the networktables and pull the value from there(i dont know how to use arrays)
@@ -152,10 +171,14 @@ public class Robot extends IterativeRobot {
         	RobotMap.isGearInRobot = false;
         	Chassis.lightStrip.set(false);
         }
-        
+    /*    double[] defaultValue = new double [0];
+        //SmartDashboard.putNumber("Yaw", ahrs.getYaw());
+        double[] tablX1 = table.getNumberArray("centerX", defaultValue); 
+        centerXr = tablX1[0];
+        centerXb = tablX1[1];
         //put it here as well so we could use it in teleop as well if we wanted
-       	centerXr = table.getNumber(contour1, defaultValue);
-    		centerXb = table.getNumber(contour2, defaultValue);
+     //  	centerXr = table.getNumber(contour1, defaultValue);
+    	//	centerXb = table.getNumber(contour2, defaultValue);
     		 centerXG = (centerXr + centerXb)/2;
     			power = centerXG-(imgWidth/2);
     			SmartDashboard.putNumber("centerAv", centerXG);
@@ -163,7 +186,7 @@ public class Robot extends IterativeRobot {
     			SmartDashboard.putNumber("center2", centerXb);
     			SmartDashboard.putNumber("POWER", power);
     			
-    			
+    			*/
     			
         /*SmartDashboard.putBoolean("light strip", Chassis.lightStrip.get());
         

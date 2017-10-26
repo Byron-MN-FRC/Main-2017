@@ -22,13 +22,13 @@ public class wiggl2 extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.chassis.leftDrive(speed);
+    	Robot.chassis.driveLeft(speed);
     	setTimeout(time);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.chassis.leftDrive(speed);
+    	Robot.chassis.driveLeft(speed);
     	
     }
 
