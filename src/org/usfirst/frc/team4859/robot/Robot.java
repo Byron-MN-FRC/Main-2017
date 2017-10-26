@@ -99,7 +99,7 @@ public class Robot extends IterativeRobot {
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
         SmartDashboard.putNumber("Poop", 2);
-        double[] defaultValue = new double [480/2];
+        double[] defaultValue = new double [(int) defaultValue1];
         SmartDashboard.putNumber("Poop", 3);
         //SmartDashboard.putNumber("Yaw", ahrs.getYaw());
         double[] tablX1 = table.getNumberArray(contour1, defaultValue); 
@@ -110,8 +110,14 @@ public class Robot extends IterativeRobot {
         	centerXb = defaultValue1;
         	 SmartDashboard.putNumber("yeet", 2);
         	SmartDashboard.putNumber("Poop", 4.5);
-        } if(tablesize >=2 && table.containsKey(contour1) == true) {
+        }if(tablesize ==1 && table.containsKey(contour1) == true) {
             SmartDashboard.putNumber("Poop", 4.7);
+        	centerXr = tablX1[0];
+            SmartDashboard.putNumber("Poop", 4.8);
+            SmartDashboard.putNumber("yeet", 3);
+            centerXb = defaultValue1;
+        }if(tablesize >=2 && table.containsKey(contour1) == true) {
+            SmartDashboard.putNumber("Poop", 4.9);
         	centerXr = tablX1[0];
             SmartDashboard.putNumber("Poop", 5);
             SmartDashboard.putNumber("yeet", 5);

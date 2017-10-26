@@ -3,6 +3,7 @@ package org.usfirst.frc.team4859.robot.autonomous;
 import org.usfirst.frc.team4859.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -30,19 +31,17 @@ private double bacon = 0;
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
-    		bacon = Robot.power;
-    		if(bacon<-50 || bacon>50){
-    		poop = speed;
-    		speedBig = poop-(bacon/1200);
-    		Robot.chassis.driveLeft(speedBig);
-    		Robot.chassis.driveRight(poop);
-    	}if(-50<=bacon && 50>=bacon){
-    		poop2 = speed/10;
-    		speedLittle = poop2-(bacon/10000);
-    		Robot.chassis.driveLeft(speedLittle);
-    		Robot.chassis.driveRight(poop2);
-    	}
+    	bacon = Robot.power;
+		poop = speed;
+		speedBig = poop+(bacon/600);
+		if(speedBig>.2) {
+			speedBig = .2;
+		}if(speedBig<.1) {
+			speedBig = .1;
+		}
+		SmartDashboard.putNumber("power val", speedBig);
+		Robot.chassis.driveLeft(speedBig);
+		Robot.chassis.driveRight(poop);
     		}
     
 
