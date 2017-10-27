@@ -43,11 +43,14 @@ public class Robot extends IterativeRobot {
     private double centerXr = 0.0;
 	private double centerXb = 0.0;
 	private int tablesize = 0;
+	private double oldCenter = 0;
+	private boolean useOld = false;
+	private boolean nothing = false;
     //output values for gear
 	public static double power = 0;
 	//what networktable/key that the code will look at and the default value(what will appear if it doesnt see anything)
 	private static String networktable = "GRIP/myContoursReport";
-	private static String contour1 = "centerX";
+	private static String contour1 = "centerY";
 	private static String contour2 = "centerX";
 	private double defaultValue1 = imgWidth/2;
 	
@@ -94,6 +97,7 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
     	autonomousCommand = (Command)autonomousChooser.getSelected();
     	if (autonomousCommand != null) autonomousCommand.start();
+    	oldCenter = 0;
     }
 
     public void autonomousPeriodic() {
@@ -105,9 +109,10 @@ public class Robot extends IterativeRobot {
         double[] tablX1 = table.getNumberArray(contour1, defaultValue); 
         SmartDashboard.putNumber("Poop", 4);
        tablesize = tablX1.length;
-        if(tablesize <2 || table.containsKey(contour1) == false) {
-        	centerXr = defaultValue1;
-        	centerXb = defaultValue1;
+        if(tablesize <1 || table.containsKey(contour1) == false) {
+        	centerXr = 350;
+        	centerXb = 400;
+        	nothing = true;
         	 SmartDashboard.putNumber("yeet", 2);
         	SmartDashboard.putNumber("Poop", 4.5);
         }if(tablesize ==1 && table.containsKey(contour1) == true) {
@@ -123,13 +128,22 @@ public class Robot extends IterativeRobot {
             SmartDashboard.putNumber("yeet", 5);
             centerXb = tablX1[1];
             SmartDashboard.putNumber("Poop", 6);
+        } if((tablesize <1 || table.containsKey(contour1) == false) && oldCenter != 0) {
+        	centerXr = defaultValue1;
+        	centerXb = defaultValue1;
+        	 SmartDashboard.putNumber("yeet", 2);
+        	SmartDashboard.putNumber("Poop", 4.5);
         }
 SmartDashboard.putBoolean("yeet1", table.containsKey(contour1));
         //Moved this here because the sections ending in "periodic" are loops that run while that mode of the robot is running
     	//centerXr = table.getNumber(contour1, defaultValue);
 		//centerXb = table.getNumber(contour2, defaultValue);
         SmartDashboard.putNumber("Poop", 6.5);
-		 centerXG = (centerXr + centerXb)/2;
+        if(useOld == true) {
+        	centerXG = oldCenter;
+        }else {
+        	 centerXG = (centerXr + centerXb)/2;
+        }
 			power = centerXG-(imgWidth/2);
 			SmartDashboard.putNumber("centerAv", centerXG);
 			SmartDashboard.putNumber("center1", centerXr);
@@ -147,6 +161,12 @@ SmartDashboard.putBoolean("yeet1", table.containsKey(contour1));
         else {
         	RobotMap.isGearInRobot = false;
         	Chassis.lightStrip.set(true);
+        }
+        if(nothing == true) {
+        oldCenter = centerXG;
+        useOld = false;
+        }else {
+        useOld = true;
         }
     }
 

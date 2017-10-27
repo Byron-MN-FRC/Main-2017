@@ -16,12 +16,13 @@ private double poop2 = 0;
 private double speedBig = 0;
 private double speedLittle = 0;
 private double bacon = 0;
-    public GearTarget(double inputSpeed, double inputTime) {
+    public GearTarget(double inputSpeedOrigin, double inputTime, double inputStraightSpeed) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.chassis);
     	time = inputTime;
-    	speed = inputSpeed;
+    	poop2 = inputSpeedOrigin;
+    	speed = inputStraightSpeed;
     }
 
     // Called just before this Command runs the first time
@@ -31,17 +32,27 @@ private double bacon = 0;
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	bacon = Robot.power;
-		poop = speed;
-		speedBig = poop+(bacon/600);
-		if(speedBig>.2) {
-			speedBig = .2;
-		}if(speedBig<.1) {
-			speedBig = .1;
+		speedBig = poop2+(Robot.power/300);
+		speedLittle = poop2-(Robot.power/600);
+		if(speedBig>.5) {
+			speedBig = .5;
+		}if(speedBig<-.5) {
+			speedBig = -.5;
+		}if(speedLittle>.5) {
+			speedLittle = .5;
+		}if(speedLittle<-.5) {
+			speedLittle = -.5;
 		}
 		SmartDashboard.putNumber("power val", speedBig);
-		Robot.chassis.driveLeft(speedBig);
-		Robot.chassis.driveRight(poop);
+		if(Robot.power <=10 && Robot.power >= 10) {
+		speedBig = speed;
+		speedLittle = speed;
+		SmartDashboard.putBoolean("yeet1", true);
+		}else{
+			SmartDashboard.putBoolean("yeet1", false);
+		}
+		Robot.chassis.driveLeft(speedBig/2.0);
+		Robot.chassis.driveRight(speedLittle/2.0);
     		}
     
 
