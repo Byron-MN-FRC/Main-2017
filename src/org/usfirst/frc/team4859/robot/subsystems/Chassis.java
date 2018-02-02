@@ -4,6 +4,8 @@ import org.usfirst.frc.team4859.robot.RobotMap;
 import org.usfirst.frc.team4859.robot.ThrottleLookup.ThrottleLookup;
 import org.usfirst.frc.team4859.robot.commands.DriveWithJoystick;
 import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogOutput;
 import edu.wpi.first.wpilibj.DigitalOutput;
@@ -13,11 +15,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Chassis extends Subsystem {
-	public static CANTalon motorChassisFrontLeft = new CANTalon(RobotMap.talonIDChassisFrontLeft);
-	public static CANTalon motorChassisFrontRight = new CANTalon(RobotMap.talonIDChassisFrontRight);
+	public static WPI_TalonSRX motorChassisFrontLeft = new WPI_TalonSRX(RobotMap.talonIDChassisFrontLeft);
+	public static WPI_TalonSRX motorChassisFrontRight = new WPI_TalonSRX(RobotMap.talonIDChassisFrontRight);
 	
-	public static CANTalon motorChassisBackLeft = new CANTalon(RobotMap.talonIDChassisBackLeft);
-	public static CANTalon motorChassisBackRight = new CANTalon(RobotMap.talonIDChassisBackRight);
+	public static WPI_TalonSRX motorChassisBackLeft = new WPI_TalonSRX(RobotMap.talonIDChassisBackLeft);
+	public static WPI_TalonSRX motorChassisBackRight = new WPI_TalonSRX(RobotMap.talonIDChassisBackRight);
 
 	public static RobotDrive chassisDrive = new RobotDrive(motorChassisFrontLeft, motorChassisBackLeft, motorChassisFrontRight, motorChassisBackRight);
 	
