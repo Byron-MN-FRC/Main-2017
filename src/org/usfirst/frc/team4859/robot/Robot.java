@@ -3,13 +3,11 @@ package org.usfirst.frc.team4859.robot;
 import org.usfirst.frc.team4859.robot.autonomous.AutoNothing;
 import org.usfirst.frc.team4859.robot.autonomous.AutoRightGear;
 import org.usfirst.frc.team4859.robot.autonomous.AutoRightGearCurve;
-import org.usfirst.frc.team4859.robot.commands.PneumaticLiftUp;
 import org.usfirst.frc.team4859.robot.autonomous.AutoCenterGear;
 import org.usfirst.frc.team4859.robot.autonomous.AutoLeftGear;
 import org.usfirst.frc.team4859.robot.autonomous.AutoLeftGearCurve;
 import org.usfirst.frc.team4859.robot.subsystems.Chassis;
 import org.usfirst.frc.team4859.robot.subsystems.Climber;
-import org.usfirst.frc.team4859.robot.subsystems.Pneumatics;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode;
 import edu.wpi.first.wpilibj.CameraServer;
@@ -25,8 +23,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 	public static Chassis chassis;
 	public static Climber climber;
-	public static Pneumatics pneumatics;
-	public static Compressor compressor;
 	//public static AHRS ahrs;
 	public static OI oi;
 	
@@ -36,7 +32,6 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	chassis = new Chassis();
     	climber = new Climber();
-    	pneumatics = new Pneumatics();
     	//ahrs = new AHRS(SerialPort.Port.kUSB);
 		oi = new OI();
 		
@@ -89,7 +84,6 @@ public class Robot extends IterativeRobot {
 		//ahrs.reset();
 		
 		// Just to get the lifting solenoid flipped the right way
-		new PneumaticLiftUp(0.5);
     }
 
     public void disabledInit() {
